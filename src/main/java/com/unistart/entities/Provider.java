@@ -19,12 +19,12 @@ import javax.persistence.Table;
 public class Provider implements java.io.Serializable {
 
 	private ProviderId id;
-	private User user;
+	private Users user;
 
 	public Provider() {
 	}
 
-	public Provider(ProviderId id, User user) {
+	public Provider(ProviderId id, Users user) {
 		this.id = id;
 		this.user = user;
 	}
@@ -44,11 +44,11 @@ public class Provider implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "UserID", nullable = false)
-	public User getUser() {
+	public Users getUser() {
 		return this.user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(Users user) {
 		this.user = user;
 	}
 
