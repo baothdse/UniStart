@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.unistart.constant.ErrorConstant;
 import com.unistart.constant.ParamConstant;
 import com.unistart.constant.UrlConstant;
+import com.unistart.entities.Users;
 import com.unistart.error.ErrorNotification;
 import com.unistart.services.interfaces.UserServiceInterface;
 
@@ -21,6 +22,8 @@ public class UserController {
 	@Autowired
 	private UserServiceInterface userService;
 	
+	private ErrorNotification error;
+	
 	@RequestMapping(value = UrlConstant.REGISTER, method = RequestMethod.POST)
 	public ResponseEntity<?> register(@RequestParam(ParamConstant.USERNAME) String username,
 									@RequestParam(ParamConstant.PASSWORD) String password,
@@ -29,7 +32,19 @@ public class UserController {
 		if (isSuccess) {
 			return new ResponseEntity<Boolean> (isSuccess, HttpStatus.OK);
 		} else {
-			ErrorNotification error = new ErrorNotification(ErrorConstant.ERR001, ErrorConstant.MES001);
+			error = new ErrorNotification(ErrorConstant.ERR001, ErrorConstant.MES001);
+			return new ResponseEntity<ErrorNotification> (error, HttpStatus.OK);
+		}
+	}
+	
+	@RequestMapping(value = UrlConstant.CHECK_LOGIN, method = RequestMethod.POST)
+	public ResponseEntity<?> checkLogin(@RequestParam(ParamConstant.USERNAME) String username,
+										@RequestParam(ParamConstant.PASSWORD) String password) {
+		Users user = userService.checkLogin(username, password);
+		if (user != null) {
+			return new ResponseEntity<Users> (user, HttpStatus.OK);
+		} else {
+			error = new ErrorNotification(ErrorConstant.ERR002, ErrorConstant.MES002);
 			return new ResponseEntity<ErrorNotification> (error, HttpStatus.OK);
 		}
 	}

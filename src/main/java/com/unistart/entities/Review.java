@@ -22,7 +22,7 @@ public class Review implements java.io.Serializable {
 
 	private int id;
 	private University university;
-	private User user;
+	private Users user;
 	private Serializable desscription;
 	private Integer starTeaching;
 	private Integer starFacilities;
@@ -36,13 +36,13 @@ public class Review implements java.io.Serializable {
 	public Review() {
 	}
 
-	public Review(int id, University university, User user) {
+	public Review(int id, University university, Users user) {
 		this.id = id;
 		this.university = university;
 		this.user = user;
 	}
 
-	public Review(int id, University university, User user, Serializable desscription, Integer starTeaching,
+	public Review(int id, University university, Users user, Serializable desscription, Integer starTeaching,
 			Integer starFacilities, Integer starCare, Integer starSocieties, Integer starCareer, Boolean status,
 			Boolean isActive, Set<ReviewLike> reviewLikes) {
 		this.id = id;
@@ -82,11 +82,11 @@ public class Review implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "UserId", nullable = false)
-	public User getUser() {
+	public Users getUser() {
 		return this.user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(Users user) {
 		this.user = user;
 	}
 

@@ -18,7 +18,7 @@ public class Mbtiresult implements java.io.Serializable {
 
 	private int id;
 	private Mbtitype mbtitype;
-	private User user;
+	private Users user;
 
 	public Mbtiresult() {
 	}
@@ -27,7 +27,7 @@ public class Mbtiresult implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public Mbtiresult(int id, Mbtitype mbtitype, User user) {
+	public Mbtiresult(int id, Mbtitype mbtitype, Users user) {
 		this.id = id;
 		this.mbtitype = mbtitype;
 		this.user = user;
@@ -56,11 +56,11 @@ public class Mbtiresult implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "UserId")
-	public User getUser() {
+	public Users getUser() {
 		return this.user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(Users user) {
 		this.user = user;
 	}
 

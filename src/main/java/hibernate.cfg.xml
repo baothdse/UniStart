@@ -14,7 +14,7 @@
         <property name="hibernate.validator.apply_to_ddl">false</property>
         <mapping class="com.unistart.entities.Block" />
         <mapping class="com.unistart.entities.Candidate" />
-        <mapping class="com.unistart.entities.User" />
+        <mapping class="com.unistart.entities.Users" />
         <mapping class="com.unistart.entities.University" />
         <mapping class="com.unistart.entities.Mbtitype" />
         <mapping class="com.unistart.entities.MajorUniversity" />

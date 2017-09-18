@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.unistart.entities.Role;
-import com.unistart.entities.User;
+import com.unistart.entities.Users;
 import com.unistart.repositories.RoleRepository;
 import com.unistart.repositories.UserRepository;
 import com.unistart.services.interfaces.UserServiceInterface;
@@ -25,9 +25,9 @@ public class UserService implements UserServiceInterface {
 	@Override
 	public boolean register(String username, String password, String email) {
 		// TODO Auto-generated method stub
-			User user = userRepository.findByUsername(username);
+			Users user = userRepository.findByUsername(username);
 			if (user == null) {
-				user = new User();
+				user = new Users();
 				user.setUsername(username);
 				String encodedPassword = bcrypt.encode(password);
 				Role role = roleRepository.findById(1);
@@ -39,6 +39,16 @@ public class UserService implements UserServiceInterface {
 				return true;
 			}
 			return false;
+	}
+
+	@Override
+	public Users checkLogin(String username, String password) {
+		// TODO Auto-generated method stub
+		Users user = userRepository.checkLogin(username);
+		if (user != null && bcrypt.matches(password, user.getPassword())) {
+			return user;
+		}
+		return null;
 	}
 	
 }

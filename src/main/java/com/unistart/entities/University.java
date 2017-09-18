@@ -28,7 +28,7 @@ public class University implements java.io.Serializable {
 	private Integer priority;
 	private Boolean isActive;
 	private Set<Location> locations = new HashSet<Location>(0);
-	private Set<User> users = new HashSet<User>(0);
+	private Set<Users> users = new HashSet<Users>(0);
 	private Set<Review> reviews = new HashSet<Review>(0);
 	private Set<MajorUniversity> majorUniversities = new HashSet<MajorUniversity>(0);
 
@@ -42,7 +42,7 @@ public class University implements java.io.Serializable {
 
 	public University(int id, Serializable code, Serializable email, Serializable phone, Serializable logo,
 			Serializable description, Serializable image, Integer priority, Boolean isActive, Set<Location> locations,
-			Set<User> users, Set<Review> reviews, Set<MajorUniversity> majorUniversities) {
+			Set<Users> users, Set<Review> reviews, Set<MajorUniversity> majorUniversities) {
 		this.id = id;
 		this.code = code;
 		this.email = email;
@@ -151,11 +151,11 @@ public class University implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "university")
-	public Set<User> getUsers() {
+	public Set<Users> getUsers() {
 		return this.users;
 	}
 
-	public void setUsers(Set<User> users) {
+	public void setUsers(Set<Users> users) {
 		this.users = users;
 	}
 
