@@ -21,6 +21,7 @@ public class University implements java.io.Serializable {
 	private int id;
 	private Serializable code;
 	private Serializable email;
+	private Serializable name;
 	private Serializable phone;
 	private Serializable logo;
 	private Serializable description;
@@ -46,6 +47,7 @@ public class University implements java.io.Serializable {
 		this.id = id;
 		this.code = code;
 		this.email = email;
+		this.name = name;
 		this.phone = phone;
 		this.logo = logo;
 		this.description = description;
@@ -85,6 +87,15 @@ public class University implements java.io.Serializable {
 
 	public void setEmail(Serializable email) {
 		this.email = email;
+	}
+	
+	@Column(name = "Name")
+	public Serializable getName() {
+		return this.name;
+	}
+
+	public void setName(Serializable name) {
+		this.name = name;
 	}
 
 	@Column(name = "Phone")
