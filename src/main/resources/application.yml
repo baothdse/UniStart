@@ -9,7 +9,7 @@ datasource:
   university:
     url: jdbc:sqlserver://localhost:1433
     username: sa
-    password: thdb010708
+    password: sa123456
     driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
     defaultSchema:
     maxPoolSize: 20
