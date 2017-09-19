@@ -32,7 +32,7 @@ public class UserController {
 		if (isSuccess) {
 			return new ResponseEntity<Boolean> (isSuccess, HttpStatus.OK);
 		} else {
-			error = new ErrorNotification(ErrorConstant.ERR001, ErrorConstant.MES001);
+			error = new ErrorNotification(ErrorConstant.MES001);
 			return new ResponseEntity<ErrorNotification> (error, HttpStatus.OK);
 		}
 	}
@@ -44,7 +44,7 @@ public class UserController {
 		if (user != null) {
 			return new ResponseEntity<Users> (user, HttpStatus.OK);
 		} else {
-			error = new ErrorNotification(ErrorConstant.ERR002, ErrorConstant.MES002);
+			error = new ErrorNotification(ErrorConstant.MES002);
 			return new ResponseEntity<ErrorNotification> (error, HttpStatus.OK);
 		}
 	}
