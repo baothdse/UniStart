@@ -1,7 +1,6 @@
 package com.unistart.entities;
 // Generated Sep 17, 2017 1:40:06 PM by Hibernate Tools 4.3.1.Final
 
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
@@ -19,12 +18,13 @@ import javax.persistence.Table;
 public class University implements java.io.Serializable {
 
 	private int id;
-	private Serializable code;
-	private Serializable email;
-	private Serializable phone;
-	private Serializable logo;
-	private Serializable description;
-	private Serializable image;
+	
+	private String code;
+	private String email;
+	private String phone;
+	private String logo;
+	private String description;
+	private String image;
 	private Integer priority;
 	private Boolean isActive;
 	private Set<Location> locations = new HashSet<Location>(0);
@@ -35,13 +35,13 @@ public class University implements java.io.Serializable {
 	public University() {
 	}
 
-	public University(int id, Serializable code) {
+	public University(int id, String code) {
 		this.id = id;
 		this.code = code;
 	}
 
-	public University(int id, Serializable code, Serializable email, Serializable phone, Serializable logo,
-			Serializable description, Serializable image, Integer priority, Boolean isActive, Set<Location> locations,
+	public University(int id, String code, String email, String phone, String logo,
+			String description, String image, Integer priority, Boolean isActive, Set<Location> locations,
 			Set<Users> users, Set<Review> reviews, Set<MajorUniversity> majorUniversities) {
 		this.id = id;
 		this.code = code;
@@ -70,56 +70,56 @@ public class University implements java.io.Serializable {
 	}
 
 	@Column(name = "Code", nullable = false)
-	public Serializable getCode() {
+	public String getCode() {
 		return this.code;
 	}
 
-	public void setCode(Serializable code) {
+	public void setCode(String code) {
 		this.code = code;
 	}
 
 	@Column(name = "Email")
-	public Serializable getEmail() {
+	public String getEmail() {
 		return this.email;
 	}
 
-	public void setEmail(Serializable email) {
+	public void setEmail(String email) {
 		this.email = email;
 	}
 
 	@Column(name = "Phone")
-	public Serializable getPhone() {
+	public String getPhone() {
 		return this.phone;
 	}
 
-	public void setPhone(Serializable phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 
 	@Column(name = "Logo")
-	public Serializable getLogo() {
+	public String getLogo() {
 		return this.logo;
 	}
 
-	public void setLogo(Serializable logo) {
+	public void setLogo(String logo) {
 		this.logo = logo;
 	}
 
 	@Column(name = "Description")
-	public Serializable getDescription() {
+	public String getDescription() {
 		return this.description;
 	}
 
-	public void setDescription(Serializable description) {
+	public void setDescription(String description) {
 		this.description = description;
 	}
 
 	@Column(name = "Image")
-	public Serializable getImage() {
+	public String getImage() {
 		return this.image;
 	}
 
-	public void setImage(Serializable image) {
+	public void setImage(String image) {
 		this.image = image;
 	}
 
