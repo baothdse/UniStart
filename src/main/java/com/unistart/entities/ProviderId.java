@@ -1,5 +1,5 @@
 package com.unistart.entities;
-// Generated Sep 17, 2017 1:40:06 PM by Hibernate Tools 4.3.1.Final
+// Generated Sep 20, 2017 9:59:41 AM by Hibernate Tools 4.3.1.Final
 
 import java.io.Serializable;
 import javax.persistence.Column;

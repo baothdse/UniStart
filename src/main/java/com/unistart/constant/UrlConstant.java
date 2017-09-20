@@ -14,7 +14,10 @@ public class UrlConstant {
 	public static final String CHECK_LOGIN = "/check-login";
 	
 	//UNIVERSITY
-	public static final String UNIVERSITY = "/University";
+	public static final String UNIVERSITY = "/university";
+	
+	//BLOCK
+	public static final String BLOCK = "/block";
 
 
 }
