@@ -5,6 +5,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.unistart.entities.LoginUserInfo;
 import com.unistart.entities.Role;
 import com.unistart.entities.Users;
 import com.unistart.repositories.RoleRepository;
@@ -42,11 +43,17 @@ public class UserService implements UserServiceInterface {
 	}
 
 	@Override
-	public Users checkLogin(String username, String password) {
+	public LoginUserInfo checkLogin(String username, String password) {
 		// TODO Auto-generated method stub
 		Users user = userRepository.checkLogin(username);
 		if (user != null && bcrypt.matches(password, user.getPassword())) {
-			return user;
+			LoginUserInfo loginUserInfo = new LoginUserInfo();
+			loginUserInfo.setUsername(user.getUsername());
+			loginUserInfo.setName(user.getName());
+			loginUserInfo.setRole(roleRepository.findById(1));
+			loginUserInfo.setEmail(user.getEmail());
+			loginUserInfo.setImage(user.getImage());
+			return loginUserInfo;
 		}
 		return null;
 	}
