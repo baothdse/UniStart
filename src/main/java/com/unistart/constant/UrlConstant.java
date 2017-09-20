@@ -15,6 +15,7 @@ public class UrlConstant {
 	
 	//UNIVERSITY
 	public static final String UNIVERSITY = "/university";
+	public static final String SHOWUNIVERSITY = "/show-university";
 	
 	//BLOCK
 	public static final String BLOCK = "/block";
