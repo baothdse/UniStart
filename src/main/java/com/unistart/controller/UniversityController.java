@@ -1,5 +1,7 @@
 package com.unistart.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -23,6 +25,14 @@ public class UniversityController {
 	
 	@Autowired
 	private UniversityServiceInterface universityService;
+	
+	private List<University> listUniversity;
+	
+	@RequestMapping(value = UrlConstant.SHOWUNIVERSITY, method = RequestMethod.GET)
+	public ResponseEntity<?> listAllUniversity(){
+		listUniversity = universityService.listAllUniversity();
+		return new ResponseEntity<List<University>>(listUniversity, HttpStatus.OK);
+	}
 	
 	@RequestMapping(value = UrlConstant.CREATE, method = RequestMethod.POST,
 			consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE})

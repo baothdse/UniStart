@@ -1,5 +1,7 @@
 package com.unistart.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,4 +42,10 @@ public class LocationService implements LocationServiceInterface {
 		return false;
 	}
 
+	private List<Location> listLocation;
+	@Override
+	public List<Location> listAllLocation(){
+		listLocation = locationRepo.findByLocationName();
+		return listLocation;
+	}
 }

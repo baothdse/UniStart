@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.unistart.constant.ErrorConstant;
 import com.unistart.constant.UrlConstant;
 import com.unistart.entities.LocationUniversity;
@@ -17,7 +16,6 @@ import com.unistart.services.interfaces.LocationServiceInterface;
 @RestController
 @RequestMapping(UrlConstant.LOCATION)
 public class LocationController {
-	
 	@Autowired
 	private LocationServiceInterface locationService;
 	
@@ -37,3 +35,4 @@ public class LocationController {
 		return new ResponseEntity<ErrorNotification> (error, HttpStatus.CONFLICT);
 	}
 }
+

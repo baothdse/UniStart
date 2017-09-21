@@ -15,6 +15,7 @@ public class UrlConstant {
 	
 	//UNIVERSITY
 	public static final String UNIVERSITY = "/university";
+	public static final String SHOWUNIVERSITY = "/show-university";
 	
 	//BLOCK
 	public static final String BLOCK = "/block";
@@ -23,4 +24,10 @@ public class UrlConstant {
 	public static final String LOCATION = "/location";
 
 
+	//MAJOR
+	public static final String SHOWMAJOR = "/show-major";
+
+	//LOCATION
+	public static final String LOCATION = "/location";
+	public static final String SHOWLOCATION = "/show-location";
 }

@@ -24,13 +24,14 @@ public class Location implements java.io.Serializable {
 	private String locationCode;
 	private Boolean isActive;
 	private Set<University> universities = new HashSet<University>(0);
-
+  
 	public Location() {
 	}
 
 	public Location(int id) {
 		this.id = id;
 	}
+
 
 	public Location(int id, String locationName, String locationCode, Boolean isActive,
 			Set<University> universities) {
