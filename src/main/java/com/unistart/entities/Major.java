@@ -19,8 +19,8 @@ import javax.persistence.Table;
 public class Major implements java.io.Serializable {
 
 	private int id;
-	private Serializable majorName;
-	private Serializable description;
+	private String majorName;
+	private String description;
 	private boolean isActive;
 	private Set<MajorUniversity> majorUniversities = new HashSet<MajorUniversity>(0);
 	private Set<MajorMbti> majorMbtis = new HashSet<MajorMbti>(0);
@@ -32,13 +32,17 @@ public class Major implements java.io.Serializable {
 	public Major() {
 	}
 
-	public Major(int id, Serializable majorName, boolean isActive) {
+	public Major(int id, String majorName, boolean isActive) {
 		this.id = id;
 		this.majorName = majorName;
 		this.isActive = isActive;
 	}
+	public Major(int id, String majorName) {
+		this.id = id;
+		this.majorName = majorName;
+	}
 
-	public Major(int id, Serializable majorName, Serializable description, boolean isActive,
+	public Major(int id, String majorName, String description, boolean isActive,
 			Set<MajorUniversity> majorUniversities, Set<MajorMbti> majorMbtis, Set<BlockOfMajor> blockOfMajors,
 			Set<MajorUniversity> majorUniversities_1, Set<BlockOfMajor> blockOfMajors_1, Set<MajorMbti> majorMbtis_1) {
 		this.id = id;
@@ -65,20 +69,20 @@ public class Major implements java.io.Serializable {
 	}
 
 	@Column(name = "MajorName", nullable = false)
-	public Serializable getMajorName() {
+	public String getMajorName() {
 		return this.majorName;
 	}
 
-	public void setMajorName(Serializable majorName) {
+	public void setMajorName(String majorName) {
 		this.majorName = majorName;
 	}
 
 	@Column(name = "Description")
-	public Serializable getDescription() {
+	public String getDescription() {
 		return this.description;
 	}
 
-	public void setDescription(Serializable description) {
+	public void setDescription(String description) {
 		this.description = description;
 	}
 

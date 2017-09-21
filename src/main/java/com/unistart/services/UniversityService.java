@@ -1,5 +1,7 @@
 package com.unistart.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,7 +18,12 @@ public class UniversityService implements UniversityServiceInterface {
 	private UniversityRepository universityRepo;
 	
 	private University university;
+	private List<University> listUniversity;
 
+	public List<University> listAllUniversity(){
+		listUniversity = universityRepo.findByUniName();
+		return listUniversity;
+	}
 	@Override
 	public boolean addUniversity(String code, String name, String email, String phone, String logo,
 			String image, String description) {
