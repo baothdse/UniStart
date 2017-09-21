@@ -20,6 +20,11 @@ public class UrlConstant {
 	//BLOCK
 	public static final String BLOCK = "/block";
 
+
 	//MAJOR
 	public static final String SHOWMAJOR = "/show-major";
+
+	//LOCATION
+	public static final String LOCATION = "/location";
+	public static final String SHOWLOCATION = "/show-location";
 }

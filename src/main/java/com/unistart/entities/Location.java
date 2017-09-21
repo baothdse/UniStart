@@ -19,8 +19,8 @@ public class Location implements java.io.Serializable {
 
 	private int id;
 	private University university;
-	private Serializable locationName;
-	private Serializable locationCode;
+	private String locationName;
+	private String locationCode;
 
 	public Location() {
 	}
@@ -29,7 +29,13 @@ public class Location implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public Location(int id, University university, Serializable locationName, Serializable locationCode) {
+	public Location(int id, String locationName, String locationCode) {
+		this.id = id;
+		this.locationName = locationName;
+		this.locationCode = locationCode;
+	}
+	
+	public Location(int id, University university, String locationName, String locationCode) {
 		this.id = id;
 		this.university = university;
 		this.locationName = locationName;
@@ -58,20 +64,20 @@ public class Location implements java.io.Serializable {
 	}
 
 	@Column(name = "LocationName")
-	public Serializable getLocationName() {
+	public String getLocationName() {
 		return this.locationName;
 	}
 
-	public void setLocationName(Serializable locationName) {
+	public void setLocationName(String locationName) {
 		this.locationName = locationName;
 	}
 
 	@Column(name = "LocationCode")
-	public Serializable getLocationCode() {
+	public String getLocationCode() {
 		return this.locationCode;
 	}
 
-	public void setLocationCode(Serializable locationCode) {
+	public void setLocationCode(String locationCode) {
 		this.locationCode = locationCode;
 	}
 
