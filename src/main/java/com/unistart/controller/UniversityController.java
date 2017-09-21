@@ -11,15 +11,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.unistart.constant.ErrorConstant;
 import com.unistart.constant.UrlConstant;
 import com.unistart.entities.University;
+import com.unistart.error.ErrorNotification;
 import com.unistart.services.interfaces.UniversityServiceInterface;
 
 @RestController
 @RequestMapping(UrlConstant.UNIVERSITY)
 public class UniversityController {
 	
-	private Error error;
+	private ErrorNotification error;
 	
 	@Autowired
 	private UniversityServiceInterface universityService;
@@ -46,6 +48,7 @@ public class UniversityController {
 		if (isCreated) {
 			return new ResponseEntity<Boolean> (isCreated, HttpStatus.OK);
 		}
-		return new ResponseEntity<Error> (error, HttpStatus.OK);
+		error = new ErrorNotification(ErrorConstant.MES003);
+		return new ResponseEntity<ErrorNotification> (error, HttpStatus.CONFLICT);
 	}
 }

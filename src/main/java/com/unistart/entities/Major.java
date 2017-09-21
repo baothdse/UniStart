@@ -1,5 +1,5 @@
 package com.unistart.entities;
-// Generated Sep 20, 2017 9:59:41 AM by Hibernate Tools 4.3.1.Final
+// Generated Sep 21, 2017 4:14:36 PM by Hibernate Tools 4.3.1.Final
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -22,11 +22,9 @@ public class Major implements java.io.Serializable {
 	private String majorName;
 	private String description;
 	private boolean isActive;
-	private Set<MajorUniversity> majorUniversities = new HashSet<MajorUniversity>(0);
 	private Set<MajorMbti> majorMbtis = new HashSet<MajorMbti>(0);
+	private Set<MajorUniversity> majorUniversities = new HashSet<MajorUniversity>(0);
 	private Set<BlockOfMajor> blockOfMajors = new HashSet<BlockOfMajor>(0);
-	private Set<MajorUniversity> majorUniversities_1 = new HashSet<MajorUniversity>(0);
-	private Set<BlockOfMajor> blockOfMajors_1 = new HashSet<BlockOfMajor>(0);
 	private Set<MajorMbti> majorMbtis_1 = new HashSet<MajorMbti>(0);
 
 	public Major() {
@@ -49,11 +47,9 @@ public class Major implements java.io.Serializable {
 		this.majorName = majorName;
 		this.description = description;
 		this.isActive = isActive;
-		this.majorUniversities = majorUniversities;
 		this.majorMbtis = majorMbtis;
+		this.majorUniversities = majorUniversities;
 		this.blockOfMajors = blockOfMajors;
-		this.majorUniversities_1 = majorUniversities_1;
-		this.blockOfMajors_1 = blockOfMajors_1;
 		this.majorMbtis_1 = majorMbtis_1;
 	}
 
@@ -96,15 +92,6 @@ public class Major implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "major")
-	public Set<MajorUniversity> getMajorUniversities() {
-		return this.majorUniversities;
-	}
-
-	public void setMajorUniversities(Set<MajorUniversity> majorUniversities) {
-		this.majorUniversities = majorUniversities;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "major")
 	public Set<MajorMbti> getMajorMbtis() {
 		return this.majorMbtis;
 	}
@@ -114,30 +101,21 @@ public class Major implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "major")
+	public Set<MajorUniversity> getMajorUniversities() {
+		return this.majorUniversities;
+	}
+
+	public void setMajorUniversities(Set<MajorUniversity> majorUniversities) {
+		this.majorUniversities = majorUniversities;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "major")
 	public Set<BlockOfMajor> getBlockOfMajors() {
 		return this.blockOfMajors;
 	}
 
 	public void setBlockOfMajors(Set<BlockOfMajor> blockOfMajors) {
 		this.blockOfMajors = blockOfMajors;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "major")
-	public Set<MajorUniversity> getMajorUniversities_1() {
-		return this.majorUniversities_1;
-	}
-
-	public void setMajorUniversities_1(Set<MajorUniversity> majorUniversities_1) {
-		this.majorUniversities_1 = majorUniversities_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "major")
-	public Set<BlockOfMajor> getBlockOfMajors_1() {
-		return this.blockOfMajors_1;
-	}
-
-	public void setBlockOfMajors_1(Set<BlockOfMajor> blockOfMajors_1) {
-		this.blockOfMajors_1 = blockOfMajors_1;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "major")

@@ -1,13 +1,15 @@
 package com.unistart.entities;
-// Generated Sep 20, 2017 9:59:41 AM by Hibernate Tools 4.3.1.Final
+// Generated Sep 21, 2017 4:14:36 PM by Hibernate Tools 4.3.1.Final
 
-import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -18,10 +20,11 @@ import javax.persistence.Table;
 public class Location implements java.io.Serializable {
 
 	private int id;
-	private University university;
 	private String locationName;
 	private String locationCode;
-
+	private Boolean isActive;
+	private Set<University> universities = new HashSet<University>(0);
+  
 	public Location() {
 	}
 
@@ -29,21 +32,18 @@ public class Location implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public Location(int id, String locationName, String locationCode) {
+
+	public Location(int id, String locationName, String locationCode, Boolean isActive,
+			Set<University> universities) {
 		this.id = id;
 		this.locationName = locationName;
 		this.locationCode = locationCode;
-	}
-	
-	public Location(int id, University university, String locationName, String locationCode) {
-		this.id = id;
-		this.university = university;
-		this.locationName = locationName;
-		this.locationCode = locationCode;
+		this.isActive = isActive;
+		this.universities = universities;
 	}
 
 	@Id
-
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "Id", unique = true, nullable = false)
 	public int getId() {
 		return this.id;
@@ -51,16 +51,6 @@ public class Location implements java.io.Serializable {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "UniversityId")
-	public University getUniversity() {
-		return this.university;
-	}
-
-	public void setUniversity(University university) {
-		this.university = university;
 	}
 
 	@Column(name = "LocationName")
@@ -79,6 +69,24 @@ public class Location implements java.io.Serializable {
 
 	public void setLocationCode(String locationCode) {
 		this.locationCode = locationCode;
+	}
+
+	@Column(name = "IsActive")
+	public Boolean getIsActive() {
+		return this.isActive;
+	}
+
+	public void setIsActive(Boolean isActive) {
+		this.isActive = isActive;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "location")
+	public Set<University> getUniversities() {
+		return this.universities;
+	}
+
+	public void setUniversities(Set<University> universities) {
+		this.universities = universities;
 	}
 
 }

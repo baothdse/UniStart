@@ -10,6 +10,8 @@ import com.unistart.entities.Location;
 
 @Repository
 public interface LocationRepository extends JpaRepository<Location, Integer>{
+
+	Location findByLocationCode(String locationCode);
 	Location findById(int id);
 	
 	@Query("select new com.unistart.entities.Location(l.id, l.locationName, l.locationCode) "

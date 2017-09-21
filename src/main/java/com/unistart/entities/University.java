@@ -1,15 +1,16 @@
 package com.unistart.entities;
-// Generated Sep 20, 2017 9:59:41 AM by Hibernate Tools 4.3.1.Final
+// Generated Sep 21, 2017 4:14:36 PM by Hibernate Tools 4.3.1.Final
 
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -21,6 +22,7 @@ import javax.persistence.Table;
 public class University implements java.io.Serializable {
 
 	private int id;
+	private Location location;
 	private String code;
 	private String name;
 	private String email;
@@ -30,14 +32,9 @@ public class University implements java.io.Serializable {
 	private String image;
 	private Integer priority;
 	private Boolean isActive;
-	private Set<Location> locations = new HashSet<Location>(0);
 	private Set<Users> userses = new HashSet<Users>(0);
 	private Set<Review> reviews = new HashSet<Review>(0);
-	private Set<Review> reviews_1 = new HashSet<Review>(0);
-	private Set<Users> userses_1 = new HashSet<Users>(0);
-	private Set<Location> locations_1 = new HashSet<Location>(0);
 	private Set<MajorUniversity> majorUniversities = new HashSet<MajorUniversity>(0);
-	private Set<MajorUniversity> majorUniversities_1 = new HashSet<MajorUniversity>(0);
 
 	public University() {
 	}
@@ -48,9 +45,8 @@ public class University implements java.io.Serializable {
 		this.name = name;
 	}
 
-	public University(String code, String name, String email, String phone, String logo,
-			String description, String image, boolean isActive) {
-		super();
+	public University(String code, String name, String email, String phone, 
+			String logo, String description, String image, Boolean isActive) {
 		this.code = code;
 		this.name = name;
 		this.email = email;
@@ -58,7 +54,7 @@ public class University implements java.io.Serializable {
 		this.logo = logo;
 		this.description = description;
 		this.image = image;
-		this.isActive = isActive; 
+		this.isActive = isActive;
 	}
 
 	@Id
@@ -70,6 +66,16 @@ public class University implements java.io.Serializable {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "LocationId")
+	public Location getLocation() {
+		return this.location;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
 	}
 
 	@Column(name = "Code", nullable = false)
@@ -154,15 +160,6 @@ public class University implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "university")
-	public Set<Location> getLocations() {
-		return this.locations;
-	}
-
-	public void setLocations(Set<Location> locations) {
-		this.locations = locations;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "university")
 	public Set<Users> getUserses() {
 		return this.userses;
 	}
@@ -181,48 +178,12 @@ public class University implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "university")
-	public Set<Review> getReviews_1() {
-		return this.reviews_1;
-	}
-
-	public void setReviews_1(Set<Review> reviews_1) {
-		this.reviews_1 = reviews_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "university")
-	public Set<Users> getUserses_1() {
-		return this.userses_1;
-	}
-
-	public void setUserses_1(Set<Users> userses_1) {
-		this.userses_1 = userses_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "university")
-	public Set<Location> getLocations_1() {
-		return this.locations_1;
-	}
-
-	public void setLocations_1(Set<Location> locations_1) {
-		this.locations_1 = locations_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "university")
 	public Set<MajorUniversity> getMajorUniversities() {
 		return this.majorUniversities;
 	}
 
 	public void setMajorUniversities(Set<MajorUniversity> majorUniversities) {
 		this.majorUniversities = majorUniversities;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "university")
-	public Set<MajorUniversity> getMajorUniversities_1() {
-		return this.majorUniversities_1;
-	}
-
-	public void setMajorUniversities_1(Set<MajorUniversity> majorUniversities_1) {
-		this.majorUniversities_1 = majorUniversities_1;
 	}
 
 }

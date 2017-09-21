@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.unistart.constant.ErrorConstant;
 import com.unistart.constant.UrlConstant;
+import com.unistart.entities.LoginUserInfo;
 import com.unistart.entities.Users;
 import com.unistart.error.ErrorNotification;
 import com.unistart.services.interfaces.UserServiceInterface;
@@ -34,7 +35,7 @@ public class UserController {
 			return new ResponseEntity<Boolean> (isSuccess, HttpStatus.OK);
 		} else {
 			error = new ErrorNotification(ErrorConstant.MES001);
-			return new ResponseEntity<ErrorNotification> (error, HttpStatus.OK);
+			return new ResponseEntity<ErrorNotification> (error, HttpStatus.CONFLICT);
 
 		}
 	}
@@ -43,12 +44,12 @@ public class UserController {
 	public ResponseEntity<?> checkLogin(@RequestBody Users u) {
 		String username = u.getUsername();
 		String password = u.getPassword();
-		Users user = userService.checkLogin(username, password);
+		LoginUserInfo user = userService.checkLogin(username, password);
 		if (user != null) {
-			return new ResponseEntity<Users> (user, HttpStatus.OK);
+			return new ResponseEntity<LoginUserInfo> (user, HttpStatus.OK);
 		} else {
 			error = new ErrorNotification(ErrorConstant.MES002);
-			return new ResponseEntity<ErrorNotification> (error, HttpStatus.OK);
+			return new ResponseEntity<ErrorNotification> (error, HttpStatus.UNAUTHORIZED);
 		}
 	}
 }
