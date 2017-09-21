@@ -1,19 +1,11 @@
 package com.unistart.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-public class LoginUserInfo implements java.io.Serializable {
-	private Role role;
+public class LoginUserInfo {
 	private String username;
 	private String name;
+	private Role role;
 	private String image;
 	private String email;
-	public Role getRole() {
-		return role;
-	}
-	public void setRole(Role role) {
-		this.role = role;
-	}
 	public String getUsername() {
 		return username;
 	}
@@ -25,6 +17,12 @@ public class LoginUserInfo implements java.io.Serializable {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public Role getRole() {
+		return role;
+	}
+	public void setRole(Role role) {
+		this.role = role;
 	}
 	public String getImage() {
 		return image;
@@ -38,5 +36,7 @@ public class LoginUserInfo implements java.io.Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	
 	
 }

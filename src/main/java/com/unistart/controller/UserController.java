@@ -35,7 +35,7 @@ public class UserController {
 			return new ResponseEntity<Boolean> (isSuccess, HttpStatus.OK);
 		} else {
 			error = new ErrorNotification(ErrorConstant.MES001);
-			return new ResponseEntity<ErrorNotification> (error, HttpStatus.OK);
+			return new ResponseEntity<ErrorNotification> (error, HttpStatus.CONFLICT);
 
 		}
 	}
@@ -49,7 +49,7 @@ public class UserController {
 			return new ResponseEntity<LoginUserInfo> (user, HttpStatus.OK);
 		} else {
 			error = new ErrorNotification(ErrorConstant.MES002);
-			return new ResponseEntity<ErrorNotification> (error, HttpStatus.OK);
+			return new ResponseEntity<ErrorNotification> (error, HttpStatus.UNAUTHORIZED);
 		}
 	}
 }

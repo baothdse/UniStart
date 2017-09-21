@@ -1,5 +1,5 @@
 package com.unistart.entities;
-// Generated Sep 20, 2017 9:59:41 AM by Hibernate Tools 4.3.1.Final
+// Generated Sep 21, 2017 4:14:36 PM by Hibernate Tools 4.3.1.Final
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,7 +17,7 @@ import javax.persistence.Table;
 public class ScoreHistory implements java.io.Serializable {
 
 	private int id;
-	private MajorUniversity majorUniversity;
+	private BlockMajorUniversity blockMajorUniversity;
 	private Double score;
 	private Integer year;
 
@@ -28,9 +28,9 @@ public class ScoreHistory implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public ScoreHistory(int id, MajorUniversity majorUniversity, Double score, Integer year) {
+	public ScoreHistory(int id, BlockMajorUniversity blockMajorUniversity, Double score, Integer year) {
 		this.id = id;
-		this.majorUniversity = majorUniversity;
+		this.blockMajorUniversity = blockMajorUniversity;
 		this.score = score;
 		this.year = year;
 	}
@@ -47,13 +47,13 @@ public class ScoreHistory implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "MajorOfUniversityId")
-	public MajorUniversity getMajorUniversity() {
-		return this.majorUniversity;
+	@JoinColumn(name = "BlockMajorUniId")
+	public BlockMajorUniversity getBlockMajorUniversity() {
+		return this.blockMajorUniversity;
 	}
 
-	public void setMajorUniversity(MajorUniversity majorUniversity) {
-		this.majorUniversity = majorUniversity;
+	public void setBlockMajorUniversity(BlockMajorUniversity blockMajorUniversity) {
+		this.blockMajorUniversity = blockMajorUniversity;
 	}
 
 	@Column(name = "Score", precision = 53, scale = 0)

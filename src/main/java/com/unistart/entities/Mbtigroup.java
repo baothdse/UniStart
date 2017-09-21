@@ -1,5 +1,5 @@
 package com.unistart.entities;
-// Generated Sep 20, 2017 9:59:41 AM by Hibernate Tools 4.3.1.Final
+// Generated Sep 21, 2017 4:14:36 PM by Hibernate Tools 4.3.1.Final
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -22,7 +22,6 @@ public class Mbtigroup implements java.io.Serializable {
 	private Serializable mbtigroupName;
 	private Boolean isActive;
 	private Set<Mbtiquestion> mbtiquestions = new HashSet<Mbtiquestion>(0);
-	private Set<Mbtiquestion> mbtiquestions_1 = new HashSet<Mbtiquestion>(0);
 
 	public Mbtigroup() {
 	}
@@ -31,13 +30,11 @@ public class Mbtigroup implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public Mbtigroup(int id, Serializable mbtigroupName, Boolean isActive, Set<Mbtiquestion> mbtiquestions,
-			Set<Mbtiquestion> mbtiquestions_1) {
+	public Mbtigroup(int id, Serializable mbtigroupName, Boolean isActive, Set<Mbtiquestion> mbtiquestions) {
 		this.id = id;
 		this.mbtigroupName = mbtigroupName;
 		this.isActive = isActive;
 		this.mbtiquestions = mbtiquestions;
-		this.mbtiquestions_1 = mbtiquestions_1;
 	}
 
 	@Id
@@ -76,15 +73,6 @@ public class Mbtigroup implements java.io.Serializable {
 
 	public void setMbtiquestions(Set<Mbtiquestion> mbtiquestions) {
 		this.mbtiquestions = mbtiquestions;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "mbtigroup")
-	public Set<Mbtiquestion> getMbtiquestions_1() {
-		return this.mbtiquestions_1;
-	}
-
-	public void setMbtiquestions_1(Set<Mbtiquestion> mbtiquestions_1) {
-		this.mbtiquestions_1 = mbtiquestions_1;
 	}
 
 }

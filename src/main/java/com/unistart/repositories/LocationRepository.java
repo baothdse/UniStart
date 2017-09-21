@@ -7,5 +7,5 @@ import com.unistart.entities.Location;
 
 @Repository
 public interface LocationRepository extends JpaRepository<Location, Integer>{
-	Location findById(int id);
+	Location findByLocationCode(String locationCode);
 }

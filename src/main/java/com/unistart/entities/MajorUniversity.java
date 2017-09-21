@@ -1,5 +1,5 @@
 package com.unistart.entities;
-// Generated Sep 20, 2017 9:59:41 AM by Hibernate Tools 4.3.1.Final
+// Generated Sep 21, 2017 4:14:36 PM by Hibernate Tools 4.3.1.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -8,8 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -22,12 +20,9 @@ import javax.persistence.Table;
 public class MajorUniversity implements java.io.Serializable {
 
 	private int id;
-	private Block block;
 	private Major major;
 	private University university;
-	private Set<ScoreHistory> scoreHistories = new HashSet<ScoreHistory>(0);
-	private Set<ScoreHistory> scoreHistories_1 = new HashSet<ScoreHistory>(0);
-	private Set<Block> blocks = new HashSet<Block>(0);
+	private Set<BlockMajorUniversity> blockMajorUniversities = new HashSet<BlockMajorUniversity>(0);
 
 	public MajorUniversity() {
 	}
@@ -36,15 +31,12 @@ public class MajorUniversity implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public MajorUniversity(int id, Block block, Major major, University university, Set<ScoreHistory> scoreHistories,
-			Set<ScoreHistory> scoreHistories_1, Set<Block> blocks) {
+	public MajorUniversity(int id, Major major, University university,
+			Set<BlockMajorUniversity> blockMajorUniversities) {
 		this.id = id;
-		this.block = block;
 		this.major = major;
 		this.university = university;
-		this.scoreHistories = scoreHistories;
-		this.scoreHistories_1 = scoreHistories_1;
-		this.blocks = blocks;
+		this.blockMajorUniversities = blockMajorUniversities;
 	}
 
 	@Id
@@ -56,16 +48,6 @@ public class MajorUniversity implements java.io.Serializable {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "BlockId")
-	public Block getBlock() {
-		return this.block;
-	}
-
-	public void setBlock(Block block) {
-		this.block = block;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -89,33 +71,12 @@ public class MajorUniversity implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "majorUniversity")
-	public Set<ScoreHistory> getScoreHistories() {
-		return this.scoreHistories;
+	public Set<BlockMajorUniversity> getBlockMajorUniversities() {
+		return this.blockMajorUniversities;
 	}
 
-	public void setScoreHistories(Set<ScoreHistory> scoreHistories) {
-		this.scoreHistories = scoreHistories;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "majorUniversity")
-	public Set<ScoreHistory> getScoreHistories_1() {
-		return this.scoreHistories_1;
-	}
-
-	public void setScoreHistories_1(Set<ScoreHistory> scoreHistories_1) {
-		this.scoreHistories_1 = scoreHistories_1;
-	}
-
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "BlockMajorUniversity", schema = "dbo", catalog = "University", joinColumns = {
-			@JoinColumn(name = "MajorUniversityID", nullable = false, updatable = false) }, inverseJoinColumns = {
-					@JoinColumn(name = "BLockId", nullable = false, updatable = false) })
-	public Set<Block> getBlocks() {
-		return this.blocks;
-	}
-
-	public void setBlocks(Set<Block> blocks) {
-		this.blocks = blocks;
+	public void setBlockMajorUniversities(Set<BlockMajorUniversity> blockMajorUniversities) {
+		this.blockMajorUniversities = blockMajorUniversities;
 	}
 
 }

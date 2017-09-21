@@ -18,6 +18,9 @@ public class UrlConstant {
 	
 	//BLOCK
 	public static final String BLOCK = "/block";
+	
+	//LOCATION
+	public static final String LOCATION = "/location";
 
 
 }
