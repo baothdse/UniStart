@@ -22,7 +22,7 @@ public class UniversityService implements UniversityServiceInterface {
 	private List<University> listUniversity;
 
 	public List<University> listAllUniversity(){
-		listUniversity = universityRepo.findByUniName();
+		listUniversity = universityRepo.findAll();
 		return listUniversity;
 	}
 	@Override

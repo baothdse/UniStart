@@ -15,19 +15,15 @@ public class UrlConstant {
 	
 	//UNIVERSITY
 	public static final String UNIVERSITY = "/university";
-	public static final String SHOWUNIVERSITY = "/show-university";
+	public static final String SHOW_UNIVERSITY = "/show-university";
 	
 	//BLOCK
 	public static final String BLOCK = "/block";
 	
-	//LOCATION
-	public static final String LOCATION = "/location";
-
-
 	//MAJOR
 	public static final String SHOWMAJOR = "/show-major";
 
 	//LOCATION
 	public static final String LOCATION = "/location";
-	public static final String SHOWLOCATION = "/show-location";
+	public static final String SHOW_LOCATION = "/show-location";
 }

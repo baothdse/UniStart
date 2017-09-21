@@ -46,4 +46,6 @@ public class ParamConstant {
 	//Score
 	public static final String SCORE = "score";
 	public static final String YEAR = "year";
+	
+	
 }

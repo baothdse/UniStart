@@ -28,7 +28,7 @@ public class UniversityController {
 	
 	private List<University> listUniversity;
 	
-	@RequestMapping(value = UrlConstant.SHOWUNIVERSITY, method = RequestMethod.GET)
+	@RequestMapping(value = UrlConstant.SHOW_UNIVERSITY, method = RequestMethod.GET)
 	public ResponseEntity<?> listAllUniversity(){
 		listUniversity = universityService.listAllUniversity();
 		return new ResponseEntity<List<University>>(listUniversity, HttpStatus.OK);
