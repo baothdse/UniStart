@@ -1,6 +1,6 @@
 package com.unistart.services.interfaces;
 
-import com.unistart.entities.LoginUserInfo;
+import com.unistart.entities.customentities.LoginUserInfo;
 
 public interface UserServiceInterface {
 	boolean register(String username, String password, String email);

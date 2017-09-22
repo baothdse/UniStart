@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.unistart.constant.ErrorConstant;
 import com.unistart.constant.UrlConstant;
-import com.unistart.entities.LoginUserInfo;
 import com.unistart.entities.Users;
+import com.unistart.entities.customentities.LoginUserInfo;
 import com.unistart.error.ErrorNotification;
 import com.unistart.services.interfaces.UserServiceInterface;
 

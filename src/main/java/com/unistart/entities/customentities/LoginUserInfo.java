@@ -1,4 +1,6 @@
-package com.unistart.entities;
+package com.unistart.entities.customentities;
+
+import com.unistart.entities.Role;
 
 public class LoginUserInfo {
 	private String username;

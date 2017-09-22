@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import com.unistart.constant.ErrorConstant;
 import com.unistart.constant.UrlConstant;
-import com.unistart.entities.LocationUniversity;
 import com.unistart.error.ErrorNotification;
 import com.unistart.services.interfaces.LocationServiceInterface;
 import com.unistart.entities.Location;
+import com.unistart.entities.customentities.LocationUniversity;
 
 @RestController
 @RequestMapping(UrlConstant.LOCATION)
