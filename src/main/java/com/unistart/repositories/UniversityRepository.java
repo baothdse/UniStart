@@ -19,7 +19,7 @@ public interface UniversityRepository extends JpaRepository<University, Integer>
 	@Query("update University u set u.location = ?1")
 	void setLocation(Location location);
 	
-	@Query("select new com.unistart.entities.University(u.id,u.image,u.name) "
+	@Query("select new com.unistart.entities.University(u.id,u.image,u.name,u.priority) "
 			+ "from University u")
-	List<University> findByLocationName();
+	List<University> showByLocationName();
 }

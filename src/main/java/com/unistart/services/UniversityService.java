@@ -52,7 +52,7 @@ public class UniversityService implements UniversityServiceInterface {
 	}
 	
 	public List<University> listAllUniversityName(){
-		listUniversity = universityRepo.findByLocationName();
+		listUniversity = universityRepo.showByLocationName();
 		return listUniversity;
 	}
 

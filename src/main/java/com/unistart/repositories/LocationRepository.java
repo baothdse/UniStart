@@ -16,5 +16,5 @@ public interface LocationRepository extends JpaRepository<Location, Integer>{
 	
 	@Query("select new com.unistart.entities.Location(l.id, l.locationName) "
 			+ "from Location l")
-	List<Location> findByLocationName();
+	List<Location> showByLocationName();
 }
