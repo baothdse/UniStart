@@ -1,7 +1,5 @@
 package com.unistart.constant;
 
-import java.io.Serializable;
-
 public class ParamConstant {
 	//All
 	public static final String IS_ACTIVE = "isActive";

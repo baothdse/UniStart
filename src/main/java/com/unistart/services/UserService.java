@@ -5,9 +5,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.unistart.entities.LoginUserInfo;
 import com.unistart.entities.Role;
 import com.unistart.entities.Users;
+import com.unistart.entities.customentities.LoginUserInfo;
 import com.unistart.repositories.RoleRepository;
 import com.unistart.repositories.UserRepository;
 import com.unistart.services.interfaces.UserServiceInterface;

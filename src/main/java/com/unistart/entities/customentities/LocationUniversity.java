@@ -1,4 +1,7 @@
-package com.unistart.entities;
+package com.unistart.entities.customentities;
+
+import com.unistart.entities.Location;
+import com.unistart.entities.University;
 
 public class LocationUniversity {
 	private University university;
