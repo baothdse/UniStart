@@ -51,6 +51,9 @@ public class UniversityService implements UniversityServiceInterface {
 		return universityRepo.findById(id);
 	}
 	
-	
+	public List<University> listAllUniversityName(){
+		listUniversity = universityRepo.findByLocationName();
+		return listUniversity;
+	}
 
 }

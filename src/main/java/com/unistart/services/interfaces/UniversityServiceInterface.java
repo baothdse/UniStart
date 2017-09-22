@@ -12,5 +12,8 @@ public interface UniversityServiceInterface {
 	void setLocation(Location location);
 	
 	University getUniversityById(int id);
+
 	List<University> listAllUniversity();
+	
+	List<University> listAllUniversityName();
 }

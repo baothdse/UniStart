@@ -6,5 +6,5 @@ import com.unistart.entities.Major;
 
 public interface MajorServiceInterface {
 
-	List<Major> listAllMajor();
+	List<Major> listAllMajorName();
 }

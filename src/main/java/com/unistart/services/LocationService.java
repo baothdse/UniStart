@@ -45,7 +45,7 @@ public class LocationService implements LocationServiceInterface {
 	private List<Location> listLocation;
 	
 	@Override
-	public List<Location> listAllLocation(){
+	public List<Location> listAllLocationName(){
 		listLocation = locationRepo.findByLocationName();
 		return listLocation;
 	}
