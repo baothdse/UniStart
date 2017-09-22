@@ -30,7 +30,6 @@ public class Users implements java.io.Serializable {
 	private String image;
 	private String email;
 	private boolean isActive;
-	private String avatar;
 	private Set<ReviewLike> reviewLikes = new HashSet<ReviewLike>(0);
 	private Set<Review> reviews = new HashSet<Review>(0);
 	private Set<Mbtiresult> mbtiresults = new HashSet<Mbtiresult>(0);
@@ -142,15 +141,6 @@ public class Users implements java.io.Serializable {
 
 	public void setIsActive(boolean isActive) {
 		this.isActive = isActive;
-	}
-
-	@Column(name = "Avatar")
-	public String getAvatar() {
-		return this.avatar;
-	}
-
-	public void setAvatar(String avatar) {
-		this.avatar = avatar;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "users")
