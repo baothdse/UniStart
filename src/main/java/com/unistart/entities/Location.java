@@ -32,6 +32,10 @@ public class Location implements java.io.Serializable {
 		this.id = id;
 	}
 
+	public Location(int id, String name){
+		this.id = id;
+		this.locationName = name;
+	}
 
 	public Location(int id, String locationName, String locationCode, Boolean isActive,
 			Set<University> universities) {

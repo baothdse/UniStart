@@ -19,8 +19,8 @@ public class MajorService implements MajorServiceInterface {
 	
 	private List<Major> listMajor;
 	@Override
-	public List<Major> listAllMajor() {
-		listMajor = majorRepository.findByMajorName();
+	public List<Major> listAllMajorName() {
+		listMajor = majorRepository.showByMajorName();
 		return listMajor;
 	}
 }

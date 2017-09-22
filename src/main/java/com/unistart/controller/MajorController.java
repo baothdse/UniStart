@@ -23,7 +23,7 @@ public class MajorController {
 	
 	@RequestMapping(value = UrlConstant.SHOWMAJOR, method = RequestMethod.GET)
 	public ResponseEntity<?> listAllMajor(){
-		listMajor = majorService.listAllMajor();
+		listMajor = majorService.listAllMajorName();
 		return new ResponseEntity<List<Major>>(listMajor, HttpStatus.OK);
 	}
 }

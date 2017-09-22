@@ -7,5 +7,5 @@ import com.unistart.entities.Location;
 public interface LocationServiceInterface {
 	
 	boolean createLocation(String locationName, String locationCode, int universityId);
-	List<Location> listAllLocation();
+	List<Location> listAllLocationName();
 }

@@ -39,10 +39,11 @@ public class University implements java.io.Serializable {
 	public University() {
 	}
 
-	public University(int id, String code, String name) {
+	public University(int id, String img, String name, int priority) {
 		this.id = id;
-		this.code = code;
+		this.image = img;
 		this.name = name;
+		this.priority = priority;
 	}
 
 	public University(String code, String name, String email, String phone, 

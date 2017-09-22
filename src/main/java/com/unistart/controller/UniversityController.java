@@ -30,7 +30,7 @@ public class UniversityController {
 	
 	@RequestMapping(value = UrlConstant.SHOW_UNIVERSITY, method = RequestMethod.GET)
 	public ResponseEntity<?> listAllUniversity(){
-		listUniversity = universityService.listAllUniversity();
+		listUniversity = universityService.listAllUniversityName();
 		return new ResponseEntity<List<University>>(listUniversity, HttpStatus.OK);
 	}
 	

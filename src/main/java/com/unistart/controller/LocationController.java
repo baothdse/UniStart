@@ -1,5 +1,7 @@
 package com.unistart.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,12 +14,15 @@ import com.unistart.constant.UrlConstant;
 import com.unistart.entities.LocationUniversity;
 import com.unistart.error.ErrorNotification;
 import com.unistart.services.interfaces.LocationServiceInterface;
+import com.unistart.entities.Location;
 
 @RestController
 @RequestMapping(UrlConstant.LOCATION)
 public class LocationController {
 	@Autowired
 	private LocationServiceInterface locationService;
+	
+	private List<Location> listAllLocation;
 	
 	private ErrorNotification error;
 	
@@ -33,6 +38,12 @@ public class LocationController {
 		}
 		error = new ErrorNotification(ErrorConstant.MES004);
 		return new ResponseEntity<ErrorNotification> (error, HttpStatus.CONFLICT);
+	}
+	
+	@RequestMapping(value = UrlConstant.SHOW_LOCATION, method = RequestMethod.GET)
+	public ResponseEntity<?> listAllLocation(){
+		listAllLocation = locationService.listAllLocationName();
+		return new ResponseEntity<List<Location>>(listAllLocation, HttpStatus.OK);
 	}
 }
 
