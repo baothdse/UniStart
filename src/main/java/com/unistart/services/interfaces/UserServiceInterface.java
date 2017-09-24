@@ -7,4 +7,5 @@ public interface UserServiceInterface {
 	LoginUserInfo checkLogin(String username, String password);
 	
 	boolean checkLoginThirdParty(String email, String image, String name, int providerId);
+
 }

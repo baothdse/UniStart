@@ -1,11 +1,9 @@
 package com.unistart.entities;
-// Generated Sep 21, 2017 4:14:36 PM by Hibernate Tools 4.3.1.Final
+// Generated Sep 25, 2017 1:40:32 AM by Hibernate Tools 4.3.1.Final
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -18,47 +16,52 @@ import javax.persistence.Table;
 @Table(name = "Provider", schema = "dbo", catalog = "University")
 public class Provider implements java.io.Serializable {
 
-	private int providerId;
-	private String providerName;
+	private String providerId;
 	private Users users;
+	private String providerName;
 
 	public Provider() {
 	}
 
-	public Provider(int providerId, Users users) {
+	public Provider(String providerId, String providerName) {
 		this.providerId = providerId;
-		this.users = users;
-	}
-
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name = "ProviderID", unique = true, nullable = false)
-	public int getProviderId() {
-		return this.providerId;
-	}
-
-	public void setProviderId(int providerId) {
-		this.providerId = providerId;
-	}
-
-	@Column(name = "ProviderName", unique = true, nullable = false)
-	public String getProviderName() {
-		return providerName;
-	}
-	
-	public void setProviderName(String providerName) {
 		this.providerName = providerName;
 	}
 
+	public Provider(String providerId, Users users, String providerName) {
+		this.providerId = providerId;
+		this.users = users;
+		this.providerName = providerName;
+	}
+
+	@Id
+
+	@Column(name = "ProviderID", unique = true, nullable = false)
+	public String getProviderId() {
+		return this.providerId;
+	}
+
+	public void setProviderId(String providerId) {
+		this.providerId = providerId;
+	}
+
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "UserID", nullable = false)
+	@JoinColumn(name = "UserID")
 	public Users getUsers() {
 		return this.users;
 	}
 
 	public void setUsers(Users users) {
 		this.users = users;
+	}
+
+	@Column(name = "ProviderName", nullable = false)
+	public String getProviderName() {
+		return this.providerName;
+	}
+
+	public void setProviderName(String providerName) {
+		this.providerName = providerName;
 	}
 
 }
