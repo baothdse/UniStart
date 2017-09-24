@@ -1,12 +1,12 @@
 package com.unistart.entities;
 // Generated Sep 21, 2017 4:14:36 PM by Hibernate Tools 4.3.1.Final
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -18,35 +18,37 @@ import javax.persistence.Table;
 @Table(name = "Provider", schema = "dbo", catalog = "University")
 public class Provider implements java.io.Serializable {
 
-	private ProviderId id;
+	private int providerId;
+	private String providerName;
 	private Users users;
-	private byte[] users_1;
 
 	public Provider() {
 	}
 
-	public Provider(ProviderId id, Users users) {
-		this.id = id;
+	public Provider(int providerId, Users users) {
+		this.providerId = providerId;
 		this.users = users;
 	}
 
-	public Provider(ProviderId id, Users users, byte[] users_1) {
-		this.id = id;
-		this.users = users;
-		this.users_1 = users_1;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "ProviderID", unique = true, nullable = false)
+	public int getProviderId() {
+		return this.providerId;
 	}
 
-	@EmbeddedId
-
-	@AttributeOverrides({
-			@AttributeOverride(name = "providerId", column = @Column(name = "ProviderID", nullable = false)),
-			@AttributeOverride(name = "providerName", column = @Column(name = "ProviderName", nullable = false)) })
-	public ProviderId getId() {
-		return this.id;
+	public void setProviderId(int providerId) {
+		this.providerId = providerId;
 	}
 
-	public void setId(ProviderId id) {
-		this.id = id;
+	@Column(name = "ProviderName", unique = true, nullable = false)
+	public String getProviderName() {
+		return providerName;
+	}
+	
+	public void setProviderName(String providerName) {
+		this.providerName = providerName;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -57,15 +59,6 @@ public class Provider implements java.io.Serializable {
 
 	public void setUsers(Users users) {
 		this.users = users;
-	}
-
-	@Column(name = "users")
-	public byte[] getUsers_1() {
-		return this.users_1;
-	}
-
-	public void setUsers_1(byte[] users_1) {
-		this.users_1 = users_1;
 	}
 
 }

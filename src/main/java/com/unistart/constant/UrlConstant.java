@@ -12,6 +12,7 @@ public class UrlConstant {
 	public static final String USER = "/user";
 	public static final String REGISTER = "/register";
 	public static final String CHECK_LOGIN = "/check-login";
+	public static final String CHECK_LOGIN_3RD_PARTY = "/check-login-3rd-party";
 	
 	//UNIVERSITY
 	public static final String UNIVERSITY = "/university";
