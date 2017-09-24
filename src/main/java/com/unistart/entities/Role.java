@@ -1,5 +1,5 @@
 package com.unistart.entities;
-// Generated Sep 21, 2017 4:14:36 PM by Hibernate Tools 4.3.1.Final
+// Generated Sep 25, 2017 1:40:32 AM by Hibernate Tools 4.3.1.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -13,7 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
@@ -74,7 +73,6 @@ public class Role implements java.io.Serializable {
 		this.isActive = isActive;
 	}
 
-	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "role")
 	public Set<Users> getUserses() {
 		return this.userses;

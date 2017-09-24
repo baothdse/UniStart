@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.unistart.constant.ErrorConstant;
 import com.unistart.constant.UrlConstant;
 import com.unistart.entities.University;
+import com.unistart.entities.customentities.SearchEntity;
 import com.unistart.error.ErrorNotification;
 import com.unistart.services.interfaces.UniversityServiceInterface;
 
@@ -50,5 +51,16 @@ public class UniversityController {
 		}
 		error = new ErrorNotification(ErrorConstant.MES003);
 		return new ResponseEntity<ErrorNotification> (error, HttpStatus.CONFLICT);
+	}
+	
+	@RequestMapping(value = UrlConstant.SEARCH, method = RequestMethod.POST,
+			consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+	public ResponseEntity<?> searchUniversity(@RequestBody SearchEntity searchEntity){
+		int majorId = searchEntity.getMajorId();
+		int universityId = searchEntity.getUniversityId();
+		int locationId = searchEntity.getLocationId();
+		
+		listUniversity = universityService.findUniversity(majorId, universityId, locationId);
+		return new ResponseEntity<List<University>>(listUniversity, HttpStatus.OK);
 	}
 }
