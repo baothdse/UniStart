@@ -13,6 +13,7 @@ import com.unistart.constant.ErrorConstant;
 import com.unistart.constant.UrlConstant;
 import com.unistart.entities.Users;
 import com.unistart.entities.customentities.LoginUserInfo;
+import com.unistart.entities.customentities.ThirdPartyUser;
 import com.unistart.error.ErrorNotification;
 import com.unistart.services.interfaces.UserServiceInterface;
 
@@ -50,6 +51,23 @@ public class UserController {
 		} else {
 			error = new ErrorNotification(ErrorConstant.MES002);
 			return new ResponseEntity<ErrorNotification> (error, HttpStatus.UNAUTHORIZED);
+		}
+	}
+	
+	@RequestMapping(value = UrlConstant.CHECK_LOGIN_3RD_PARTY, method = RequestMethod.POST)
+	public ResponseEntity<?> checkLoginThirdParty(@RequestBody ThirdPartyUser user) {
+		String email = user.getEmail();
+		String image = user.getImage();
+		String name = user.getName();
+		int providerId = user.getProviderId();
+		
+		boolean isSuccess = userService.checkLoginThirdParty(email, image, name, providerId);
+		if (isSuccess) {
+			return new ResponseEntity<Boolean> (isSuccess, HttpStatus.OK);
+		} else {
+			error = new ErrorNotification(ErrorConstant.MES001);
+			return new ResponseEntity<ErrorNotification> (error, HttpStatus.CONFLICT);
+
 		}
 	}
 }
