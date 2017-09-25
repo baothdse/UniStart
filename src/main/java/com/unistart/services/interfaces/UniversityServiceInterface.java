@@ -1,7 +1,8 @@
 package com.unistart.services.interfaces;
 
-import com.unistart.entities.Location;
 import java.util.List;
+
+import com.unistart.entities.Location;
 import com.unistart.entities.University;
 
 public interface UniversityServiceInterface {
@@ -16,4 +17,6 @@ public interface UniversityServiceInterface {
 	List<University> listAllUniversity();
 	
 	List<University> listAllUniversityName();
+	
+	List<University> findUniversity(int majorId, int universityId, int locationId);
 }

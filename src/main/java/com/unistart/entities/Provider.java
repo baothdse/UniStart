@@ -1,12 +1,10 @@
 package com.unistart.entities;
-// Generated Sep 21, 2017 4:14:36 PM by Hibernate Tools 4.3.1.Final
+// Generated Sep 25, 2017 1:40:32 AM by Hibernate Tools 4.3.1.Final
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -18,39 +16,37 @@ import javax.persistence.Table;
 @Table(name = "Provider", schema = "dbo", catalog = "University")
 public class Provider implements java.io.Serializable {
 
-	private ProviderId id;
+	private String providerId;
 	private Users users;
-	private byte[] users_1;
+	private String providerName;
 
 	public Provider() {
 	}
 
-	public Provider(ProviderId id, Users users) {
-		this.id = id;
+	public Provider(String providerId, String providerName) {
+		this.providerId = providerId;
+		this.providerName = providerName;
+	}
+
+	public Provider(String providerId, Users users, String providerName) {
+		this.providerId = providerId;
 		this.users = users;
+		this.providerName = providerName;
 	}
 
-	public Provider(ProviderId id, Users users, byte[] users_1) {
-		this.id = id;
-		this.users = users;
-		this.users_1 = users_1;
+	@Id
+
+	@Column(name = "ProviderID", unique = true, nullable = false)
+	public String getProviderId() {
+		return this.providerId;
 	}
 
-	@EmbeddedId
-
-	@AttributeOverrides({
-			@AttributeOverride(name = "providerId", column = @Column(name = "ProviderID", nullable = false)),
-			@AttributeOverride(name = "providerName", column = @Column(name = "ProviderName", nullable = false)) })
-	public ProviderId getId() {
-		return this.id;
-	}
-
-	public void setId(ProviderId id) {
-		this.id = id;
+	public void setProviderId(String providerId) {
+		this.providerId = providerId;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "UserID", nullable = false)
+	@JoinColumn(name = "UserID")
 	public Users getUsers() {
 		return this.users;
 	}
@@ -59,13 +55,13 @@ public class Provider implements java.io.Serializable {
 		this.users = users;
 	}
 
-	@Column(name = "users")
-	public byte[] getUsers_1() {
-		return this.users_1;
+	@Column(name = "ProviderName", nullable = false)
+	public String getProviderName() {
+		return this.providerName;
 	}
 
-	public void setUsers_1(byte[] users_1) {
-		this.users_1 = users_1;
+	public void setProviderName(String providerName) {
+		this.providerName = providerName;
 	}
 
 }

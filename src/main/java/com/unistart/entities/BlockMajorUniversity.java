@@ -1,5 +1,5 @@
 package com.unistart.entities;
-// Generated Sep 21, 2017 4:14:36 PM by Hibernate Tools 4.3.1.Final
+// Generated Sep 25, 2017 1:40:32 AM by Hibernate Tools 4.3.1.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,7 +22,9 @@ public class BlockMajorUniversity implements java.io.Serializable {
 	private int id;
 	private Block block;
 	private MajorUniversity majorUniversity;
+	private byte[] blockMajorUniversitiesKey;
 	private Set<ScoreHistory> scoreHistories = new HashSet<ScoreHistory>(0);
+	private Set<ScoreHistory> scoreHistories_1 = new HashSet<ScoreHistory>(0);
 
 	public BlockMajorUniversity() {
 	}
@@ -33,12 +35,14 @@ public class BlockMajorUniversity implements java.io.Serializable {
 		this.majorUniversity = majorUniversity;
 	}
 
-	public BlockMajorUniversity(int id, Block block, MajorUniversity majorUniversity,
-			Set<ScoreHistory> scoreHistories) {
+	public BlockMajorUniversity(int id, Block block, MajorUniversity majorUniversity, byte[] blockMajorUniversitiesKey,
+			Set<ScoreHistory> scoreHistories, Set<ScoreHistory> scoreHistories_1) {
 		this.id = id;
 		this.block = block;
 		this.majorUniversity = majorUniversity;
+		this.blockMajorUniversitiesKey = blockMajorUniversitiesKey;
 		this.scoreHistories = scoreHistories;
+		this.scoreHistories_1 = scoreHistories_1;
 	}
 
 	@Id
@@ -72,6 +76,15 @@ public class BlockMajorUniversity implements java.io.Serializable {
 		this.majorUniversity = majorUniversity;
 	}
 
+	@Column(name = "blockMajorUniversities_KEY")
+	public byte[] getBlockMajorUniversitiesKey() {
+		return this.blockMajorUniversitiesKey;
+	}
+
+	public void setBlockMajorUniversitiesKey(byte[] blockMajorUniversitiesKey) {
+		this.blockMajorUniversitiesKey = blockMajorUniversitiesKey;
+	}
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "blockMajorUniversity")
 	public Set<ScoreHistory> getScoreHistories() {
 		return this.scoreHistories;
@@ -79,6 +92,15 @@ public class BlockMajorUniversity implements java.io.Serializable {
 
 	public void setScoreHistories(Set<ScoreHistory> scoreHistories) {
 		this.scoreHistories = scoreHistories;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "blockMajorUniversity")
+	public Set<ScoreHistory> getScoreHistories_1() {
+		return this.scoreHistories_1;
+	}
+
+	public void setScoreHistories_1(Set<ScoreHistory> scoreHistories_1) {
+		this.scoreHistories_1 = scoreHistories_1;
 	}
 
 }
