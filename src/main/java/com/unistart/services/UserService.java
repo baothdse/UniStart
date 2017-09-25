@@ -50,7 +50,7 @@ public class UserService implements UserServiceInterface {
 			LoginUserInfo loginUserInfo = new LoginUserInfo();
 			loginUserInfo.setUsername(user.getUsername());
 			loginUserInfo.setName(user.getName());
-			loginUserInfo.setRole(roleRepository.findById(1));
+			loginUserInfo.setRole(user.getRole());
 			loginUserInfo.setEmail(user.getEmail());
 			loginUserInfo.setImage(user.getImage());
 			return loginUserInfo;
