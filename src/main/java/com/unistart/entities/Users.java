@@ -1,10 +1,10 @@
 package com.unistart.entities;
 // Generated Sep 25, 2017 1:40:32 AM by Hibernate Tools 4.3.1.Final
 
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -51,7 +51,8 @@ public class Users implements java.io.Serializable {
 		this.isActive = isActive;
 	}
 
-	public Users(Role role, String username,String name, String image, String email,  String password) {
+	public Users(int id, Role role, String username,String name, String image, String email,  String password) {
+		this.id = id;
 		this.role = role;
 		this.username = username;
 		this.name = name;
@@ -154,7 +155,7 @@ public class Users implements java.io.Serializable {
 		this.reviewLikes = reviewLikes;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "users")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "users",  cascade = CascadeType.ALL)
 	public Set<Provider> getProviders() {
 		return this.providers;
 	}

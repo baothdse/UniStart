@@ -7,5 +7,7 @@ import com.unistart.entities.Provider;
 
 @Repository
 public interface ProviderRepository extends JpaRepository<Provider, Integer> {
-	Provider findByProviderId(int providerId);
+	Provider findByProviderId(String providerId);
+	
+	
 }
