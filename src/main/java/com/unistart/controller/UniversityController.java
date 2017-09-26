@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.unistart.constant.ErrorConstant;
 import com.unistart.constant.UrlConstant;
+import com.unistart.entities.Location;
 import com.unistart.entities.University;
 import com.unistart.entities.customentities.SearchEntity;
 import com.unistart.error.ErrorNotification;
@@ -46,8 +47,9 @@ public class UniversityController {
 		String image = university.getImage();
 		String description = university.getDescription();
 		boolean isCreated = universityService.addUniversity(code, name, email, phone, logo, image, description);
+		University uni = universityService.getUniversityByCode(code);
 		if (isCreated) {
-			return new ResponseEntity<Boolean> (isCreated, HttpStatus.OK);
+			return new ResponseEntity<University> (uni, HttpStatus.OK);
 		}
 		error = new ErrorNotification(ErrorConstant.MES003);
 		return new ResponseEntity<ErrorNotification> (error, HttpStatus.CONFLICT);
@@ -62,5 +64,17 @@ public class UniversityController {
 		
 		listUniversity = universityService.findUniversity(majorId, universityId, locationId);
 		return new ResponseEntity<List<University>>(listUniversity, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = UrlConstant.UPDATE, method = RequestMethod.POST)
+	public ResponseEntity<?> addLocation(@RequestBody University uni) {
+		int id = uni.getLocation().getId();
+		System.out.println(id);
+		boolean isCreated = universityService.addLocation(uni.getLocation().getId(), uni.getId());
+		if (isCreated) {
+			return new ResponseEntity<Boolean> (isCreated, HttpStatus.OK);
+		}
+		error = new ErrorNotification(ErrorConstant.MES004);
+		return new ResponseEntity<ErrorNotification> (error, HttpStatus.CONFLICT);
 	}
 }
