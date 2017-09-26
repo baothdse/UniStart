@@ -6,6 +6,8 @@ public interface UserServiceInterface {
 	boolean register(String username, String password, String email);
 	LoginUserInfo checkLogin(String username, String password);
 	
-	boolean checkLoginThirdParty(String email, String image, String name, int providerId);
+	boolean checkLoginThirdParty(String email, String image, String name, String providerId, String providerName);
+	
+	LoginUserInfo get3rdPartyInfo(String email);
 
 }

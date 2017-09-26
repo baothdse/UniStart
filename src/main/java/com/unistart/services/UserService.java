@@ -1,5 +1,8 @@
 package com.unistart.services;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -54,6 +57,7 @@ public class UserService implements UserServiceInterface {
 		user = userRepository.checkLogin(username);
 		if (user != null && bcrypt.matches(password, user.getPassword())) {
 			LoginUserInfo loginUserInfo = new LoginUserInfo();
+			loginUserInfo.setUserId(user.getId());
 			loginUserInfo.setUsername(user.getUsername());
 			loginUserInfo.setName(user.getName());
 			loginUserInfo.setRole(roleRepository.findById(1));
@@ -65,7 +69,7 @@ public class UserService implements UserServiceInterface {
 	}
 
 	@Override
-	public boolean checkLoginThirdParty(String email, String image, String name, int providerId) {
+	public boolean checkLoginThirdParty(String email, String image, String name, String providerId, String providerName) {
 		user = userRepository.findByEmail(email);
 		if (user == null) {
 			user = new Users();
@@ -76,12 +80,19 @@ public class UserService implements UserServiceInterface {
 			user.setPassword("12345678");
 			user.setIsActive(true);
 			user.setRole(roleRepository.findById(1));
-			Provider provider = providerService.getById(providerId);
-			provider.setUsers(user);
-			userRepository.save(user);
+			providerService.addProvider(providerId, providerName, user);
 			return true;
 		}
-		return true;
+		return false;
+	}
+
+	@Override
+	public LoginUserInfo get3rdPartyInfo(String email) {
+		// TODO Auto-generated method stub
+		Users user = userRepository.findByUsername(email);
+		LoginUserInfo userInfo = new LoginUserInfo(user.getId(), user.getUsername(), 
+				user.getName(), user.getRole(), user.getImage(), user.getEmail());
+		return userInfo;
 	}
 
 }
