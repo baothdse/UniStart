@@ -52,6 +52,7 @@ public class UniversityService implements UniversityServiceInterface {
 		return universityRepo.findById(id);
 	}
 	
+	@Override
 	public List<University> listAllUniversityName(){
 		listUniversity = universityRepo.showByLocationName();
 		return listUniversity;
