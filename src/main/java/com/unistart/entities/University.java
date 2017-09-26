@@ -24,7 +24,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name = "University", schema = "dbo", catalog = "University")
 public class University implements java.io.Serializable {
 
-	private int id;
+	private Integer id;
 	private Location location;
 	private String code;
 	private String name;
@@ -40,10 +40,7 @@ public class University implements java.io.Serializable {
 	@JsonIgnore
 	private Set<MajorUniversity> majorUniversities = new HashSet<MajorUniversity>(0);
 
-	public University() {
-	}
-
-	public University(int id, String image, String name, int priority) {
+	public University(Integer id, String image, String name, Integer priority) {
 		this.id = id;
 		this.image = image;
 		this.name = name;
@@ -64,15 +61,15 @@ public class University implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "Id", unique = true, nullable = false)
-	public int getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "LocationId")
 	public Location getLocation() {
 		return this.location;
@@ -163,7 +160,7 @@ public class University implements java.io.Serializable {
 		this.isActive = isActive;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "university")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "university")
 	public Set<Users> getUserses() {
 		return this.userses;
 	}
@@ -172,7 +169,7 @@ public class University implements java.io.Serializable {
 		this.userses = userses;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "university")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "university")
 	public Set<Review> getReviews() {
 		return this.reviews;
 	}
@@ -181,7 +178,7 @@ public class University implements java.io.Serializable {
 		this.reviews = reviews;
 	}
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "university")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "university")
 	public Set<MajorUniversity> getMajorUniversities() {
 		return this.majorUniversities;
 	}

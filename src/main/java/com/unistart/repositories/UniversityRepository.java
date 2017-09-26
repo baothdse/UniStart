@@ -21,6 +21,7 @@ public interface UniversityRepository extends JpaRepository<University, Integer>
 	
 	@Query("select new com.unistart.entities.University(u.id,u.image,u.name,u.priority) "
 			+ "from University u")
+//	@Query("select u from University u")
 	List<University> showByLocationName();
 	
 	@Query("select u from University u where u.location.id = ?1")
