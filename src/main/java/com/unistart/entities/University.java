@@ -40,6 +40,9 @@ public class University implements java.io.Serializable {
 	@JsonIgnore
 	private Set<MajorUniversity> majorUniversities = new HashSet<MajorUniversity>(0);
 
+	public University() {
+		
+	}
 	public University(Integer id, String image, String name, Integer priority) {
 		this.id = id;
 		this.image = image;

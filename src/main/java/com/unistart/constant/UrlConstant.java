@@ -28,4 +28,8 @@ public class UrlConstant {
 	//LOCATION
 	public static final String LOCATION = "/location";
 	public static final String SHOW_LOCATION = "/show-location";
+	
+	//MBTI
+	public static final String MBTI = "/mbti";
+	public static final String SAVE_MBTI_RESULT = "/save-mbti-result";
 }
