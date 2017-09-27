@@ -1,5 +1,5 @@
 package com.unistart.entities;
-// Generated Sep 21, 2017 4:14:36 PM by Hibernate Tools 4.3.1.Final
+// Generated Sep 25, 2017 1:40:32 AM by Hibernate Tools 4.3.1.Final
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -33,6 +33,7 @@ public class Review implements java.io.Serializable {
 	private Boolean status;
 	private Boolean isActive;
 	private Set<ReviewLike> reviewLikes = new HashSet<ReviewLike>(0);
+	private Set<ReviewLike> reviewLikes_1 = new HashSet<ReviewLike>(0);
 
 	public Review() {
 	}
@@ -45,7 +46,7 @@ public class Review implements java.io.Serializable {
 
 	public Review(int id, University university, Users users, Serializable desscription, Integer starTeaching,
 			Integer starFacilities, Integer starCare, Integer starSocieties, Integer starCareer, Boolean isRecomment,
-			Boolean status, Boolean isActive, Set<ReviewLike> reviewLikes) {
+			Boolean status, Boolean isActive, Set<ReviewLike> reviewLikes, Set<ReviewLike> reviewLikes_1) {
 		this.id = id;
 		this.university = university;
 		this.users = users;
@@ -59,6 +60,7 @@ public class Review implements java.io.Serializable {
 		this.status = status;
 		this.isActive = isActive;
 		this.reviewLikes = reviewLikes;
+		this.reviewLikes_1 = reviewLikes_1;
 	}
 
 	@Id
@@ -180,6 +182,15 @@ public class Review implements java.io.Serializable {
 
 	public void setReviewLikes(Set<ReviewLike> reviewLikes) {
 		this.reviewLikes = reviewLikes;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "review")
+	public Set<ReviewLike> getReviewLikes_1() {
+		return this.reviewLikes_1;
+	}
+
+	public void setReviewLikes_1(Set<ReviewLike> reviewLikes_1) {
+		this.reviewLikes_1 = reviewLikes_1;
 	}
 
 }

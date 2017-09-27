@@ -1,5 +1,5 @@
 package com.unistart.entities;
-// Generated Sep 21, 2017 4:14:36 PM by Hibernate Tools 4.3.1.Final
+// Generated Sep 25, 2017 1:40:32 AM by Hibernate Tools 4.3.1.Final
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -23,7 +23,9 @@ public class Mbtitype implements java.io.Serializable {
 	private Serializable description;
 	private boolean isActive;
 	private Set<Mbtiresult> mbtiresults = new HashSet<Mbtiresult>(0);
+	private Set<Mbtiresult> mbtiresults_1 = new HashSet<Mbtiresult>(0);
 	private Set<MajorMbti> majorMbtis = new HashSet<MajorMbti>(0);
+	private Set<MajorMbti> majorMbtis_1 = new HashSet<MajorMbti>(0);
 
 	public Mbtitype() {
 	}
@@ -34,13 +36,16 @@ public class Mbtitype implements java.io.Serializable {
 	}
 
 	public Mbtitype(int id, Serializable mbtitypeName, Serializable description, boolean isActive,
-			Set<Mbtiresult> mbtiresults, Set<MajorMbti> majorMbtis) {
+			Set<Mbtiresult> mbtiresults, Set<Mbtiresult> mbtiresults_1, Set<MajorMbti> majorMbtis,
+			Set<MajorMbti> majorMbtis_1) {
 		this.id = id;
 		this.mbtitypeName = mbtitypeName;
 		this.description = description;
 		this.isActive = isActive;
 		this.mbtiresults = mbtiresults;
+		this.mbtiresults_1 = mbtiresults_1;
 		this.majorMbtis = majorMbtis;
+		this.majorMbtis_1 = majorMbtis_1;
 	}
 
 	@Id
@@ -91,12 +96,30 @@ public class Mbtitype implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "mbtitype")
+	public Set<Mbtiresult> getMbtiresults_1() {
+		return this.mbtiresults_1;
+	}
+
+	public void setMbtiresults_1(Set<Mbtiresult> mbtiresults_1) {
+		this.mbtiresults_1 = mbtiresults_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "mbtitype")
 	public Set<MajorMbti> getMajorMbtis() {
 		return this.majorMbtis;
 	}
 
 	public void setMajorMbtis(Set<MajorMbti> majorMbtis) {
 		this.majorMbtis = majorMbtis;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "mbtitype")
+	public Set<MajorMbti> getMajorMbtis_1() {
+		return this.majorMbtis_1;
+	}
+
+	public void setMajorMbtis_1(Set<MajorMbti> majorMbtis_1) {
+		this.majorMbtis_1 = majorMbtis_1;
 	}
 
 }

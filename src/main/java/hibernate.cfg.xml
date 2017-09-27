@@ -29,6 +29,7 @@
         <mapping class="com.unistart.entities.ReviewLike" />
         <mapping class="com.unistart.entities.Mbtigroup" />
         <mapping class="com.unistart.entities.Mbtiresult" />
+        <mapping class="com.unistart.entities.Sysdiagrams" />
         <mapping class="com.unistart.entities.Role" />
     </session-factory>
 </hibernate-configuration>
