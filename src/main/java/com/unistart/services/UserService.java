@@ -81,9 +81,9 @@ public class UserService implements UserServiceInterface {
 			user.setIsActive(true);
 			user.setRole(roleRepository.findById(1));
 			providerService.addProvider(providerId, providerName, user);
-			return true;
+			
 		}
-		return false;
+		return true;
 	}
 
 	@Override
