@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.unistart.constant.ErrorConstant;
@@ -29,6 +30,7 @@ public class UniversityController {
 	private UniversityServiceInterface universityService;
 	
 	private List<University> listUniversity;
+	private University uni;
 	
 	@RequestMapping(value = UrlConstant.SHOW_UNIVERSITY, method = RequestMethod.GET)
 	public ResponseEntity<?> listAllUniversity(){
@@ -66,7 +68,7 @@ public class UniversityController {
 		return new ResponseEntity<List<University>>(listUniversity, HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = UrlConstant.UPDATE, method = RequestMethod.POST)
+	@RequestMapping(value = UrlConstant.UPDATE_LOCATION, method = RequestMethod.POST)
 	public ResponseEntity<?> addLocation(@RequestBody University uni) {
 		int id = uni.getLocation().getId();
 		System.out.println(id);
@@ -76,5 +78,16 @@ public class UniversityController {
 		}
 		error = new ErrorNotification(ErrorConstant.MES004);
 		return new ResponseEntity<ErrorNotification> (error, HttpStatus.CONFLICT);
+	}
+	
+	@RequestMapping(value = UrlConstant.GET_UNIVERSITY_BY_ID, method = RequestMethod.GET)
+	public ResponseEntity<?> getUniversityById(@RequestParam(value = "universityId") int universityId) {
+		uni = universityService.getUniversityById(universityId);
+		if(uni != null){
+			return new ResponseEntity<University> (uni, HttpStatus.OK);
+		}
+		error = new ErrorNotification(ErrorConstant.MES005);
+		return new ResponseEntity<ErrorNotification> (error, HttpStatus.CONFLICT);
+		
 	}
 }

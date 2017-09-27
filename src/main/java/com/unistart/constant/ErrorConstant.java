@@ -8,6 +8,7 @@ public class ErrorConstant {
 	
 	//University
 	public static final String MES003 = "University is existed";
+	public static final String MES005 = "University is not existed";
 	
 	//Location
 	public static final String MES004 = "Location is existed";
