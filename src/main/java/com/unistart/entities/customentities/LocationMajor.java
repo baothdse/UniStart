@@ -4,25 +4,40 @@ import java.util.List;
 
 import com.unistart.entities.Location;
 import com.unistart.entities.Major;
+import com.unistart.entities.University;
 
 public class LocationMajor {
-	private List<Major> majors;
+	private int[] majorId;
 	private Location location;
+	private University university;
+	public University getUniversity() {
+		return university;
+	}
+
+	public void setUniversity(University university) {
+		this.university = university;
+	}
+
 	public LocationMajor() {
 		super();
 	}
 	
-	public LocationMajor(List<Major> majors, Location location) {
+
+	public LocationMajor(int[] majorId, Location location, University university) {
 		super();
-		this.majors = majors;
+		this.majorId = majorId;
 		this.location = location;
+		this.university = university;
 	}
-	public List<Major> getMajors() {
-		return majors;
+
+	public int[] getMajorId() {
+		return majorId;
 	}
-	public void setMajors(List<Major> majors) {
-		this.majors = majors;
+
+	public void setMajorId(int[] majorId) {
+		this.majorId = majorId;
 	}
+
 	public Location getLocation() {
 		return location;
 	}

@@ -87,6 +87,7 @@ public class Major implements java.io.Serializable {
 		this.isActive = isActive;
 	}
 
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "major")
 	public Set<MajorUniversity> getMajorUniversities() {
 		return this.majorUniversities;
@@ -96,6 +97,7 @@ public class Major implements java.io.Serializable {
 		this.majorUniversities = majorUniversities;
 	}
 
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "major")
 	public Set<MajorMbti> getMajorMbtis() {
 		return this.majorMbtis;
@@ -105,6 +107,7 @@ public class Major implements java.io.Serializable {
 		this.majorMbtis = majorMbtis;
 	}
 
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "major")
 	public Set<BlockOfMajor> getBlockOfMajors() {
 		return this.blockOfMajors;
