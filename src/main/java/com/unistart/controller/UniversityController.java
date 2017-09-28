@@ -86,7 +86,7 @@ public class UniversityController {
 		if(uni != null){
 			return new ResponseEntity<University> (uni, HttpStatus.OK);
 		}
-		error = new ErrorNotification(ErrorConstant.MES005);
+		error = new ErrorNotification(ErrorConstant.MES006);
 		return new ResponseEntity<ErrorNotification> (error, HttpStatus.CONFLICT);
 		
 	}
