@@ -32,5 +32,6 @@ public class UrlConstant {
 	
 	//MBTI
 	public static final String MBTI = "/mbti";
+	public static final String SAVE_MBTI_RESULT = "/save-mbti-result";
 	public static final String SHOW_MBTI_QUESTION = "/show-mbti-question";
 }

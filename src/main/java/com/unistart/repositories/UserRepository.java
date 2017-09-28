@@ -11,6 +11,7 @@ public interface UserRepository extends JpaRepository <Users, Integer> {
 	
 	Users findByUsername(String username);
 	Users findByEmail(String email);
+	Users findById(int id);
 	
 	@Query("select new com.unistart.entities.Users(u.id, u.role, u.username, u.name, u.image, u.email, u.password) "
 			+ "from Users u where u.username = ?1 and u.isActive = true")

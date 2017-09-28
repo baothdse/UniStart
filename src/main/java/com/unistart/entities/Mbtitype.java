@@ -19,8 +19,8 @@ import javax.persistence.Table;
 public class Mbtitype implements java.io.Serializable {
 
 	private int id;
-	private Serializable mbtitypeName;
-	private Serializable description;
+	private String mbtitypeName;
+	private String description;
 	private boolean isActive;
 	private Set<Mbtiresult> mbtiresults = new HashSet<Mbtiresult>(0);
 	private Set<Mbtiresult> mbtiresults_1 = new HashSet<Mbtiresult>(0);
@@ -35,7 +35,7 @@ public class Mbtitype implements java.io.Serializable {
 		this.isActive = isActive;
 	}
 
-	public Mbtitype(int id, Serializable mbtitypeName, Serializable description, boolean isActive,
+	public Mbtitype(int id, String mbtitypeName, String description, boolean isActive,
 			Set<Mbtiresult> mbtiresults, Set<Mbtiresult> mbtiresults_1, Set<MajorMbti> majorMbtis,
 			Set<MajorMbti> majorMbtis_1) {
 		this.id = id;
@@ -60,20 +60,20 @@ public class Mbtitype implements java.io.Serializable {
 	}
 
 	@Column(name = "MBTITypeName")
-	public Serializable getMbtitypeName() {
+	public String getMbtitypeName() {
 		return this.mbtitypeName;
 	}
 
-	public void setMbtitypeName(Serializable mbtitypeName) {
+	public void setMbtitypeName(String mbtitypeName) {
 		this.mbtitypeName = mbtitypeName;
 	}
 
 	@Column(name = "Description")
-	public Serializable getDescription() {
+	public String getDescription() {
 		return this.description;
 	}
 
-	public void setDescription(Serializable description) {
+	public void setDescription(String description) {
 		this.description = description;
 	}
 

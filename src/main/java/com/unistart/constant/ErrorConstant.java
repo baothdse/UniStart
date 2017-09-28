@@ -13,4 +13,6 @@ public class ErrorConstant {
 	//Location
 	public static final String MES004 = "Location is existed";
 	
+	//MBTI
+	public static final String MES005 = "Save failed";
 }
