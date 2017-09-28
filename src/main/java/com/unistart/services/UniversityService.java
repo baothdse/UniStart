@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.unistart.entities.Location;
 import com.unistart.entities.University;
+import com.unistart.repositories.LocationRepository;
 import com.unistart.repositories.UniversityRepository;
 import com.unistart.services.interfaces.UniversityServiceInterface;
 
@@ -19,6 +20,9 @@ public class UniversityService implements UniversityServiceInterface {
 	@Autowired
 	private UniversityRepository universityRepo;
 
+	@Autowired
+	private LocationRepository locationRepo;
+	
 	private University university;
 	private List<University> listUniversity;
 
@@ -54,7 +58,7 @@ public class UniversityService implements UniversityServiceInterface {
 	
 	@Override
 	public List<University> listAllUniversityName(){
-		listUniversity = universityRepo.showByLocationName();
+		listUniversity = universityRepo.showByUniversityName();
 		return listUniversity;
 	}
 	@Override
@@ -88,6 +92,16 @@ public class UniversityService implements UniversityServiceInterface {
 		}
 		
 		return listUniversity;
+	}
+	@Override
+	public University getUniversityByCode(String code) {	
+		return universityRepo.findByCode(code);
+	}
+	
+	@Override
+	public boolean addLocation(int locationID,int uniId) {
+		universityRepo.addLocation(locationRepo.findById(locationID), uniId);
+		return true;
 	}
 
 

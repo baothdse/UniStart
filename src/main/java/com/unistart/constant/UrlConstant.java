@@ -18,7 +18,8 @@ public class UrlConstant {
 	//UNIVERSITY
 	public static final String UNIVERSITY = "/university";
 	public static final String SHOW_UNIVERSITY = "/show-university";
-	
+	public static final String GET_UNIVERSITY_BY_ID = "/get-university";
+	public static final String UPDATE_LOCATION = "/update-location";
 	//BLOCK
 	public static final String BLOCK = "/block";
 	
@@ -32,4 +33,5 @@ public class UrlConstant {
 	//MBTI
 	public static final String MBTI = "/mbti";
 	public static final String SAVE_MBTI_RESULT = "/save-mbti-result";
+	public static final String SHOW_MBTI_QUESTION = "/show-mbti-question";
 }
