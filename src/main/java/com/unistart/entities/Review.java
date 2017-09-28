@@ -1,5 +1,5 @@
 package com.unistart.entities;
-// Generated Sep 17, 2017 1:40:06 PM by Hibernate Tools 4.3.1.Final
+// Generated Sep 25, 2017 1:40:32 AM by Hibernate Tools 4.3.1.Final
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -22,41 +22,45 @@ public class Review implements java.io.Serializable {
 
 	private int id;
 	private University university;
-	private User user;
+	private Users users;
 	private Serializable desscription;
 	private Integer starTeaching;
 	private Integer starFacilities;
 	private Integer starCare;
 	private Integer starSocieties;
 	private Integer starCareer;
+	private Boolean isRecomment;
 	private Boolean status;
 	private Boolean isActive;
 	private Set<ReviewLike> reviewLikes = new HashSet<ReviewLike>(0);
+	private Set<ReviewLike> reviewLikes_1 = new HashSet<ReviewLike>(0);
 
 	public Review() {
 	}
 
-	public Review(int id, University university, User user) {
+	public Review(int id, University university, Users users) {
 		this.id = id;
 		this.university = university;
-		this.user = user;
+		this.users = users;
 	}
 
-	public Review(int id, University university, User user, Serializable desscription, Integer starTeaching,
-			Integer starFacilities, Integer starCare, Integer starSocieties, Integer starCareer, Boolean status,
-			Boolean isActive, Set<ReviewLike> reviewLikes) {
+	public Review(int id, University university, Users users, Serializable desscription, Integer starTeaching,
+			Integer starFacilities, Integer starCare, Integer starSocieties, Integer starCareer, Boolean isRecomment,
+			Boolean status, Boolean isActive, Set<ReviewLike> reviewLikes, Set<ReviewLike> reviewLikes_1) {
 		this.id = id;
 		this.university = university;
-		this.user = user;
+		this.users = users;
 		this.desscription = desscription;
 		this.starTeaching = starTeaching;
 		this.starFacilities = starFacilities;
 		this.starCare = starCare;
 		this.starSocieties = starSocieties;
 		this.starCareer = starCareer;
+		this.isRecomment = isRecomment;
 		this.status = status;
 		this.isActive = isActive;
 		this.reviewLikes = reviewLikes;
+		this.reviewLikes_1 = reviewLikes_1;
 	}
 
 	@Id
@@ -82,12 +86,12 @@ public class Review implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "UserId", nullable = false)
-	public User getUser() {
-		return this.user;
+	public Users getUsers() {
+		return this.users;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUsers(Users users) {
+		this.users = users;
 	}
 
 	@Column(name = "Desscription")
@@ -144,6 +148,15 @@ public class Review implements java.io.Serializable {
 		this.starCareer = starCareer;
 	}
 
+	@Column(name = "IsRecomment")
+	public Boolean getIsRecomment() {
+		return this.isRecomment;
+	}
+
+	public void setIsRecomment(Boolean isRecomment) {
+		this.isRecomment = isRecomment;
+	}
+
 	@Column(name = "Status")
 	public Boolean getStatus() {
 		return this.status;
@@ -169,6 +182,15 @@ public class Review implements java.io.Serializable {
 
 	public void setReviewLikes(Set<ReviewLike> reviewLikes) {
 		this.reviewLikes = reviewLikes;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "review")
+	public Set<ReviewLike> getReviewLikes_1() {
+		return this.reviewLikes_1;
+	}
+
+	public void setReviewLikes_1(Set<ReviewLike> reviewLikes_1) {
+		this.reviewLikes_1 = reviewLikes_1;
 	}
 
 }

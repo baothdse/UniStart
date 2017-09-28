@@ -1,5 +1,5 @@
 package com.unistart.entities;
-// Generated Sep 17, 2017 1:40:06 PM by Hibernate Tools 4.3.1.Final
+// Generated Sep 25, 2017 1:40:32 AM by Hibernate Tools 4.3.1.Final
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,8 +17,8 @@ import javax.persistence.Table;
 public class ReviewLike implements java.io.Serializable {
 
 	private int id;
-	private Candidate candidate;
 	private Review review;
+	private Users users;
 	private Boolean isLike;
 	private Boolean isActive;
 
@@ -29,10 +29,10 @@ public class ReviewLike implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public ReviewLike(int id, Candidate candidate, Review review, Boolean isLike, Boolean isActive) {
+	public ReviewLike(int id, Review review, Users users, Boolean isLike, Boolean isActive) {
 		this.id = id;
-		this.candidate = candidate;
 		this.review = review;
+		this.users = users;
 		this.isLike = isLike;
 		this.isActive = isActive;
 	}
@@ -49,16 +49,6 @@ public class ReviewLike implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "CandidateId")
-	public Candidate getCandidate() {
-		return this.candidate;
-	}
-
-	public void setCandidate(Candidate candidate) {
-		this.candidate = candidate;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ReviewId")
 	public Review getReview() {
 		return this.review;
@@ -66,6 +56,16 @@ public class ReviewLike implements java.io.Serializable {
 
 	public void setReview(Review review) {
 		this.review = review;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "UserId")
+	public Users getUsers() {
+		return this.users;
+	}
+
+	public void setUsers(Users users) {
+		this.users = users;
 	}
 
 	@Column(name = "IsLike")

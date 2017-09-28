@@ -19,22 +19,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	DataSource dataSource;
 
 	@Autowired
-	public void configAuthentication(AuthenticationManagerBuilder auth)
-		throws Exception {
+	public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
 
-		auth.jdbcAuthentication().dataSource(dataSource)
-			.passwordEncoder(passwordEncoder())
-			.usersByUsernameQuery("sql...")
-			.authoritiesByUsernameQuery("sql...");
+		auth.jdbcAuthentication().dataSource(dataSource).passwordEncoder(passwordEncoder())
+				.usersByUsernameQuery("sql...").authoritiesByUsernameQuery("sql...");
 	}
 
 	@Bean
-	public PasswordEncoder passwordEncoder(){
+	public PasswordEncoder passwordEncoder() {
 		PasswordEncoder encoder = new BCryptPasswordEncoder();
 		return encoder;
 	}
+
 	@Override
-	  protected void configure(HttpSecurity http) throws Exception {
-	    http.csrf().disable();
-	  }
+	protected void configure(HttpSecurity http) throws Exception {
+		http.csrf().disable();
+	}
 }

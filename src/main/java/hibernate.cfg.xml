@@ -13,13 +13,13 @@
         <property name="hibernate.search.autoregister_listeners">false</property>
         <property name="hibernate.validator.apply_to_ddl">false</property>
         <mapping class="com.unistart.entities.Block" />
-        <mapping class="com.unistart.entities.Candidate" />
-        <mapping class="com.unistart.entities.User" />
+        <mapping class="com.unistart.entities.BlockMajorUniversity" />
         <mapping class="com.unistart.entities.University" />
         <mapping class="com.unistart.entities.Mbtitype" />
         <mapping class="com.unistart.entities.MajorUniversity" />
         <mapping class="com.unistart.entities.Mbtiquestion" />
         <mapping class="com.unistart.entities.BlockOfMajor" />
+        <mapping class="com.unistart.entities.Users" />
         <mapping class="com.unistart.entities.Review" />
         <mapping class="com.unistart.entities.ScoreHistory" />
         <mapping class="com.unistart.entities.MajorMbti" />
@@ -29,6 +29,7 @@
         <mapping class="com.unistart.entities.ReviewLike" />
         <mapping class="com.unistart.entities.Mbtigroup" />
         <mapping class="com.unistart.entities.Mbtiresult" />
+        <mapping class="com.unistart.entities.Sysdiagrams" />
         <mapping class="com.unistart.entities.Role" />
     </session-factory>
 </hibernate-configuration>

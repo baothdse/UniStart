@@ -1,5 +1,5 @@
 package com.unistart.entities;
-// Generated Sep 17, 2017 1:40:06 PM by Hibernate Tools 4.3.1.Final
+// Generated Sep 25, 2017 1:40:32 AM by Hibernate Tools 4.3.1.Final
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -22,8 +22,10 @@ public class Block implements java.io.Serializable {
 	private Serializable blockName;
 	private Serializable description;
 	private Boolean isActive;
-	private Set<MajorUniversity> majorUniversities = new HashSet<MajorUniversity>(0);
 	private Set<BlockOfMajor> blockOfMajors = new HashSet<BlockOfMajor>(0);
+	private Set<BlockOfMajor> blockOfMajors_1 = new HashSet<BlockOfMajor>(0);
+	private Set<BlockMajorUniversity> blockMajorUniversities = new HashSet<BlockMajorUniversity>(0);
+	private Set<BlockMajorUniversity> blockMajorUniversities_1 = new HashSet<BlockMajorUniversity>(0);
 
 	public Block() {
 	}
@@ -33,13 +35,16 @@ public class Block implements java.io.Serializable {
 	}
 
 	public Block(int id, Serializable blockName, Serializable description, Boolean isActive,
-			Set<MajorUniversity> majorUniversities, Set<BlockOfMajor> blockOfMajors) {
+			Set<BlockOfMajor> blockOfMajors, Set<BlockOfMajor> blockOfMajors_1,
+			Set<BlockMajorUniversity> blockMajorUniversities, Set<BlockMajorUniversity> blockMajorUniversities_1) {
 		this.id = id;
 		this.blockName = blockName;
 		this.description = description;
 		this.isActive = isActive;
-		this.majorUniversities = majorUniversities;
 		this.blockOfMajors = blockOfMajors;
+		this.blockOfMajors_1 = blockOfMajors_1;
+		this.blockMajorUniversities = blockMajorUniversities;
+		this.blockMajorUniversities_1 = blockMajorUniversities_1;
 	}
 
 	@Id
@@ -81,21 +86,39 @@ public class Block implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "block")
-	public Set<MajorUniversity> getMajorUniversities() {
-		return this.majorUniversities;
-	}
-
-	public void setMajorUniversities(Set<MajorUniversity> majorUniversities) {
-		this.majorUniversities = majorUniversities;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "block")
 	public Set<BlockOfMajor> getBlockOfMajors() {
 		return this.blockOfMajors;
 	}
 
 	public void setBlockOfMajors(Set<BlockOfMajor> blockOfMajors) {
 		this.blockOfMajors = blockOfMajors;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "block")
+	public Set<BlockOfMajor> getBlockOfMajors_1() {
+		return this.blockOfMajors_1;
+	}
+
+	public void setBlockOfMajors_1(Set<BlockOfMajor> blockOfMajors_1) {
+		this.blockOfMajors_1 = blockOfMajors_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "block")
+	public Set<BlockMajorUniversity> getBlockMajorUniversities() {
+		return this.blockMajorUniversities;
+	}
+
+	public void setBlockMajorUniversities(Set<BlockMajorUniversity> blockMajorUniversities) {
+		this.blockMajorUniversities = blockMajorUniversities;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "block")
+	public Set<BlockMajorUniversity> getBlockMajorUniversities_1() {
+		return this.blockMajorUniversities_1;
+	}
+
+	public void setBlockMajorUniversities_1(Set<BlockMajorUniversity> blockMajorUniversities_1) {
+		this.blockMajorUniversities_1 = blockMajorUniversities_1;
 	}
 
 }

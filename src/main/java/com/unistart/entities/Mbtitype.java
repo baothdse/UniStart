@@ -1,5 +1,5 @@
 package com.unistart.entities;
-// Generated Sep 17, 2017 1:40:06 PM by Hibernate Tools 4.3.1.Final
+// Generated Sep 25, 2017 1:40:32 AM by Hibernate Tools 4.3.1.Final
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -19,11 +19,13 @@ import javax.persistence.Table;
 public class Mbtitype implements java.io.Serializable {
 
 	private int id;
-	private Serializable mbtitypeName;
-	private Serializable description;
+	private String mbtitypeName;
+	private String description;
 	private boolean isActive;
 	private Set<Mbtiresult> mbtiresults = new HashSet<Mbtiresult>(0);
+	private Set<Mbtiresult> mbtiresults_1 = new HashSet<Mbtiresult>(0);
 	private Set<MajorMbti> majorMbtis = new HashSet<MajorMbti>(0);
+	private Set<MajorMbti> majorMbtis_1 = new HashSet<MajorMbti>(0);
 
 	public Mbtitype() {
 	}
@@ -33,14 +35,17 @@ public class Mbtitype implements java.io.Serializable {
 		this.isActive = isActive;
 	}
 
-	public Mbtitype(int id, Serializable mbtitypeName, Serializable description, boolean isActive,
-			Set<Mbtiresult> mbtiresults, Set<MajorMbti> majorMbtis) {
+	public Mbtitype(int id, String mbtitypeName, String description, boolean isActive,
+			Set<Mbtiresult> mbtiresults, Set<Mbtiresult> mbtiresults_1, Set<MajorMbti> majorMbtis,
+			Set<MajorMbti> majorMbtis_1) {
 		this.id = id;
 		this.mbtitypeName = mbtitypeName;
 		this.description = description;
 		this.isActive = isActive;
 		this.mbtiresults = mbtiresults;
+		this.mbtiresults_1 = mbtiresults_1;
 		this.majorMbtis = majorMbtis;
+		this.majorMbtis_1 = majorMbtis_1;
 	}
 
 	@Id
@@ -55,20 +60,20 @@ public class Mbtitype implements java.io.Serializable {
 	}
 
 	@Column(name = "MBTITypeName")
-	public Serializable getMbtitypeName() {
+	public String getMbtitypeName() {
 		return this.mbtitypeName;
 	}
 
-	public void setMbtitypeName(Serializable mbtitypeName) {
+	public void setMbtitypeName(String mbtitypeName) {
 		this.mbtitypeName = mbtitypeName;
 	}
 
 	@Column(name = "Description")
-	public Serializable getDescription() {
+	public String getDescription() {
 		return this.description;
 	}
 
-	public void setDescription(Serializable description) {
+	public void setDescription(String description) {
 		this.description = description;
 	}
 
@@ -91,12 +96,30 @@ public class Mbtitype implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "mbtitype")
+	public Set<Mbtiresult> getMbtiresults_1() {
+		return this.mbtiresults_1;
+	}
+
+	public void setMbtiresults_1(Set<Mbtiresult> mbtiresults_1) {
+		this.mbtiresults_1 = mbtiresults_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "mbtitype")
 	public Set<MajorMbti> getMajorMbtis() {
 		return this.majorMbtis;
 	}
 
 	public void setMajorMbtis(Set<MajorMbti> majorMbtis) {
 		this.majorMbtis = majorMbtis;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "mbtitype")
+	public Set<MajorMbti> getMajorMbtis_1() {
+		return this.majorMbtis_1;
+	}
+
+	public void setMajorMbtis_1(Set<MajorMbti> majorMbtis_1) {
+		this.majorMbtis_1 = majorMbtis_1;
 	}
 
 }

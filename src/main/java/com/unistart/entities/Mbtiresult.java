@@ -1,9 +1,11 @@
 package com.unistart.entities;
-// Generated Sep 17, 2017 1:40:06 PM by Hibernate Tools 4.3.1.Final
+// Generated Sep 25, 2017 1:40:32 AM by Hibernate Tools 4.3.1.Final
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -18,7 +20,7 @@ public class Mbtiresult implements java.io.Serializable {
 
 	private int id;
 	private Mbtitype mbtitype;
-	private User user;
+	private Users users;
 
 	public Mbtiresult() {
 	}
@@ -27,14 +29,14 @@ public class Mbtiresult implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public Mbtiresult(int id, Mbtitype mbtitype, User user) {
+	public Mbtiresult(int id, Mbtitype mbtitype, Users users) {
 		this.id = id;
 		this.mbtitype = mbtitype;
-		this.user = user;
+		this.users = users;
 	}
 
 	@Id
-
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "Id", unique = true, nullable = false)
 	public int getId() {
 		return this.id;
@@ -56,12 +58,12 @@ public class Mbtiresult implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "UserId")
-	public User getUser() {
-		return this.user;
+	public Users getUsers() {
+		return this.users;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUsers(Users users) {
+		this.users = users;
 	}
 
 }
