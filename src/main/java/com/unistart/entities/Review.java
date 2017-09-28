@@ -7,6 +7,8 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -23,17 +25,16 @@ public class Review implements java.io.Serializable {
 	private int id;
 	private University university;
 	private Users users;
-	private Serializable desscription;
-	private Integer starTeaching;
-	private Integer starFacilities;
-	private Integer starCare;
-	private Integer starSocieties;
-	private Integer starCareer;
-	private Boolean isRecomment;
-	private Boolean status;
-	private Boolean isActive;
+	private String description;
+	private int starTeaching;
+	private int starFacilities;
+	private int starCare;
+	private int starSocieties;
+	private int starCareer;
+	private boolean isRecomment;
+	private boolean status;
+	private boolean isActive;
 	private Set<ReviewLike> reviewLikes = new HashSet<ReviewLike>(0);
-	private Set<ReviewLike> reviewLikes_1 = new HashSet<ReviewLike>(0);
 
 	public Review() {
 	}
@@ -44,13 +45,13 @@ public class Review implements java.io.Serializable {
 		this.users = users;
 	}
 
-	public Review(int id, University university, Users users, Serializable desscription, Integer starTeaching,
+	public Review(int id, University university, Users users, String description, Integer starTeaching,
 			Integer starFacilities, Integer starCare, Integer starSocieties, Integer starCareer, Boolean isRecomment,
-			Boolean status, Boolean isActive, Set<ReviewLike> reviewLikes, Set<ReviewLike> reviewLikes_1) {
+			Boolean status, Boolean isActive, Set<ReviewLike> reviewLikes) {
 		this.id = id;
 		this.university = university;
 		this.users = users;
-		this.desscription = desscription;
+		this.description = description;
 		this.starTeaching = starTeaching;
 		this.starFacilities = starFacilities;
 		this.starCare = starCare;
@@ -60,11 +61,10 @@ public class Review implements java.io.Serializable {
 		this.status = status;
 		this.isActive = isActive;
 		this.reviewLikes = reviewLikes;
-		this.reviewLikes_1 = reviewLikes_1;
 	}
 
 	@Id
-
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "Id", unique = true, nullable = false)
 	public int getId() {
 		return this.id;
@@ -94,13 +94,13 @@ public class Review implements java.io.Serializable {
 		this.users = users;
 	}
 
-	@Column(name = "Desscription")
-	public Serializable getDesscription() {
-		return this.desscription;
+	@Column(name = "Description")
+	public String getDescription() {
+		return this.description;
 	}
 
-	public void setDesscription(Serializable desscription) {
-		this.desscription = desscription;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	@Column(name = "StarTeaching")
@@ -182,15 +182,6 @@ public class Review implements java.io.Serializable {
 
 	public void setReviewLikes(Set<ReviewLike> reviewLikes) {
 		this.reviewLikes = reviewLikes;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "review")
-	public Set<ReviewLike> getReviewLikes_1() {
-		return this.reviewLikes_1;
-	}
-
-	public void setReviewLikes_1(Set<ReviewLike> reviewLikes_1) {
-		this.reviewLikes_1 = reviewLikes_1;
 	}
 
 }
