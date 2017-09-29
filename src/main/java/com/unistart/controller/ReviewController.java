@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.unistart.constant.ErrorConstant;
 import com.unistart.constant.UrlConstant;
-import com.unistart.entities.Location;
 import com.unistart.entities.Review;
+import com.unistart.entities.customentities.ReviewUniversity;
 import com.unistart.error.ErrorNotification;
 import com.unistart.services.interfaces.ReviewServiceInterface;
 
@@ -48,9 +48,16 @@ public class ReviewController {
 		}
 	}
 	
-	@RequestMapping(value = UrlConstant.SHOW_REVIEW, method = RequestMethod.GET)
-	public ResponseEntity<?> listAllReview(){
-		listAllReview = reviewService.listAllReview();
-		return new ResponseEntity<List<Review>>(listAllReview, HttpStatus.OK);
+	@RequestMapping(value = UrlConstant.SHOW_REVIEW, method = RequestMethod.POST)
+	public ResponseEntity<?> listAllReview(@RequestBody ReviewUniversity review){
+		int universityId = review.getUniversity().getId();
+		
+		listAllReview = reviewService.listAllReview(universityId);
+		if (listAllReview != null){
+			return new ResponseEntity<List<Review>>(listAllReview, HttpStatus.OK);
+		}else {
+			error = new ErrorNotification(ErrorConstant.MES006);
+			return new ResponseEntity<ErrorNotification> (error, HttpStatus.CONFLICT);
+		}
 	}
 }

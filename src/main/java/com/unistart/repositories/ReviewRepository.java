@@ -11,6 +11,6 @@ import com.unistart.entities.Review;
 @Repository
 public interface ReviewRepository extends JpaRepository<Review, Integer>{
 
-	@Query("SELECT r FROM Review r")
-	public List<Review> showByReviewId();
+	@Query("SELECT r FROM Review r WHERE r.isActive = 1 and r.university.id = ?1")
+	public List<Review> showReviewByUniversityId(int universityId);
 }

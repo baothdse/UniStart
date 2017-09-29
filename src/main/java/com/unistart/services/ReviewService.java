@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.unistart.entities.Location;
 import com.unistart.entities.Review;
 import com.unistart.entities.University;
 import com.unistart.entities.Users;
@@ -29,6 +28,7 @@ public class ReviewService implements ReviewServiceInterface{
 	private University university;
 	private Review review;
 	private Users user;
+	private List<Review> listALLReview;
 	
 	@Override
 	public boolean saveReview(int universityId, int userId, String description, int starTeaching, int starFacilities, int starCare,
@@ -52,11 +52,11 @@ public class ReviewService implements ReviewServiceInterface{
 		}
 		return false;
 	}
-	private List<Review> listALLReview;
-	
+
 	@Override
-	public List<Review> listAllReview(){
-		listALLReview = reviewRepo.showByReviewId();
+	public List<Review> listAllReview(int universityId) {
+		
+		listALLReview = reviewRepo.showReviewByUniversityId(universityId);
 		return listALLReview;
 	}
 }
