@@ -42,4 +42,18 @@ public class ReviewController {
 			return new ResponseEntity<ErrorNotification> (error, HttpStatus.CONFLICT);
 		}
 	}
+	@RequestMapping(value = UrlConstant.CHANGE_REVIEW_STATUS, method = RequestMethod.POST)
+	public ResponseEntity<?> changeReviewStatus(@RequestBody Review Review) {
+		int id = Review.getId();
+		boolean status = Review.getStatus();
+		boolean isActive = Review.getIsActive();
+
+		boolean isSuccess = reviewService.changeReviewStatus(id, status, isActive);
+		if (isSuccess) {
+			return new ResponseEntity<Boolean> (isSuccess, HttpStatus.OK);
+		} else {
+			error = new ErrorNotification(ErrorConstant.MES005);
+			return new ResponseEntity<ErrorNotification> (error, HttpStatus.CONFLICT);
+		}
+	}
 }

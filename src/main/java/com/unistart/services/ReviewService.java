@@ -49,4 +49,18 @@ public class ReviewService implements ReviewServiceInterface{
 		}
 		return false;
 	}
+
+	@Override
+	public boolean changeReviewStatus(int id, boolean status, boolean isActive) {
+		
+		review = reviewRepo.findById(id);
+
+		if (review != null){
+			review.setStatus(status);
+			review.setIsActive(isActive);
+			reviewRepo.save(review);
+			return true;
+		}
+		return false;
+	}
 }
