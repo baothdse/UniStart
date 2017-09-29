@@ -14,4 +14,6 @@ public interface MajorRepository extends JpaRepository<Major, Integer>{
 	@Query("select new com.unistart.entities.Major(m.id, m.majorName) "
 			+ "from Major m")
 	List<Major> showByMajorName();
+	
+	Major findById(int id);
 }

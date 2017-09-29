@@ -1,5 +1,6 @@
 package com.unistart.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +16,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.unistart.constant.ErrorConstant;
 import com.unistart.constant.UrlConstant;
 import com.unistart.entities.Location;
+import com.unistart.entities.Major;
+import com.unistart.entities.MajorUniversity;
 import com.unistart.entities.University;
+import com.unistart.entities.customentities.LocationMajor;
 import com.unistart.entities.customentities.SearchEntity;
 import com.unistart.error.ErrorNotification;
+import com.unistart.services.MajorService;
+import com.unistart.services.interfaces.MajorServiceInterface;
 import com.unistart.services.interfaces.UniversityServiceInterface;
 
 @RestController
@@ -28,6 +34,9 @@ public class UniversityController {
 	
 	@Autowired
 	private UniversityServiceInterface universityService;
+	
+	@Autowired
+	private MajorServiceInterface majorService;
 	
 	private List<University> listUniversity;
 	private University uni;
@@ -67,13 +76,28 @@ public class UniversityController {
 		listUniversity = universityService.findUniversity(majorId, universityId, locationId);
 		return new ResponseEntity<List<University>>(listUniversity, HttpStatus.OK);
 	}
-	
-	@RequestMapping(value = UrlConstant.UPDATE_LOCATION, method = RequestMethod.POST)
-	public ResponseEntity<?> addLocation(@RequestBody University uni) {
-		int id = uni.getLocation().getId();
-		System.out.println(id);
-		boolean isCreated = universityService.addLocation(uni.getLocation().getId(), uni.getId());
-		if (isCreated) {
+	@RequestMapping(value = UrlConstant.UPDATE_LOCATION_MAJOR, method = RequestMethod.POST)
+	public ResponseEntity<?> addLocation(@RequestBody LocationMajor uni) {
+		boolean isCreated = false, isSave = false;
+		int listMajorId[] = null;
+		listMajorId = uni.getMajorId();
+		University univer = universityService.getUniversityById(uni.getUniversity().getId());
+		if(listMajorId != null){
+			for (int index = 0; index < listMajorId.length; index++) {
+				Major major = majorService.getMajorById(listMajorId[index]);
+		        isSave = majorService.saveMajorUniversity(major, univer); 	
+		        System.out.println("isSave " + isSave);
+			}
+		}else{
+			isSave= true;
+		}
+		if(uni.getLocation() != null){
+			isCreated = universityService.addLocation(uni.getLocation().getId(), uni.getUniversity().getId());
+			System.out.println("isCreated " + isSave);
+		}else{
+			isCreated = true;
+		}
+		if (isCreated && isSave) {
 			return new ResponseEntity<Boolean> (isCreated, HttpStatus.OK);
 		}
 		error = new ErrorNotification(ErrorConstant.MES004);
@@ -84,6 +108,7 @@ public class UniversityController {
 	public ResponseEntity<?> getUniversityById(@RequestParam(value = "universityId") int universityId) {
 		uni = universityService.getUniversityById(universityId);
 		if(uni != null){
+			//List<University> majorUni = majorService.getUniverityWithMajor(uni);
 			return new ResponseEntity<University> (uni, HttpStatus.OK);
 		}
 		error = new ErrorNotification(ErrorConstant.MES006);
