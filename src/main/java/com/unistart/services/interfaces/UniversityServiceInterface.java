@@ -10,7 +10,12 @@ public interface UniversityServiceInterface {
 	boolean addUniversity(String code, String name, String email, String phone,
 			String logo, String image,int priority, String description);
 	
+	boolean updateUniversity(int id,String code, String name, String email, String phone,
+			String logo, String image,int priority, String description);
+	
 	boolean addLocation(int locationId, int uniId);
+	
+	boolean deleteUniversity(int id);
 	
 	void setLocation(Location location);
 	

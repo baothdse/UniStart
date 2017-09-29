@@ -103,6 +103,21 @@ public class UniversityService implements UniversityServiceInterface {
 		universityRepo.addLocation(locationRepo.findById(locationID), uniId);
 		return true;
 	}
+	@Override
+	public boolean updateUniversity(int id, String code, String name, String email, String phone, String logo, String image, int priority,
+			String description) {
+		University university = universityRepo.findById(id);
+		if (university != null) {
+			universityRepo.updateUniversity(code, name, email, phone, logo, image, priority, description, id);
+			return true;
+		}
+		return false;
+	}
+	@Override
+	public boolean deleteUniversity(int id) {
+		universityRepo.changeIsActive(id);
+		return true;
+	}
 
 
 }

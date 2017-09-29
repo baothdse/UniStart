@@ -27,7 +27,6 @@ public interface UniversityRepository extends JpaRepository<University, Integer>
 			+ "from University u")
 	List<University> showByUniversityName();
 
-	
 	@Query("select u from University u where u.location.id = ?1")
 	List<University> findByLocation(int locationId);
 	
@@ -52,4 +51,14 @@ public interface UniversityRepository extends JpaRepository<University, Integer>
 			+ "where u.id = mu.university.id and m.id = mu.major.id and "
 			+ "u.isActive = 'true' and m.id = ?1 and u.id = ?2 and u.location.id = ?3")
 	University findBy(int majorId, int universityId, int locationId);
+	
+	@Modifying
+	@Query("update University u set u.isActive = false where u.id = ?1")
+	void changeIsActive(int id);
+	
+	@Modifying
+	@Query("update University u set u.code = ?1, u.name= ?2, u.email= ?3, u.phone = ?4,"
+			+ "u.logo = ?5, u.image = ?6, u.priority = ?7, u.description = ?8 where u.id = ?9 ")
+	void updateUniversity(String code, String name, String email, String phone,
+			String logo, String image,int priority, String description,int id);
 }

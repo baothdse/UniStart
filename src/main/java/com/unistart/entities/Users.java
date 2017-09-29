@@ -173,6 +173,7 @@ public class Users implements java.io.Serializable {
 		this.reviews = reviews;
 	}
 
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "users")
 	public Set<Mbtiresult> getMbtiresults() {
 		return this.mbtiresults;
