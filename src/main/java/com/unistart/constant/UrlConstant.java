@@ -38,4 +38,5 @@ public class UrlConstant {
 	//Review
 	public static final String REVIEW = "/review";
 	public static final String SAVE_REVIEW = "/save-review";
+	public static final String SHOW_REVIEW = "/show-review";
 }

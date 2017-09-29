@@ -1,9 +1,12 @@
 package com.unistart.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.unistart.entities.Location;
 import com.unistart.entities.Review;
 import com.unistart.entities.University;
 import com.unistart.entities.Users;
@@ -48,5 +51,12 @@ public class ReviewService implements ReviewServiceInterface{
 			return true;
 		}
 		return false;
+	}
+	private List<Review> listALLReview;
+	
+	@Override
+	public List<Review> listAllReview(){
+		listALLReview = reviewRepo.showByReviewId();
+		return listALLReview;
 	}
 }
