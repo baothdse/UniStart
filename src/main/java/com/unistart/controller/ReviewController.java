@@ -1,5 +1,7 @@
 package com.unistart.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.unistart.constant.ErrorConstant;
 import com.unistart.constant.UrlConstant;
+import com.unistart.entities.Mbtiquestion;
 import com.unistart.entities.Review;
 import com.unistart.error.ErrorNotification;
 import com.unistart.services.interfaces.ReviewServiceInterface;
@@ -55,5 +58,16 @@ public class ReviewController {
 			error = new ErrorNotification(ErrorConstant.MES005);
 			return new ResponseEntity<ErrorNotification> (error, HttpStatus.CONFLICT);
 		}
+	}
+	@RequestMapping(value = UrlConstant.NEED_ACCEPT_REVIEW, method = RequestMethod.GET)
+	public ResponseEntity<?> listAllNeedAcceptReview(){
+		List<Review> listAllReview = reviewService.listAllNeedAcceptReview();
+		if(listAllReview != null){
+			return new ResponseEntity<List<Review>>(listAllReview, HttpStatus.OK);
+		}else {
+			error = new ErrorNotification(ErrorConstant.MES007);
+			return new ResponseEntity<ErrorNotification> (error, HttpStatus.CONFLICT);
+		}
+		
 	}
 }

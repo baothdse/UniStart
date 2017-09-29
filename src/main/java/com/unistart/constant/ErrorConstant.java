@@ -15,4 +15,6 @@ public class ErrorConstant {
 	
 	//MBTI
 	public static final String MES005 = "Save failed";
+	//Review
+	public static final String MES007 = "No review found";
 }
