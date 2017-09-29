@@ -57,7 +57,8 @@ public class UniversityController {
 		String logo = university.getLogo();
 		String image = university.getImage();
 		String description = university.getDescription();
-		boolean isCreated = universityService.addUniversity(code, name, email, phone, logo, image, description);
+		int priority = university.getPriority();
+		boolean isCreated = universityService.addUniversity(code, name, email, phone, logo, image, priority, description);
 		University uni = universityService.getUniversityByCode(code);
 		if (isCreated) {
 			return new ResponseEntity<University> (uni, HttpStatus.OK);
@@ -82,26 +83,30 @@ public class UniversityController {
 		int listMajorId[] = null;
 		listMajorId = uni.getMajorId();
 		University univer = universityService.getUniversityById(uni.getUniversity().getId());
-		if(listMajorId != null){
-			for (int index = 0; index < listMajorId.length; index++) {
-				Major major = majorService.getMajorById(listMajorId[index]);
-		        isSave = majorService.saveMajorUniversity(major, univer); 	
-		        System.out.println("isSave " + isSave);
+		if(univer !=null){
+			if(listMajorId != null){
+				for (int index = 0; index < listMajorId.length; index++) {
+					Major major = majorService.getMajorById(listMajorId[index]);
+			        isSave = majorService.saveMajorUniversity(major, univer); 
+				}
+			}else{
+				isSave= true;
+			}
+			if(uni.getLocation() != null){
+				isCreated = universityService.addLocation(uni.getLocation().getId(), uni.getUniversity().getId());
+			}else{
+				isCreated = true;
+			}
+			if (isCreated && isSave) {
+				return new ResponseEntity<Boolean> (isCreated, HttpStatus.OK);
+			}else{
+				error = new ErrorNotification(ErrorConstant.MES005);
+				return new ResponseEntity<ErrorNotification> (error, HttpStatus.CONFLICT);
 			}
 		}else{
-			isSave= true;
+			error = new ErrorNotification(ErrorConstant.MES006);
+			return new ResponseEntity<ErrorNotification> (error, HttpStatus.NOT_FOUND);
 		}
-		if(uni.getLocation() != null){
-			isCreated = universityService.addLocation(uni.getLocation().getId(), uni.getUniversity().getId());
-			System.out.println("isCreated " + isSave);
-		}else{
-			isCreated = true;
-		}
-		if (isCreated && isSave) {
-			return new ResponseEntity<Boolean> (isCreated, HttpStatus.OK);
-		}
-		error = new ErrorNotification(ErrorConstant.MES004);
-		return new ResponseEntity<ErrorNotification> (error, HttpStatus.CONFLICT);
 	}
 	
 	@RequestMapping(value = UrlConstant.GET_UNIVERSITY_BY_ID, method = RequestMethod.GET)
