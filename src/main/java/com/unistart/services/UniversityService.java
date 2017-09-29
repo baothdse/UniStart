@@ -32,12 +32,12 @@ public class UniversityService implements UniversityServiceInterface {
 	}
 	@Override
 	public boolean addUniversity(String code, String name, String email, String phone, String logo,
-			String image, String description) {
+			String image,int priority, String description) {
 		// TODO Auto-generated method stub
 		University university = universityRepo.findByCode(code);
 		if (university == null) {
 			boolean isActive = true;
-			university = new University(code, name, email, phone, logo, image, description, isActive);
+			university = new University(code, name, email, phone, logo, image, priority, description, isActive);
 			universityRepo.save(university);
 			return true;
 		}

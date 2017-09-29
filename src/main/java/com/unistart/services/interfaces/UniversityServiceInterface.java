@@ -8,7 +8,7 @@ import com.unistart.entities.University;
 public interface UniversityServiceInterface {
 	
 	boolean addUniversity(String code, String name, String email, String phone,
-			String logo, String image, String description);
+			String logo, String image,int priority, String description);
 	
 	boolean addLocation(int locationId, int uniId);
 	
