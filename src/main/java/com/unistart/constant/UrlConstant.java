@@ -22,6 +22,7 @@ public class UrlConstant {
 	public static final String UPDATE_LOCATION_MAJOR = "/update-location-major";
 	//BLOCK
 	public static final String BLOCK = "/block";
+	public static final String GET_ALL_BLOCK = "/get-all-block";
 	
 	//MAJOR
 	public static final String SHOWMAJOR = "/show-major";

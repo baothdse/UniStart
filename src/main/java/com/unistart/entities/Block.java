@@ -19,13 +19,11 @@ import javax.persistence.Table;
 public class Block implements java.io.Serializable {
 
 	private int id;
-	private Serializable blockName;
-	private Serializable description;
+	private String blockName;
+	private String description;
 	private Boolean isActive;
 	private Set<BlockOfMajor> blockOfMajors = new HashSet<BlockOfMajor>(0);
-	private Set<BlockOfMajor> blockOfMajors_1 = new HashSet<BlockOfMajor>(0);
 	private Set<BlockMajorUniversity> blockMajorUniversities = new HashSet<BlockMajorUniversity>(0);
-	private Set<BlockMajorUniversity> blockMajorUniversities_1 = new HashSet<BlockMajorUniversity>(0);
 
 	public Block() {
 	}
@@ -34,7 +32,7 @@ public class Block implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public Block(int id, Serializable blockName, Serializable description, Boolean isActive,
+	public Block(int id, String blockName, String description, Boolean isActive,
 			Set<BlockOfMajor> blockOfMajors, Set<BlockOfMajor> blockOfMajors_1,
 			Set<BlockMajorUniversity> blockMajorUniversities, Set<BlockMajorUniversity> blockMajorUniversities_1) {
 		this.id = id;
@@ -42,11 +40,12 @@ public class Block implements java.io.Serializable {
 		this.description = description;
 		this.isActive = isActive;
 		this.blockOfMajors = blockOfMajors;
-		this.blockOfMajors_1 = blockOfMajors_1;
 		this.blockMajorUniversities = blockMajorUniversities;
-		this.blockMajorUniversities_1 = blockMajorUniversities_1;
 	}
 
+	public Block(String blockName){
+		this.blockName = blockName;
+	}
 	@Id
 
 	@Column(name = "Id", unique = true, nullable = false)
@@ -63,7 +62,7 @@ public class Block implements java.io.Serializable {
 		return this.blockName;
 	}
 
-	public void setBlockName(Serializable blockName) {
+	public void setBlockName(String blockName) {
 		this.blockName = blockName;
 	}
 
@@ -72,7 +71,7 @@ public class Block implements java.io.Serializable {
 		return this.description;
 	}
 
-	public void setDescription(Serializable description) {
+	public void setDescription(String description) {
 		this.description = description;
 	}
 
@@ -95,15 +94,6 @@ public class Block implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "block")
-	public Set<BlockOfMajor> getBlockOfMajors_1() {
-		return this.blockOfMajors_1;
-	}
-
-	public void setBlockOfMajors_1(Set<BlockOfMajor> blockOfMajors_1) {
-		this.blockOfMajors_1 = blockOfMajors_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "block")
 	public Set<BlockMajorUniversity> getBlockMajorUniversities() {
 		return this.blockMajorUniversities;
 	}
@@ -111,14 +101,4 @@ public class Block implements java.io.Serializable {
 	public void setBlockMajorUniversities(Set<BlockMajorUniversity> blockMajorUniversities) {
 		this.blockMajorUniversities = blockMajorUniversities;
 	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "block")
-	public Set<BlockMajorUniversity> getBlockMajorUniversities_1() {
-		return this.blockMajorUniversities_1;
-	}
-
-	public void setBlockMajorUniversities_1(Set<BlockMajorUniversity> blockMajorUniversities_1) {
-		this.blockMajorUniversities_1 = blockMajorUniversities_1;
-	}
-
 }
