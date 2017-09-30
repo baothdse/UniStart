@@ -26,6 +26,7 @@ public class Mbtitype implements java.io.Serializable {
 	private int id;
 	private String mbtitypeName;
 	private String description;
+	private String contentType;
 	private boolean isActive;
 	private Set<Mbtiresult> mbtiresults = new HashSet<Mbtiresult>(0);
 	
@@ -40,12 +41,12 @@ public class Mbtitype implements java.io.Serializable {
 		this.isActive = isActive;
 	}
 
-	public Mbtitype(int id, String mbtitypeName, String description, boolean isActive,
-			Set<Mbtiresult> mbtiresults, Set<Mbtiresult> mbtiresults_1, Set<MajorMbti> majorMbtis,
-			Set<MajorMbti> majorMbtis_1) {
+	public Mbtitype(int id, String mbtitypeName, String description, boolean isActive, String contentType,
+			Set<Mbtiresult> mbtiresults, Set<MajorMbti> majorMbtis) {
 		this.id = id;
 		this.mbtitypeName = mbtitypeName;
 		this.description = description;
+		this.contentType = contentType;
 		this.isActive = isActive;
 		this.mbtiresults = mbtiresults;
 		this.majorMbtis = majorMbtis;
@@ -78,6 +79,14 @@ public class Mbtitype implements java.io.Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	public String getContentType() {
+		return contentType;
+	}
+
+	public void setContentType(String contentType) {
+		this.contentType = contentType;
 	}
 
 	@Column(name = "isActive", nullable = false)

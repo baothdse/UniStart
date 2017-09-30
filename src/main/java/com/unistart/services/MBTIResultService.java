@@ -28,7 +28,7 @@ public class MBTIResultService implements MBTIResultServiceInterface {
 
 	private Mbtitype mbtiType;
 	private Users user;
-	private Mbtiresult mbtiResult;
+	private Mbtiresult mbtiResult = new Mbtiresult();
 	
 	@Override
 	public boolean saveMbtiResult(String mbtiTypeName, int userId) {
