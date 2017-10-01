@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.unistart.constant.ErrorConstant;
@@ -48,11 +49,9 @@ public class ReviewController {
 		}
 	}
 	
-	@RequestMapping(value = UrlConstant.SHOW_REVIEW, method = RequestMethod.POST)
-	public ResponseEntity<?> listAllReview(@RequestBody ReviewUniversity review){
-		int universityId = review.getUniversity().getId();
-		
-		listAllReview = reviewService.listAllReview(universityId);
+	@RequestMapping(value = UrlConstant.SHOW_REVIEW, method = RequestMethod.GET)
+	public ResponseEntity<?> listReviewOfUniveristy(@RequestParam(value = "universityId") int universityId){
+		listAllReview = reviewService.listReviewOfUniversity(universityId);
 		if (listAllReview != null){
 			return new ResponseEntity<List<Review>>(listAllReview, HttpStatus.OK);
 		}else {

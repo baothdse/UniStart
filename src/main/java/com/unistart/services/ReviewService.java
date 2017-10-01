@@ -54,8 +54,7 @@ public class ReviewService implements ReviewServiceInterface{
 	}
 
 	@Override
-	public List<Review> listAllReview(int universityId) {
-		
+	public List<Review> listReviewOfUniversity(int universityId) {
 		listALLReview = reviewRepo.showReviewByUniversityId(universityId);
 		return listALLReview;
 	}
