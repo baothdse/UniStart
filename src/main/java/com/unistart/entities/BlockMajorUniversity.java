@@ -6,6 +6,8 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -22,10 +24,8 @@ public class BlockMajorUniversity implements java.io.Serializable {
 	private int id;
 	private Block block;
 	private MajorUniversity majorUniversity;
-	private byte[] blockMajorUniversitiesKey;
 	private Set<ScoreHistory> scoreHistories = new HashSet<ScoreHistory>(0);
-	private Set<ScoreHistory> scoreHistories_1 = new HashSet<ScoreHistory>(0);
-
+	
 	public BlockMajorUniversity() {
 	}
 
@@ -40,13 +40,11 @@ public class BlockMajorUniversity implements java.io.Serializable {
 		this.id = id;
 		this.block = block;
 		this.majorUniversity = majorUniversity;
-		this.blockMajorUniversitiesKey = blockMajorUniversitiesKey;
 		this.scoreHistories = scoreHistories;
-		this.scoreHistories_1 = scoreHistories_1;
 	}
 
 	@Id
-
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "Id", unique = true, nullable = false)
 	public int getId() {
 		return this.id;
@@ -76,15 +74,6 @@ public class BlockMajorUniversity implements java.io.Serializable {
 		this.majorUniversity = majorUniversity;
 	}
 
-	@Column(name = "blockMajorUniversities_KEY")
-	public byte[] getBlockMajorUniversitiesKey() {
-		return this.blockMajorUniversitiesKey;
-	}
-
-	public void setBlockMajorUniversitiesKey(byte[] blockMajorUniversitiesKey) {
-		this.blockMajorUniversitiesKey = blockMajorUniversitiesKey;
-	}
-
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "blockMajorUniversity")
 	public Set<ScoreHistory> getScoreHistories() {
 		return this.scoreHistories;
@@ -92,15 +81,6 @@ public class BlockMajorUniversity implements java.io.Serializable {
 
 	public void setScoreHistories(Set<ScoreHistory> scoreHistories) {
 		this.scoreHistories = scoreHistories;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "blockMajorUniversity")
-	public Set<ScoreHistory> getScoreHistories_1() {
-		return this.scoreHistories_1;
-	}
-
-	public void setScoreHistories_1(Set<ScoreHistory> scoreHistories_1) {
-		this.scoreHistories_1 = scoreHistories_1;
 	}
 
 }

@@ -9,5 +9,6 @@ import com.unistart.entities.University;
 
 
 public interface MajorUniRepository extends JpaRepository<MajorUniversity, Integer>{
+	  MajorUniversity findById(int id);
       List<MajorUniversity> findByUniversity (University university);
 }
