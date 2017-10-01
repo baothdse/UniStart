@@ -26,7 +26,7 @@ public class UrlConstant {
 	
 	//MAJOR
 	public static final String SHOWMAJOR = "/show-major";
-
+   
 	//LOCATION
 	public static final String LOCATION = "/location";
 	public static final String SHOW_LOCATION = "/show-location";
@@ -38,4 +38,8 @@ public class UrlConstant {
 	public static final String SHOW_MBTI_QUESTION = "/show-mbti-question";
 	public static final String GET_MBTI_RESULT = "/get-mbti-results";
 	public static final String GET_MBTI_MAJOR = "/get-mbti-major";
+	
+	//SCORE
+	public static final String SCORE = "/score";
+	public static final String SAVE_SCORE = "/save-score";
 }

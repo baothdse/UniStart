@@ -13,7 +13,7 @@ import com.unistart.entities.Block;
 public interface BlockRepository extends JpaRepository<Block, Integer> {
 	Block findById(int id);
 	
-	@Query("select new com.unistart.entities.Block(b.blockName) "
-			+ "from Block b")
+	@Query("select new com.unistart.entities.Block(b.id, b.blockName) "
+			+ "from Block b where b.isActive = true")
 	List<Block> getListOfBlock();
 }

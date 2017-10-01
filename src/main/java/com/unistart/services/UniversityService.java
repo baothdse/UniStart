@@ -77,9 +77,6 @@ public class UniversityService implements UniversityServiceInterface {
 		} else if (majorId != 0 && universityId != 0 && locationId == 0) {
 			university = universityRepo.findByMajorAndUniversity(majorId, universityId);
 			listUniversity = new ArrayList<University>();
-			System.out.println(majorId);
-			System.out.println(universityId);
-			System.out.println(locationId);
 			listUniversity.add(university); 
 		} else if (majorId == 0 && universityId != 0 && locationId != 0) {
 			university = universityRepo.findByLocationAndId(locationId, universityId);
