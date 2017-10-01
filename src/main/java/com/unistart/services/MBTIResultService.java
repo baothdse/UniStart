@@ -28,7 +28,7 @@ public class MBTIResultService implements MBTIResultServiceInterface {
 
 	private Mbtitype mbtiType;
 	private Users user;
-	private Mbtiresult mbtiResult;
+	private Mbtiresult mbtiResult = new Mbtiresult();
 	
 	@Override
 	public boolean saveMbtiResult(String mbtiTypeName, int userId) {
@@ -47,9 +47,18 @@ public class MBTIResultService implements MBTIResultServiceInterface {
 	}
 
 	@Override
-	public Mbtiresult findById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Mbtiresult getMBTIResult(int userId) {
+		return mbtiResultRepo.getMBTIResult(userId);
+	}
+
+	@Override
+	public boolean updateMbtiResult(String mbtiName, int userid) {
+		mbtiType = mbtiTypeRepo.findByMbtitypeName(mbtiName);
+		if (mbtiType != null) {
+			mbtiResultRepo.updateMBTIResult(userid, mbtiType.getId());
+			return true;
+		}	
+		return false;
 	}
 
 }

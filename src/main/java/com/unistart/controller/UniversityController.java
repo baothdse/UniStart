@@ -118,6 +118,32 @@ public class UniversityController {
 		}
 		error = new ErrorNotification(ErrorConstant.MES006);
 		return new ResponseEntity<ErrorNotification> (error, HttpStatus.CONFLICT);
+	}
+	
+	@RequestMapping(value = UrlConstant.UPDATE, method = RequestMethod.POST)
+	public ResponseEntity<?> updateUniversity(@RequestBody University university) {
+		int id = university.getId();
+		String code = university.getCode();
+		String name = university.getName();
+		String email = university.getEmail();
+		String phone = university.getPhone();
+		String logo = university.getLogo();
+		String image = university.getImage();
+		String description = university.getDescription();
+		int priority = university.getPriority();
+		boolean isCreated = universityService.updateUniversity(id, code, name, email, phone, logo, image, priority, description);
+		if (isCreated) {
+			return new ResponseEntity<Boolean> (isCreated, HttpStatus.OK);
+		}
+		error = new ErrorNotification(ErrorConstant.MES007);
+		return new ResponseEntity<ErrorNotification> (error, HttpStatus.CONFLICT);	
+	}
+	
+	@RequestMapping(value = UrlConstant.DELETE, method = RequestMethod.POST)
+	public ResponseEntity<?> deleteUniversity(@RequestBody University university) {
+		int id = university.getId();
+		boolean isCreated = universityService.deleteUniversity(id);
+		return new ResponseEntity<Boolean> (isCreated, HttpStatus.OK);
 		
 	}
 }

@@ -66,6 +66,7 @@ public class University implements java.io.Serializable {
 		this.description = description;
 		this.isActive = isActive;
 	}
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "Id", unique = true, nullable = false)
