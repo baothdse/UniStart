@@ -58,4 +58,14 @@ public class ReviewService implements ReviewServiceInterface{
 		listALLReview = reviewRepo.showReviewByUniversityId(universityId);
 		return listALLReview;
 	}
+	public boolean changeReviewStatus(int id, boolean status, boolean isActive) {	
+		review = reviewRepo.findById(id);
+		if (review != null){
+			review.setStatus(status);
+			review.setIsActive(isActive);
+			reviewRepo.save(review);
+			return true;
+		}
+		return false;
+	}
 }

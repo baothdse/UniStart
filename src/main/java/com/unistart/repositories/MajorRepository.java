@@ -12,7 +12,7 @@ import com.unistart.entities.Major;
 public interface MajorRepository extends JpaRepository<Major, Integer>{
 
 	@Query("select new com.unistart.entities.Major(m.id, m.majorName) "
-			+ "from Major m")
+			+ "from Major m where m.isActive = true")
 	List<Major> showByMajorName();
 	
 	Major findById(int id);

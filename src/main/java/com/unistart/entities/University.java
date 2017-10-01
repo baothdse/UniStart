@@ -55,16 +55,18 @@ public class University implements java.io.Serializable {
 	}
 
 	public University(String code, String name, String email,
-			String phone, String logo, String image, String description, Boolean isActive) {
+			String phone, String logo, String image,int priority, String description, Boolean isActive) {
 		this.code = code;
 		this.name = name;
 		this.email = email;
 		this.phone = phone;
 		this.logo = logo;
 		this.image = image;
+		this.priority = priority;
 		this.description = description;
 		this.isActive = isActive;
 	}
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "Id", unique = true, nullable = false)

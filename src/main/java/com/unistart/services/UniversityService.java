@@ -32,12 +32,12 @@ public class UniversityService implements UniversityServiceInterface {
 	}
 	@Override
 	public boolean addUniversity(String code, String name, String email, String phone, String logo,
-			String image, String description) {
+			String image,int priority, String description) {
 		// TODO Auto-generated method stub
 		University university = universityRepo.findByCode(code);
 		if (university == null) {
 			boolean isActive = true;
-			university = new University(code, name, email, phone, logo, image, description, isActive);
+			university = new University(code, name, email, phone, logo, image, priority, description, isActive);
 			universityRepo.save(university);
 			return true;
 		}
@@ -77,9 +77,6 @@ public class UniversityService implements UniversityServiceInterface {
 		} else if (majorId != 0 && universityId != 0 && locationId == 0) {
 			university = universityRepo.findByMajorAndUniversity(majorId, universityId);
 			listUniversity = new ArrayList<University>();
-			System.out.println(majorId);
-			System.out.println(universityId);
-			System.out.println(locationId);
 			listUniversity.add(university); 
 		} else if (majorId == 0 && universityId != 0 && locationId != 0) {
 			university = universityRepo.findByLocationAndId(locationId, universityId);
@@ -101,6 +98,21 @@ public class UniversityService implements UniversityServiceInterface {
 	@Override
 	public boolean addLocation(int locationID,int uniId) {
 		universityRepo.addLocation(locationRepo.findById(locationID), uniId);
+		return true;
+	}
+	@Override
+	public boolean updateUniversity(int id, String code, String name, String email, String phone, String logo, String image, int priority,
+			String description) {
+		University university = universityRepo.findById(id);
+		if (university != null) {
+			universityRepo.updateUniversity(code, name, email, phone, logo, image, priority, description, id);
+			return true;
+		}
+		return false;
+	}
+	@Override
+	public boolean deleteUniversity(int id) {
+		universityRepo.changeIsActive(id);
 		return true;
 	}
 
