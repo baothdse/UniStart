@@ -86,8 +86,16 @@ public class UniversityController {
 		if(univer !=null){
 			if(listMajorId != null){
 				for (int index = 0; index < listMajorId.length; index++) {
-					Major major = majorService.getMajorById(listMajorId[index]);
-			        isSave = majorService.saveMajorUniversity(major, univer); 
+					MajorUniversity majorUni = majorService.findByMajorIdAndUniId(listMajorId[index], uni.getUniversity().getId());
+					if(majorUni == null){
+						Major major = majorService.getMajorById(listMajorId[index]);
+				        isSave = majorService.saveMajorUniversity(major, univer); 
+					}else if(majorUni != null && majorUni.getIsActive() == false){
+					    majorUni.getId();
+					    isSave = majorService.changeActive(majorUni.getId(), true);
+					}else{
+						isSave = true;
+					}
 				}
 			}else{
 				isSave= true;
@@ -107,6 +115,25 @@ public class UniversityController {
 			error = new ErrorNotification(ErrorConstant.MES006);
 			return new ResponseEntity<ErrorNotification> (error, HttpStatus.NOT_FOUND);
 		}
+	}
+	
+	@RequestMapping(value = UrlConstant.REMOVE_MAJOR_UNI, method = RequestMethod.POST)
+	public ResponseEntity<?> removeMajorOfUniversity(@RequestBody LocationMajor majorUni) {
+		boolean isRemove = false;
+		int listMajorId[] = null;
+		listMajorId = majorUni.getMajorId();
+		int uniId = majorUni.getUniversity().getId();
+		for(int index = 0; index < listMajorId.length; index++){
+			MajorUniversity mu = majorService.findByMajorIdAndUniId(listMajorId[index], uniId);
+			if(mu != null){
+				isRemove = majorService.changeActive(mu.getId(), false);
+			}
+		}
+		if(isRemove){
+			return new ResponseEntity<Boolean> (isRemove, HttpStatus.OK);
+		}
+		error = new ErrorNotification(ErrorConstant.MES009);
+		return new ResponseEntity<ErrorNotification> (error, HttpStatus.CONFLICT);
 	}
 	
 	@RequestMapping(value = UrlConstant.GET_UNIVERSITY_BY_ID, method = RequestMethod.GET)

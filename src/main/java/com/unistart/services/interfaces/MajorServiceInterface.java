@@ -11,5 +11,7 @@ public interface MajorServiceInterface {
 	List<Major> listAllMajorName();
     Major getMajorById(int id);
 	boolean saveMajorUniversity(Major major, University uni);
+	boolean changeActive(int majorUniId, boolean isActive);
 	List<MajorUniversity> getUniverityWithMajor(University uni);
+	MajorUniversity findByMajorIdAndUniId(int majorId, int uniId);
 }

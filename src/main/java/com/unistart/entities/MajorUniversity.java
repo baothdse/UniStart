@@ -31,6 +31,7 @@ public class MajorUniversity implements java.io.Serializable {
 	private Major major;
 	@JsonBackReference
 	private University university;
+	private Boolean isActive;
 	private Set<BlockMajorUniversity> blockMajorUniversities = new HashSet<BlockMajorUniversity>(0);
 
 	public MajorUniversity() {
@@ -40,11 +41,12 @@ public class MajorUniversity implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public MajorUniversity(int id, Major major, University university, byte[] majorUniversitiesKey,
+	public MajorUniversity(int id, Major major, University university, byte[] majorUniversitiesKey,Boolean isActive,
 			Set<BlockMajorUniversity> blockMajorUniversities) {
 		this.id = id;
 		this.major = major;
 		this.university = university;
+		this.isActive = isActive;
 		this.blockMajorUniversities = blockMajorUniversities;
 	}
 
@@ -87,6 +89,15 @@ public class MajorUniversity implements java.io.Serializable {
 
 	public void setBlockMajorUniversities(Set<BlockMajorUniversity> blockMajorUniversities) {
 		this.blockMajorUniversities = blockMajorUniversities;
+	}
+	
+	@Column(name = "isActive")
+	public Boolean getIsActive() {
+		return this.isActive;
+	}
+
+	public void setIsActive(Boolean isActive) {
+		this.isActive = isActive;
 	}
 
 }
