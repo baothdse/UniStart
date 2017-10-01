@@ -26,7 +26,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Table(name = "University", schema = "dbo", catalog = "University")
 public class University implements java.io.Serializable {
 
-	private int id;
+	private Integer id;
 	private Location location;
 	private String code;
 	private String name;
@@ -35,7 +35,7 @@ public class University implements java.io.Serializable {
 	private String logo;
 	private String description;
 	private String image;
-	private int priority;
+	private Integer priority;
 	private Boolean isActive;
 	private Set<Users> userses = new HashSet<Users>(0);
 	private Set<Review> reviews = new HashSet<Review>(0);
@@ -47,7 +47,7 @@ public class University implements java.io.Serializable {
 		
 	}
 
-	public University(int id, String image, String name, int priority) {
+	public University(Integer id, String image, String name, Integer priority) {
 		this.id = id;
 		this.image = image;
 		this.name = name;
@@ -70,11 +70,11 @@ public class University implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "Id", unique = true, nullable = false)
-	public int getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	
@@ -152,11 +152,11 @@ public class University implements java.io.Serializable {
 	}
 
 	@Column(name = "Priority")
-	public int getPriority() {
+	public Integer getPriority() {
 		return this.priority;
 	}
 
-	public void setPriority(int priority) {
+	public void setPriority(Integer priority) {
 		this.priority = priority;
 	}
 
