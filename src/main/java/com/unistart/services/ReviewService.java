@@ -68,4 +68,11 @@ public class ReviewService implements ReviewServiceInterface{
 		}
 		return false;
 	}
+
+	List<Review> listAllReview;
+	@Override
+	public List<Review> listAllNeedAcceptReview() {
+		listAllReview = reviewRepo.findNeedAcceptReview();
+		return listAllReview;
+	}
 }

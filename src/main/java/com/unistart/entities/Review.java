@@ -179,6 +179,7 @@ public class Review implements java.io.Serializable {
 		this.isActive = isActive;
 	}
 
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "review")
 	public Set<ReviewLike> getReviewLikes() {
 		return this.reviewLikes;
