@@ -22,12 +22,16 @@ import com.unistart.error.ErrorNotification;
 import com.unistart.repositories.BlockMajorUniRepository;
 import com.unistart.repositories.MajorUniRepository;
 import com.unistart.services.interfaces.BlockMajorUniInterface;
+import com.unistart.services.interfaces.BlockServiceInterface;
 
 @RestController
 @RequestMapping(UrlConstant.SCORE)
 public class ScoreController {
    @Autowired
    private BlockMajorUniInterface blockMajorUniService;
+   
+   @Autowired
+   private BlockServiceInterface blockService;
    private ErrorNotification error;
    private BlockMajorUniversity bmu;
    private ScoreHistory scoreHistory;
@@ -35,11 +39,11 @@ public class ScoreController {
    @RequestMapping(value = UrlConstant.SAVE_SCORE, method = RequestMethod.POST)
 	public ResponseEntity<?> addLocation(@RequestBody MajorBlockScore majorScore) {
 	   List<MajorScore> listMajorScore = majorScore.getMajorScore();
+	   int majorUniId = majorScore.getMajorUniId();
 		MajorScore ms = new MajorScore();
+		int blockId = blockService.findByBlockName(majorScore.getBlockName()).getId();
 		for (int i = 0; i < listMajorScore.size(); i++) {
 			ms = listMajorScore.get(i);
-			int blockId = ms.getBlockId();
-			int majorUniId = ms.getMajorUniId();
 			bmu = blockMajorUniService.findByBlockAndMajor(blockId, majorUniId);
 			if (bmu == null) {
 				// create blockMajorUni
