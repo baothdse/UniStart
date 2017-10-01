@@ -34,6 +34,7 @@ public class MajorService implements MajorServiceInterface {
 		MajorUniversity majorUni = new MajorUniversity();
 		majorUni.setMajor(major);
 		majorUni.setUniversity(uni);
+		majorUni.setIsActive(true);
 		majorUniRepo.save(majorUni);
 		return true;
 	}
@@ -45,6 +46,15 @@ public class MajorService implements MajorServiceInterface {
 	@Override
 	public List<MajorUniversity> getUniverityWithMajor(University uni){
 		return majorUniRepo.findByUniversity(uni);
+	}
+	@Override
+	public MajorUniversity findByMajorIdAndUniId(int majorId, int uniId) {
+		return majorUniRepo.findByMajorIdAndUniId(majorId, uniId);
+	}
+	@Override
+	public boolean changeActive(int majorUniId, boolean isActive) {
+		majorUniRepo.changeIsActive(majorUniId, isActive);
+		return true;
 	}
 	
 }
