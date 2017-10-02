@@ -9,7 +9,13 @@ import com.unistart.entities.ScoreHistory;
 
 public class MajorScore {
 	private int blockId;
-	private int majorUniId;
+	private String blockName;
+	public String getBlockName() {
+		return blockName;
+	}
+	public void setBlockName(String blockName) {
+		this.blockName = blockName;
+	}
 	private Double score;
 	private int year;
 	public int getBlockId() {
@@ -19,12 +25,6 @@ public class MajorScore {
 		this.blockId = blockId;
 	}
 	
-	public int getMajorUniId() {
-		return majorUniId;
-	}
-	public void setMajorUniId(int majorUniId) {
-		this.majorUniId = majorUniId;
-	}
 	public Double getScore() {
 		return score;
 	}

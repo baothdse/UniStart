@@ -22,4 +22,9 @@ public class BlockService implements BlockServiceInterface{
 		return blockRepo.getListOfBlock();
 	}
 
+	@Override
+	public Block findByBlockName(String blockName) {
+		return blockRepo.findByBlockName(blockName);
+	}
+
 }

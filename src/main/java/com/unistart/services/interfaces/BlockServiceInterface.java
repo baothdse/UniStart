@@ -7,4 +7,6 @@ import com.unistart.entities.Location;
 
 public interface BlockServiceInterface {
 	List<Block> listAllBlock();
+	
+	Block findByBlockName(String blockName);
 }
