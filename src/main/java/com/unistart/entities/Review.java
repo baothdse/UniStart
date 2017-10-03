@@ -1,9 +1,9 @@
 package com.unistart.entities;
-// Generated Sep 25, 2017 1:40:32 AM by Hibernate Tools 4.3.1.Final
+// Generated Oct 1, 2017 10:03:30 PM by Hibernate Tools 4.3.1.Final
 
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -24,30 +24,30 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name = "Review", schema = "dbo", catalog = "University")
 public class Review implements java.io.Serializable {
 
-	private int id;
+	private Integer id;
 	private University university;
 	private Users users;
-	private String description;
-	private int starTeaching;
-	private int starFacilities;
-	private int starCare;
-	private int starSocieties;
-	private int starCareer;
-	private boolean isRecomment;
-	private boolean status;
-	private boolean isActive;
+	private String desscription;
+	private Integer starTeaching;
+	private Integer starFacilities;
+	private Integer starCare;
+	private Integer starSocieties;
+	private Integer starCareer;
+	private Boolean isRecomment;
+	private Boolean status;
+	private Boolean isActive;
 	private Set<ReviewLike> reviewLikes = new HashSet<ReviewLike>(0);
 
 	public Review() {
 	}
 
-	public Review(int id, University university, Users users) {
+	public Review(Integer id, University university, Users users) {
 		this.id = id;
 		this.university = university;
 		this.users = users;
 	}
 
-	public Review(int id, University university, Users users, String description, Integer starTeaching,
+	public Review(Integer id, University university, Users users, String desscription, Integer starTeaching,
 			Integer starFacilities, Integer starCare, Integer starSocieties, Integer starCareer, Boolean isRecomment,
 			Boolean status, Boolean isActive, Set<ReviewLike> reviewLikes) {
 		this.id = id;
@@ -68,11 +68,11 @@ public class Review implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "Id", unique = true, nullable = false)
-	public int getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -98,13 +98,13 @@ public class Review implements java.io.Serializable {
 		this.users = users;
 	}
 
-	@Column(name = "Description")
-	public String getDescription() {
-		return this.description;
+	@Column(name = "Desscription")
+	public String getDesscription() {
+		return this.desscription;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setDesscription(String desscription) {
+		this.desscription = desscription;
 	}
 
 	@Column(name = "StarTeaching")
