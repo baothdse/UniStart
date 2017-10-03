@@ -43,6 +43,7 @@ public class UrlConstant {
 	//SCORE
 	public static final String SCORE = "/score";
 	public static final String SAVE_SCORE = "/save-score";
+	//public static final String GET_SCORE = "/get-score";
 	
 	//Review
 	public static final String REVIEW = "/review";

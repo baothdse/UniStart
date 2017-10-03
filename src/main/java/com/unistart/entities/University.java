@@ -46,7 +46,10 @@ public class University implements java.io.Serializable {
 	public University() {
 		
 	}
-
+    
+	public University(Set<MajorUniversity> majorUniversities){
+		this.majorUniversities = majorUniversities;
+	}
 	public University(Integer id, String image, String name, Integer priority) {
 		this.id = id;
 		this.image = image;
@@ -189,6 +192,7 @@ public class University implements java.io.Serializable {
 		this.reviews = reviews;
 	}
 	
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "university")
 	public Set<MajorUniversity> getMajorUniversities() {
 		return this.majorUniversities;

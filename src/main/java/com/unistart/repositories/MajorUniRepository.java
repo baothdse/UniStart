@@ -12,13 +12,17 @@ import com.unistart.entities.University;
 
 @Repository
 public interface MajorUniRepository extends JpaRepository<MajorUniversity, Integer>{
-	  MajorUniversity findById(int id);
-      List<MajorUniversity> findByUniversity (University university);
-      
-      @Query("select m from MajorUniversity m where m.major.id = ?1 and m.university.id = ?2")
-      MajorUniversity findByMajorIdAndUniId(int majorId, int uniId);
-      
-    @Modifying
-  	@Query("update MajorUniversity u set u.isActive = ?2 where u.id = ?1")
-  	void changeIsActive(int id,boolean isActive);
+	MajorUniversity findById(int id);
+
+	List<MajorUniversity> findByUniversity(University university);
+
+	@Query("select m from MajorUniversity m where m.major.id = ?1 and m.university.id = ?2")
+	MajorUniversity findByMajorIdAndUniId(int majorId, int uniId);
+
+	@Modifying
+	@Query("update MajorUniversity u set u.isActive = ?2 where u.id = ?1")
+	void changeIsActive(int id, boolean isActive);
+	
+//	@Query("select m from MajorUniversity m where m.university.id = ?1")
+//	List<MajorUniversity> findByUniId(int uniId);
 }

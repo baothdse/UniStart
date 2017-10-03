@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.unistart.entities.Location;
+import com.unistart.entities.MajorUniversity;
 import com.unistart.entities.University;
 import com.unistart.repositories.LocationRepository;
 import com.unistart.repositories.UniversityRepository;

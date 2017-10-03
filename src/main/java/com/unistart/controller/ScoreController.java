@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.unistart.constant.ErrorConstant;
@@ -15,6 +16,7 @@ import com.unistart.constant.UrlConstant;
 import com.unistart.entities.BlockMajorUniversity;
 import com.unistart.entities.MajorUniversity;
 import com.unistart.entities.ScoreHistory;
+import com.unistart.entities.University;
 import com.unistart.entities.customentities.LocationUniversity;
 import com.unistart.entities.customentities.MajorBlockScore;
 import com.unistart.entities.customentities.MajorScore;
@@ -37,7 +39,7 @@ public class ScoreController {
    private ScoreHistory scoreHistory;
    
    @RequestMapping(value = UrlConstant.SAVE_SCORE, method = RequestMethod.POST)
-	public ResponseEntity<?> addLocation(@RequestBody MajorBlockScore majorScore) {
+	public ResponseEntity<?> saveScore(@RequestBody MajorBlockScore majorScore) {
 	   List<MajorScore> listMajorScore = majorScore.getMajorScore();
 	   int majorUniId = majorScore.getMajorUniId();
 		MajorScore ms = new MajorScore();
@@ -84,4 +86,10 @@ public class ScoreController {
 		}
 		return new ResponseEntity<Boolean>(true, HttpStatus.OK);
 	}
+   
+//   @RequestMapping(value = UrlConstant.GET_SCORE, method = RequestMethod.GET)
+//	public ResponseEntity<?> getScore(@RequestParam(value = "universityId") int uniId){
+//		List<MajorUniversity> listMajorUni = blockMajorUniService.findByUniId(uniId);
+//		return new ResponseEntity<List<MajorUniversity>>(listMajorUni, HttpStatus.OK);
+//	}
 }
