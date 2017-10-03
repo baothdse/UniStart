@@ -1,5 +1,5 @@
 package com.unistart.entities;
-// Generated Sep 25, 2017 1:40:32 AM by Hibernate Tools 4.3.1.Final
+// Generated Oct 1, 2017 10:03:30 PM by Hibernate Tools 4.3.1.Final
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 @Table(name = "ScoreHistory", schema = "dbo", catalog = "University")
 public class ScoreHistory implements java.io.Serializable {
 
-	private int id;
+	private Integer id;
 	@JsonBackReference
 	private BlockMajorUniversity blockMajorUniversity;
 	private Double score;
@@ -29,11 +29,11 @@ public class ScoreHistory implements java.io.Serializable {
 	public ScoreHistory() {
 	}
 
-	public ScoreHistory(int id) {
+	public ScoreHistory(Integer id) {
 		this.id = id;
 	}
 
-	public ScoreHistory(int id, BlockMajorUniversity blockMajorUniversity, Double score, Integer year) {
+	public ScoreHistory(Integer id, BlockMajorUniversity blockMajorUniversity, Double score, Integer year) {
 		this.id = id;
 		this.blockMajorUniversity = blockMajorUniversity;
 		this.score = score;
@@ -43,11 +43,11 @@ public class ScoreHistory implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "Id", unique = true, nullable = false)
-	public int getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
