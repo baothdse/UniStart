@@ -1,5 +1,5 @@
 package com.unistart.entities;
-// Generated Oct 1, 2017 10:03:30 PM by Hibernate Tools 4.3.1.Final
+// Generated Sep 25, 2017 1:40:32 AM by Hibernate Tools 4.3.1.Final
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,7 +16,7 @@ import javax.persistence.Table;
 @Table(name = "ReviewLike", schema = "dbo", catalog = "University")
 public class ReviewLike implements java.io.Serializable {
 
-	private Integer id;
+	private int id;
 	private Review review;
 	private Users users;
 	private Boolean isLike;
@@ -25,11 +25,11 @@ public class ReviewLike implements java.io.Serializable {
 	public ReviewLike() {
 	}
 
-	public ReviewLike(Integer id) {
+	public ReviewLike(int id) {
 		this.id = id;
 	}
 
-	public ReviewLike(Integer id, Review review, Users users, Boolean isLike, Boolean isActive) {
+	public ReviewLike(int id, Review review, Users users, Boolean isLike, Boolean isActive) {
 		this.id = id;
 		this.review = review;
 		this.users = users;
@@ -40,11 +40,11 @@ public class ReviewLike implements java.io.Serializable {
 	@Id
 
 	@Column(name = "Id", unique = true, nullable = false)
-	public Integer getId() {
+	public int getId() {
 		return this.id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

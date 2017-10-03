@@ -1,5 +1,5 @@
 package com.unistart.entities;
-// Generated Oct 1, 2017 10:03:30 PM by Hibernate Tools 4.3.1.Final
+// Generated Sep 25, 2017 1:40:32 AM by Hibernate Tools 4.3.1.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -26,7 +26,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Table(name = "BlockMajorUniversity", schema = "dbo", catalog = "University")
 public class BlockMajorUniversity implements java.io.Serializable {
 
-	private Integer id;
+	private int id;
 	private Block block;
 	@JsonBackReference
 	private MajorUniversity majorUniversity;
@@ -37,13 +37,13 @@ public class BlockMajorUniversity implements java.io.Serializable {
 	public BlockMajorUniversity() {
 	}
 
-	public BlockMajorUniversity(Integer id, Block block, MajorUniversity majorUniversity) {
+	public BlockMajorUniversity(int id, Block block, MajorUniversity majorUniversity) {
 		this.id = id;
 		this.block = block;
 		this.majorUniversity = majorUniversity;
 	}
 
-	public BlockMajorUniversity(Integer id, Block block, MajorUniversity majorUniversity, byte[] blockMajorUniversitiesKey,
+	public BlockMajorUniversity(int id, Block block, MajorUniversity majorUniversity, byte[] blockMajorUniversitiesKey,
 			Set<ScoreHistory> scoreHistories, Set<ScoreHistory> scoreHistories_1) {
 		this.id = id;
 		this.block = block;
@@ -54,11 +54,11 @@ public class BlockMajorUniversity implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "Id", unique = true, nullable = false)
-	public Integer getId() {
+	public int getId() {
 		return this.id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
