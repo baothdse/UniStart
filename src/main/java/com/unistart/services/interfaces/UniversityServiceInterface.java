@@ -8,12 +8,21 @@ import com.unistart.entities.University;
 public interface UniversityServiceInterface {
 	
 	boolean addUniversity(String code, String name, String email, String phone,
-			String logo, String image, String description);
+			String logo, String image,int priority, String description);
+	
+	boolean updateUniversity(int id,String code, String name, String email, String phone,
+			String logo, String image,int priority, String description);
+	
+	boolean addLocation(int locationId, int uniId);
+	
+	boolean deleteUniversity(int id);
 	
 	void setLocation(Location location);
 	
 	University getUniversityById(int id);
-
+	
+	University getUniversityByCode(String id);
+	
 	List<University> listAllUniversity();
 	
 	List<University> listAllUniversityName();

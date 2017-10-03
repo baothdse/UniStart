@@ -19,11 +19,14 @@ public interface UniversityRepository extends JpaRepository<University, Integer>
 	@Query("update University u set u.location = ?1")
 	void setLocation(Location location);
 	
-	@Query("select new com.unistart.entities.University(u.id,u.image,u.name,u.priority) "
-			+ "from University u")
-//	@Query("select u from University u")
-	List<University> showByLocationName();
+	@Modifying
+	@Query("update University u set u.location = ?1 where u.id = ?2 ")
+	void addLocation(Location location, int id);
 	
+	@Query("select new com.unistart.entities.University(u.id,u.image,u.name,u.priority) "
+			+ "from University u where u.isActive = true")
+	List<University> showByUniversityName();
+
 	@Query("select u from University u where u.location.id = ?1")
 	List<University> findByLocation(int locationId);
 	
@@ -49,6 +52,18 @@ public interface UniversityRepository extends JpaRepository<University, Integer>
 			+ "u.isActive = 'true' and m.id = ?1 and u.id = ?2 and u.location.id = ?3")
 	University findBy(int majorId, int universityId, int locationId);
 	
+
 	@Query("select new com.unistart.entities.University(u.id) from University u")
 	List<University> getListId();
+  
+	@Modifying
+	@Query("update University u set u.isActive = false where u.id = ?1")
+	void changeIsActive(int id);
+	
+	@Modifying
+	@Query("update University u set u.code = ?1, u.name= ?2, u.email= ?3, u.phone = ?4,"
+			+ "u.logo = ?5, u.image = ?6, u.priority = ?7, u.description = ?8 where u.id = ?9 ")
+	void updateUniversity(String code, String name, String email, String phone,
+			String logo, String image,int priority, String description,int id);
+
 }

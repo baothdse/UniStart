@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.unistart.entities.Location;
+import com.unistart.entities.MajorUniversity;
 import com.unistart.entities.University;
+import com.unistart.repositories.LocationRepository;
 import com.unistart.repositories.UniversityRepository;
 import com.unistart.services.interfaces.UniversityServiceInterface;
 
@@ -19,6 +21,9 @@ public class UniversityService implements UniversityServiceInterface {
 	@Autowired
 	private UniversityRepository universityRepo;
 
+	@Autowired
+	private LocationRepository locationRepo;
+	
 	private University university;
 
 	public List<University> listAllUniversity(){
@@ -27,12 +32,12 @@ public class UniversityService implements UniversityServiceInterface {
 	}
 	@Override
 	public boolean addUniversity(String code, String name, String email, String phone, String logo,
-			String image, String description) {
+			String image,int priority, String description) {
 		// TODO Auto-generated method stub
 		University university = universityRepo.findByCode(code);
 		if (university == null) {
 			boolean isActive = true;
-			university = new University(code, name, email, phone, logo, image, description, isActive);
+			university = new University(code, name, email, phone, logo, image, priority, description, isActive);
 			universityRepo.save(university);
 			return true;
 		}
@@ -51,11 +56,15 @@ public class UniversityService implements UniversityServiceInterface {
 		return universityRepo.findById(id);
 	}
 	
-	@Override
-	public List<University> listAllUniversityName(){
-		List<University> listUniversity = universityRepo.showByLocationName();
-		return listUniversity;
-	}
+// 	@Override
+// 	public List<University> listAllUniversityName(){
+// <<<<<<< dev_baothd
+// 		List<University> listUniversity = universityRepo.showByLocationName();
+// =======
+// 		listUniversity = universityRepo.showByUniversityName();
+// >>>>>>> master
+// 		return listUniversity;
+// 	}
 	@Override
 	public List<University> findUniversity(int majorId, int universityId, int locationId) {
 		// TODO Auto-generated method stub
@@ -73,9 +82,6 @@ public class UniversityService implements UniversityServiceInterface {
 		} else if (majorId != 0 && universityId != 0 && locationId == 0) {
 			university = universityRepo.findByMajorAndUniversity(majorId, universityId);
 			listUniversity = new ArrayList<University>();
-			System.out.println(majorId);
-			System.out.println(universityId);
-			System.out.println(locationId);
 			listUniversity.add(university); 
 		} else if (majorId == 0 && universityId != 0 && locationId != 0) {
 			university = universityRepo.findByLocationAndId(locationId, universityId);
@@ -90,10 +96,36 @@ public class UniversityService implements UniversityServiceInterface {
 		return listUniversity;
 	}
 	@Override
+
 	public List<University> getListId() {
 		// TODO Auto-generated method stub
 		List<University> listUniversity = universityRepo.getListId();
 		return listUniversity;
+  }
+
+	public University getUniversityByCode(String code) {	
+		return universityRepo.findByCode(code);
+	}
+	
+	@Override
+	public boolean addLocation(int locationID,int uniId) {
+		universityRepo.addLocation(locationRepo.findById(locationID), uniId);
+		return true;
+	}
+	@Override
+	public boolean updateUniversity(int id, String code, String name, String email, String phone, String logo, String image, int priority,
+			String description) {
+		University university = universityRepo.findById(id);
+		if (university != null) {
+			universityRepo.updateUniversity(code, name, email, phone, logo, image, priority, description, id);
+			return true;
+		}
+		return false;
+	}
+	@Override
+	public boolean deleteUniversity(int id) {
+		universityRepo.changeIsActive(id);
+		return true;
 	}
 
 

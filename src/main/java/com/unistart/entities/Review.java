@@ -53,7 +53,7 @@ public class Review implements java.io.Serializable {
 		this.id = id;
 		this.university = university;
 		this.users = users;
-		this.desscription = desscription;
+		this.description = description;
 		this.starTeaching = starTeaching;
 		this.starFacilities = starFacilities;
 		this.starCare = starCare;
@@ -77,7 +77,7 @@ public class Review implements java.io.Serializable {
 	}
 
 	@JsonIgnore
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "UniversityId", nullable = false)
 	public University getUniversity() {
 		return this.university;
@@ -88,7 +88,7 @@ public class Review implements java.io.Serializable {
 	}
 
 	@JsonIgnore
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "UserId", nullable = false)
 	public Users getUsers() {
 		return this.users;
@@ -178,8 +178,9 @@ public class Review implements java.io.Serializable {
 	public void setIsActive(Boolean isActive) {
 		this.isActive = isActive;
 	}
-	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "review")
+
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "review")
 	public Set<ReviewLike> getReviewLikes() {
 		return this.reviewLikes;
 	}

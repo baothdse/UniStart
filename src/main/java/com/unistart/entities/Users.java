@@ -193,7 +193,8 @@ public class Users implements java.io.Serializable {
 		this.reviews = reviews;
 	}
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "users")
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "users")
 	public Set<Mbtiresult> getMbtiresults() {
 		return this.mbtiresults;
 	}

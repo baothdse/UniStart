@@ -1,5 +1,7 @@
 package com.unistart.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +21,10 @@ public class ReviewController {
 	
 	@Autowired
 	private ReviewServiceInterface reviewService;
+  
+  private ErrorNotification error;
+	
+	private List<Review> listAllReview;
 
 	@RequestMapping(value = UrlConstant.STAR_POINT, method = RequestMethod.POST)
 	public ResponseEntity<?> getStarPoint(@RequestBody University university) {
@@ -27,4 +33,61 @@ public class ReviewController {
 		return new ResponseEntity<UniversityPoint> (universityPoint, HttpStatus.OK);
 	}
 
+	
+	@RequestMapping(value = UrlConstant.SAVE_REVIEW, method = RequestMethod.POST)
+	public ResponseEntity<?> saveReview(@RequestBody Review Review) {
+		int universityId = Review.getUniversity().getId();
+		int userId = Review.getUsers().getId();
+		String description = Review.getDescription();
+		int starTeaching = Review.getStarTeaching();
+		int starFacilities = Review.getStarFacilities();
+		int starCare = Review.getStarCare();
+		int starSocieties = Review.getStarSocieties();
+		int starCareer = Review.getStarCareer();
+		boolean isRecomment = Review.getIsRecomment();
+		boolean status = Review.getStatus();
+
+		boolean isSuccess = reviewService.saveReview(universityId, userId, description, starTeaching, starFacilities, starCare, starSocieties, starCareer, isRecomment, status);
+		if (isSuccess) {
+			return new ResponseEntity<Boolean> (isSuccess, HttpStatus.OK);
+		} else {
+			error = new ErrorNotification(ErrorConstant.MES005);
+			return new ResponseEntity<ErrorNotification> (error, HttpStatus.CONFLICT);
+		}
+	}
+
+	@RequestMapping(value = UrlConstant.SHOW_REVIEW, method = RequestMethod.GET)
+	public ResponseEntity<?> listReviewOfUniveristy(@RequestParam(value = "universityId") int universityId){
+		listAllReview = reviewService.listReviewOfUniversity(universityId);
+		if (listAllReview != null){
+			return new ResponseEntity<List<Review>>(listAllReview, HttpStatus.OK);
+		}else {
+			error = new ErrorNotification(ErrorConstant.MES006);
+			return new ResponseEntity<ErrorNotification> (error, HttpStatus.CONFLICT);
+		}
+	}
+	@RequestMapping(value = UrlConstant.CHANGE_REVIEW_STATUS, method = RequestMethod.POST)
+	public ResponseEntity<?> changeReviewStatus(@RequestBody Review Review) {
+		int id = Review.getId();
+		boolean status = Review.getStatus();
+		boolean isActive = Review.getIsActive();
+		boolean isSuccess = reviewService.changeReviewStatus(id, status, isActive);
+		if (isSuccess) {
+			return new ResponseEntity<Boolean> (isSuccess, HttpStatus.OK);
+		} else {
+			error = new ErrorNotification(ErrorConstant.MES005);
+			return new ResponseEntity<ErrorNotification> (error, HttpStatus.CONFLICT);
+		}
+	}
+	@RequestMapping(value = UrlConstant.NEED_ACCEPT_REVIEW, method = RequestMethod.GET)
+	public ResponseEntity<?> listAllNeedAcceptReview(){
+		List<Review> listAllReview = reviewService.listAllNeedAcceptReview();
+		if(listAllReview != null){
+			return new ResponseEntity<List<Review>>(listAllReview, HttpStatus.OK);
+		}else {
+			error = new ErrorNotification(ErrorConstant.MES007);
+			return new ResponseEntity<ErrorNotification> (error, HttpStatus.CONFLICT);
+		}
+		
+	}
 }
