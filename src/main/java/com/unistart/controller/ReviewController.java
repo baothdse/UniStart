@@ -8,25 +8,31 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.unistart.constant.ErrorConstant;
 import com.unistart.constant.UrlConstant;
-import com.unistart.entities.Mbtiquestion;
-import com.unistart.entities.Review;
-import com.unistart.entities.customentities.ReviewUniversity;
-import com.unistart.error.ErrorNotification;
+import com.unistart.entities.University;
+import com.unistart.entities.customentities.UniversityPoint;
 import com.unistart.services.interfaces.ReviewServiceInterface;
 
 @RestController
-@RequestMapping(value = UrlConstant.REVIEW)
+@RequestMapping(UrlConstant.REVIEW)
 public class ReviewController {
+	
 	@Autowired
 	private ReviewServiceInterface reviewService;
-	private ErrorNotification error;
+  
+  private ErrorNotification error;
 	
 	private List<Review> listAllReview;
+
+	@RequestMapping(value = UrlConstant.STAR_POINT, method = RequestMethod.POST)
+	public ResponseEntity<?> getStarPoint(@RequestBody University university) {
+		int universityId = university.getId();
+		UniversityPoint universityPoint = reviewService.getPointById(universityId);
+		return new ResponseEntity<UniversityPoint> (universityPoint, HttpStatus.OK);
+	}
+
 	
 	@RequestMapping(value = UrlConstant.SAVE_REVIEW, method = RequestMethod.POST)
 	public ResponseEntity<?> saveReview(@RequestBody Review Review) {

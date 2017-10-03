@@ -61,16 +61,12 @@ public class UserController {
 		String name = user.getName();
 		String providerId = user.getProviderId();
 		String providerName = user.getProviderName();
-		LoginUserInfo userInfo;
+		LoginUserInfo userInfo = null;
 		
 		boolean isSuccess = userService.checkLoginThirdParty(email, image, name, providerId, providerName);
 		if (isSuccess) {
-			userInfo = userService.get3rdPartyInfo(email);
-			return new ResponseEntity<LoginUserInfo> (userInfo, HttpStatus.OK);
-		} else {
-			error = new ErrorNotification(ErrorConstant.MES001);
-			return new ResponseEntity<ErrorNotification> (error, HttpStatus.CONFLICT);
-
+			userInfo = userService.get3rdPartyInfo(email);	
 		}
+		return new ResponseEntity<LoginUserInfo> (userInfo, HttpStatus.OK);
 	}
 }

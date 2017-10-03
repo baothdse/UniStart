@@ -1,7 +1,6 @@
 package com.unistart.entities;
-// Generated Sep 25, 2017 1:40:32 AM by Hibernate Tools 4.3.1.Final
+// Generated Oct 1, 2017 10:03:30 PM by Hibernate Tools 4.3.1.Final
 
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
@@ -23,10 +22,10 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Table(name = "MBTIType", schema = "dbo", catalog = "University")
 public class Mbtitype implements java.io.Serializable {
 
-	private int id;
+	private Integer id;
 	private String mbtitypeName;
 	private String description;
-	private String contentType;
+  private String contentType;
 	private boolean isActive;
 	private Set<Mbtiresult> mbtiresults = new HashSet<Mbtiresult>(0);
 	
@@ -36,7 +35,7 @@ public class Mbtitype implements java.io.Serializable {
 	public Mbtitype() {
 	}
 
-	public Mbtitype(int id, boolean isActive) {
+	public Mbtitype(Integer id, boolean isActive) {
 		this.id = id;
 		this.isActive = isActive;
 	}
@@ -55,11 +54,11 @@ public class Mbtitype implements java.io.Serializable {
 	@Id
 
 	@Column(name = "Id", unique = true, nullable = false)
-	public int getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

@@ -3,10 +3,12 @@ package com.unistart.main;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 import com.unistart.config.JPAConfiguration;
 
 @Import(JPAConfiguration.class)
+@EnableScheduling
 @SpringBootApplication(scanBasePackages = {"com.unistart"})
 public class UniStartApplication {
 

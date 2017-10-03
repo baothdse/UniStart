@@ -1,7 +1,6 @@
 package com.unistart.entities;
-// Generated Sep 25, 2017 1:40:32 AM by Hibernate Tools 4.3.1.Final
+// Generated Oct 1, 2017 10:03:30 PM by Hibernate Tools 4.3.1.Final
 
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -24,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Mbtigroup implements java.io.Serializable {
 
-	private int id;
+	private Integer id;
 	private String mbtigroupName;
 	private Boolean isActive;
 	private Set<Mbtiquestion> mbtiquestions = new HashSet<Mbtiquestion>(0);
@@ -32,11 +31,12 @@ public class Mbtigroup implements java.io.Serializable {
 	public Mbtigroup() {
 	}
 
-	public Mbtigroup(int id) {
+	public Mbtigroup(Integer id) {
 		this.id = id;
 	}
 
-	public Mbtigroup(int id, String mbtigroupName, Boolean isActive, Set<Mbtiquestion> mbtiquestions){
+
+	public Mbtigroup(Integer id, String mbtigroupName, Boolean isActive, Set<Mbtiquestion> mbtiquestions) {
 		this.id = id;
 		this.mbtigroupName = mbtigroupName;
 		this.isActive = isActive;
@@ -46,11 +46,11 @@ public class Mbtigroup implements java.io.Serializable {
 	@Id
 
 	@Column(name = "Id", unique = true, nullable = false)
-	public int getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

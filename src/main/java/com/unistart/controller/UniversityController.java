@@ -77,6 +77,13 @@ public class UniversityController {
 		listUniversity = universityService.findUniversity(majorId, universityId, locationId);
 		return new ResponseEntity<List<University>>(listUniversity, HttpStatus.OK);
 	}
+
+	@RequestMapping(value = UrlConstant.FIND_BY_ID, method = RequestMethod.POST)
+	public ResponseEntity<?> findById(@RequestBody University uni) {
+		int universityId = uni.getId();
+		University university = universityService.getUniversityById(universityId);
+		return new ResponseEntity<University> (university, HttpStatus.OK);
+
 	@RequestMapping(value = UrlConstant.UPDATE_LOCATION_MAJOR, method = RequestMethod.POST)
 	public ResponseEntity<?> addLocation(@RequestBody LocationMajor uni) {
 		boolean isCreated = false, isSave = false;
@@ -171,6 +178,6 @@ public class UniversityController {
 		int id = university.getId();
 		boolean isCreated = universityService.deleteUniversity(id);
 		return new ResponseEntity<Boolean> (isCreated, HttpStatus.OK);
-		
+
 	}
 }
