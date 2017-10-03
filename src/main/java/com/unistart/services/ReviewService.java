@@ -10,9 +10,13 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.unistart.entities.Review;
 import com.unistart.entities.University;
+import com.unistart.entities.Users;
 import com.unistart.entities.customentities.UniversityPoint;
 import com.unistart.repositories.ReviewRepository;
+import com.unistart.repositories.UniversityRepository;
+import com.unistart.repositories.UserRepository;
 import com.unistart.services.interfaces.ReviewServiceInterface;
 import com.unistart.services.interfaces.UniversityServiceInterface;
 
@@ -33,9 +37,9 @@ public class ReviewService implements ReviewServiceInterface {
   private University university;
 	private Review review;
 	private Users user;
-	private List<Review> listALLReview;
 	private UniversityPoint universityPoint;
 	private List<UniversityPoint> listUniversityPoint;
+	private List<Review> listAllReview;
 
 	private Double starCare;
 	private Double starTeaching;
@@ -297,8 +301,8 @@ public class ReviewService implements ReviewServiceInterface {
 
 	@Override
 	public List<Review> listReviewOfUniversity(int universityId) {
-		listALLReview = reviewRepo.showReviewByUniversityId(universityId);
-		return listALLReview;
+		listAllReview = reviewRepo.showReviewByUniversityId(universityId);
+		return listAllReview;
 	}
 	public boolean changeReviewStatus(int id, boolean status, boolean isActive) {	
 		review = reviewRepo.findById(id);
@@ -311,7 +315,6 @@ public class ReviewService implements ReviewServiceInterface {
 		return false;
 	}
 
-	List<Review> listAllReview;
 	@Override
 	public List<Review> listAllNeedAcceptReview() {
 		listAllReview = reviewRepo.findNeedAcceptReview();

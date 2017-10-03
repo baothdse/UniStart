@@ -27,7 +27,7 @@ public class Review implements java.io.Serializable {
 	private Integer id;
 	private University university;
 	private Users users;
-	private String desscription;
+	private String description;
 	private Integer starTeaching;
 	private Integer starFacilities;
 	private Integer starCare;
@@ -98,13 +98,13 @@ public class Review implements java.io.Serializable {
 		this.users = users;
 	}
 
-	@Column(name = "Desscription")
-	public String getDesscription() {
-		return this.desscription;
+	@Column(name = "Description")
+	public String getDescription() {
+		return this.description;
 	}
 
-	public void setDesscription(String desscription) {
-		this.desscription = desscription;
+	public void setDescription(String desscription) {
+		this.description = desscription;
 	}
 
 	@Column(name = "StarTeaching")

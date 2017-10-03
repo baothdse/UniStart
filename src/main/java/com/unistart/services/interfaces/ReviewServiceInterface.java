@@ -2,6 +2,7 @@ package com.unistart.services.interfaces;
 
 import java.util.List;
 
+import com.unistart.entities.Review;
 import com.unistart.entities.customentities.UniversityPoint;
 
 public interface ReviewServiceInterface {

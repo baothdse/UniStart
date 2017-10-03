@@ -1,6 +1,8 @@
 package com.unistart.entities;
 // Generated Oct 1, 2017 10:03:30 PM by Hibernate Tools 4.3.1.Final
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;

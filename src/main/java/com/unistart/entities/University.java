@@ -39,7 +39,7 @@ public class University implements java.io.Serializable {
 	private Boolean isActive;
 	private Set<Users> userses = new HashSet<Users>(0);
 	private Set<Review> reviews = new HashSet<Review>(0);
-  @JsonManagedReference
+	@JsonManagedReference
 	private Set<MajorUniversity> majorUniversities = new HashSet<MajorUniversity>(0);
 
 	public University(Integer id) {
@@ -53,12 +53,13 @@ public class University implements java.io.Serializable {
 	}
 
 	public University() {
-		
+
 	}
-    
-	public University(Set<MajorUniversity> majorUniversities){
+
+	public University(Set<MajorUniversity> majorUniversities) {
 		this.majorUniversities = majorUniversities;
 	}
+
 	public University(Integer id, String image, String name, Integer priority) {
 		super();
 		this.id = id;
@@ -66,9 +67,10 @@ public class University implements java.io.Serializable {
 		this.image = image;
 		this.priority = priority;
 	}
-
-	public University(String code, String name, String email,
-			String phone, String logo,String description, String image,int priority, String description, Boolean isActive) {
+	
+	public University(String code, String name, String email, String phone, String logo, String image, 
+			Integer priority, String description,Boolean isActive) {
+		super();
 		this.code = code;
 		this.name = name;
 		this.email = email;
@@ -78,14 +80,23 @@ public class University implements java.io.Serializable {
 		this.image = image;
 		this.priority = priority;
 		this.isActive = isActive;
-		this.userses = userses;
-		this.reviews = reviews;
-		this.majorUniversities = majorUniversities;;
 	}
 
+	public University(String code, String name, String email, String phone, String logo, String description,
+			String image, int priority, Boolean isActive) {
+		this.code = code;
+		this.name = name;
+		this.email = email;
+		this.phone = phone;
+		this.logo = logo;
+		this.description = description;
+		this.image = image;
+		this.priority = priority;
+		this.isActive = isActive;
+	}
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "Id", unique = true, nullable = false)
 	public Integer getId() {
 		return this.id;
@@ -94,7 +105,7 @@ public class University implements java.io.Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
+
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "LocationId")
 	public Location getLocation() {
@@ -205,7 +216,7 @@ public class University implements java.io.Serializable {
 	public void setReviews(Set<Review> reviews) {
 		this.reviews = reviews;
 	}
-  
+
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "university")
 	public Set<MajorUniversity> getMajorUniversities() {
