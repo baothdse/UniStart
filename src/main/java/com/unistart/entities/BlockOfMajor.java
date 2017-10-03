@@ -1,5 +1,5 @@
 package com.unistart.entities;
-// Generated Oct 1, 2017 10:03:30 PM by Hibernate Tools 4.3.1.Final
+// Generated Sep 25, 2017 1:40:32 AM by Hibernate Tools 4.3.1.Final
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,7 +16,7 @@ import javax.persistence.Table;
 @Table(name = "BlockOfMajor", schema = "dbo", catalog = "University")
 public class BlockOfMajor implements java.io.Serializable {
 
-	private Integer id;
+	private int id;
 	private Block block;
 	private Major major;
 	private Boolean isActive;
@@ -28,7 +28,7 @@ public class BlockOfMajor implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public BlockOfMajor(Integer id, Block block, Major major, Boolean isActive) {
+	public BlockOfMajor(int id, Block block, Major major, Boolean isActive) {
 		this.id = id;
 		this.block = block;
 		this.major = major;
@@ -38,11 +38,11 @@ public class BlockOfMajor implements java.io.Serializable {
 	@Id
 
 	@Column(name = "Id", unique = true, nullable = false)
-	public Integer getId() {
+	public int getId() {
 		return this.id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

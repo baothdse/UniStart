@@ -1,6 +1,7 @@
 package com.unistart.entities;
-// Generated Oct 1, 2017 10:03:30 PM by Hibernate Tools 4.3.1.Final
+// Generated Sep 25, 2017 1:40:32 AM by Hibernate Tools 4.3.1.Final
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
@@ -30,16 +31,17 @@ public class Block implements java.io.Serializable {
 	private Set<BlockOfMajor> blockOfMajors = new HashSet<BlockOfMajor>(0);
 	private Set<BlockMajorUniversity> blockMajorUniversities = new HashSet<BlockMajorUniversity>(0);
 
-
-	public Block() {
-	}
 	public Block(Integer id, String blockName ) {
 		this.id = id;
 		this.blockName = blockName;
 	}
-
+	
+	public Block() {
+	}
+	
 	public Block(Integer id, String blockName, String description, Boolean isActive,
-			Set<BlockOfMajor> blockOfMajors, Set<BlockMajorUniversity> blockMajorUniversities) {
+			Set<BlockOfMajor> blockOfMajors, Set<BlockOfMajor> blockOfMajors_1,
+			Set<BlockMajorUniversity> blockMajorUniversities, Set<BlockMajorUniversity> blockMajorUniversities_1) {
 		this.id = id;
 		this.blockName = blockName;
 		this.description = description;
@@ -95,7 +97,6 @@ public class Block implements java.io.Serializable {
 	public void setBlockOfMajors(Set<BlockOfMajor> blockOfMajors) {
 		this.blockOfMajors = blockOfMajors;
 	}
-
 
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "block")
