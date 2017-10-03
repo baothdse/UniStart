@@ -1,6 +1,7 @@
 package com.unistart.entities;
-// Generated Oct 1, 2017 10:03:30 PM by Hibernate Tools 4.3.1.Final
+// Generated Sep 25, 2017 1:40:32 AM by Hibernate Tools 4.3.1.Final
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -19,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Mbtiquestion implements Serializable {
 
-	private Integer id;
+	private int id;
 	private Mbtigroup mbtigroup;
 	private String code;
 	private String questionContent;
@@ -30,11 +31,11 @@ public class Mbtiquestion implements Serializable {
 	public Mbtiquestion() {
 	}
 
-	public Mbtiquestion(Integer id) {
+	public Mbtiquestion(int id) {
 		this.id = id;
 	}
 
-	public Mbtiquestion(Integer id, Mbtigroup mbtigroup, String code, String questionContent,
+	public Mbtiquestion(int id, Mbtigroup mbtigroup, String code, String questionContent,
 			String option1name, String option2name, Boolean isActive) {
 		this.id = id;
 		this.mbtigroup = mbtigroup;
@@ -48,11 +49,11 @@ public class Mbtiquestion implements Serializable {
 	@Id
 
 	@Column(name = "Id", unique = true, nullable = false)
-	public Integer getId() {
+	public int getId() {
 		return this.id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

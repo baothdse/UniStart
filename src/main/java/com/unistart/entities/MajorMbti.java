@@ -1,5 +1,5 @@
 package com.unistart.entities;
-// Generated Oct 1, 2017 10:03:30 PM by Hibernate Tools 4.3.1.Final
+// Generated Sep 25, 2017 1:40:32 AM by Hibernate Tools 4.3.1.Final
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Table(name = "Major_MBTI", schema = "dbo", catalog = "University")
 public class MajorMbti implements java.io.Serializable {
 
-	private Integer id;
+	private int id;
 	private Major major;
 	@JsonBackReference
 	private Mbtitype mbtitype;
@@ -28,11 +28,11 @@ public class MajorMbti implements java.io.Serializable {
 	public MajorMbti() {
 	}
 
-	public MajorMbti(Integer id) {
+	public MajorMbti(int id) {
 		this.id = id;
 	}
 
-	public MajorMbti(Integer id, Major major, Mbtitype mbtitype, Boolean isActive) {
+	public MajorMbti(int id, Major major, Mbtitype mbtitype, Boolean isActive) {
 		this.id = id;
 		this.major = major;
 		this.mbtitype = mbtitype;
@@ -42,11 +42,11 @@ public class MajorMbti implements java.io.Serializable {
 	@Id
 
 	@Column(name = "Id", unique = true, nullable = false)
-	public Integer getId() {
+	public int getId() {
 		return this.id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
