@@ -1,5 +1,5 @@
 package com.unistart.entities;
-// Generated Sep 25, 2017 1:40:32 AM by Hibernate Tools 4.3.1.Final
+// Generated Oct 1, 2017 10:03:30 PM by Hibernate Tools 4.3.1.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -37,27 +37,61 @@ public class University implements java.io.Serializable {
 	private Boolean isActive;
 	private Set<Users> userses = new HashSet<Users>(0);
 	private Set<Review> reviews = new HashSet<Review>(0);
-	@JsonIgnore
 	private Set<MajorUniversity> majorUniversities = new HashSet<MajorUniversity>(0);
 
-	public University(Integer id, String image, String name, Integer priority) {
+	public University() {
+	}
+	
+	public University(Integer id) {
 		this.id = id;
-		this.image = image;
+	}
+
+	public University(Integer id, String code, String name) {
+		this.id = id;
+		this.code = code;
 		this.name = name;
+	}
+
+	public University(Integer id, String image, String name, Integer priority) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.image = image;
 		this.priority = priority;
 	}
 
-	public University(String code, String name, String email,
-			String phone, String logo, String image, String description, Boolean isActive) {
+	public University(Integer id, Location location, String code, String name, String email,
+			String phone, String logo, String description, String image, Integer priority,
+			Boolean isActive, Set<Users> userses, Set<Review> reviews, Set<MajorUniversity> majorUniversities) {
+		this.id = id;
+		this.location = location;
 		this.code = code;
 		this.name = name;
 		this.email = email;
 		this.phone = phone;
 		this.logo = logo;
-		this.image = image;
 		this.description = description;
+		this.image = image;
+		this.priority = priority;
+		this.isActive = isActive;
+		this.userses = userses;
+		this.reviews = reviews;
+		this.majorUniversities = majorUniversities;;
+	}
+
+	public University(String code, String name, String email, String phone, String logo,String image, 
+			 String description, Boolean isActive) {
+		super();
+		this.code = code;
+		this.name = name;
+		this.email = email;
+		this.phone = phone;
+		this.logo = logo;
+		this.description = description;
+		this.image = image;
 		this.isActive = isActive;
 	}
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "Id", unique = true, nullable = false)
@@ -160,6 +194,7 @@ public class University implements java.io.Serializable {
 		this.isActive = isActive;
 	}
 
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "university")
 	public Set<Users> getUserses() {
 		return this.userses;
@@ -169,6 +204,7 @@ public class University implements java.io.Serializable {
 		this.userses = userses;
 	}
 
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "university")
 	public Set<Review> getReviews() {
 		return this.reviews;
@@ -177,7 +213,8 @@ public class University implements java.io.Serializable {
 	public void setReviews(Set<Review> reviews) {
 		this.reviews = reviews;
 	}
-	
+
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "university")
 	public Set<MajorUniversity> getMajorUniversities() {
 		return this.majorUniversities;

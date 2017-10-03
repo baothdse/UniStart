@@ -1,5 +1,5 @@
 package com.unistart.entities;
-// Generated Sep 25, 2017 1:40:32 AM by Hibernate Tools 4.3.1.Final
+// Generated Oct 1, 2017 10:03:30 PM by Hibernate Tools 4.3.1.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,10 +22,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name = "Major_University", schema = "dbo", catalog = "University")
 public class MajorUniversity implements java.io.Serializable {
 
-	private int id;
-	@JsonIgnore
+	private Integer id;
 	private Major major;
-	@JsonIgnore
 	private University university;
 	private byte[] majorUniversitiesKey;
 	private Set<BlockMajorUniversity> blockMajorUniversities = new HashSet<BlockMajorUniversity>(0);
@@ -33,11 +31,11 @@ public class MajorUniversity implements java.io.Serializable {
 	public MajorUniversity() {
 	}
 
-	public MajorUniversity(int id) {
+	public MajorUniversity(Integer id) {
 		this.id = id;
 	}
 
-	public MajorUniversity(int id, Major major, University university, byte[] majorUniversitiesKey,
+	public MajorUniversity(Integer id, Major major, University university, byte[] majorUniversitiesKey,
 			Set<BlockMajorUniversity> blockMajorUniversities) {
 		this.id = id;
 		this.major = major;
@@ -49,11 +47,11 @@ public class MajorUniversity implements java.io.Serializable {
 	@Id
 
 	@Column(name = "Id", unique = true, nullable = false)
-	public int getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -67,7 +65,8 @@ public class MajorUniversity implements java.io.Serializable {
 		this.major = major;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnore
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "UniversityId")
 	public University getUniversity() {
 		return this.university;

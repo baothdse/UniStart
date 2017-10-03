@@ -1,5 +1,5 @@
 package com.unistart.entities;
-// Generated Sep 25, 2017 1:40:32 AM by Hibernate Tools 4.3.1.Final
+// Generated Oct 1, 2017 10:03:30 PM by Hibernate Tools 4.3.1.Final
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,7 +16,7 @@ import javax.persistence.Table;
 @Table(name = "Major_MBTI", schema = "dbo", catalog = "University")
 public class MajorMbti implements java.io.Serializable {
 
-	private int id;
+	private Integer id;
 	private Major major;
 	private Mbtitype mbtitype;
 	private Boolean isActive;
@@ -24,11 +24,11 @@ public class MajorMbti implements java.io.Serializable {
 	public MajorMbti() {
 	}
 
-	public MajorMbti(int id) {
+	public MajorMbti(Integer id) {
 		this.id = id;
 	}
 
-	public MajorMbti(int id, Major major, Mbtitype mbtitype, Boolean isActive) {
+	public MajorMbti(Integer id, Major major, Mbtitype mbtitype, Boolean isActive) {
 		this.id = id;
 		this.major = major;
 		this.mbtitype = mbtitype;
@@ -38,11 +38,11 @@ public class MajorMbti implements java.io.Serializable {
 	@Id
 
 	@Column(name = "Id", unique = true, nullable = false)
-	public int getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

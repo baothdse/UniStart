@@ -1,7 +1,6 @@
 package com.unistart.entities;
-// Generated Sep 25, 2017 1:40:32 AM by Hibernate Tools 4.3.1.Final
+// Generated Oct 1, 2017 10:03:30 PM by Hibernate Tools 4.3.1.Final
 
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
@@ -18,45 +17,42 @@ import javax.persistence.Table;
 @Table(name = "MBTIGroup", schema = "dbo", catalog = "University")
 public class Mbtigroup implements java.io.Serializable {
 
-	private int id;
-	private Serializable mbtigroupName;
+	private Integer id;
+	private String mbtigroupName;
 	private Boolean isActive;
 	private Set<Mbtiquestion> mbtiquestions = new HashSet<Mbtiquestion>(0);
-	private Set<Mbtiquestion> mbtiquestions_1 = new HashSet<Mbtiquestion>(0);
 
 	public Mbtigroup() {
 	}
 
-	public Mbtigroup(int id) {
+	public Mbtigroup(Integer id) {
 		this.id = id;
 	}
 
-	public Mbtigroup(int id, Serializable mbtigroupName, Boolean isActive, Set<Mbtiquestion> mbtiquestions,
-			Set<Mbtiquestion> mbtiquestions_1) {
+	public Mbtigroup(Integer id, String mbtigroupName, Boolean isActive, Set<Mbtiquestion> mbtiquestions) {
 		this.id = id;
 		this.mbtigroupName = mbtigroupName;
 		this.isActive = isActive;
 		this.mbtiquestions = mbtiquestions;
-		this.mbtiquestions_1 = mbtiquestions_1;
 	}
 
 	@Id
 
 	@Column(name = "Id", unique = true, nullable = false)
-	public int getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
 	@Column(name = "MBTIGroupName")
-	public Serializable getMbtigroupName() {
+	public String getMbtigroupName() {
 		return this.mbtigroupName;
 	}
 
-	public void setMbtigroupName(Serializable mbtigroupName) {
+	public void setMbtigroupName(String mbtigroupName) {
 		this.mbtigroupName = mbtigroupName;
 	}
 
@@ -76,15 +72,6 @@ public class Mbtigroup implements java.io.Serializable {
 
 	public void setMbtiquestions(Set<Mbtiquestion> mbtiquestions) {
 		this.mbtiquestions = mbtiquestions;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "mbtigroup")
-	public Set<Mbtiquestion> getMbtiquestions_1() {
-		return this.mbtiquestions_1;
-	}
-
-	public void setMbtiquestions_1(Set<Mbtiquestion> mbtiquestions_1) {
-		this.mbtiquestions_1 = mbtiquestions_1;
 	}
 
 }

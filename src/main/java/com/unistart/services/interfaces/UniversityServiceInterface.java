@@ -19,4 +19,6 @@ public interface UniversityServiceInterface {
 	List<University> listAllUniversityName();
 	
 	List<University> findUniversity(int majorId, int universityId, int locationId);
+	
+	List<University> getListId ();
 }

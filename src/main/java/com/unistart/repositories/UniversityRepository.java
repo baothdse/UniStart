@@ -12,7 +12,7 @@ import com.unistart.entities.University;
 
 @Repository
 public interface UniversityRepository extends JpaRepository<University, Integer> {
-	University findById(int id);
+	University findById(Integer id);
 	University findByCode(String code);
 
 	@Modifying
@@ -48,4 +48,7 @@ public interface UniversityRepository extends JpaRepository<University, Integer>
 			+ "where u.id = mu.university.id and m.id = mu.major.id and "
 			+ "u.isActive = 'true' and m.id = ?1 and u.id = ?2 and u.location.id = ?3")
 	University findBy(int majorId, int universityId, int locationId);
+	
+	@Query("select new com.unistart.entities.University(u.id) from University u")
+	List<University> getListId();
 }

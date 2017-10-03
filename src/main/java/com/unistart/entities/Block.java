@@ -1,7 +1,6 @@
 package com.unistart.entities;
-// Generated Sep 25, 2017 1:40:32 AM by Hibernate Tools 4.3.1.Final
+// Generated Oct 1, 2017 10:03:30 PM by Hibernate Tools 4.3.1.Final
 
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
@@ -18,61 +17,56 @@ import javax.persistence.Table;
 @Table(name = "Block", schema = "dbo", catalog = "University")
 public class Block implements java.io.Serializable {
 
-	private int id;
-	private Serializable blockName;
-	private Serializable description;
+	private Integer id;
+	private String blockName;
+	private String description;
 	private Boolean isActive;
 	private Set<BlockOfMajor> blockOfMajors = new HashSet<BlockOfMajor>(0);
-	private Set<BlockOfMajor> blockOfMajors_1 = new HashSet<BlockOfMajor>(0);
 	private Set<BlockMajorUniversity> blockMajorUniversities = new HashSet<BlockMajorUniversity>(0);
-	private Set<BlockMajorUniversity> blockMajorUniversities_1 = new HashSet<BlockMajorUniversity>(0);
 
 	public Block() {
 	}
 
-	public Block(int id) {
+	public Block(Integer id) {
 		this.id = id;
 	}
 
-	public Block(int id, Serializable blockName, Serializable description, Boolean isActive,
-			Set<BlockOfMajor> blockOfMajors, Set<BlockOfMajor> blockOfMajors_1,
-			Set<BlockMajorUniversity> blockMajorUniversities, Set<BlockMajorUniversity> blockMajorUniversities_1) {
+	public Block(Integer id, String blockName, String description, Boolean isActive,
+			Set<BlockOfMajor> blockOfMajors, Set<BlockMajorUniversity> blockMajorUniversities) {
 		this.id = id;
 		this.blockName = blockName;
 		this.description = description;
 		this.isActive = isActive;
 		this.blockOfMajors = blockOfMajors;
-		this.blockOfMajors_1 = blockOfMajors_1;
 		this.blockMajorUniversities = blockMajorUniversities;
-		this.blockMajorUniversities_1 = blockMajorUniversities_1;
 	}
 
 	@Id
 
 	@Column(name = "Id", unique = true, nullable = false)
-	public int getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
 	@Column(name = "BlockName")
-	public Serializable getBlockName() {
+	public String getBlockName() {
 		return this.blockName;
 	}
 
-	public void setBlockName(Serializable blockName) {
+	public void setBlockName(String blockName) {
 		this.blockName = blockName;
 	}
 
 	@Column(name = "Description")
-	public Serializable getDescription() {
+	public String getDescription() {
 		return this.description;
 	}
 
-	public void setDescription(Serializable description) {
+	public void setDescription(String description) {
 		this.description = description;
 	}
 
@@ -85,7 +79,7 @@ public class Block implements java.io.Serializable {
 		this.isActive = isActive;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "block")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "block")
 	public Set<BlockOfMajor> getBlockOfMajors() {
 		return this.blockOfMajors;
 	}
@@ -94,16 +88,7 @@ public class Block implements java.io.Serializable {
 		this.blockOfMajors = blockOfMajors;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "block")
-	public Set<BlockOfMajor> getBlockOfMajors_1() {
-		return this.blockOfMajors_1;
-	}
-
-	public void setBlockOfMajors_1(Set<BlockOfMajor> blockOfMajors_1) {
-		this.blockOfMajors_1 = blockOfMajors_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "block")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "block")
 	public Set<BlockMajorUniversity> getBlockMajorUniversities() {
 		return this.blockMajorUniversities;
 	}
@@ -111,14 +96,4 @@ public class Block implements java.io.Serializable {
 	public void setBlockMajorUniversities(Set<BlockMajorUniversity> blockMajorUniversities) {
 		this.blockMajorUniversities = blockMajorUniversities;
 	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "block")
-	public Set<BlockMajorUniversity> getBlockMajorUniversities_1() {
-		return this.blockMajorUniversities_1;
-	}
-
-	public void setBlockMajorUniversities_1(Set<BlockMajorUniversity> blockMajorUniversities_1) {
-		this.blockMajorUniversities_1 = blockMajorUniversities_1;
-	}
-
 }

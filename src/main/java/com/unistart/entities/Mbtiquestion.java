@@ -1,7 +1,6 @@
 package com.unistart.entities;
-// Generated Sep 25, 2017 1:40:32 AM by Hibernate Tools 4.3.1.Final
+// Generated Oct 1, 2017 10:03:30 PM by Hibernate Tools 4.3.1.Final
 
-import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,23 +16,23 @@ import javax.persistence.Table;
 @Table(name = "MBTIQuestion", schema = "dbo", catalog = "University")
 public class Mbtiquestion implements java.io.Serializable {
 
-	private int id;
+	private Integer id;
 	private Mbtigroup mbtigroup;
-	private Serializable code;
-	private Serializable questionContent;
-	private Serializable option1name;
-	private Serializable option2name;
+	private String code;
+	private String questionContent;
+	private String option1name;
+	private String option2name;
 	private Boolean isActive;
 
 	public Mbtiquestion() {
 	}
 
-	public Mbtiquestion(int id) {
+	public Mbtiquestion(Integer id) {
 		this.id = id;
 	}
 
-	public Mbtiquestion(int id, Mbtigroup mbtigroup, Serializable code, Serializable questionContent,
-			Serializable option1name, Serializable option2name, Boolean isActive) {
+	public Mbtiquestion(Integer id, Mbtigroup mbtigroup, String code, String questionContent,
+			String option1name, String option2name, Boolean isActive) {
 		this.id = id;
 		this.mbtigroup = mbtigroup;
 		this.code = code;
@@ -46,11 +45,11 @@ public class Mbtiquestion implements java.io.Serializable {
 	@Id
 
 	@Column(name = "Id", unique = true, nullable = false)
-	public int getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -65,38 +64,38 @@ public class Mbtiquestion implements java.io.Serializable {
 	}
 
 	@Column(name = "Code")
-	public Serializable getCode() {
+	public String getCode() {
 		return this.code;
 	}
 
-	public void setCode(Serializable code) {
+	public void setCode(String code) {
 		this.code = code;
 	}
 
 	@Column(name = "QuestionContent")
-	public Serializable getQuestionContent() {
+	public String getQuestionContent() {
 		return this.questionContent;
 	}
 
-	public void setQuestionContent(Serializable questionContent) {
+	public void setQuestionContent(String questionContent) {
 		this.questionContent = questionContent;
 	}
 
 	@Column(name = "Option1Name")
-	public Serializable getOption1name() {
+	public String getOption1name() {
 		return this.option1name;
 	}
 
-	public void setOption1name(Serializable option1name) {
+	public void setOption1name(String option1name) {
 		this.option1name = option1name;
 	}
 
 	@Column(name = "Option2Name")
-	public Serializable getOption2name() {
+	public String getOption2name() {
 		return this.option2name;
 	}
 
-	public void setOption2name(Serializable option2name) {
+	public void setOption2name(String option2name) {
 		this.option2name = option2name;
 	}
 

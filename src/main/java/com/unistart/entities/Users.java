@@ -1,10 +1,9 @@
 package com.unistart.entities;
-// Generated Sep 25, 2017 1:40:32 AM by Hibernate Tools 4.3.1.Final
+// Generated Oct 1, 2017 10:03:30 PM by Hibernate Tools 4.3.1.Final
 
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -25,8 +24,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name = "Users", schema = "dbo", catalog = "University")
 public class Users implements java.io.Serializable {
 
-	private int id;
-	@JsonIgnore
+	private Integer id;
 	private Role role;
 	private University university;
 	private String username;
@@ -39,39 +37,60 @@ public class Users implements java.io.Serializable {
 	private Set<Provider> providers = new HashSet<Provider>(0);
 	private Set<Review> reviews = new HashSet<Review>(0);
 	private Set<Mbtiresult> mbtiresults = new HashSet<Mbtiresult>(0);
-
+	private Set<Article> articles = new HashSet<Article>(0);
+	
 	public Users() {
 	}
 
-	public Users(int id, Role role, String username, String password, boolean isActive) {
+	public Users(Integer id, Role role, String username, String password, boolean isActive) {
 		this.id = id;
 		this.role = role;
 		this.username = username;
 		this.password = password;
 		this.isActive = isActive;
 	}
-
-	public Users(int id, Role role, String username,String name, String image, String email,  String password) {
+	
+	public Users(Integer id, Role role, String username, String name, String image, String email, String password) {
 		this.id = id;
 		this.role = role;
 		this.username = username;
+		this.password = password;
 		this.name = name;
 		this.image = image;
 		this.email = email;
-		this.password = password;
 	}
-	
+
+	public Users(Integer id, Role role, University university, String username, String password, String name,
+			String image, String email, boolean isActive, Set<ReviewLike> reviewLikes, Set<Provider> providers,
+			Set<Review> reviews, Set<Mbtiresult> mbtiresults) {
+		this.id = id;
+		this.role = role;
+		this.university = university;
+		this.username = username;
+		this.password = password;
+		this.name = name;
+		this.image = image;
+		this.email = email;
+		this.isActive = isActive;
+		this.reviewLikes = reviewLikes;
+		this.providers = providers;
+		this.reviews = reviews;
+		this.mbtiresults = mbtiresults;
+
+	}
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "Id", unique = true, nullable = false)
-	public int getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "RoleID", nullable = false)
 	public Role getRole() {
@@ -81,6 +100,7 @@ public class Users implements java.io.Serializable {
 	public void setRole(Role role) {
 		this.role = role;
 	}
+
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "UniversityId")
@@ -155,7 +175,7 @@ public class Users implements java.io.Serializable {
 		this.reviewLikes = reviewLikes;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "users",  cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "users")
 	public Set<Provider> getProviders() {
 		return this.providers;
 	}
@@ -163,8 +183,8 @@ public class Users implements java.io.Serializable {
 	public void setProviders(Set<Provider> providers) {
 		this.providers = providers;
 	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "users")
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "users")
 	public Set<Review> getReviews() {
 		return this.reviews;
 	}
@@ -173,7 +193,7 @@ public class Users implements java.io.Serializable {
 		this.reviews = reviews;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "users")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "users")
 	public Set<Mbtiresult> getMbtiresults() {
 		return this.mbtiresults;
 	}
@@ -182,4 +202,14 @@ public class Users implements java.io.Serializable {
 		this.mbtiresults = mbtiresults;
 	}
 
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "users")
+	public Set<Article> getArticles() {
+		return articles;
+	}
+
+	public void setArticles(Set<Article> articles) {
+		this.articles = articles;
+	}
+
+	
 }

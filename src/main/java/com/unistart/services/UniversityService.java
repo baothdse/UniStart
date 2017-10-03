@@ -20,10 +20,9 @@ public class UniversityService implements UniversityServiceInterface {
 	private UniversityRepository universityRepo;
 
 	private University university;
-	private List<University> listUniversity;
 
 	public List<University> listAllUniversity(){
-		listUniversity = universityRepo.findAll();
+		List<University> listUniversity = universityRepo.findAll();
 		return listUniversity;
 	}
 	@Override
@@ -54,12 +53,13 @@ public class UniversityService implements UniversityServiceInterface {
 	
 	@Override
 	public List<University> listAllUniversityName(){
-		listUniversity = universityRepo.showByLocationName();
+		List<University> listUniversity = universityRepo.showByLocationName();
 		return listUniversity;
 	}
 	@Override
 	public List<University> findUniversity(int majorId, int universityId, int locationId) {
 		// TODO Auto-generated method stub
+		List<University> listUniversity;
 		if (universityId == 0 && locationId == 0 && majorId != 0) {
 			listUniversity = universityRepo.findByMajor(majorId);
 		} else if (majorId == 0 && locationId == 0 && universityId != 0){
@@ -87,6 +87,12 @@ public class UniversityService implements UniversityServiceInterface {
 			listUniversity.add(university);
 		}
 		
+		return listUniversity;
+	}
+	@Override
+	public List<University> getListId() {
+		// TODO Auto-generated method stub
+		List<University> listUniversity = universityRepo.getListId();
 		return listUniversity;
 	}
 
