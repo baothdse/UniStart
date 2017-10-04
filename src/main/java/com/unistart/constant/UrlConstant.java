@@ -40,7 +40,7 @@ public class UrlConstant {
 	public static final String REVIEW = "/review";
 // 	public static final String COUNT = "/count";
 // 	public static final String CALCULATE = "/calculate";
-	public static final String STAR_POINT = "/star-point";public static final String REVIEW = "/review";
+	public static final String STAR_POINT = "/star-point";
 	public static final String SAVE_REVIEW = "/save-review";
 	public static final String SHOW_REVIEW = "/show-review";
 	public static final String CHANGE_REVIEW_STATUS = "/change-review-status";
