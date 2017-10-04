@@ -10,9 +10,13 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.unistart.entities.Review;
 import com.unistart.entities.University;
+import com.unistart.entities.Users;
 import com.unistart.entities.customentities.UniversityPoint;
 import com.unistart.repositories.ReviewRepository;
+import com.unistart.repositories.UniversityRepository;
+import com.unistart.repositories.UserRepository;
 import com.unistart.services.interfaces.ReviewServiceInterface;
 import com.unistart.services.interfaces.UniversityServiceInterface;
 

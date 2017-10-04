@@ -83,7 +83,8 @@ public class UniversityController {
 		int universityId = uni.getId();
 		University university = universityService.getUniversityById(universityId);
 		return new ResponseEntity<University> (university, HttpStatus.OK);
-
+	}
+	
 	@RequestMapping(value = UrlConstant.UPDATE_LOCATION_MAJOR, method = RequestMethod.POST)
 	public ResponseEntity<?> addLocation(@RequestBody LocationMajor uni) {
 		boolean isCreated = false, isSave = false;

@@ -66,9 +66,9 @@ public class University implements java.io.Serializable {
 		this.image = image;
 		this.priority = priority;
 	}
-
+	
 	public University(String code, String name, String email,
-			String phone, String logo,String description, String image,int priority, String description, Boolean isActive) {
+			String phone, String logo, String image,int priority, String description, Boolean isActive) {
 		this.code = code;
 		this.name = name;
 		this.email = email;
@@ -78,9 +78,7 @@ public class University implements java.io.Serializable {
 		this.image = image;
 		this.priority = priority;
 		this.isActive = isActive;
-		this.userses = userses;
-		this.reviews = reviews;
-		this.majorUniversities = majorUniversities;;
+		
 	}
 
 
