@@ -39,17 +39,17 @@ public class ReviewController {
 
 	
 	@RequestMapping(value = UrlConstant.SAVE_REVIEW, method = RequestMethod.POST)
-	public ResponseEntity<?> saveReview(@RequestBody Review Review) {
-		int universityId = Review.getUniversity().getId();
-		int userId = Review.getUsers().getId();
-		String description = Review.getDescription();
-		int starTeaching = Review.getStarTeaching();
-		int starFacilities = Review.getStarFacilities();
-		int starCare = Review.getStarCare();
-		int starSocieties = Review.getStarSocieties();
-		int starCareer = Review.getStarCareer();
-		boolean isRecomment = Review.getIsRecomment();
-		boolean status = Review.getStatus();
+	public ResponseEntity<?> saveReview(@RequestBody Review review) {
+		int universityId = review.getUniversity().getId();
+		int userId = review.getUsers().getId();
+		String description = review.getDescription();
+		int starTeaching = review.getStarTeaching();
+		int starFacilities = review.getStarFacilities();
+		int starCare = review.getStarCare();
+		int starSocieties = review.getStarSocieties();
+		int starCareer = review.getStarCareer();
+		boolean isRecomment = review.getIsRecomment();
+		boolean status = review.getStatus();
 
 		boolean isSuccess = reviewService.saveReview(universityId, userId, description, starTeaching, starFacilities, starCare, starSocieties, starCareer, isRecomment, status);
 		if (isSuccess) {

@@ -293,6 +293,7 @@ public class ReviewService implements ReviewServiceInterface {
 			review.setStarCareer(starCareer);
 			review.setIsRecomment(isRecomment);
 			review.setStatus(status);
+			review.setIsActive(true);
 			reviewRepo.save(review);
 			return true;
 		}
