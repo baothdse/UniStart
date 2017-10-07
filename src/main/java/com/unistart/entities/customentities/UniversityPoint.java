@@ -10,7 +10,7 @@ public class UniversityPoint implements Serializable{
 	private double starFacilities;
 	private double starCareer;
 	private double recommentPoint;
-	
+	private int totalReview;
 	public UniversityPoint(){
 		
 	}
@@ -26,7 +26,7 @@ public class UniversityPoint implements Serializable{
 		
 	}
 	public UniversityPoint(int universityId, double starCare, double starTeaching, double starSocieties,
-			double starFacilities, double starCareer, double recommentPoint) {
+			double starFacilities, double starCareer,int totalReview) {
 		super();
 		this.universityId = universityId;
 		this.starCare = starCare;
@@ -34,6 +34,18 @@ public class UniversityPoint implements Serializable{
 		this.starSocieties = starSocieties;
 		this.starFacilities = starFacilities;
 		this.starCareer = starCareer;
+		this.totalReview = totalReview;
+	}
+	public UniversityPoint(int universityId, double starCare, double starTeaching, double starSocieties,
+			double starFacilities, double starCareer,int totalReview, double recommentPoint) {
+		super();
+		this.universityId = universityId;
+		this.starCare = starCare;
+		this.starTeaching = starTeaching;
+		this.starSocieties = starSocieties;
+		this.starFacilities = starFacilities;
+		this.starCareer = starCareer;
+		this.totalReview = totalReview;
 		this.recommentPoint = recommentPoint;
 	}
 	public int getUniversityId() {
@@ -78,5 +90,10 @@ public class UniversityPoint implements Serializable{
 	public void setRecommentPoint(double recommentPoint) {
 		this.recommentPoint = recommentPoint;
 	}
-	
+	public int getTotalReview() {
+		return totalReview;
+	}
+	public void setTotalReview(int totalReview) {
+		this.totalReview = totalReview;
+	}
 }

@@ -39,7 +39,7 @@ public class University implements java.io.Serializable {
 	private Boolean isActive;
 	private Set<Users> userses = new HashSet<Users>(0);
 	private Set<Review> reviews = new HashSet<Review>(0);
-  @JsonManagedReference
+	@JsonManagedReference
 	private Set<MajorUniversity> majorUniversities = new HashSet<MajorUniversity>(0);
 
 	public University(Integer id) {

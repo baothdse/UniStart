@@ -37,7 +37,6 @@ public class Users implements java.io.Serializable {
 	private Set<Provider> providers = new HashSet<Provider>(0);
 	private Set<Review> reviews = new HashSet<Review>(0);
 	private Set<Mbtiresult> mbtiresults = new HashSet<Mbtiresult>(0);
-	private Set<Article> articles = new HashSet<Article>(0);
 	
 	public Users() {
 	}
@@ -202,15 +201,4 @@ public class Users implements java.io.Serializable {
 	public void setMbtiresults(Set<Mbtiresult> mbtiresults) {
 		this.mbtiresults = mbtiresults;
 	}
-
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "users")
-	public Set<Article> getArticles() {
-		return articles;
-	}
-
-	public void setArticles(Set<Article> articles) {
-		this.articles = articles;
-	}
-
-	
 }
