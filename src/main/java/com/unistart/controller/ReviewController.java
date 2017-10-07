@@ -30,9 +30,8 @@ public class ReviewController {
 	
 	private List<Review> listAllReview;
 
-	@RequestMapping(value = UrlConstant.STAR_POINT, method = RequestMethod.POST)
-	public ResponseEntity<?> getStarPoint(@RequestBody University university) {
-		int universityId = university.getId();
+	@RequestMapping(value = UrlConstant.STAR_POINT, method = RequestMethod.GET)
+	public ResponseEntity<?> getStarPoint(@RequestParam(value = "universityId") int universityId) {
 		UniversityPoint universityPoint = reviewService.getPointById(universityId);
 		return new ResponseEntity<UniversityPoint> (universityPoint, HttpStatus.OK);
 	}

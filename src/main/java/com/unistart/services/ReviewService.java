@@ -20,6 +20,8 @@ import com.unistart.repositories.UserRepository;
 import com.unistart.services.interfaces.ReviewServiceInterface;
 import com.unistart.services.interfaces.UniversityServiceInterface;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
+
 @Service
 @Transactional
 public class ReviewService implements ReviewServiceInterface {
@@ -27,13 +29,13 @@ public class ReviewService implements ReviewServiceInterface {
 
 	@Autowired
 	private ReviewRepository reviewRepo;
-  @Autowired
+	@Autowired
 	private UserRepository userRepo;
 	@Autowired
-  private UniversityServiceInterface uniService;
-  @Autowired
-  private UniversityRepository universityRepo;
-  
+	private UniversityServiceInterface uniService;
+	@Autowired
+	private UniversityRepository universityRepo;
+
   private University university;
 	private Review review;
 	private Users user;
@@ -47,6 +49,21 @@ public class ReviewService implements ReviewServiceInterface {
 	private Double starFacilities;
 	private Double starCareer;
 	private Double recommentPoint;
+	private int totalReview;
+	
+	public int getTotalReview() {
+		return totalReview;
+	}
+
+	public void setTotalReview(int totalReview) {
+		this.totalReview = totalReview;
+	}
+
+	@Override
+	public void countReviewOfUniversity(int universityId) {
+		int count = reviewRepo.countReview(universityId);
+		setTotalReview(count);
+	}
 
 	@Override
 	public int countStarCare(int universityId) {
@@ -144,10 +161,13 @@ public class ReviewService implements ReviewServiceInterface {
 		List<Integer> listOfCareerPoint = reviewRepo.getStarCareer(universityId);
 		for (int index = 0; index < listOfCareerPoint.size(); index++) {
 			totalPoint += listOfCareerPoint.get(index);
+			System.out.println(listOfCareerPoint.get(index));
 		}
 		double average = (double) totalPoint / totalCareerReview;
 		setStarCareer(average);
 	}
+	
+	
 
 	@Override
 	@PostConstruct
@@ -164,12 +184,14 @@ public class ReviewService implements ReviewServiceInterface {
 			calculateStarCare(listId.get(index).getId());
 			calculateStarCareer(listId.get(index).getId());
 			calculateRecomment(listId.get(index).getId());
+			countReviewOfUniversity(listId.get(index).getId());
+			System.out.println("totalReview " + getTotalReview());
 			if(getRecommentPoint() == null) {
 				point = new UniversityPoint(listId.get(index).getId(), getStarCare(), 
-					getStarTeaching(), getStarSocieties(), getStarFacilities(),getStarCareer());
+					getStarTeaching(), getStarSocieties(), getStarFacilities(),getStarCareer(),getTotalReview());
 			} else {
 				point = new UniversityPoint(listId.get(index).getId(), getStarCare(), 
-						getStarTeaching(), getStarSocieties(), getStarFacilities(),getStarCareer(), getRecommentPoint());
+						getStarTeaching(), getStarSocieties(), getStarFacilities(),getStarCareer(),getTotalReview(), getRecommentPoint());
 			}
 			
 			listPoint.add(point);
@@ -322,4 +344,5 @@ public class ReviewService implements ReviewServiceInterface {
 		listAllReview = reviewRepo.findNeedAcceptReview();
 		return listAllReview;
 	}
+
 }

@@ -2,6 +2,9 @@ package com.unistart.constant;
 
 public class UrlConstant {
 	
+	public static final String IMAGE_API = "image/**";
+	public static final String UNIVERSITY_FOLDER = "file:D:\\Capstone\\";
+	public static final String UNIVERSITY_DIRECTORY = "D:\\Capstone";
 	//CRUD
 	public static final String CREATE = "/create";
 	public static final String UPDATE = "/update";

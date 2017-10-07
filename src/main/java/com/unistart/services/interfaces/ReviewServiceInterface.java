@@ -11,6 +11,7 @@ public interface ReviewServiceInterface {
 	int countStarSocieties (int universityId);
 	int countStarCare(int universityId);
 	int countStarCareer (int universityId);
+	void countReviewOfUniversity (int universityId);
 	
 	void calculateStarTeaching (int universityId);
 	void calculateStarFacilities (int universityId);

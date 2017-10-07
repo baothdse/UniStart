@@ -1,6 +1,11 @@
 package com.unistart.controller;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.unistart.constant.ErrorConstant;
 import com.unistart.constant.UrlConstant;
@@ -180,5 +187,24 @@ public class UniversityController {
 		boolean isCreated = universityService.deleteUniversity(id);
 		return new ResponseEntity<Boolean> (isCreated, HttpStatus.OK);
 
+	}
+	
+	@RequestMapping(value = "/upload", method = RequestMethod.POST)
+    public ResponseEntity<?> UploadFile(MultipartHttpServletRequest request) throws IOException {
+      Iterator<String> itr = request.getFileNames();
+      MultipartFile file = request.getFile(itr.next());
+      String fileName = file.getOriginalFilename();
+      File dir = new File("src/main/resources/img/");
+      if(!dir.exists()){
+    	  dir.mkdirs();
+      }
+      if (dir.isDirectory()) {
+        File serverFile = new File(dir, fileName);
+        BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
+        stream.write(file.getBytes());
+        stream.close();
+      }
+      String urlImage = dir.getAbsolutePath() + File.separator + fileName;
+      return new ResponseEntity<String> (urlImage, HttpStatus.OK);
 	}
 }
