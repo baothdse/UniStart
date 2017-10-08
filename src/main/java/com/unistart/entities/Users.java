@@ -182,6 +182,7 @@ public class Users implements java.io.Serializable {
 	public void setProviders(Set<Provider> providers) {
 		this.providers = providers;
 	}
+	
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "users")
 	public Set<Review> getReviews() {

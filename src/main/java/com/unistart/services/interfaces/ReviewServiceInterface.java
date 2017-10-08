@@ -27,7 +27,7 @@ public interface ReviewServiceInterface {
 	
 	UniversityPoint getPointById(int universityId);
   
-	boolean saveReview(int universityId, int userId, String description, int starTeaching,
+	boolean saveReview(int universityId, int userId,String title, String description, int starTeaching,
 			int starFacilities, int starCare, int starSocieties, int starCareer, boolean isRecomment, boolean status);
 	List<Review> listReviewOfUniversity(int universityId);
 	boolean changeReviewStatus(int id, boolean status, boolean isActive);

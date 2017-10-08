@@ -299,7 +299,7 @@ public class ReviewService implements ReviewServiceInterface {
 	}
 	
 	@Override
-	public boolean saveReview(int universityId, int userId, String description, int starTeaching, int starFacilities, int starCare,
+	public boolean saveReview(int universityId, int userId,String title, String description, int starTeaching, int starFacilities, int starCare,
 			 int starSocieties, int starCareer, boolean isRecomment, boolean status) {
 		university = universityRepo.findById(universityId);
 		user = userRepo.findById(userId);
@@ -307,6 +307,7 @@ public class ReviewService implements ReviewServiceInterface {
 			review = new Review();
 			review.setUniversity(university);
 			review.setUsers(user);
+			review.setTitle(title);
 			review.setDescription(description);
 			review.setStarTeaching(starTeaching);
 			review.setStarFacilities(starFacilities);

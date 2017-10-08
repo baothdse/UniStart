@@ -41,6 +41,7 @@ public class ReviewController {
 	public ResponseEntity<?> saveReview(@RequestBody Review review) {
 		int universityId = review.getUniversity().getId();
 		int userId = review.getUsers().getId();
+		String title = review.getTitle();
 		String description = review.getDescription();
 		int starTeaching = review.getStarTeaching();
 		int starFacilities = review.getStarFacilities();
@@ -50,7 +51,7 @@ public class ReviewController {
 		boolean isRecomment = review.getIsRecomment();
 		boolean status = review.getStatus();
 
-		boolean isSuccess = reviewService.saveReview(universityId, userId, description, starTeaching, starFacilities, starCare, starSocieties, starCareer, isRecomment, status);
+		boolean isSuccess = reviewService.saveReview(universityId, userId, title, description, starTeaching, starFacilities, starCare, starSocieties, starCareer, isRecomment, status);
 		if (isSuccess) {
 			return new ResponseEntity<Boolean> (isSuccess, HttpStatus.OK);
 		} else {
