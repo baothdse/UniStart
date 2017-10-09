@@ -70,6 +70,13 @@ public class University implements java.io.Serializable {
 		this.isActive = isActive;
 	}
 	
+	public University(Integer id, String name, String logo){
+		this.id = id;
+		this.name = name;
+		this.logo = logo;
+		
+	}
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "Id", unique = true, nullable = false)

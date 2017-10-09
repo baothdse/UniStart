@@ -2,6 +2,8 @@ package com.unistart.repositories;
 
 import java.util.List;
 
+import org.springframework.boot.test.autoconfigure.properties.SkipPropertyMapping;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -25,4 +27,8 @@ public interface MajorUniRepository extends JpaRepository<MajorUniversity, Integ
 	
 //	@Query("select m from MajorUniversity m where m.university.id = ?1")
 //	List<MajorUniversity> findByUniId(int uniId);
+	
+	@Query("select new com.unistart.entities.University(m.university.id, m.university.name, m.university.logo) "
+			+ "from MajorUniversity m where m.major.id = ?1")
+	List<University> getByMajor(int majorId);
 }

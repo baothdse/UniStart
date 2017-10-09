@@ -61,4 +61,6 @@ public interface UniversityRepository extends JpaRepository<University, Integer>
 			+ "u.logo = ?5, u.image = ?6, u.priority = ?7, u.description = ?8 where u.id = ?9 ")
 	void updateUniversity(String code, String name, String email, String phone,
 			String logo, String image,int priority, String description,int id);
+	
+	
 }
