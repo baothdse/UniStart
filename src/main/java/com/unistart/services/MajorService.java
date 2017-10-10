@@ -3,6 +3,7 @@ package com.unistart.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -64,6 +65,13 @@ public class MajorService implements MajorServiceInterface {
 			return true;
 		}
 		return false;
+	}
+	
+	@Override
+	public List<University> getByMajor(int majorId) {
+		// TODO Auto-generated method stub
+		List<University> u = majorUniRepo.getByMajor(majorId);
+		return u.subList(0, u.size() >= 3 ? 3: u.size());
 	}
 	
 }

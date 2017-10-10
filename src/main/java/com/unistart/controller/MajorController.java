@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.unistart.constant.ErrorConstant;
@@ -15,6 +16,7 @@ import com.unistart.constant.UrlConstant;
 import com.unistart.entities.Major;
 import com.unistart.entities.MajorUniversity;
 import com.unistart.error.ErrorNotification;
+import com.unistart.entities.University;
 import com.unistart.services.interfaces.MajorServiceInterface;
 
 @RestController
@@ -32,6 +34,7 @@ public class MajorController {
 		return new ResponseEntity<List<Major>>(listMajor, HttpStatus.OK);
 	}
 	
+
 	@RequestMapping(value = UrlConstant.SAVE_DETAIL_MAJOR, method = RequestMethod.POST)
 	public ResponseEntity<?> saveDetailMajor(@RequestBody MajorUniversity majorUni){
 		int id = majorUni.getId();
@@ -45,5 +48,11 @@ public class MajorController {
 		}
 		error = new ErrorNotification(ErrorConstant.MES009);
 		return new ResponseEntity<ErrorNotification> (error, HttpStatus.CONFLICT);
+	}
+	
+	@RequestMapping(value = UrlConstant.GET_BY_GROUP, method = RequestMethod.GET)
+	public ResponseEntity<?> getByGroup(@RequestParam(value = "majorId") int majorId ){
+		List<University> universities = majorService.getByMajor(majorId);
+		return new ResponseEntity<List<University>>(universities, HttpStatus.OK);
 	}
 }
