@@ -2,6 +2,9 @@ package com.unistart.constant;
 
 public class UrlConstant {
 	
+	public static final String IMAGE_API = "image/**";
+	public static final String UNIVERSITY_FOLDER = "file:D:\\Capstone\\";
+	public static final String UNIVERSITY_DIRECTORY = "D:\\Capstone";
 	//CRUD
 	public static final String CREATE = "/create";
 	public static final String UPDATE = "/update";
@@ -18,6 +21,9 @@ public class UrlConstant {
 	//UNIVERSITY
 	public static final String UNIVERSITY = "/university";
 	public static final String SHOW_UNIVERSITY = "/show-university";
+
+	public static final String FIND_BY_ID = "/find-by-id";
+
 	public static final String GET_UNIVERSITY_BY_ID = "/get-university";
 	public static final String UPDATE_LOCATION_MAJOR = "/update-location-major";
 	public static final String REMOVE_MAJOR_UNI = "/remove-major-uni";
@@ -33,6 +39,16 @@ public class UrlConstant {
 	public static final String LOCATION = "/location";
 	public static final String SHOW_LOCATION = "/show-location";
 	
+	//REVIEW
+	public static final String REVIEW = "/review";
+// 	public static final String COUNT = "/count";
+// 	public static final String CALCULATE = "/calculate";
+	public static final String STAR_POINT = "/star-point";
+	public static final String SAVE_REVIEW = "/save-review";
+	public static final String SHOW_REVIEW = "/show-review";
+	public static final String CHANGE_REVIEW_STATUS = "/change-review-status";
+	public static final String NEED_ACCEPT_REVIEW = "/need-accept-review";
+
 	//MBTI
 	public static final String MBTI = "/mbti";
 	public static final String SAVE_MBTI_RESULT = "/save-mbti-result";
@@ -45,11 +61,5 @@ public class UrlConstant {
 	public static final String SCORE = "/score";
 	public static final String SAVE_SCORE = "/save-score";
 	//public static final String GET_SCORE = "/get-score";
-	
-	//Review
-	public static final String REVIEW = "/review";
-	public static final String SAVE_REVIEW = "/save-review";
-	public static final String SHOW_REVIEW = "/show-review";
-	public static final String CHANGE_REVIEW_STATUS = "/change-review-status";
-	public static final String NEED_ACCEPT_REVIEW = "/need-accept-review";
+
 }

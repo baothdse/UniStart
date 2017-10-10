@@ -13,35 +13,45 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.unistart.constant.ErrorConstant;
 import com.unistart.constant.UrlConstant;
-import com.unistart.entities.Mbtiquestion;
 import com.unistart.entities.Review;
-import com.unistart.entities.customentities.ReviewUniversity;
+import com.unistart.entities.University;
+import com.unistart.entities.customentities.UniversityPoint;
 import com.unistart.error.ErrorNotification;
 import com.unistart.services.interfaces.ReviewServiceInterface;
 
 @RestController
-@RequestMapping(value = UrlConstant.REVIEW)
+@RequestMapping(UrlConstant.REVIEW)
 public class ReviewController {
+	
 	@Autowired
 	private ReviewServiceInterface reviewService;
-	private ErrorNotification error;
+  
+  private ErrorNotification error;
 	
 	private List<Review> listAllReview;
+
+	@RequestMapping(value = UrlConstant.STAR_POINT, method = RequestMethod.GET)
+	public ResponseEntity<?> getStarPoint(@RequestParam(value = "universityId") int universityId) {
+		UniversityPoint universityPoint = reviewService.getPointById(universityId);
+		return new ResponseEntity<UniversityPoint> (universityPoint, HttpStatus.OK);
+	}
+
 	
 	@RequestMapping(value = UrlConstant.SAVE_REVIEW, method = RequestMethod.POST)
-	public ResponseEntity<?> saveReview(@RequestBody Review Review) {
-		int universityId = Review.getUniversity().getId();
-		int userId = Review.getUsers().getId();
-		String description = Review.getDescription();
-		int starTeaching = Review.getStarTeaching();
-		int starFacilities = Review.getStarFacilities();
-		int starCare = Review.getStarCare();
-		int starSocieties = Review.getStarSocieties();
-		int starCareer = Review.getStarCareer();
-		boolean isRecomment = Review.getIsRecomment();
-		boolean status = Review.getStatus();
+	public ResponseEntity<?> saveReview(@RequestBody Review review) {
+		int universityId = review.getUniversity().getId();
+		int userId = review.getUsers().getId();
+		String title = review.getTitle();
+		String description = review.getDescription();
+		int starTeaching = review.getStarTeaching();
+		int starFacilities = review.getStarFacilities();
+		int starCare = review.getStarCare();
+		int starSocieties = review.getStarSocieties();
+		int starCareer = review.getStarCareer();
+		boolean isRecomment = review.getIsRecomment();
+		boolean status = review.getStatus();
 
-		boolean isSuccess = reviewService.saveReview(universityId, userId, description, starTeaching, starFacilities, starCare, starSocieties, starCareer, isRecomment, status);
+		boolean isSuccess = reviewService.saveReview(universityId, userId, title, description, starTeaching, starFacilities, starCare, starSocieties, starCareer, isRecomment, status);
 		if (isSuccess) {
 			return new ResponseEntity<Boolean> (isSuccess, HttpStatus.OK);
 		} else {

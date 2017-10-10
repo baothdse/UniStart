@@ -1,5 +1,5 @@
 package com.unistart.entities;
-// Generated Sep 25, 2017 1:40:32 AM by Hibernate Tools 4.3.1.Final
+// Generated Oct 1, 2017 10:03:30 PM by Hibernate Tools 4.3.1.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -24,7 +24,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Table(name = "Role", schema = "dbo", catalog = "University")
 public class Role implements java.io.Serializable {
 
-	private int id;
+	private Integer id;
 	private String name;
 	private boolean isActive;
 	private Set<Users> userses = new HashSet<Users>(0);
@@ -32,27 +32,26 @@ public class Role implements java.io.Serializable {
 	public Role() {
 	}
 
-	public Role(int id, String name, boolean isActive) {
+	public Role(Integer id, String name, boolean isActive) {
 		this.id = id;
 		this.name = name;
 		this.isActive = isActive;
 	}
 
-	public Role(int id, String name, boolean isActive, Set<Users> userses) {
+	public Role(Integer id, String name, boolean isActive, Set<Users> userses) {
 		this.id = id;
 		this.name = name;
 		this.isActive = isActive;
 		this.userses = userses;
 	}
-
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "Id", unique = true, nullable = false)
-	public int getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

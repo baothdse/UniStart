@@ -1,5 +1,5 @@
 package com.unistart.entities;
-// Generated Sep 25, 2017 1:40:32 AM by Hibernate Tools 4.3.1.Final
+// Generated Oct 1, 2017 10:03:30 PM by Hibernate Tools 4.3.1.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name = "Major", schema = "dbo", catalog = "University")
 public class Major implements java.io.Serializable {
 
-	private int id;
+	private Integer id;
 	private String majorName;
 	private String description;
 	private boolean isActive;
@@ -33,12 +33,19 @@ public class Major implements java.io.Serializable {
 	public Major() {
 	}
 
-	public Major(int id, String majorName) {
+	public Major(Integer id, String majorName, boolean isActive) {
+		this.id = id;
+		this.majorName = majorName;
+		this.isActive = isActive;
+	}
+
+	public Major(Integer id, String majorName) {
+		super();
 		this.id = id;
 		this.majorName = majorName;
 	}
 
-	public Major(int id, String majorName, String description, boolean isActive,
+	public Major(Integer id, String majorName, String description, boolean isActive,
 			Set<MajorUniversity> majorUniversities, Set<MajorMbti> majorMbtis, Set<BlockOfMajor> blockOfMajors) {
 		this.id = id;
 		this.majorName = majorName;
@@ -48,15 +55,15 @@ public class Major implements java.io.Serializable {
 		this.majorMbtis = majorMbtis;
 		this.blockOfMajors = blockOfMajors;
 	}
-	
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "Id", unique = true, nullable = false)
-	public int getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -97,6 +104,7 @@ public class Major implements java.io.Serializable {
 		this.majorUniversities = majorUniversities;
 	}
 
+
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "major")
 	public Set<MajorMbti> getMajorMbtis() {
@@ -116,4 +124,5 @@ public class Major implements java.io.Serializable {
 	public void setBlockOfMajors(Set<BlockOfMajor> blockOfMajors) {
 		this.blockOfMajors = blockOfMajors;
 	}
+
 }

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.unistart.entities.Location;
-import com.unistart.entities.MajorUniversity;
 import com.unistart.entities.University;
 import com.unistart.repositories.LocationRepository;
 import com.unistart.repositories.UniversityRepository;
@@ -25,10 +24,9 @@ public class UniversityService implements UniversityServiceInterface {
 	private LocationRepository locationRepo;
 	
 	private University university;
-	private List<University> listUniversity;
 
 	public List<University> listAllUniversity(){
-		listUniversity = universityRepo.findAll();
+		List<University> listUniversity = universityRepo.findAll();
 		return listUniversity;
 	}
 	@Override
@@ -57,14 +55,15 @@ public class UniversityService implements UniversityServiceInterface {
 		return universityRepo.findById(id);
 	}
 	
-	@Override
-	public List<University> listAllUniversityName(){
-		listUniversity = universityRepo.showByUniversityName();
-		return listUniversity;
-	}
+ 	@Override
+ 	public List<University> listAllUniversityName(){
+ 		List<University> listUniversity = universityRepo.showByUniversityName();
+ 		return listUniversity;
+ 	}
 	@Override
 	public List<University> findUniversity(int majorId, int universityId, int locationId) {
 		// TODO Auto-generated method stub
+		List<University> listUniversity;
 		if (universityId == 0 && locationId == 0 && majorId != 0) {
 			listUniversity = universityRepo.findByMajor(majorId);
 		} else if (majorId == 0 && locationId == 0 && universityId != 0){
@@ -92,6 +91,13 @@ public class UniversityService implements UniversityServiceInterface {
 		return listUniversity;
 	}
 	@Override
+
+	public List<University> getListId() {
+		// TODO Auto-generated method stub
+		List<University> listUniversity = universityRepo.getListId();
+		return listUniversity;
+  }
+
 	public University getUniversityByCode(String code) {	
 		return universityRepo.findByCode(code);
 	}
