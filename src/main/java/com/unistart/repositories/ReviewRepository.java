@@ -60,4 +60,6 @@ public interface ReviewRepository extends JpaRepository<Review, Integer> {
 			+ "from Review r where r.status = 0 and r.isActive = 1")
 	public List<Review> findNeedAcceptReview();
 
+	@Query("select count (r) from Review r where r.isActive = true and r.status= false")
+	int numberOfReviewNeedAccept();
 }

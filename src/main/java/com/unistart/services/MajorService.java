@@ -56,5 +56,14 @@ public class MajorService implements MajorServiceInterface {
 		majorUniRepo.changeIsActive(majorUniId, isActive);
 		return true;
 	}
+	@Override
+	public boolean saveMajorUniDetail(int id, double year, String des, String requirement, String pros) {
+		MajorUniversity majorUni = majorUniRepo.findById(id);
+		if(majorUni != null){
+			majorUniRepo.updateMajorUni(id, year, des, requirement, pros);
+			return true;
+		}
+		return false;
+	}
 	
 }

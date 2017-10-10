@@ -25,4 +25,9 @@ public interface MajorUniRepository extends JpaRepository<MajorUniversity, Integ
 	
 //	@Query("select m from MajorUniversity m where m.university.id = ?1")
 //	List<MajorUniversity> findByUniId(int uniId);
+	
+	@Modifying
+	@Query("update MajorUniversity u set u.numberOfYear = ?2, u.description = ?3, u.requirement = ?4, u.prospects = ?5 "
+			+ "where u.id = ?1")
+	void updateMajorUni(int id, double year, String des, String requirement, String pros);
 }

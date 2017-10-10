@@ -33,8 +33,11 @@ public class MajorUniversity implements java.io.Serializable {
 	private Major major;
 	@JsonBackReference
 	private University university;
+	private String description;
+	private Double numberOfYear;
+	private String requirement;
+	private String prospects;
 	private Boolean isActive;
-	
 	@JsonManagedReference
 	private Set<BlockMajorUniversity> blockMajorUniversities = new HashSet<BlockMajorUniversity>(0);
 
@@ -45,11 +48,16 @@ public class MajorUniversity implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public MajorUniversity(int id, Major major, University university,Boolean isActive,
-			Set<BlockMajorUniversity> blockMajorUniversities) {
+	public MajorUniversity(Integer id, Major major, University university, String description, Double numberOfYear,
+			String requirement, String prospects, Boolean isActive, Set<BlockMajorUniversity> blockMajorUniversities) {
+		super();
 		this.id = id;
 		this.major = major;
 		this.university = university;
+		this.description = description;
+		this.numberOfYear = numberOfYear;
+		this.requirement = requirement;
+		this.prospects = prospects;
 		this.isActive = isActive;
 		this.blockMajorUniversities = blockMajorUniversities;
 	}
@@ -84,6 +92,42 @@ public class MajorUniversity implements java.io.Serializable {
 
 	public void setUniversity(University university) {
 		this.university = university;
+	}
+
+	@Column(name = "Description")
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	@Column(name = "NumberOfYear")
+	public Double getNumberOfYear() {
+		return numberOfYear;
+	}
+
+	public void setNumberOfYear(Double numberOfYear) {
+		this.numberOfYear = numberOfYear;
+	}
+
+	@Column(name = "Requirement")
+	public String getRequirement() {
+		return requirement;
+	}
+
+	public void setRequirement(String requirement) {
+		this.requirement = requirement;
+	}
+
+	@Column(name = "Prospects")
+	public String getProspects() {
+		return prospects;
+	}
+
+	public void setProspects(String prospects) {
+		this.prospects = prospects;
 	}
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "majorUniversity")

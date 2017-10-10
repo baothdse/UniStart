@@ -94,4 +94,10 @@ public class ReviewController {
 		}
 		
 	}
+	
+	@RequestMapping(value = UrlConstant.NUMBER_NEED_ACCEPT_REVIEW, method = RequestMethod.GET)
+	public ResponseEntity<?> getNumberReviewNeedAccept(){
+		int numberOfReview = reviewService.numberOfReview();
+		return new ResponseEntity<Integer>(numberOfReview, HttpStatus.OK);	
+	}
 }
