@@ -28,6 +28,7 @@ public class BlockMajorUniversity implements java.io.Serializable {
 
 	private Integer id;
 	private Block block;
+	private Boolean isActive; 
 	@JsonBackReference
 	private MajorUniversity majorUniversity;
 	
@@ -61,7 +62,15 @@ public class BlockMajorUniversity implements java.io.Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
+	
+	@Column(name = "IsActive")
+	public Boolean getIsActive() {
+		return this.isActive;
+	}
 
+	public void setIsActive(Boolean isActive) {
+		this.isActive = isActive;
+	}
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "BLockId", nullable = false)
 	public Block getBlock() {

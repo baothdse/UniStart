@@ -39,6 +39,7 @@ public class BlockMajorUniService implements BlockMajorUniInterface{
 			BlockMajorUniversity bmu = new BlockMajorUniversity();
 			bmu.setBlock(block);
 			bmu.setMajorUniversity(major);
+			bmu.setIsActive(true);
 			BlockMajorUniRepo.save(bmu);
 			return true;
 		}
@@ -74,6 +75,11 @@ public class BlockMajorUniService implements BlockMajorUniInterface{
 //	public List<MajorUniversity> findByUniId(int uniId) {
 //		return majorUniRepository.findByUniId(uniId);
 //	}
+	@Override
+	public boolean deleteBlockScore(int blockMajorUniId) {
+		BlockMajorUniRepo.changeIsActive(blockMajorUniId);
+		return true;
+	}
 	
 	
 	

@@ -64,13 +64,16 @@ public class ScoreController {
 					return new ResponseEntity<ErrorNotification>(error, HttpStatus.NOT_FOUND);
 				}
 			} else {
+				if(bmu.getIsActive() == false){
+					bmu.setIsActive(true);
+				}
 				Double score = (double) ms.getScore();
 				int year = ms.getYear();
 				scoreHistory = blockMajorUniService.findByIdAndYear(bmu.getId(), year);
 				if(scoreHistory == null){
+					//add Score
 					boolean isAddScore = blockMajorUniService.saveScore(bmu.getId(), score, year);
 					if (isAddScore == false) {
-						//add Score
 						error = new ErrorNotification(ErrorConstant.MES011);
 						return new ResponseEntity<ErrorNotification>(error, HttpStatus.CONFLICT);
 					}
@@ -92,4 +95,11 @@ public class ScoreController {
 //		List<MajorUniversity> listMajorUni = blockMajorUniService.findByUniId(uniId);
 //		return new ResponseEntity<List<MajorUniversity>>(listMajorUni, HttpStatus.OK);
 //	}
+   
+ @RequestMapping(value = UrlConstant.DELETE_BLOCK_SCORE, method = RequestMethod.POST)
+	public ResponseEntity<?> getScore(@RequestBody BlockMajorUniversity blockMajorUni){
+	 	int id = blockMajorUni.getId();
+	    Boolean isRemove = blockMajorUniService.deleteBlockScore(id);
+		return new ResponseEntity<Boolean>(isRemove, HttpStatus.OK);
+	}
 }

@@ -346,4 +346,9 @@ public class ReviewService implements ReviewServiceInterface {
 		return listAllReview;
 	}
 
+	@Override
+	public int numberOfReview() {
+		return reviewRepo.numberOfReviewNeedAccept();
+	}
+
 }

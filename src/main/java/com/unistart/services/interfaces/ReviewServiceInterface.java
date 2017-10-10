@@ -33,4 +33,6 @@ public interface ReviewServiceInterface {
 	boolean changeReviewStatus(int id, boolean status, boolean isActive);
 
 	List<Review> listAllNeedAcceptReview();
+	
+	int numberOfReview();
 }

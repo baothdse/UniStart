@@ -34,7 +34,7 @@ public class UrlConstant {
 	
 	//MAJOR
 	public static final String SHOWMAJOR = "/show-major";
-   
+    public static final String SAVE_DETAIL_MAJOR = "/save-detail-major";
 	//LOCATION
 	public static final String LOCATION = "/location";
 	public static final String SHOW_LOCATION = "/show-location";
@@ -48,6 +48,7 @@ public class UrlConstant {
 	public static final String SHOW_REVIEW = "/show-review";
 	public static final String CHANGE_REVIEW_STATUS = "/change-review-status";
 	public static final String NEED_ACCEPT_REVIEW = "/need-accept-review";
+	public static final String NUMBER_NEED_ACCEPT_REVIEW = "/number-need-accept-review";
 
 	//MBTI
 	public static final String MBTI = "/mbti";
@@ -61,5 +62,6 @@ public class UrlConstant {
 	public static final String SCORE = "/score";
 	public static final String SAVE_SCORE = "/save-score";
 	//public static final String GET_SCORE = "/get-score";
+	public static final String DELETE_BLOCK_SCORE = "/delete-block-score";
 
 }

@@ -15,4 +15,5 @@ public interface BlockMajorUniInterface {
     ScoreHistory findByIdAndYear (int blockMajorUniId, int year);
     boolean updateScore(int blockMajorUniId, Double score, int year);
     //List<MajorUniversity> findByUniId(int uniId);
+    boolean deleteBlockScore(int blockMajorUniId);
 }

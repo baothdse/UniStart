@@ -34,8 +34,6 @@ public class MBTIResultService implements MBTIResultServiceInterface {
 	public boolean saveMbtiResult(String mbtiTypeName, int userId) {
 		mbtiType = mbtiTypeRepo.findByMbtitypeName(mbtiTypeName);
 		user = userRepo.findById(userId);
-		System.out.println("aa" + mbtiType);
-		
 		if (mbtiType != null) {
 			mbtiResult = new Mbtiresult();
 			mbtiResult.setMbtitype(mbtiType);

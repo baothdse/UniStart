@@ -58,6 +58,16 @@ public class MajorService implements MajorServiceInterface {
 		return true;
 	}
 	@Override
+	public boolean saveMajorUniDetail(int id, double year, String des, String requirement, String pros) {
+		MajorUniversity majorUni = majorUniRepo.findById(id);
+		if(majorUni != null){
+			majorUniRepo.updateMajorUni(id, year, des, requirement, pros);
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
 	public List<University> getByMajor(int majorId) {
 		// TODO Auto-generated method stub
 		List<University> u = majorUniRepo.getByMajor(majorId);
