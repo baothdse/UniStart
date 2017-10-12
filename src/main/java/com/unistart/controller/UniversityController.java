@@ -92,6 +92,12 @@ public class UniversityController {
 		return new ResponseEntity<University> (university, HttpStatus.OK);
 	}
 	
+	@RequestMapping(value = UrlConstant.FIND_BY_MAJOR_ID, method = RequestMethod.POST)
+	public ResponseEntity<?> findUniByMajorId(@RequestParam(value = "majorId") int majorId) {
+		listUniversity = universityService.findUniversityByMajorId(majorId);
+		return new ResponseEntity<List<University>> (listUniversity, HttpStatus.OK);
+	}
+	
 	@RequestMapping(value = UrlConstant.UPDATE_LOCATION_MAJOR, method = RequestMethod.POST)
 	public ResponseEntity<?> addLocation(@RequestBody LocationMajor uni) {
 		boolean isCreated = false, isSave = false;

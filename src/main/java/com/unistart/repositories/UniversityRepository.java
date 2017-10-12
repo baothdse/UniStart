@@ -27,27 +27,30 @@ public interface UniversityRepository extends JpaRepository<University, Integer>
 			+ "from University u where u.isActive = true")
 	List<University> showByUniversityName();
 
-	@Query("select u from University u where u.location.id = ?1")
+	@Query("select new com.unistart.entities.University(u.id,u.name,u.logo,u.phone) from University u where u.location.id = ?1")
 	List<University> findByLocation(int locationId);
 	
-	@Query("select u from University u, MajorUniversity mu, Major m "
+	@Query("select new com.unistart.entities.University(u.id,u.name,u.logo,u.phone) from University u, MajorUniversity mu, Major m "
 			+ "where u.id = mu.university.id and m.id = mu.major.id and m.id = ?1 and u.isActive = true")
 	List<University> findByMajor(int majorId);
 	
-	@Query("select u from University u, MajorUniversity mu, Major m "
+	@Query("select new com.unistart.entities.University(u.id,u.name,u.logo,u.phone) from University u where u.id = ?1 and u.isActive = true")
+	University findByUniId(int uniId);
+	
+	@Query("select new com.unistart.entities.University(u.id,u.name,u.logo,u.phone) from University u, MajorUniversity mu, Major m "
 			+ "where u.id = mu.university.id and m.id = mu.major.id and m.id = ?1 "
 			+ "and u.location.id = ?2 and u.isActive = true")
 	List<University> findByLocationAndMajor(int majorId, int locationId);
 	
-	@Query("select u from University u, MajorUniversity mu, Major m "
+	@Query("select new com.unistart.entities.University(u.id,u.name,u.logo,u.phone) from University u, MajorUniversity mu, Major m "
 			+ "where u.id = mu.university.id and m.id = mu.major.id and m.id = ?1 "
 			+ "and u.id = ?2 and u.isActive = true")
 	University findByMajorAndUniversity(int majorId, int universityId);
 	
-	@Query("select u from University u where u.location.id = ?1 and u.id = ?2")
+	@Query("select new com.unistart.entities.University(u.id,u.name,u.logo,u.phone) from University u where u.location.id = ?1 and u.id = ?2")
 	University findByLocationAndId(int locationId, int universityId);
 	
-	@Query("select u from University u, MajorUniversity mu, Major m "
+	@Query("select new com.unistart.entities.University(u.id,u.name,u.logo,u.phone) from University u, MajorUniversity mu, Major m "
 			+ "where u.id = mu.university.id and m.id = mu.major.id and "
 			+ "u.isActive = 'true' and m.id = ?1 and u.id = ?2 and u.location.id = ?3")
 	University findBy(int majorId, int universityId, int locationId);

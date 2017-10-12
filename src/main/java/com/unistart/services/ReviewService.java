@@ -292,7 +292,7 @@ public class ReviewService implements ReviewServiceInterface {
 		if (totalRecomment != 0) {
 			double averagePercent =  ((double)(trueComment)/totalRecomment) * 100;
 			System.out.println(averagePercent); 
-			setRecommentPoint(averagePercent); 
+			setRecommentPoint((double)Math.round(averagePercent*10)/10); 
 		}else {
 			setRecommentPoint(null);
 		}

@@ -23,6 +23,7 @@ public class UrlConstant {
 	public static final String SHOW_UNIVERSITY = "/show-university";
 
 	public static final String FIND_BY_ID = "/find-by-id";
+	public static final String FIND_BY_MAJOR_ID = "/find-by-major-id";
 
 	public static final String GET_UNIVERSITY_BY_ID = "/get-university";
 	public static final String UPDATE_LOCATION_MAJOR = "/update-location-major";

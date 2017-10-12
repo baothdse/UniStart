@@ -90,6 +90,14 @@ public class University implements java.io.Serializable {
 		this.logo = logo;
 
 	}
+	
+	public University(Integer id, String name, String logo, String phone) {
+		this.id = id;
+		this.name = name;
+		this.logo = logo;
+		this.phone = phone;
+
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

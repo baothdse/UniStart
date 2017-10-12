@@ -79,7 +79,7 @@ public class ReviewController {
 		if (isSuccess) {
 			return new ResponseEntity<Boolean> (isSuccess, HttpStatus.OK);
 		} else {
-			error = new ErrorNotification(ErrorConstant.MES005);
+			error = new ErrorNotification(ErrorConstant.MES007);
 			return new ResponseEntity<ErrorNotification> (error, HttpStatus.CONFLICT);
 		}
 	}

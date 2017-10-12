@@ -67,7 +67,7 @@ public class UniversityService implements UniversityServiceInterface {
 		if (universityId == 0 && locationId == 0 && majorId != 0) {
 			listUniversity = universityRepo.findByMajor(majorId);
 		} else if (majorId == 0 && locationId == 0 && universityId != 0){
-			university = universityRepo.findById(universityId);
+			university = universityRepo.findByUniId(universityId);
 			listUniversity = new ArrayList<University>();
 			listUniversity.add(university);
 		} else if (majorId == 0 && universityId == 0 && locationId != 0) {
@@ -90,8 +90,15 @@ public class UniversityService implements UniversityServiceInterface {
 		
 		return listUniversity;
 	}
+	
 	@Override
-
+	public List<University> findUniversityByMajorId(int majorId) {
+		List<University> listUniversity;
+		listUniversity = universityRepo.findByMajor(majorId);
+		return listUniversity;
+	}
+	
+	@Override
 	public List<University> getListId() {
 		// TODO Auto-generated method stub
 		List<University> listUniversity = universityRepo.getListId();
@@ -122,7 +129,5 @@ public class UniversityService implements UniversityServiceInterface {
 		universityRepo.changeIsActive(id);
 		return true;
 	}
-	
-
 
 }
