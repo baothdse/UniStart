@@ -38,4 +38,6 @@ public interface MajorUniRepository extends JpaRepository<MajorUniversity, Integ
 			+ "from MajorUniversity m where m.major.id = ?1")
 	List<University> getByMajor(int majorId);
 
+	@Query("select new com.unistart.entities.MajorUniversity(u.id) from MajorUniversity u")
+	List<MajorUniversity> getListId();
 }

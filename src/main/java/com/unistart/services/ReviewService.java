@@ -36,7 +36,7 @@ public class ReviewService implements ReviewServiceInterface {
 	@Autowired
 	private UniversityRepository universityRepo;
 
-  private University university;
+	private University university;
 	private Review review;
 	private Users user;
 	private List<Review> listALLReview;
@@ -50,124 +50,84 @@ public class ReviewService implements ReviewServiceInterface {
 	private Double starCareer;
 	private Double recommentPoint;
 	private int totalReview;
-	
-	public int getTotalReview() {
-		return totalReview;
-	}
 
-	public void setTotalReview(int totalReview) {
-		this.totalReview = totalReview;
-	}
-
-	@Override
-	public void countReviewOfUniversity(int universityId) {
-		int count = reviewRepo.countReview(universityId);
-		setTotalReview(count);
-	}
-
-	@Override
-	public int countStarCare(int universityId) {
-		// TODO Auto-generated method stub
-		int count = reviewRepo.countStarCare(universityId);
-		return count;
-	}
-
-	@Override
-	public int countStarTeaching(int universityId) {
-		// TODO Auto-generated method stub
-		int count = reviewRepo.countStarTeaching(universityId);
-		return count;
-	}
-
-	@Override
-	public int countStarFacilities(int universityId) {
-		// TODO Auto-generated method stub
-		int count = reviewRepo.countStarFacilites(universityId);
-		return count;
-	}
-
-	@Override
-	public int countStarSocieties(int universityId) {
-		// TODO Auto-generated method stub
-		int count = reviewRepo.countStarSocieties(universityId);
-		return count;
-	}
-
-	@Override
-	public int countStarCareer(int universityId) {
-		// TODO Auto-generated method stub
-		int count = reviewRepo.countStarCareer(universityId);
-		return count;
-	}
-
-	@Override
-	public void calculateStarTeaching(int universityId) {
-		// TODO Auto-generated method stub
-
-		int totalTeachingReview = countStarTeaching(universityId);
-		int totalPoint = 0;
-		List<Integer> listOfTeachingPoint = reviewRepo.getStarTeaching(universityId);
-		for (int index = 0; index < listOfTeachingPoint.size(); index++) {
-			totalPoint += listOfTeachingPoint.get(index);
+	public double calculateStarTeaching(int universityId) {
+		int totalReview = reviewRepo.countReview(universityId);
+		if(reviewRepo.sumStarTeaching(universityId) != null && totalReview != 0){
+			int totalPoint = reviewRepo.sumStarTeaching(universityId);
+			double average =  (double) totalPoint / totalReview;
+			return average;
 		}
-		double average = (double) totalPoint / totalTeachingReview;
-		setStarTeaching(average);
+		return -1;
 	}
 
-	@Override
-	public void calculateStarFacilities(int universityId) {
-		// TODO Auto-generated method stub
-		int totalFacilitiesReview = countStarFacilities(universityId);
-		int totalPoint = 0;
-		List<Integer> listOfFacilitiesPoint = reviewRepo.getStarFacilities(universityId);
-		for (int index = 0; index < listOfFacilitiesPoint.size(); index++) {
-			totalPoint += listOfFacilitiesPoint.get(index);
+	public double calculateStarFacilities(int universityId) {
+		int totalReview = reviewRepo.countReview(universityId);
+		if(reviewRepo.sumStarFacilites(universityId) != null && totalReview != 0){
+			int totalPoint = reviewRepo.sumStarFacilites(universityId);
+			double average =  (double) totalPoint / totalReview;
+			return average;
 		}
-		double average = (double) totalPoint / totalFacilitiesReview;
-		setStarFacilities(average);
+		return -1;
 	}
 
-	@Override
-	public void calculateStarSocieties(int universityId) {
-		// TODO Auto-generated method stub
-		int totalSocietiesReview = countStarSocieties(universityId);
-		int totalPoint = 0;
-		List<Integer> listOfSocietiesPoint = reviewRepo.getStarSocieties(universityId);
-		for (int index = 0; index < listOfSocietiesPoint.size(); index++) {
-			totalPoint += listOfSocietiesPoint.get(index);
+	public double calculateStarSocieties(int universityId) {
+		int totalReview = reviewRepo.countReview(universityId);
+		if(reviewRepo.sumStarSocieties(universityId) != null && totalReview != 0){
+			int totalPoint = reviewRepo.sumStarSocieties(universityId);
+			double average =  (double) totalPoint / totalReview;
+			return average;
 		}
-		double average = (double) totalPoint / totalSocietiesReview;
-		setStarSocieties(average);
+		return -1;
 	}
 
-	@Override
-	public void calculateStarCare(int universityId) {
-		// TODO Auto-generated method stub
-		int totalCareReview = countStarCare(universityId);
-		int totalPoint = 0;
-		List<Integer> listOfCarePoint = reviewRepo.getStarCare(universityId);
-		for (int index = 0; index < listOfCarePoint.size(); index++) {
-			totalPoint += listOfCarePoint.get(index);
+	public double calculateStarCare(int universityId) {
+		int totalReview = reviewRepo.countReview(universityId);
+		if(reviewRepo.sumStarCare(universityId) != null && totalReview != 0){
+			int totalPoint = reviewRepo.sumStarCare(universityId);
+			double average =  (double) totalPoint / totalReview;
+			return average;
 		}
-		double average = (double) totalPoint / totalCareReview;
-		setStarCare(average);
+		return -1;
 	}
 
-	@Override
-	public void calculateStarCareer(int universityId) {
-		// TODO Auto-generated method stub
-		int totalCareerReview = countStarCareer(universityId);
-		int totalPoint = 0;
-		List<Integer> listOfCareerPoint = reviewRepo.getStarCareer(universityId);
-		for (int index = 0; index < listOfCareerPoint.size(); index++) {
-			totalPoint += listOfCareerPoint.get(index);
-			System.out.println(listOfCareerPoint.get(index));
+	public double calculateStarCareer(int universityId) {
+		int totalReview = reviewRepo.countReview(universityId);
+		if(reviewRepo.sumStarCareer(universityId) != null && totalReview != 0){
+			int totalPoint = reviewRepo.sumStarCareer(universityId);
+			double average =  (double) totalPoint / totalReview;
+			return average;
 		}
-		double average = (double) totalPoint / totalCareerReview;
-		setStarCareer(average);
+		return -1;
 	}
 	
+	public Double getRecommentPoint() {
+		return recommentPoint;
+	}
+
+	public void setRecommentPoint(Double recommentPoint) {
+		this.recommentPoint = recommentPoint;
+	}
+
+	public void calculateRecomment(int universityId) {
+		// TODO Auto-generated method stub
+		int totalRecomment = reviewRepo.countReview(universityId);
+		int trueComment = reviewRepo.countRecommended(universityId);
+		if (totalRecomment != 0) {
+			double averagePercent =  ((double)(trueComment)/totalRecomment) * 100;
+			setRecommentPoint((double)Math.round(averagePercent)); 
+		}else {
+			setRecommentPoint(null);
+		}
+	}
 	
+	public List<UniversityPoint> getListUniversityPoint() {
+		return listUniversityPoint;
+	}
+
+	public void setListUniversityPoint(List<UniversityPoint> listUniversityPoint) {
+		this.listUniversityPoint = listUniversityPoint;
+	}
 
 	@Override
 	@PostConstruct
@@ -178,124 +138,38 @@ public class ReviewService implements ReviewServiceInterface {
 		UniversityPoint point = null;
 		for (int index = 0; index < listId.size(); index++) {
 			
-			calculateStarTeaching(listId.get(index).getId());
-			calculateStarFacilities(listId.get(index).getId());
-			calculateStarSocieties(listId.get(index).getId());
-			calculateStarCare(listId.get(index).getId());
-			calculateStarCareer(listId.get(index).getId());
+			starTeaching = calculateStarTeaching(listId.get(index).getId());
+			starFacilities = calculateStarFacilities(listId.get(index).getId());
+			starSocieties = calculateStarSocieties(listId.get(index).getId());
+			starCare = calculateStarCare(listId.get(index).getId());
+			starCareer = calculateStarCareer(listId.get(index).getId());
 			calculateRecomment(listId.get(index).getId());
-			countReviewOfUniversity(listId.get(index).getId());
-			System.out.println("totalReview " + getTotalReview());
-			if(getRecommentPoint() == null) {
-				point = new UniversityPoint(listId.get(index).getId(), getStarCare(), 
-					getStarTeaching(), getStarSocieties(), getStarFacilities(),getStarCareer(),getTotalReview());
-			} else {
-				point = new UniversityPoint(listId.get(index).getId(), getStarCare(), 
-						getStarTeaching(), getStarSocieties(), getStarFacilities(),getStarCareer(),getTotalReview(), getRecommentPoint());
+			totalReview = reviewRepo.countReview(listId.get(index).getId());
+			if(starTeaching != -1 && starFacilities != -1 && starSocieties != -1 && starCare != -1 && starCareer != -1){
+				if(getRecommentPoint() == null) {
+					point = new UniversityPoint(listId.get(index).getId(),starCare, starTeaching,starSocieties,
+							starFacilities,starCareer, totalReview);
+				} else {
+					point = new UniversityPoint(listId.get(index).getId(),starCare,starTeaching,starSocieties,
+							starFacilities,starCareer, totalReview, getRecommentPoint());
+				}
+				
+				listPoint.add(point);
 			}
-			
-			listPoint.add(point);
 		}
 		setListUniversityPoint(listPoint);
-	}
-	public UniversityPoint getUniversityPoint() {
-
-		return universityPoint;
-	}
-
-	public void setUniversityPoint(UniversityPoint universityPoint) {
-		this.universityPoint = universityPoint;
-	}
-
-	public Double getStarCare() {
-		return starCare;
-	}
-
-	public void setStarCare(Double starCare) {
-		this.starCare = starCare;
-	}
-
-	public Double getStarTeaching() {
-		return starTeaching;
-	}
-
-	public void setStarTeaching(Double starTeaching) {
-		this.starTeaching = starTeaching;
-	}
-
-	public Double getStarSocieties() {
-		return starSocieties;
-	}
-
-	public void setStarSocieties(Double starSocieties) {
-		this.starSocieties = starSocieties;
-	}
-
-	public Double getStarFacilities() {
-		return starFacilities;
-	}
-
-	public void setStarFacilities(Double starFacilities) {
-		this.starFacilities = starFacilities;
-	}
-
-	public Double getStarCareer() {
-		return starCareer;
-	}
-
-	public void setStarCareer(Double starCareer) {
-		this.starCareer = starCareer;
-	}
-	
-	@Override
-	public List<UniversityPoint> getListUniversityPoint() {
-		return listUniversityPoint;
-	}
-
-	public void setListUniversityPoint(List<UniversityPoint> listUniversityPoint) {
-		this.listUniversityPoint = listUniversityPoint;
 	}
 
 	@Override
 	public UniversityPoint getPointById(int universityId) {
-		// TODO Auto-generated method stub
 		UniversityPoint uniPoint = null;
 		for (int index = 0; index < listUniversityPoint.size(); index++) {
 			if(universityId == listUniversityPoint.get(index).getUniversityId()) {
 				uniPoint = listUniversityPoint.get(index);
+				System.out.println(uniPoint);
 			}
 		}
 		return uniPoint;
-	}
-
-	public Double getRecommentPoint() {
-		return recommentPoint;
-	}
-
-	public void setRecommentPoint(Double recommentPoint) {
-		this.recommentPoint = recommentPoint;
-	}
-
-	@Override
-	public int countRecomment(int universityId) {
-		// TODO Auto-generated method stub
-		return reviewRepo.countRecommended(universityId);
-	}
-
-	@Override
-	public void calculateRecomment(int universityId) {
-		// TODO Auto-generated method stub
-		int totalRecomment = reviewRepo.countTotalRecomment(universityId);
-		int trueComment = countRecomment(universityId);
-		System.out.println(totalRecomment);
-		System.out.println(trueComment);
-		if (totalRecomment != 0) {
-			double averagePercent =  ((double)(trueComment)/totalRecomment) * 100;
-			System.out.println(averagePercent); 
-			setRecommentPoint((double)Math.round(averagePercent*10)/10); 
-		}else {
-			setRecommentPoint(null);
-		}
 	}
 	
 	@Override
@@ -350,5 +224,4 @@ public class ReviewService implements ReviewServiceInterface {
 	public int numberOfReview() {
 		return reviewRepo.numberOfReviewNeedAccept();
 	}
-
 }

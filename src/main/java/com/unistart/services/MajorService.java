@@ -73,5 +73,9 @@ public class MajorService implements MajorServiceInterface {
 		List<University> u = majorUniRepo.getByMajor(majorId);
 		return u.subList(0, u.size() >= 3 ? 3: u.size());
 	}
+	@Override
+	public List<MajorUniversity> getListId() {
+		return majorUniRepo.getListId();
+	}
 	
 }

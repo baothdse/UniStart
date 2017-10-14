@@ -22,4 +22,5 @@ public class ErrorConstant {
 	public static final String MES008 = "MBTI result is not existed";
 	//Review
 	public static final String MES007 = "No review found";
+	public static final String MES012 = "Major or user not existed";
 }
