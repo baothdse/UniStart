@@ -30,6 +30,7 @@ public class University implements java.io.Serializable {
 
 	private Integer id;
 	private Location location;
+	private TrainSystem trainSystem;
 	private String code;
 	private String name;
 	private String email;
@@ -118,6 +119,16 @@ public class University implements java.io.Serializable {
 
 	public void setLocation(Location location) {
 		this.location = location;
+	}
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "TrainSystemId")
+	public TrainSystem getTrainSystem() {
+		return trainSystem;
+	}
+
+	public void setTrainSystem(TrainSystem trainSystem) {
+		this.trainSystem = trainSystem;
 	}
 
 	@Column(name = "Code", nullable = false)

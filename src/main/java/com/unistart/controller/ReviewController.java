@@ -14,9 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.unistart.constant.ErrorConstant;
 import com.unistart.constant.UrlConstant;
 import com.unistart.entities.Review;
+import com.unistart.entities.ReviewMajor;
 import com.unistart.entities.University;
+import com.unistart.entities.customentities.MajorPoint;
 import com.unistart.entities.customentities.UniversityPoint;
 import com.unistart.error.ErrorNotification;
+import com.unistart.services.ReviewMajorService;
+import com.unistart.services.interfaces.ReviewMajorUniInterface;
 import com.unistart.services.interfaces.ReviewServiceInterface;
 
 @RestController
@@ -26,6 +30,8 @@ public class ReviewController {
 	@Autowired
 	private ReviewServiceInterface reviewService;
   
+	@Autowired
+	private ReviewMajorUniInterface reviewMajorService;
   private ErrorNotification error;
 	
 	private List<Review> listAllReview;
@@ -33,10 +39,13 @@ public class ReviewController {
 	@RequestMapping(value = UrlConstant.STAR_POINT, method = RequestMethod.GET)
 	public ResponseEntity<?> getStarPoint(@RequestParam(value = "universityId") int universityId) {
 		UniversityPoint universityPoint = reviewService.getPointById(universityId);
-		return new ResponseEntity<UniversityPoint> (universityPoint, HttpStatus.OK);
+		if(universityPoint != null){
+			return new ResponseEntity<UniversityPoint> (universityPoint, HttpStatus.OK);
+		}
+		error = new ErrorNotification(ErrorConstant.MES007);
+		return new ResponseEntity<ErrorNotification> (error, HttpStatus.NOT_FOUND);
 	}
 
-	
 	@RequestMapping(value = UrlConstant.SAVE_REVIEW, method = RequestMethod.POST)
 	public ResponseEntity<?> saveReview(@RequestBody Review review) {
 		int universityId = review.getUniversity().getId();
@@ -94,10 +103,37 @@ public class ReviewController {
 		}
 		
 	}
-	
+
 	@RequestMapping(value = UrlConstant.NUMBER_NEED_ACCEPT_REVIEW, method = RequestMethod.GET)
 	public ResponseEntity<?> getNumberReviewNeedAccept(){
 		int numberOfReview = reviewService.numberOfReview();
 		return new ResponseEntity<Integer>(numberOfReview, HttpStatus.OK);	
 	}
+	
+	@RequestMapping(value = UrlConstant.SAVE_REVIEW_MAJOR_UNI, method = RequestMethod.POST)
+	public ResponseEntity<?> saveReviewMajorUni(@RequestBody ReviewMajor review) {
+		int majorUniId = review.getMajorUniversity().getId();
+		int userId = review.getUsers().getId();
+		int starTeaching = review.getStarTeaching();
+		int starCareer = review.getStarCareer();
+		boolean isRecomment = review.getIsRecomment();
+		boolean isSuccess = reviewMajorService.saveReviewMajorUni(majorUniId, userId, starTeaching, starCareer, isRecomment);
+		if (isSuccess) {
+			return new ResponseEntity<Boolean> (isSuccess, HttpStatus.OK);
+		} else {
+			error = new ErrorNotification(ErrorConstant.MES012);
+			return new ResponseEntity<ErrorNotification> (error, HttpStatus.CONFLICT);
+		}
+	}
+	
+	@RequestMapping(value = UrlConstant.STAR_REIVEW_MAJOR, method = RequestMethod.GET)
+	public ResponseEntity<?> getStarReviewMajorUni(@RequestParam(value = "majorUniId") int majorUniId) {
+		MajorPoint majorPoint = reviewMajorService.getPointById(majorUniId);
+		if(majorPoint != null){
+			return new ResponseEntity<MajorPoint> (majorPoint, HttpStatus.OK);
+		}
+		error = new ErrorNotification(ErrorConstant.MES007);
+		return new ResponseEntity<ErrorNotification> (error, HttpStatus.NOT_FOUND);
+	}
+	
 }

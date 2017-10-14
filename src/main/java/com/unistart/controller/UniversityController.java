@@ -92,7 +92,7 @@ public class UniversityController {
 		return new ResponseEntity<University> (university, HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = UrlConstant.FIND_BY_MAJOR_ID, method = RequestMethod.POST)
+	@RequestMapping(value = UrlConstant.FIND_BY_MAJOR_ID, method = RequestMethod.GET)
 	public ResponseEntity<?> findUniByMajorId(@RequestParam(value = "majorId") int majorId) {
 		listUniversity = universityService.findUniversityByMajorId(majorId);
 		return new ResponseEntity<List<University>> (listUniversity, HttpStatus.OK);
