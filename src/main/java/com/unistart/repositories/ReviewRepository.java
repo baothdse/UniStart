@@ -47,4 +47,7 @@ public interface ReviewRepository extends JpaRepository<Review, Integer> {
 
 	@Query("select count (r) from Review r where r.isActive = true and r.status= false")
 	int numberOfReviewNeedAccept();
+	
+	@Query("select r from Review r where r.university.id=?1 and r.users.id=?2")
+	Review checkReviewed(int universityId, int userId);
 }

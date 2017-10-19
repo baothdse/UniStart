@@ -25,4 +25,7 @@ public interface ReviewMajorRepository extends JpaRepository<ReviewMajor, Intege
 	List<Integer> getStarTeaching(int majorUniId);
 	@Query("select r.starCareer from ReviewMajor r where r.majorUniversity.id = ?1 and r.isActive = true")
 	List<Integer> getStarCareer(int majorUniId);
+	
+	@Query("select r from ReviewMajor r where r.majorUniversity.id = ?1 and r.users.id = ?2")
+	ReviewMajor checkReviewed(int majorUniId, int userId);
 }

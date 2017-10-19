@@ -65,8 +65,8 @@ public interface UniversityRepository extends JpaRepository<University, Integer>
 	
 	@Modifying
 	@Query("update University u set u.code = ?1, u.name= ?2, u.email= ?3, u.phone = ?4,"
-			+ "u.logo = ?5, u.image = ?6, u.priority = ?7, u.description = ?8 where u.id = ?9 ")
+			+ "u.logo = ?5, u.image = ?6, u.priority = ?7, u.description = ?8, u.trainSystem.id = ?9 where u.id = ?10 ")
 	void updateUniversity(String code, String name, String email, String phone,
-			String logo, String image,int priority, String description,int id);
+			String logo, String image,int priority, String description,int trainSystem,int id);
 
 }

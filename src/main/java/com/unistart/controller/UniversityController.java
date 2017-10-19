@@ -65,7 +65,8 @@ public class UniversityController {
 		String image = university.getImage();
 		String description = university.getDescription();
 		int priority = university.getPriority();
-		boolean isCreated = universityService.addUniversity(code, name, email, phone, logo, image, priority, description);
+		int trainSystem = university.getTrainSystem().getId();
+		boolean isCreated = universityService.addUniversity(code, name, email, phone, logo, image, priority, description,trainSystem);
 		University uni = universityService.getUniversityByCode(code);
 		if (isCreated) {
 			return new ResponseEntity<University> (uni, HttpStatus.OK);
@@ -179,7 +180,8 @@ public class UniversityController {
 		String image = university.getImage();
 		String description = university.getDescription();
 		int priority = university.getPriority();
-		boolean isCreated = universityService.updateUniversity(id, code, name, email, phone, logo, image, priority, description);
+		int trainSystem = university.getTrainSystem().getId();
+		boolean isCreated = universityService.updateUniversity(id, code, name, email, phone, logo, image, priority, description,trainSystem);
 		if (isCreated) {
 			return new ResponseEntity<Boolean> (isCreated, HttpStatus.OK);
 		}
@@ -195,22 +197,22 @@ public class UniversityController {
 
 	}
 	
-	@RequestMapping(value = "/upload", method = RequestMethod.POST)
-    public ResponseEntity<?> UploadFile(MultipartHttpServletRequest request) throws IOException {
-      Iterator<String> itr = request.getFileNames();
-      MultipartFile file = request.getFile(itr.next());
-      String fileName = file.getOriginalFilename();
-      File dir = new File("src/main/resources/img/");
-      if(!dir.exists()){
-    	  dir.mkdirs();
-      }
-      if (dir.isDirectory()) {
-        File serverFile = new File(dir, fileName);
-        BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
-        stream.write(file.getBytes());
-        stream.close();
-      }
-      String urlImage = dir.getAbsolutePath() + File.separator + fileName;
-      return new ResponseEntity<String> (urlImage, HttpStatus.OK);
-	}
+//	@RequestMapping(value = "/upload", method = RequestMethod.POST)
+//    public ResponseEntity<?> UploadFile(MultipartHttpServletRequest request) throws IOException {
+//      Iterator<String> itr = request.getFileNames();
+//      MultipartFile file = request.getFile(itr.next());
+//      String fileName = file.getOriginalFilename();
+//      File dir = new File("src/main/resources/img/");
+//      if(!dir.exists()){
+//    	  dir.mkdirs();
+//      }
+//      if (dir.isDirectory()) {
+//        File serverFile = new File(dir, fileName);
+//        BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
+//        stream.write(file.getBytes());
+//        stream.close();
+//      }
+//      String urlImage = dir.getAbsolutePath() + File.separator + fileName;
+//      return new ResponseEntity<String> (urlImage, HttpStatus.OK);
+//	}
 }

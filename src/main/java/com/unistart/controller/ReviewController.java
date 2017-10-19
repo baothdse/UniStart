@@ -136,4 +136,20 @@ public class ReviewController {
 		return new ResponseEntity<ErrorNotification> (error, HttpStatus.NOT_FOUND);
 	}
 	
+	@RequestMapping(value = UrlConstant.CHECK_REVIEWED_UNI, method = RequestMethod.POST)
+	public ResponseEntity<?> checkReviewUniversity(@RequestBody Review review) {
+		int universityId = review.getUniversity().getId();
+		int userId = review.getUsers().getId();
+		boolean isReviwed = reviewService.checkReviewedUni(universityId, userId);
+		return new ResponseEntity<Boolean> (isReviwed, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = UrlConstant.CHECK_REVIEWED_UNI_MAJOR, method = RequestMethod.POST)
+	public ResponseEntity<?> checkReviewUniversityMajor(@RequestBody ReviewMajor review) {
+		int majorUniId = review.getMajorUniversity().getId();
+		int userId = review.getUsers().getId();
+		boolean isReviwed = reviewMajorService.checkReviewUniMajor(majorUniId, userId);
+		return new ResponseEntity<Boolean> (isReviwed, HttpStatus.OK);
+	}
+	
 }

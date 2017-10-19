@@ -8,8 +8,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.unistart.entities.Location;
+import com.unistart.entities.TrainSystem;
 import com.unistart.entities.University;
 import com.unistart.repositories.LocationRepository;
+import com.unistart.repositories.TrainRepository;
 import com.unistart.repositories.UniversityRepository;
 import com.unistart.services.interfaces.UniversityServiceInterface;
 
@@ -23,6 +25,8 @@ public class UniversityService implements UniversityServiceInterface {
 	@Autowired
 	private LocationRepository locationRepo;
 	
+	@Autowired
+	private TrainRepository trainRepo;
 	private University university;
 
 	public List<University> listAllUniversity(){
@@ -31,12 +35,14 @@ public class UniversityService implements UniversityServiceInterface {
 	}
 	@Override
 	public boolean addUniversity(String code, String name, String email, String phone, String logo,
-			String image,int priority, String description) {
+			String image,int priority, String description,int trainSystem) {
 		// TODO Auto-generated method stub
 		University university = universityRepo.findByCode(code);
+		TrainSystem train = trainRepo.findById(trainSystem);
 		if (university == null) {
 			boolean isActive = true;
 			university = new University(code, name, email, phone, logo, image, priority, description, isActive);
+			university.setTrainSystem(train);
 			universityRepo.save(university);
 			return true;
 		}
@@ -116,10 +122,10 @@ public class UniversityService implements UniversityServiceInterface {
 	}
 	@Override
 	public boolean updateUniversity(int id, String code, String name, String email, String phone, String logo, String image, int priority,
-			String description) {
+			String description, int trainSystem) {
 		University university = universityRepo.findById(id);
 		if (university != null) {
-			universityRepo.updateUniversity(code, name, email, phone, logo, image, priority, description, id);
+			universityRepo.updateUniversity(code, name, email, phone, logo, image, priority, description, trainSystem, id);
 			return true;
 		}
 		return false;

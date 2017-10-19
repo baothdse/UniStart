@@ -224,4 +224,13 @@ public class ReviewService implements ReviewServiceInterface {
 	public int numberOfReview() {
 		return reviewRepo.numberOfReviewNeedAccept();
 	}
+
+	@Override
+	public boolean checkReviewedUni(int unversityId, int userId) {
+		review = reviewRepo.checkReviewed(unversityId, userId);
+		if(review == null){
+			return false;
+		}
+		return true;
+	}
 }

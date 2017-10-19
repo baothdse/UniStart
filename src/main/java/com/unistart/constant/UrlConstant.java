@@ -2,9 +2,9 @@ package com.unistart.constant;
 
 public class UrlConstant {
 	
-	public static final String IMAGE_API = "image/**";
-	public static final String UNIVERSITY_FOLDER = "file:D:\\Capstone\\";
-	public static final String UNIVERSITY_DIRECTORY = "D:\\Capstone";
+//	public static final String IMAGE_API = "image/**";
+//	public static final String UNIVERSITY_FOLDER = "file:D:\\Capstone\\";
+//	public static final String UNIVERSITY_DIRECTORY = "D:\\Capstone";
 	//CRUD
 	public static final String CREATE = "/create";
 	public static final String UPDATE = "/update";
@@ -44,14 +44,14 @@ public class UrlConstant {
 	public static final String REVIEW = "/review";
 	public static final String STAR_POINT = "/star-point";
 	public static final String STAR_REIVEW_MAJOR = "/star-review-major";
-	
-	
 	public static final String SHOW_REVIEW = "/show-review";
 	public static final String CHANGE_REVIEW_STATUS = "/change-review-status";
 	public static final String NEED_ACCEPT_REVIEW = "/need-accept-review";
 	public static final String NUMBER_NEED_ACCEPT_REVIEW = "/number-need-accept-review";
 	public static final String SAVE_REVIEW = "/save-review";
 	public static final String SAVE_REVIEW_MAJOR_UNI = "/save-review-major-uni";
+	public static final String CHECK_REVIEWED_UNI = "/check-reviewed-uni";
+	public static final String CHECK_REVIEWED_UNI_MAJOR = "/check-reviewed-uni-major";
 
 	//MBTI
 	public static final String MBTI = "/mbti";

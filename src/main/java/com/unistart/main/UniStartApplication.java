@@ -21,7 +21,7 @@ public class UniStartApplication extends WebMvcConfigurerAdapter{
 		SpringApplication.run(UniStartApplication.class, args);
 	}
 	
-	public void addResourceHandles(ResourceHandlerRegistry registry){
-		registry.addResourceHandler(UrlConstant.IMAGE_API).addResourceLocations(UrlConstant.UNIVERSITY_FOLDER);
-	}
+//	public void addResourceHandles(ResourceHandlerRegistry registry){
+//		registry.addResourceHandler(UrlConstant.IMAGE_API).addResourceLocations(UrlConstant.UNIVERSITY_FOLDER);
+//	}
 }
