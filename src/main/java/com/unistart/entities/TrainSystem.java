@@ -75,7 +75,5 @@ public class TrainSystem {
 	public void setUniversity(Set<University> university) {
 		this.university = university;
 	}
-	
-	
-	
+
 }

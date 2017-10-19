@@ -148,5 +148,13 @@ public class ReviewMajorService implements ReviewMajorUniInterface{
 		}
 		return majorPoint;
 	}
+	@Override
+	public boolean checkReviewUniMajor(int majorUniId, int userId) {
+		review = reviewMajorRepo.checkReviewed(majorUniId, userId);
+		if(review == null){
+			return false;
+		}
+		return true;
+	}
 
 }

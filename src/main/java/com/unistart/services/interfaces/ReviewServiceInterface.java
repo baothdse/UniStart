@@ -20,4 +20,6 @@ public interface ReviewServiceInterface {
 	List<Review> listAllNeedAcceptReview();
 	
 	int numberOfReview();
+	
+	boolean checkReviewedUni(int unversityId, int userId);
 }
