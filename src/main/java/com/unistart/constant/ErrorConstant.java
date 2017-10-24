@@ -5,6 +5,7 @@ public class ErrorConstant {
 	public static final String MES001 = "Username is duplicate!";
 	
 	public static final String MES002 = "Username/Password is invalid";
+	public static final String MES013 = "This user not existed";
 	
 	//University
 	public static final String MES003 = "University is existed";

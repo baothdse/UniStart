@@ -41,6 +41,22 @@ public class UserController {
 		}
 	}
 	
+	@RequestMapping(value = UrlConstant.CHANGE_PROFILE, method = RequestMethod.POST)
+	public ResponseEntity<?> changeProfile(@RequestBody Users u) {
+		String name = u.getName();
+		String email = u.getEmail();
+		String password = u.getPassword();
+		String image = u.getImage();
+		int userId = u.getId();
+		boolean isUpdate = userService.changeProfile(name, email, image, password, userId);
+		if (isUpdate) {
+			return new ResponseEntity<Boolean> (isUpdate, HttpStatus.OK);
+		} else {
+			error = new ErrorNotification(ErrorConstant.MES013);
+			return new ResponseEntity<ErrorNotification> (error, HttpStatus.UNAUTHORIZED);
+		}
+	}
+	
 	@RequestMapping(value = UrlConstant.CHECK_LOGIN, method = RequestMethod.POST)
 	public ResponseEntity<?> checkLogin(@RequestBody Users u) {
 		String username = u.getUsername();
