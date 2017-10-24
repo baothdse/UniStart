@@ -25,10 +25,9 @@ public interface MajorUniRepository extends JpaRepository<MajorUniversity, Integ
 	@Query("update MajorUniversity u set u.isActive = ?2 where u.id = ?1")
 	void changeIsActive(int id, boolean isActive);
 	
-//	@Query("select m from MajorUniversity m where m.university.id = ?1")
-//	List<MajorUniversity> findByUniId(int uniId);
+	@Query("select m from MajorUniversity m where m.university.id = ?1")
+	List<MajorUniversity> findByUniId(int uniId);
 	
-
 	@Modifying
 	@Query("update MajorUniversity u set u.numberOfYear = ?2, u.description = ?3, u.requirement = ?4, u.prospects = ?5 "
 			+ "where u.id = ?1")
@@ -40,4 +39,8 @@ public interface MajorUniRepository extends JpaRepository<MajorUniversity, Integ
 
 	@Query("select new com.unistart.entities.MajorUniversity(u.id) from MajorUniversity u")
 	List<MajorUniversity> getListId();
+	
+	@Query("select DISTINCT new com.unistart.entities.MajorUniversity(u.university) from MajorUniversity u "
+			+ "where u.university.id != ?1")
+	List<MajorUniversity> getListUni(int universityId);
 }

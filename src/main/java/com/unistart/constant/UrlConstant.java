@@ -15,6 +15,7 @@ public class UrlConstant {
 	//USER
 	public static final String USER = "/user";
 	public static final String REGISTER = "/register";
+	public static final String CHANGE_PROFILE = "/change-profile";
 	public static final String CHECK_LOGIN = "/check-login";
 	public static final String CHECK_LOGIN_3RD_PARTY = "/check-login-3rd-party";
 	
@@ -66,5 +67,9 @@ public class UrlConstant {
 	public static final String SAVE_SCORE = "/save-score";
 	//public static final String GET_SCORE = "/get-score";
 	public static final String DELETE_BLOCK_SCORE = "/delete-block-score";
+	
+	//CORRELATE
+	public static final String CORRLATE = "/corrlate";
+	public static final String TOP_CORRLATE_UNI = "/top-corrlate-uni";
 
 }

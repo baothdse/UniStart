@@ -25,7 +25,7 @@ public class Mbtitype implements java.io.Serializable {
 	private Integer id;
 	private String mbtitypeName;
 	private String description;
-  private String contentType;
+	private String contentType;
 	private boolean isActive;
 	private Set<Mbtiresult> mbtiresults = new HashSet<Mbtiresult>(0);
 	

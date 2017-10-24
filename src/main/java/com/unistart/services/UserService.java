@@ -95,4 +95,15 @@ public class UserService implements UserServiceInterface {
 		return userInfo;
 	}
 
+	@Override
+	public boolean changeProfile(String name, String email, String image, String password, int userId) {
+		user = userRepository.findById(userId);
+		if(user != null){
+			String encodedPassword = bcrypt.encode(password);
+			userRepository.updateProfile(name, email, encodedPassword, image, userId);
+			return true;
+		}
+		return false;
+	}
+
 }
