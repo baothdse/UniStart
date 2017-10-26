@@ -130,8 +130,8 @@ public class ReviewService implements ReviewServiceInterface {
 	}
 
 	@Override
-	@PostConstruct
-	@Scheduled(cron = "0 0 2 * * *")
+	//@PostConstruct
+	@Scheduled(cron = "0 0 14 * * *")
 	public void calculateTotalAverage() {
 		List<University> listId = uniService.getListId();
 		List<UniversityPoint> listPoint = new ArrayList<UniversityPoint>();

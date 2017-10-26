@@ -87,7 +87,8 @@ public class ScoreController {
 				}
 			}
 		}
-		return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+		bmu = blockMajorUniService.findByBlockAndMajor(blockId, majorUniId);
+		return new ResponseEntity<Integer>(bmu.getId(), HttpStatus.OK);
 	}
    
 //   @RequestMapping(value = UrlConstant.GET_SCORE, method = RequestMethod.GET)
