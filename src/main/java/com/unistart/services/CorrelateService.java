@@ -66,7 +66,8 @@ public class CorrelateService implements CorrelateServiceInterface{
 	@Override
 	public List<Pearson> getTop5Uni(List<Pearson> list){
 		Collections.sort(list, new Pearson());
-		return list.subList(0, list.size()>=5 ? 5 : list.size());
+	    return list.subList(0, list.size()>=5 ? 5 : list.size());
+		//return list;
 	}
 
 	
@@ -114,6 +115,7 @@ public class CorrelateService implements CorrelateServiceInterface{
 			if(r.isNaN()){
 				subtent = a*0.2 + b*0.2;
 			}else{
+				r = Math.abs(r);
 				subtent = (r*ratio)*0.6 + a*0.2 + b*0.2;
 			}
 			p.setR(subtent);

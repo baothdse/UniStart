@@ -58,7 +58,7 @@ public class UniversityService implements UniversityServiceInterface {
 	@Override
 	public University getUniversityById(int id) {
 		// TODO Auto-generated method stub
-		return universityRepo.findWithShortData(id);
+		return universityRepo.findById(id);
 	}
 	
  	@Override

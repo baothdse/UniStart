@@ -26,8 +26,7 @@ public class CorrelateController {
 	@RequestMapping(value = UrlConstant.TOP_CORRLATE_UNI, method = RequestMethod.GET)
 	public ResponseEntity<?> getBlock(@RequestParam(value = "universityId") int universityId) {
 		List<Pearson> listCorr = correlateService.count(universityId);
-		listCorr = correlateService.getTop5Uni(listCorr);
-		return new ResponseEntity<List<Pearson>>(listCorr, HttpStatus.OK);
+		return new ResponseEntity<List<Pearson>>(correlateService.getTop5Uni(listCorr), HttpStatus.OK);
 	}
 	
 //	@RequestMapping(value = "/get-nganh", method = RequestMethod.GET)

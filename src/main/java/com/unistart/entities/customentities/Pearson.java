@@ -31,8 +31,8 @@ public class Pearson implements Comparator<Pearson>{
 		this.r = r;
 	}
 	@Override
-	public int compare(Pearson b, Pearson a) {
-		return (int) (b.r - a.r);
+	public int compare(Pearson a, Pearson b) {
+		return b.r.compareTo(a.r);
 	}
 
 }
