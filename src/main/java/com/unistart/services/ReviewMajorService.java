@@ -97,7 +97,7 @@ public class ReviewMajorService implements ReviewMajorUniInterface{
 	}
 	
 	@Override
-	//@PostConstruct
+	@PostConstruct
 	@Scheduled(cron = "0 0 2 * * *")
 	public void calculateTotalAverage() {
 		List<MajorUniversity> listId = majorUniService.getListId();
