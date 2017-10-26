@@ -75,7 +75,6 @@ public class University implements java.io.Serializable {
     	this.name = name;
     	this.location = location;
     	this.trainSystem = trainSystem;
-    	System.out.println(trainSystem);
  
     }
 	public University(String code, String name, String email, String phone, String logo, String image, int priority,
@@ -131,10 +130,6 @@ public class University implements java.io.Serializable {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "TrainSystemId")
 	public TrainSystem getTrainSystem() {
-		if(trainSystem == null) {
-			TrainSystem trainSys = new TrainSystem();
-			setTrainSystem(trainSys);
-		}
 		return trainSystem;
 	}
 
