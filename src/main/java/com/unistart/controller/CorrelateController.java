@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.unistart.constant.UrlConstant;
 import com.unistart.entities.customentities.Correlate;
+import com.unistart.entities.customentities.Pearson;
 import com.unistart.error.ErrorNotification;
 import com.unistart.services.interfaces.CorrelateServiceInterface;
 
@@ -24,7 +25,13 @@ public class CorrelateController {
 	
 	@RequestMapping(value = UrlConstant.TOP_CORRLATE_UNI, method = RequestMethod.GET)
 	public ResponseEntity<?> getBlock(@RequestParam(value = "universityId") int universityId) {
-		List<Correlate> listCorr = correlateService.getTop10Uni(universityId);
-		return new ResponseEntity<List<Correlate>>(listCorr, HttpStatus.OK);
+		List<Pearson> listCorr = correlateService.count(universityId);
+		return new ResponseEntity<List<Pearson>>(correlateService.getTop5Uni(listCorr), HttpStatus.OK);
 	}
+	
+//	@RequestMapping(value = "/get-nganh", method = RequestMethod.GET)
+//	public ResponseEntity<?> getList(@RequestParam(value = "universityId") int universityId) {
+//		List<Correlate> listCorr = correlateService.getTop10Uni(universityId);
+//		return new ResponseEntity<List<Correlate>>(listCorr, HttpStatus.OK);
+//	}
 }

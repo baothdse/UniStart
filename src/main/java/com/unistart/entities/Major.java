@@ -10,6 +10,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -23,6 +25,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Major implements java.io.Serializable {
 
 	private Integer id;
+	private GroupMajor groupMajor;
 	private String majorName;
 	private String description;
 	private boolean isActive;
@@ -48,6 +51,19 @@ public class Major implements java.io.Serializable {
 	public Major(Integer id, String majorName, String description, boolean isActive,
 			Set<MajorUniversity> majorUniversities, Set<MajorMbti> majorMbtis, Set<BlockOfMajor> blockOfMajors) {
 		this.id = id;
+		this.majorName = majorName;
+		this.description = description;
+		this.isActive = isActive;
+		this.majorUniversities = majorUniversities;
+		this.majorMbtis = majorMbtis;
+		this.blockOfMajors = blockOfMajors;
+	}
+
+	public Major(Integer id, GroupMajor groupMajor, String majorName, String description, boolean isActive,
+			Set<MajorUniversity> majorUniversities, Set<MajorMbti> majorMbtis, Set<BlockOfMajor> blockOfMajors) {
+		super();
+		this.id = id;
+		this.groupMajor = groupMajor;
 		this.majorName = majorName;
 		this.description = description;
 		this.isActive = isActive;
@@ -93,7 +109,16 @@ public class Major implements java.io.Serializable {
 	public void setIsActive(boolean isActive) {
 		this.isActive = isActive;
 	}
+	//@JsonIgnore
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "GroupMajorId")
+	public GroupMajor getGroupMajor() {
+		return groupMajor;
+	}
 
+	public void setGroupMajor(GroupMajor groupMajor) {
+		this.groupMajor = groupMajor;
+	}
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "major")
 	public Set<MajorUniversity> getMajorUniversities() {
@@ -124,5 +149,4 @@ public class Major implements java.io.Serializable {
 	public void setBlockOfMajors(Set<BlockOfMajor> blockOfMajors) {
 		this.blockOfMajors = blockOfMajors;
 	}
-
 }

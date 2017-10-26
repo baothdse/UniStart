@@ -70,7 +70,13 @@ public class University implements java.io.Serializable {
 		this.image = image;
 		this.priority = priority;
 	}
-
+    public University(Integer id, String name, Location location, TrainSystem trainSystem){
+    	this.id = id;
+    	this.name = name;
+    	this.location = location;
+    	this.trainSystem = trainSystem;
+ 
+    }
 	public University(String code, String name, String email, String phone, String logo, String image, int priority,
 			String description, Boolean isActive) {
 		this.code = code;

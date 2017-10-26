@@ -1,12 +1,17 @@
 package com.unistart.entities.customentities;
 
 import java.util.Comparator;
+import java.util.List;
+
+import com.unistart.entities.Major;
+import com.unistart.entities.MajorUniversity;
 
 public class Correlate implements Comparator<Correlate>{
 
 	private int numberOfSameMajor;
+	private List<MajorUniversity> listMajorX;
+	private List<MajorUniversity> listMajorY;
 	private int universityId;
-	
 	public Correlate() {
 		super();
 	}
@@ -14,6 +19,19 @@ public class Correlate implements Comparator<Correlate>{
 		super();
 		this.numberOfSameMajor = numberOfSameMajor;
 		this.universityId = universityId;
+	}
+	
+	public List<MajorUniversity> getListMajorX() {
+		return listMajorX;
+	}
+	public void setListMajorX(List<MajorUniversity> listMajorX) {
+		this.listMajorX = listMajorX;
+	}
+	public List<MajorUniversity> getListMajorY() {
+		return listMajorY;
+	}
+	public void setListMajorY(List<MajorUniversity> listMajorY) {
+		this.listMajorY = listMajorY;
 	}
 	public int getNumberOfSameMajor() {
 		return numberOfSameMajor;
