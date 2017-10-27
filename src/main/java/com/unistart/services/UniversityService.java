@@ -135,5 +135,10 @@ public class UniversityService implements UniversityServiceInterface {
 		universityRepo.changeIsActive(id);
 		return true;
 	}
-
+	@Override
+	public List<University> getUniByMajorId(int majorId) {
+		List<University> listUniversity;
+		listUniversity = universityRepo.findByMajorId(majorId);
+		return listUniversity;
+	}
 }
