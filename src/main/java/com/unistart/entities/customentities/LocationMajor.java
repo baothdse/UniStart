@@ -8,6 +8,7 @@ import com.unistart.entities.University;
 
 public class LocationMajor {
 	private int[] majorId;
+	private int majorID;
 	private Location location;
 	private University university;
 	public University getUniversity() {
@@ -43,6 +44,14 @@ public class LocationMajor {
 	}
 	public void setLocation(Location location) {
 		this.location = location;
+	}
+
+	public int getMajorID() {
+		return majorID;
+	}
+
+	public void setMajorID(int majorID) {
+		this.majorID = majorID;
 	}
 	
 }

@@ -196,7 +196,18 @@ public class UniversityController {
 		return new ResponseEntity<Boolean> (isCreated, HttpStatus.OK);
 
 	}
-	
+	@RequestMapping(value = UrlConstant.GET_BY_LOCATION_AND_MAJOR, method = RequestMethod.POST)
+	public ResponseEntity<?> getUniByLocaMajor(@RequestBody LocationMajor locaMajor){
+		int locationId = locaMajor.getLocation().getId();
+		int majorId = locaMajor.getMajorID();
+
+		listUniversity = universityService.getUniByLocationMajor(locationId, majorId);
+		if(listUniversity == null){
+			error = new ErrorNotification(ErrorConstant.MES014);
+			return new ResponseEntity<ErrorNotification> (error, HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<List<University>>(listUniversity, HttpStatus.OK);
+	}
 //	@RequestMapping(value = "/upload", method = RequestMethod.POST)
 //    public ResponseEntity<?> UploadFile(MultipartHttpServletRequest request) throws IOException {
 //      Iterator<String> itr = request.getFileNames();

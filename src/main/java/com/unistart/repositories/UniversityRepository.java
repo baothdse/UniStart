@@ -71,5 +71,10 @@ public interface UniversityRepository extends JpaRepository<University, Integer>
 			+ "u.logo = ?5, u.image = ?6, u.priority = ?7, u.description = ?8, u.trainSystem.id = ?9 where u.id = ?10 ")
 	void updateUniversity(String code, String name, String email, String phone,
 			String logo, String image,int priority, String description,int trainSystem,int id);
+	
+	@Query("select new com.unistart.entities.University(u.id,u.name) from University u, MajorUniversity mu, Major m "
+			+ "where u.id = mu.university.id and m.id = mu.major.id and m.id = ?2 "
+			+ "and u.location.id = ?1 and u.isActive = true")
+	List<University> getByLocationMajor(int locationId, int majorId);
 
 }
