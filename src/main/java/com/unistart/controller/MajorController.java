@@ -55,4 +55,9 @@ public class MajorController {
 		List<University> universities = majorService.getByMajor(majorId);
 		return new ResponseEntity<List<University>>(universities, HttpStatus.OK);
 	}
+	@RequestMapping(value = UrlConstant.GET_ALL_MAJOR_OF_UNIVERSITY, method = RequestMethod.GET)
+	public ResponseEntity<?> getByUniversityId(@RequestParam(value = "universityId") int uniId ){
+		List<MajorUniversity> major = majorService.getByUniversityId(uniId);
+		return new ResponseEntity<List<MajorUniversity>>(major, HttpStatus.OK);
+	}
 }
