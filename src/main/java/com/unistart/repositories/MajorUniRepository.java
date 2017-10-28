@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import com.unistart.entities.Major;
 import com.unistart.entities.MajorUniversity;
 import com.unistart.entities.University;
 
@@ -27,6 +28,10 @@ public interface MajorUniRepository extends JpaRepository<MajorUniversity, Integ
 	
 	@Query("select m from MajorUniversity m where m.university.id = ?1")
 	List<MajorUniversity> findByUniId(int uniId);
+	
+	@Query("select new com.unistart.entities.Major(m.major.id, m.major.majorName) "
+			+ "from MajorUniversity m where m.university.id = ?1")
+	List<MajorUniversity> getByUniversityId(int uniId);
 	
 	@Modifying
 	@Query("update MajorUniversity u set u.numberOfYear = ?2, u.description = ?3, u.requirement = ?4, u.prospects = ?5 "

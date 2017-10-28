@@ -20,4 +20,5 @@ public interface MajorServiceInterface {
 	List<University> getByMajor(int majorId);
 
 	List<MajorUniversity> getListId();
+	List<MajorUniversity> getByUniversityId(int uniId);
 }

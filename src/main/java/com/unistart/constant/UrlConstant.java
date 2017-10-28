@@ -37,6 +37,7 @@ public class UrlConstant {
 	//MAJOR
 	public static final String SHOWMAJOR = "/show-major";
     public static final String SAVE_DETAIL_MAJOR = "/save-detail-major";
+    public static final String GET_ALL_MAJOR_OF_UNIVERSITY = "/get-major-uni";
 	//LOCATION
 	public static final String LOCATION = "/location";
 	public static final String SHOW_LOCATION = "/show-location";

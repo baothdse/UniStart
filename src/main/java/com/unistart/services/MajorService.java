@@ -25,6 +25,7 @@ public class MajorService implements MajorServiceInterface {
 	private MajorUniRepository majorUniRepo;
 	
 	private List<Major> listMajor;
+	private List<MajorUniversity> listMajorUni;
 	@Override
 	public List<Major> listAllMajorName() {
 		listMajor = majorRepository.showByMajorName();
@@ -42,6 +43,11 @@ public class MajorService implements MajorServiceInterface {
 	@Override
 	public Major getMajorById(int id) {
 		return majorRepository.findById(id);
+	}
+	@Override
+	public List<MajorUniversity> getByUniversityId(int uniId){
+		listMajorUni = majorUniRepo.getByUniversityId(uniId);
+		return listMajorUni;
 	}
 	
 	@Override
