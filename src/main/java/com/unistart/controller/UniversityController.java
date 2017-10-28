@@ -196,6 +196,11 @@ public class UniversityController {
 		return new ResponseEntity<Boolean> (isCreated, HttpStatus.OK);
 
 	}
+	@RequestMapping(value = UrlConstant.GET_UIVERSITY_BY_LOCATION, method = RequestMethod.GET)
+	public ResponseEntity<?> getUniByLocationId(@RequestParam(value = "locationId") int locationId) {
+		listUniversity = universityService.getUniByLocationId(locationId);
+		return new ResponseEntity<List<University>> (listUniversity, HttpStatus.OK);
+	}
 	
 //	@RequestMapping(value = "/upload", method = RequestMethod.POST)
 //    public ResponseEntity<?> UploadFile(MultipartHttpServletRequest request) throws IOException {
