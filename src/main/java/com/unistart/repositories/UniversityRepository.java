@@ -30,6 +30,10 @@ public interface UniversityRepository extends JpaRepository<University, Integer>
 	@Query("select new com.unistart.entities.University(u.id,u.name,u.logo,u.phone) from University u where u.location.id = ?1")
 	List<University> findByLocation(int locationId);
 	
+	@Query("select new com.unistart.entities.University(u.id,u.name) from University u where u.location.id = ?1")
+	List<University> getUniByLocationId(int locationId);
+	
+	
 	@Query("select new com.unistart.entities.University(u.id,u.name,u.location,u.trainSystem, u.logo) from University u where u.id = ?1")
 	University findWithShortData(Integer id);
 	

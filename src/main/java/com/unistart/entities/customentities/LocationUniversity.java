@@ -6,6 +6,9 @@ import com.unistart.entities.University;
 public class LocationUniversity {
 	private University university;
 	private Location location;
+	public LocationUniversity() {
+		super();
+	}
 	public University getUniversity() {
 		return university;
 	}
