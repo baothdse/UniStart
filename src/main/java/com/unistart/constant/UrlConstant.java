@@ -25,12 +25,15 @@ public class UrlConstant {
 
 	public static final String FIND_BY_ID = "/find-by-id";
 	public static final String FIND_BY_MAJOR_ID = "/find-by-major-id";
+	
+	public static final String GET_UIVERSITY_BY_LOCATION = "/get-uni-by-location";
 
 	public static final String GET_UNIVERSITY_BY_ID = "/get-university";
 	public static final String UPDATE_LOCATION_MAJOR = "/update-location-major";
 	public static final String REMOVE_MAJOR_UNI = "/remove-major-uni";
 	public static final String GET_BY_GROUP = "/get-by-group";
 	public static final String GET_BY_LOCATION_AND_MAJOR = "/get-by-location-and-major";
+	public static final String GET_BY_MAJOR_ID = "/get-by-major-id";
 	//BLOCK
 	public static final String BLOCK = "/block";
 	public static final String GET_ALL_BLOCK = "/get-all-block";
@@ -38,6 +41,7 @@ public class UrlConstant {
 	//MAJOR
 	public static final String SHOWMAJOR = "/show-major";
     public static final String SAVE_DETAIL_MAJOR = "/save-detail-major";
+    public static final String GET_ALL_MAJOR_OF_UNIVERSITY = "/get-major-uni";
 	//LOCATION
 	public static final String LOCATION = "/location";
 	public static final String SHOW_LOCATION = "/show-location";

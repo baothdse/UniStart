@@ -30,6 +30,10 @@ public interface UniversityRepository extends JpaRepository<University, Integer>
 	@Query("select new com.unistart.entities.University(u.id,u.name,u.logo,u.phone) from University u where u.location.id = ?1")
 	List<University> findByLocation(int locationId);
 	
+	@Query("select new com.unistart.entities.University(u.id,u.name) from University u where u.location.id = ?1")
+	List<University> getUniByLocationId(int locationId);
+	
+	
 	@Query("select new com.unistart.entities.University(u.id,u.name,u.location,u.trainSystem, u.logo) from University u where u.id = ?1")
 	University findWithShortData(Integer id);
 	
@@ -74,7 +78,12 @@ public interface UniversityRepository extends JpaRepository<University, Integer>
 	
 	@Query("select new com.unistart.entities.University(u.id,u.name) from University u, MajorUniversity mu, Major m "
 			+ "where u.id = mu.university.id and m.id = mu.major.id and m.id = ?2 "
-			+ "and u.location.id = ?1 and u.isActive = true")
+			+ "and u.location.id = ?1 and u.isActive = true and mu.isActive = true")
 	List<University> getByLocationMajor(int locationId, int majorId);
+
+  @Query("select new com.unistart.entities.University(u.id,u.name) from University u, MajorUniversity mu, Major m "
+			+ "where u.id = mu.university.id and m.id = mu.major.id and m.id = ?1 and u.isActive = true and mu.isActive = true")
+	List<University> findByMajorId(int majorId);
+
 
 }
