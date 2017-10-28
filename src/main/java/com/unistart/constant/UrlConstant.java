@@ -32,6 +32,7 @@ public class UrlConstant {
 	public static final String UPDATE_LOCATION_MAJOR = "/update-location-major";
 	public static final String REMOVE_MAJOR_UNI = "/remove-major-uni";
 	public static final String GET_BY_GROUP = "/get-by-group";
+	public static final String GET_BY_LOCATION_AND_MAJOR = "/get-by-location-and-major";
 	public static final String GET_BY_MAJOR_ID = "/get-by-major-id";
 	//BLOCK
 	public static final String BLOCK = "/block";

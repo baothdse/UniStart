@@ -197,6 +197,19 @@ public class UniversityController {
 
 	}
 
+	@RequestMapping(value = UrlConstant.GET_BY_LOCATION_AND_MAJOR, method = RequestMethod.POST)
+	public ResponseEntity<?> getUniByLocaMajor(@RequestBody LocationMajor locaMajor){
+		int locationId = locaMajor.getLocation().getId();
+		int majorId = locaMajor.getMajorID();
+
+		listUniversity = universityService.getUniByLocationMajor(locationId, majorId);
+		if(listUniversity == null){
+			error = new ErrorNotification(ErrorConstant.MES014);
+			return new ResponseEntity<ErrorNotification> (error, HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<List<University>>(listUniversity, HttpStatus.OK);
+	}
+
 	@RequestMapping(value = UrlConstant.GET_BY_MAJOR_ID, method = RequestMethod.GET)
 	public ResponseEntity<?> getUniByMajorId(@RequestParam(value = "majorId") int majorId) {
 		listUniversity = universityService.getUniByMajorId(majorId);

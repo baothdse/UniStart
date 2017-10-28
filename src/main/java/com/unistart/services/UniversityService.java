@@ -136,7 +136,13 @@ public class UniversityService implements UniversityServiceInterface {
 		return true;
 	}
 	@Override
-	public List<University> getUniByMajorId(int majorId) {
+	public List<University> getUniByLocationMajor(int locationId, int majorId) {
+		List<University> listUniversity;
+		listUniversity = universityRepo.getByLocationMajor(locationId, majorId);
+    return listUniversity;
+  }
+  @Override
+  public List<University> getUniByMajorId(int majorId) {
 		List<University> listUniversity;
 		listUniversity = universityRepo.findByMajorId(majorId);
 		return listUniversity;

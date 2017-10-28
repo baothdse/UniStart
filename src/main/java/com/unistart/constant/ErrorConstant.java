@@ -12,6 +12,7 @@ public class ErrorConstant {
 	public static final String MES006 = "University is not existed";
 	public static final String MES010 = "BlockId or MajorUniId not existed";
 	public static final String MES011 = "Something wrong with score";
+	public static final String MES014 = "LocationId or MajorId not existed";
 	
 	//Major
 	public static final String MES009 = "This Major_University not existed";
