@@ -33,6 +33,8 @@ public interface UniversityServiceInterface {
 	
 	List<University> getListId();
 
+	List<University> getUniByMajorId(int majorId);
+  
 	List<University> getUniByLocationId(int locationId);
 
 }
