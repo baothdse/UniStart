@@ -10,14 +10,17 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.unistart.entities.BlockMajorUniversity;
 import com.unistart.entities.Major;
+import com.unistart.entities.MajorMbti;
 import com.unistart.entities.MajorUniversity;
 import com.unistart.entities.ScoreHistory;
 import com.unistart.entities.University;
 import com.unistart.entities.customentities.Correlate;
 import com.unistart.entities.customentities.Pearson;
+import com.unistart.entities.customentities.UniversityPoint;
 import com.unistart.repositories.MajorUniRepository;
 import com.unistart.repositories.UniversityRepository;
 import com.unistart.services.interfaces.CorrelateServiceInterface;
+import com.unistart.services.interfaces.ReviewServiceInterface;
 
 @Service
 @Transactional
@@ -29,6 +32,8 @@ public class CorrelateService implements CorrelateServiceInterface{
 	@Autowired
 	private UniversityRepository uniRepo;
 	
+	@Autowired
+	private ReviewServiceInterface reviewService;
 	List<Correlate> listCorrelate;
 	
 	// X is ogrin, Y...
@@ -69,7 +74,6 @@ public class CorrelateService implements CorrelateServiceInterface{
 	    return list.subList(0, list.size()>=5 ? 5 : list.size());
 		//return list;
 	}
-
 	
 	public List<Correlate> getTop10Uni(int universityId){
 		listCorrelate = countSameMajor(universityId);
@@ -139,9 +143,9 @@ public class CorrelateService implements CorrelateServiceInterface{
 		}
 		return list;
 	}
-	public Double avgScoreOfBlock(int majorUniId){
+	public Double avgScoreOfBlock(MajorUniversity majorUni){
 		Double totalScore = (double) 0;
-		MajorUniversity majorUni = majorUniRepo.findById(majorUniId);
+		//MajorUniversity majorUni = majorUniRepo.findById(majorUniId);
 		List<BlockMajorUniversity> listBlockMajorUni = new ArrayList<>(majorUni.getBlockMajorUniversities());
 		for(int i = 0; i<listBlockMajorUni.size();i++){
 			List<ScoreHistory> listScore = new ArrayList<>(listBlockMajorUni.get(i).getScoreHistories());
@@ -164,8 +168,8 @@ public class CorrelateService implements CorrelateServiceInterface{
 		List<ScoreHistory> listScoreX = new ArrayList<>();
 		List<ScoreHistory> listScoreY = new ArrayList<>();
 		for(int i =0; i<listMajorX.size();i++){
-			scoreX = scoreX + avgScoreOfBlock(listMajorX.get(i).getId());
-			scoreY = scoreY + avgScoreOfBlock(listMajorY.get(i).getId());
+			scoreX = scoreX + avgScoreOfBlock(listMajorX.get(i));
+			scoreY = scoreY + avgScoreOfBlock(listMajorY.get(i));
 		}
 		// trung binh x
 		Double avgX = scoreX/listMajorX.size();
@@ -213,5 +217,64 @@ public class CorrelateService implements CorrelateServiceInterface{
 		}
 		Double avg = (double) (total/listCorrelate.size());
 		return avg;	
+	}
+	//End Correlate Uni
+	
+	//Top 5 Uni same Major MBTI
+	public List<Correlate> countSameMBTI(List<MajorMbti> listMajorMBTI){
+		List<Correlate> listPeason = new ArrayList<>();
+		List<University> listUniId = uniRepo.getListId();
+		for(int i = 0;i< listUniId.size();i++){
+			System.out.println("uni: "+ listUniId.get(i).getId());
+			Correlate pe = new Correlate();
+			int count = 0;
+			List<MajorUniversity> listMajorUni = majorUniRepo.findByUniIdShort(listUniId.get(i).getId());
+			for(int j =0; j<listMajorMBTI.size();j++){
+				int number1 = listMajorMBTI.get(j).getMajor().getId();
+				for(int a =0; a<listMajorUni.size();a++){
+					int number2 = listMajorUni.get(a).getMajor().getId();
+					if(number1 == number2){
+						count = count + 1;
+						System.out.println("count: "+ count);
+					}
+				}
+			}
+			System.out.println("final: "+ count);
+			pe.setNumberOfSameMajor(count);
+			pe.setUniversityId(listUniId.get(i).getId());
+			listPeason.add(pe);
+		}
+		return listPeason;
+	}
+	
+	@Override
+	public List<Correlate> getTop20Uni(List<MajorMbti> listMajorMBTI){
+		listCorrelate = countSameMBTI(listMajorMBTI);
+		Collections.sort(listCorrelate, new Correlate());
+	    return listCorrelate.subList(0, listCorrelate.size()>=20 ? 20 : listCorrelate.size());
+	}
+	
+	@Override
+	public List<Pearson> getTop5UniMBTI(List<MajorMbti> listMajorMBTI){
+		listCorrelate = getTop20Uni(listMajorMBTI);
+		List<Pearson> listPearson = new ArrayList<>();
+		for(int i = 0; i<listCorrelate.size();i++){
+			Pearson pe = new Pearson();
+			UniversityPoint uniPoint = reviewService.getPointById(listCorrelate.get(i).getUniversityId());
+			University uni = uniRepo.findByUniId(listCorrelate.get(i).getUniversityId());
+			if(uniPoint == null){
+				pe.setR(0.0);
+			}else{
+				pe.setR(uniPoint.getRecommentPoint());
+			}
+			pe.setUniversity(uni);
+			listPearson.add(pe);
+		}
+		Collections.sort(listPearson, new Pearson());
+		return listPearson.subList(0, listCorrelate.size()>=5 ? 5 : listCorrelate.size());
+	}
+	public List<University> getListUniSameMajor(int majorId){
+		List<University> listUni = uniRepo.findByMajor(majorId);
+		return listUni;	
 	}
 }

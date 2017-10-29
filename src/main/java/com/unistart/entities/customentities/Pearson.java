@@ -9,7 +9,6 @@ public class Pearson implements Comparator<Pearson>{
      private University university;
      private Double r;
      
-     
 	public Pearson() {
 		super();
 	}
@@ -30,6 +29,7 @@ public class Pearson implements Comparator<Pearson>{
 	public void setR(Double r) {
 		this.r = r;
 	}
+	
 	@Override
 	public int compare(Pearson a, Pearson b) {
 		return b.r.compareTo(a.r);

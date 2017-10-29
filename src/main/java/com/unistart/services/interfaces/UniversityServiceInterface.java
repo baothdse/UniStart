@@ -20,6 +20,7 @@ public interface UniversityServiceInterface {
 	void setLocation(Location location);
 	
 	University getUniversityById(int id);
+	University getUniversityShort(int id);
 	
 	University getUniversityByCode(String id);
 	

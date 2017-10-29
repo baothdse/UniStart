@@ -46,7 +46,8 @@ public class MBTIResultService implements MBTIResultServiceInterface {
 
 	@Override
 	public Mbtiresult getMBTIResult(int userId) {
-		return mbtiResultRepo.getMBTIResult(userId);
+		mbtiResult = mbtiResultRepo.getMBTIResult(userId);
+		return mbtiResult;
 	}
 
 	@Override

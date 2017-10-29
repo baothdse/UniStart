@@ -22,18 +22,16 @@ public class UrlConstant {
 	//UNIVERSITY
 	public static final String UNIVERSITY = "/university";
 	public static final String SHOW_UNIVERSITY = "/show-university";
-
 	public static final String FIND_BY_ID = "/find-by-id";
 	public static final String FIND_BY_MAJOR_ID = "/find-by-major-id";
-	
 	public static final String GET_UIVERSITY_BY_LOCATION = "/get-uni-by-location";
-
 	public static final String GET_UNIVERSITY_BY_ID = "/get-university";
 	public static final String UPDATE_LOCATION_MAJOR = "/update-location-major";
 	public static final String REMOVE_MAJOR_UNI = "/remove-major-uni";
 	public static final String GET_BY_GROUP = "/get-by-group";
 	public static final String GET_BY_LOCATION_AND_MAJOR = "/get-by-location-and-major";
 	public static final String GET_BY_MAJOR_ID = "/get-by-major-id";
+	public static final String GET_LOCATION_BY_ID = "/get-location-by-uni";
 	//BLOCK
 	public static final String BLOCK = "/block";
 	public static final String GET_ALL_BLOCK = "/get-all-block";
@@ -76,5 +74,6 @@ public class UrlConstant {
 	//CORRELATE
 	public static final String CORRLATE = "/corrlate";
 	public static final String TOP_CORRLATE_UNI = "/top-corrlate-uni";
+	public static final String TOP_UNI_MBTI = "/top-uni-mbti";
 
 }

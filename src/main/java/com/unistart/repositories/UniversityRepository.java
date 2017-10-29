@@ -63,7 +63,7 @@ public interface UniversityRepository extends JpaRepository<University, Integer>
 	University findBy(int majorId, int universityId, int locationId);
 	
 
-	@Query("select new com.unistart.entities.University(u.id) from University u")
+	@Query("select new com.unistart.entities.University(u.id) from University u where u.isActive = true")
 	List<University> getListId();
   
 	@Modifying

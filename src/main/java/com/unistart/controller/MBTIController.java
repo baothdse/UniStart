@@ -19,7 +19,6 @@ import com.unistart.services.interfaces.MBTIServiceInterface;
 @RequestMapping(UrlConstant.MBTI)
 public class MBTIController {
 
-
 	@Autowired
 	private MBTIServiceInterface mbtiService;
 	
@@ -32,9 +31,9 @@ public class MBTIController {
 		return new ResponseEntity<List<Mbtiquestion>>(listMbtiquestion, HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = UrlConstant.GET_MBTI_MAJOR, method = RequestMethod.GET)
-	public ResponseEntity<?> getMbtiMajor(@RequestParam(value = "MBTIid") int MBTIid){
-		MBTIType = mbtiService.getMajorMBTI(MBTIid);
-		return new ResponseEntity<Mbtitype>(MBTIType, HttpStatus.OK);
-	}
+//	@RequestMapping(value = UrlConstant.GET_MBTI_MAJOR, method = RequestMethod.GET)
+//	public ResponseEntity<?> getMbtiMajor(@RequestParam(value = "MBTIid") int MBTIid){
+//		MBTIType = mbtiService.getMajorMBTI(MBTIid);
+//		return new ResponseEntity<Mbtitype>(MBTIType, HttpStatus.OK);
+//	}
 }
