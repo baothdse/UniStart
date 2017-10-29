@@ -61,6 +61,12 @@ public class UniversityService implements UniversityServiceInterface {
 		return universityRepo.findById(id);
 	}
 	
+	@Override
+	public University getUniversityShort(int id) {
+		// TODO Auto-generated method stub
+		return universityRepo.findWithShortData(id);
+	}
+	
  	@Override
  	public List<University> listAllUniversityName(){
  		List<University> listUniversity = universityRepo.showByUniversityName();

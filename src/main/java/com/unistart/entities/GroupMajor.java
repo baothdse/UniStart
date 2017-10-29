@@ -38,6 +38,14 @@ public class GroupMajor {
 		this.majors = majors;
 	}
 	
+	public GroupMajor(Integer id, String code, String name, boolean isActive, Set<Major> majors) {
+		super();
+		this.id = id;
+		this.code = code;
+		this.name = name;
+		this.isActive = isActive;
+		this.majors = majors;
+	}
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "Id", unique = true, nullable = false)
@@ -72,7 +80,7 @@ public class GroupMajor {
 	public void setActive(boolean isActive) {
 		this.isActive = isActive;
 	}
-	//@JsonIgnore
+    @JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "groupMajor")
 	public Set<Major> getMajors() {
 		return majors;

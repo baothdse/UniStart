@@ -11,5 +11,5 @@ public interface MBTIServiceInterface {
 
 	List<Mbtiquestion> listAllMbtiquestion();
 	
-	Mbtitype getMajorMBTI (int mbtiID);
+	Mbtitype getMBTIType (int mbtiID);
 }

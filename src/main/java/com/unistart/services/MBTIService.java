@@ -31,10 +31,8 @@ public class MBTIService implements MBTIServiceInterface {
 	}
 
 	@Override
-	public Mbtitype getMajorMBTI(int mbtiID) {
+	public Mbtitype getMBTIType(int mbtiID) {
 		return mbtiTypeRepo.findById(mbtiID);
 	}
 	
-	
-
 }

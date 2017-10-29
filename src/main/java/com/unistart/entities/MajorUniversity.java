@@ -51,6 +51,12 @@ public class MajorUniversity implements java.io.Serializable {
 		this.university = university;
 	}
 
+	public MajorUniversity(Integer id, Major major) {
+		super();
+		this.id = id;
+		this.major = major;
+	}
+
 	public MajorUniversity(Integer id, Major major, University university, String description, Double numberOfYear,
 			String requirement, String prospects, Boolean isActive, Set<BlockMajorUniversity> blockMajorUniversities) {
 		super();

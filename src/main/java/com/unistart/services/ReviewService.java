@@ -166,7 +166,6 @@ public class ReviewService implements ReviewServiceInterface {
 		for (int index = 0; index < listUniversityPoint.size(); index++) {
 			if(universityId == listUniversityPoint.get(index).getUniversityId()) {
 				uniPoint = listUniversityPoint.get(index);
-				System.out.println(uniPoint);
 			}
 		}
 		return uniPoint;

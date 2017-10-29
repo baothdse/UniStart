@@ -1,15 +1,16 @@
 package com.unistart.entities.customentities;
 
 import java.io.Serializable;
+import java.util.Comparator;
 
-public class UniversityPoint implements Serializable{
+public class UniversityPoint implements Serializable, Comparator<UniversityPoint>{
 	private int universityId;
 	private double starCare;
 	private double starTeaching;
 	private double starSocieties;
 	private double starFacilities;
 	private double starCareer;
-	private double recommentPoint;
+	private Double recommentPoint;
 	private int totalReview;
 	public UniversityPoint(){
 		
@@ -95,5 +96,9 @@ public class UniversityPoint implements Serializable{
 	}
 	public void setTotalReview(int totalReview) {
 		this.totalReview = totalReview;
+	}
+	@Override
+	public int compare(UniversityPoint a, UniversityPoint b) {
+		return b.recommentPoint.compareTo(a.recommentPoint);
 	}
 }

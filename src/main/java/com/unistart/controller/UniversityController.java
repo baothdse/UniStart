@@ -169,6 +169,17 @@ public class UniversityController {
 		return new ResponseEntity<ErrorNotification> (error, HttpStatus.CONFLICT);
 	}
 	
+	@RequestMapping(value = UrlConstant.GET_LOCATION_BY_ID, method = RequestMethod.GET)
+	public ResponseEntity<?> getLocationById(@RequestParam(value = "universityId") int universityId) {
+		uni = universityService.getUniversityShort(universityId);
+		if(uni != null){
+			//List<University> majorUni = majorService.getUniverityWithMajor(uni);
+			return new ResponseEntity<Location> (uni.getLocation(), HttpStatus.OK);
+		}
+		error = new ErrorNotification(ErrorConstant.MES006);
+		return new ResponseEntity<ErrorNotification> (error, HttpStatus.CONFLICT);
+	}
+	
 	@RequestMapping(value = UrlConstant.UPDATE, method = RequestMethod.POST)
 	public ResponseEntity<?> updateUniversity(@RequestBody University university) {
 		int id = university.getId();
@@ -197,11 +208,9 @@ public class UniversityController {
 
 	}
 
-	@RequestMapping(value = UrlConstant.GET_BY_LOCATION_AND_MAJOR, method = RequestMethod.POST)
-	public ResponseEntity<?> getUniByLocaMajor(@RequestBody LocationMajor locaMajor){
-		int locationId = locaMajor.getLocation().getId();
-		int majorId = locaMajor.getMajorID();
-
+	@RequestMapping(value = UrlConstant.GET_BY_LOCATION_AND_MAJOR, method = RequestMethod.GET)
+	public ResponseEntity<?> getUniByLocaMajor(@RequestParam(value = "locationId") int locationId,
+			@RequestParam(value = "majorId") int majorId){
 		listUniversity = universityService.getUniByLocationMajor(locationId, majorId);
 		if(listUniversity == null){
 			error = new ErrorNotification(ErrorConstant.MES014);
