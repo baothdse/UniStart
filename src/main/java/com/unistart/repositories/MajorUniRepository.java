@@ -33,7 +33,7 @@ public interface MajorUniRepository extends JpaRepository<MajorUniversity, Integ
 	List<MajorUniversity> findByUniIdShort(int uniId);
 	
 	@Query("select new com.unistart.entities.Major(m.major.id, m.major.majorName) "
-			+ "from MajorUniversity m where m.university.id = ?1")
+			+ "from MajorUniversity m where m.university.id = ?1 and m.isActive = true")
 	List<MajorUniversity> getByUniversityId(int uniId);
 	
 	@Modifying
