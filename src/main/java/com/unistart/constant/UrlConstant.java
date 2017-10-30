@@ -76,4 +76,6 @@ public class UrlConstant {
 	public static final String TOP_CORRLATE_UNI = "/top-corrlate-uni";
 	public static final String TOP_UNI_MBTI = "/top-uni-mbti";
 
+	//ARTICLE
+	public static final String ARTICLE = "/article";
 }
