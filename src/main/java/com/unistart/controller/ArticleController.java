@@ -46,6 +46,24 @@ public class ArticleController {
 			return new ResponseEntity<ErrorNotification> (error, HttpStatus.CONFLICT);
 		}
 	}
+
+	@RequestMapping(value = UrlConstant.UPDATE, method = RequestMethod.POST)
+	public ResponseEntity<?> updateArticle(@RequestBody Article article) {
+		int id = article.getId();
+		String code = article.getCode();
+		String title = article.getTitle();
+		String description = article.getDescription();
+		String contents = article.getContents();
+		String image = article.getImage();
+		int uniId = article.getUniversity().getId();
+		boolean isCreated = articleService.updateArticle(id, code, title, description, contents, image, uniId);
+		if (isCreated) {
+			return new ResponseEntity<Boolean> (isCreated, HttpStatus.OK);
+		}
+		error = new ErrorNotification(ErrorConstant.MES015);
+		return new ResponseEntity<ErrorNotification> (error, HttpStatus.CONFLICT);	
+  }
+  
 	@RequestMapping(value = UrlConstant.DELETE, method = RequestMethod.POST)
 	public ResponseEntity<?> deleteArticle(@RequestBody Article article) {
 		int id = article.getId();

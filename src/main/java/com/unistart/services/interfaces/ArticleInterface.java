@@ -11,4 +11,7 @@ public interface ArticleInterface {
 	boolean deleteArticle(int id);
 	List<Article> listAllArticle();
 
+	boolean updateArticle(int id, String code, String title, String description, String contents, String image,
+			int uniId);
+
 }

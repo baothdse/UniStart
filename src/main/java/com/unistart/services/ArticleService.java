@@ -45,6 +45,16 @@ public class ArticleService implements ArticleInterface{
 		}
 		return false;
 	}
+	@Override
+	public boolean updateArticle(int id, String code, String title, String description, String contents, String image,
+			int uniId) {
+		article = articleRepo.findById(id);
+		if(article != null){
+			articleRepo.updateArticle(id, code, title, description, contents, image, uniId);
+			return true;
+		}
+		return false;
+	}
 
 	@Override
 	public boolean deleteArticle(int id) {
