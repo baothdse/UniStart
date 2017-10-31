@@ -1,12 +1,41 @@
 package com.unistart.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.unistart.constant.ErrorConstant;
 import com.unistart.constant.UrlConstant;
+import com.unistart.entities.Article;
+import com.unistart.error.ErrorNotification;
+import com.unistart.services.interfaces.ArticleInterface;
 
 @RestController
 @RequestMapping(UrlConstant.ARTICLE)
 public class ArticleController {
-
+	@Autowired
+	private ArticleInterface articleService;
+	private ErrorNotification error;
+	
+	@RequestMapping(value = UrlConstant.SAVE_ARTICLE, method = RequestMethod.POST)
+	public ResponseEntity<?> saveArticle(@RequestBody Article article) {
+		String code = article.getCode();
+		String title = article.getTitle();
+		String description = article.getDescription();
+		String contents = article.getContents();
+		String image = article.getImage();
+		int uniId = article.getUniversity().getId();
+		boolean isSuccess = articleService.saveArticle(code, title, description, contents, image, uniId);
+		if (isSuccess) {
+			return new ResponseEntity<Boolean> (isSuccess, HttpStatus.OK);
+		} else {
+			error = new ErrorNotification(ErrorConstant.MES005);
+			return new ResponseEntity<ErrorNotification> (error, HttpStatus.CONFLICT);
+		}
+	}
+	
 }
