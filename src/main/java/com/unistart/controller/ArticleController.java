@@ -46,6 +46,12 @@ public class ArticleController {
 			return new ResponseEntity<ErrorNotification> (error, HttpStatus.CONFLICT);
 		}
 	}
+	@RequestMapping(value = UrlConstant.DELETE, method = RequestMethod.POST)
+	public ResponseEntity<?> deleteArticle(@RequestBody Article article) {
+		int id = article.getId();
+		boolean isCreated = articleService.deleteArticle(id);
+		return new ResponseEntity<Boolean> (isCreated, HttpStatus.OK);
+}
 	
 	@RequestMapping(value = UrlConstant.SHOW_ARTICLE, method = RequestMethod.GET)
 	public ResponseEntity<?> listAllArticle(){

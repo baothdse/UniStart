@@ -45,7 +45,12 @@ public class ArticleService implements ArticleInterface{
 		}
 		return false;
 	}
-	
+
+	@Override
+	public boolean deleteArticle(int id) {
+		articleRepo.changeIsActive(id);
+		return true;
+  }
 	@Override
 	public List<Article> listAllArticle() {
 		listArticle = articleRepo.getListArticle();
