@@ -79,4 +79,5 @@ public class UrlConstant {
 	//ARTICLE
 	public static final String ARTICLE = "/article";
 	public static final String SAVE_ARTICLE = "/save-article";
+	public static final String SHOW_ARTICLE = "/show-article";
 }

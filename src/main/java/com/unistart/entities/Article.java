@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "Article", schema = "dbo", catalog = "University")
-public class Article {
+public class Article implements java.io.Serializable {
 	private Integer id;
 	private String code;
 	private String title;
@@ -33,6 +33,14 @@ public class Article {
 	
 	public Article() {
 		super();
+	}
+
+
+	public Article(Integer id, String code, String title) {
+		super();
+		this.id = id;
+		this.code = code;
+		this.title = title;
 	}
 
 
