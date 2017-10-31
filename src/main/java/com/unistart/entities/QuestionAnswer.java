@@ -25,10 +25,10 @@ public class QuestionAnswer implements java.io.Serializable {
 	private Integer type;
 	private Integer count;
 	private Users users;
-	private University university;
+	private Integer parent;
 	private Boolean isActive;
 	public QuestionAnswer(Integer id, String title, String content, Integer vote, Integer type, Users users,
-			University university, Boolean isActive) {
+			Integer isParent, Boolean isActive) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -36,7 +36,7 @@ public class QuestionAnswer implements java.io.Serializable {
 		this.vote = vote;
 		this.type = type;
 		this.users = users;
-		this.university = university;
+		this.parent = isParent;
 		this.isActive = isActive;
 	}
 	public QuestionAnswer() {
@@ -103,15 +103,13 @@ public class QuestionAnswer implements java.io.Serializable {
 		this.users = users;
 	}
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "UniversityId")
-	public University getUniversity() {
-		return university;
+	@Column(name = "Parent", nullable = false)
+	public Integer getIsParent() {
+		return parent;
 	}
-	public void setUniversity(University university) {
-		this.university = university;
+	public void setIsParent(Integer isParent) {
+		this.parent = isParent;
 	}
-	
 	@Column(name = "IsActive", nullable = false)
 	public Boolean getIsActive() {
 		return isActive;
