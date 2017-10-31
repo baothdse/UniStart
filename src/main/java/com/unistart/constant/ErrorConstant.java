@@ -25,4 +25,7 @@ public class ErrorConstant {
 	//Review
 	public static final String MES007 = "No review found";
 	public static final String MES012 = "Major or user not existed";
+	
+	//Article
+	public static final String MES015 = "No Article found";
 }
