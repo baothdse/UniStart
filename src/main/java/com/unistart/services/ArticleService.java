@@ -1,5 +1,7 @@
 package com.unistart.services;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,7 +26,7 @@ public class ArticleService implements ArticleInterface{
 	
 	private Article article;
 	@Override
-	public boolean saveArticle(String code, String title, String description, String contents, String image,
+	public boolean saveArticle(String code, String title, String description, String contents, String image, Date createDate,
 			int uniId) {
 		university = universityRepo.findById(uniId);
 		if (university != null) {
@@ -35,6 +37,7 @@ public class ArticleService implements ArticleInterface{
 			article.setDescription(description);
 			article.setContents(contents);
 			article.setImage(image);
+			article.setCreateDate(createDate);
 			article.setIsActive(true);
 			articleRepo.save(article);
 			return true;

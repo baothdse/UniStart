@@ -75,7 +75,7 @@ public class ReviewController {
 		if (listAllReview != null){
 			return new ResponseEntity<List<Review>>(listAllReview, HttpStatus.OK);
 		}else {
-			error = new ErrorNotification(ErrorConstant.MES006);
+			error = new ErrorNotification(ErrorConstant.MES007);
 			return new ResponseEntity<ErrorNotification> (error, HttpStatus.CONFLICT);
 		}
 	}

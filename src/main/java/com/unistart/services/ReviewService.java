@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.unistart.entities.Review;
 import com.unistart.entities.University;
 import com.unistart.entities.Users;
+import com.unistart.entities.customentities.ReviewUniversity;
 import com.unistart.entities.customentities.UniversityPoint;
 import com.unistart.repositories.ReviewRepository;
 import com.unistart.repositories.UniversityRepository;
@@ -39,9 +40,10 @@ public class ReviewService implements ReviewServiceInterface {
 	private University university;
 	private Review review;
 	private Users user;
-	private List<Review> listALLReview;
+	private List<Review> listAllReview = new ArrayList<>();
 	private UniversityPoint universityPoint;
 	private List<UniversityPoint> listUniversityPoint;
+	private List<ReviewUniversity> listAllReviewUni;
 
 	private Double starCare;
 	private Double starTeaching;
@@ -129,15 +131,25 @@ public class ReviewService implements ReviewServiceInterface {
 		this.listUniversityPoint = listUniversityPoint;
 	}
 
+	
+	public List<ReviewUniversity> getListAllReviewUni() {
+		return listAllReviewUni;
+	}
+
+	public void setListAllReviewUni(List<ReviewUniversity> listAllReviewUni) {
+		this.listAllReviewUni = listAllReviewUni;
+	}
+
 	@Override
 	@PostConstruct
 	@Scheduled(cron = "0 0 2 * * *")
 	public void calculateTotalAverage() {
 		List<University> listId = uniService.getListId();
 		List<UniversityPoint> listPoint = new ArrayList<UniversityPoint>();
+		ReviewUniversity reviewUni = null;
+		List<ReviewUniversity> listReviewUni = new ArrayList<ReviewUniversity>();
 		UniversityPoint point = null;
 		for (int index = 0; index < listId.size(); index++) {
-			
 			starTeaching = calculateStarTeaching(listId.get(index).getId());
 			starFacilities = calculateStarFacilities(listId.get(index).getId());
 			starSocieties = calculateStarSocieties(listId.get(index).getId());
@@ -156,8 +168,14 @@ public class ReviewService implements ReviewServiceInterface {
 				
 				listPoint.add(point);
 			}
+			listAllReview = reviewRepo.showReviewByUniversityId(listId.get(index).getId());
+			if(listAllReview != null){
+				reviewUni = new ReviewUniversity(listAllReview,listId.get(index).getId());
+				listReviewUni.add(reviewUni);
+			}
 		}
 		setListUniversityPoint(listPoint);
+		setListAllReviewUni(listReviewUni);
 	}
 
 	@Override
@@ -198,9 +216,14 @@ public class ReviewService implements ReviewServiceInterface {
 
 	@Override
 	public List<Review> listReviewOfUniversity(int universityId) {
-		listALLReview = reviewRepo.showReviewByUniversityId(universityId);
-		return listALLReview;
+		for(int i =0; i<listAllReviewUni.size();i++){
+			if(universityId == listAllReviewUni.get(i).getUniversityId()){
+				listAllReview = listAllReviewUni.get(i).getReview();
+			}
+		}
+		return listAllReview;
 	}
+	
 	public boolean changeReviewStatus(int id, boolean status, boolean isActive) {	
 		review = reviewRepo.findById(id);
 		if (review != null){
@@ -212,7 +235,6 @@ public class ReviewService implements ReviewServiceInterface {
 		return false;
 	}
 
-	List<Review> listAllReview;
 	@Override
 	public List<Review> listAllNeedAcceptReview() {
 		listAllReview = reviewRepo.findNeedAcceptReview();

@@ -1,5 +1,7 @@
 package com.unistart.entities;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -20,6 +24,7 @@ public class Article {
 	private String code;
 	private String title;
 	private String description;
+	private Date createDate;
 	private String contents;
 	private String image;
 	private University university;
@@ -31,7 +36,7 @@ public class Article {
 	}
 
 
-	public Article(Integer id, String code, String title, String description, String contents, String image,
+	public Article(Integer id, String code, String title, String description, String contents, String image, Date createDate,
 			University university, Boolean isActive) {
 		super();
 		this.id = id;
@@ -40,6 +45,7 @@ public class Article {
 		this.description = description;
 		this.contents = contents;
 		this.image = image;
+		this.createDate = createDate;
 		this.university = university;
 		this.isActive = isActive;
 	}
@@ -85,6 +91,18 @@ public class Article {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "createDate", length = 100)
+	public Date getCreateDate() {
+		return createDate;
+	}
+
+
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+
 
 	@Column(name = "Contents", nullable = false)
 	public String getContents() {

@@ -1,5 +1,8 @@
 package com.unistart.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,8 +31,11 @@ public class ArticleController {
 		String description = article.getDescription();
 		String contents = article.getContents();
 		String image = article.getImage();
+		Date createDate = new Date();
+		System.out.println(createDate);
+		//SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
 		int uniId = article.getUniversity().getId();
-		boolean isSuccess = articleService.saveArticle(code, title, description, contents, image, uniId);
+		boolean isSuccess = articleService.saveArticle(code, title, description, contents, image, createDate, uniId);
 		if (isSuccess) {
 			return new ResponseEntity<Boolean> (isSuccess, HttpStatus.OK);
 		} else {
