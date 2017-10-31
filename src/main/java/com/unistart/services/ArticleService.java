@@ -1,6 +1,7 @@
 package com.unistart.services;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +24,7 @@ public class ArticleService implements ArticleInterface{
 	private ArticleRepository articleRepo;
 	
 	private University university;
-	
+	private List<Article> listArticle;
 	private Article article;
 	@Override
 	public boolean saveArticle(String code, String title, String description, String contents, String image, Date createDate,
@@ -53,6 +54,17 @@ public class ArticleService implements ArticleInterface{
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public boolean deleteArticle(int id) {
+		articleRepo.changeIsActive(id);
+		return true;
+  }
+	@Override
+	public List<Article> listAllArticle() {
+		listArticle = articleRepo.getListArticle();
+		return listArticle;
 	}
 
 }
