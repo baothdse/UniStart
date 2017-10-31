@@ -2,6 +2,7 @@ package com.unistart.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,6 +23,8 @@ import com.unistart.services.interfaces.ArticleInterface;
 public class ArticleController {
 	@Autowired
 	private ArticleInterface articleService;
+	
+	private List<Article> listArticle;
 	private ErrorNotification error;
 	
 	@RequestMapping(value = UrlConstant.SAVE_ARTICLE, method = RequestMethod.POST)
@@ -44,4 +47,9 @@ public class ArticleController {
 		}
 	}
 	
+	@RequestMapping(value = UrlConstant.SHOW_ARTICLE, method = RequestMethod.GET)
+	public ResponseEntity<?> listAllArticle(){
+		listArticle = articleService.listAllArticle();
+		return new ResponseEntity<List<Article>>(listArticle, HttpStatus.OK);
+	}
 }

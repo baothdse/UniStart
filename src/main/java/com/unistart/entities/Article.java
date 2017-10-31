@@ -36,6 +36,14 @@ public class Article {
 	}
 
 
+	public Article(Integer id, String code, String title) {
+		super();
+		this.id = id;
+		this.code = code;
+		this.title = title;
+	}
+
+
 	public Article(Integer id, String code, String title, String description, String contents, String image, Date createDate,
 			University university, Boolean isActive) {
 		super();
