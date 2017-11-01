@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.unistart.constant.ErrorConstant;
@@ -74,6 +75,12 @@ public class ArticleController {
 	@RequestMapping(value = UrlConstant.SHOW_ARTICLE, method = RequestMethod.GET)
 	public ResponseEntity<?> listAllArticle(){
 		listArticle = articleService.listAllArticle();
+		return new ResponseEntity<List<Article>>(listArticle, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = UrlConstant.GET_NEWEST_ARTICLE, method = RequestMethod.GET)
+	public ResponseEntity<?> getNewestArticle(@RequestParam(value = "universityId") int universityId){
+		listArticle = articleService.getNewestArticle(universityId);
 		return new ResponseEntity<List<Article>>(listArticle, HttpStatus.OK);
 	}
 }
