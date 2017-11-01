@@ -49,10 +49,15 @@ public class ArticleService implements ArticleInterface{
 	@Override
 	public boolean updateArticle(int id, String code, String title, String description, String contents, String image,
 			int uniId) {
-		article = articleRepo.findById(id);
-		if(article != null){
-			articleRepo.updateArticle(id, code, title, description, contents, image, uniId);
-			return true;
+		article = articleRepo.findCodeById(id, code);
+		if(article == null){
+			article = articleRepo.findById(id);
+			if(article != null){
+				articleRepo.updateArticle(id, code, title, description, contents, image, uniId);
+				return true;
+			}else{
+				return false;
+			}
 		}
 		return false;
 	}
