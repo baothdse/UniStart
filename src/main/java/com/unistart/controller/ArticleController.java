@@ -42,7 +42,7 @@ public class ArticleController {
 		if (isSuccess) {
 			return new ResponseEntity<Boolean> (isSuccess, HttpStatus.OK);
 		} else {
-			error = new ErrorNotification(ErrorConstant.MES005);
+			error = new ErrorNotification(ErrorConstant.MES016);
 			return new ResponseEntity<ErrorNotification> (error, HttpStatus.CONFLICT);
 		}
 	}
@@ -76,4 +76,5 @@ public class ArticleController {
 		listArticle = articleService.listAllArticle();
 		return new ResponseEntity<List<Article>>(listArticle, HttpStatus.OK);
 	}
+	
 }

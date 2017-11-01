@@ -29,8 +29,9 @@ public class ArticleService implements ArticleInterface{
 	@Override
 	public boolean saveArticle(String code, String title, String description, String contents, String image, Date createDate,
 			int uniId) {
+		article = articleRepo.findByCode(code);
 		university = universityRepo.findById(uniId);
-		if (university != null) {
+		if (university != null && article == null) {
 			article = new Article();
 			article.setUniversity(university);
 			article.setCode(code);
