@@ -66,5 +66,10 @@ public class ArticleService implements ArticleInterface{
 		listArticle = articleRepo.getListArticle();
 		return listArticle;
 	}
+	@Override
+	public Article getArticleById(int id) {
+		Article article = articleRepo.findById(id);
+		return article;
+	}
 
 }
