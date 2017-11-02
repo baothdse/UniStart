@@ -14,6 +14,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -47,6 +48,20 @@ public class Article implements java.io.Serializable {
 	}
 
 
+	public Article(Integer id, String code, String title, String description, Date createDate, String contents,
+			String image, Boolean isActive) {
+		super();
+		this.id = id;
+		this.code = code;
+		this.title = title;
+		this.description = description;
+		this.createDate = createDate;
+		this.contents = contents;
+		this.image = image;
+		this.isActive = isActive;
+	}
+
+
 	public Article(Integer id, String code, String title, String description, String contents, String image, Date createDate,
 			University university, Boolean isActive) {
 		super();
@@ -60,6 +75,16 @@ public class Article implements java.io.Serializable {
 		this.university = university;
 		this.isActive = isActive;
 	}
+
+	public Article(Integer id, String title,  Date createDate, String description, String image) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.description = description;
+		this.createDate = createDate;
+		this.image = image;
+	}
+
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -103,7 +128,6 @@ public class Article implements java.io.Serializable {
 		this.description = description;
 	}
 
-	@Temporal(TemporalType.DATE)
 	@Column(name = "createDate", length = 100)
 	public Date getCreateDate() {
 		return createDate;

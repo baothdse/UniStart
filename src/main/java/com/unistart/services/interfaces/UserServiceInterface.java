@@ -1,5 +1,6 @@
 package com.unistart.services.interfaces;
 
+import com.unistart.entities.Users;
 import com.unistart.entities.customentities.LoginUserInfo;
 
 public interface UserServiceInterface {
@@ -9,5 +10,5 @@ public interface UserServiceInterface {
 	boolean checkLoginThirdParty(String email, String image, String name, String providerId, String providerName);
 	
 	LoginUserInfo get3rdPartyInfo(String email);
-
+	Users getUserById(int id);
 }

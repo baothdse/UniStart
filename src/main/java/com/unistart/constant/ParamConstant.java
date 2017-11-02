@@ -13,6 +13,7 @@ public class ParamConstant {
 	public static final String NAME = "userFullName";
 	public static final String ROLE = "role";
 	public static final String AVATAR = "avatar";
+	public static final String USER_ID = "userId";
 	
 	//University
 	public static final String UNIVERSITY_CODE = "universityCode";
@@ -44,6 +45,9 @@ public class ParamConstant {
 	//Score
 	public static final String SCORE = "score";
 	public static final String YEAR = "year";
+	
+	//qa
+	public static final String QA_ID = "qaId";
 	
 	
 }

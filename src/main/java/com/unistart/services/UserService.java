@@ -3,6 +3,7 @@ package com.unistart.services;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -104,6 +105,12 @@ public class UserService implements UserServiceInterface {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public Users getUserById(int id) {
+		// TODO Auto-generated method stub
+		return userRepository.findById(id);
 	}
 
 }

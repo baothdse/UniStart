@@ -11,6 +11,7 @@ public class UrlConstant {
 	public static final String VIEW = "/view";
 	public static final String DELETE = "/delete";
 	public static final String SEARCH = "/search";
+	public static final String SAVE = "/save";
 	
 	//USER
 	public static final String USER = "/user";
@@ -83,4 +84,10 @@ public class UrlConstant {
 	public static final String GET_NEWEST_ARTICLE = "/get-newest-article";
 	public static final String GET_ARTICLE_BY_ID = "/get-article-by-id";
 
+	
+	//QA
+	public static final String QA = "/qa";
+	public static final String ANSWER = "/answer";
+	public static final String QUESTIONS = "/questions";
+	public static final String QUESTIONS_BY_USER = "/questions-by-user";
 }

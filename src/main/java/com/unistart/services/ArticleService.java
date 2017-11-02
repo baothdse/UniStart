@@ -1,7 +1,8 @@
 package com.unistart.services;
 
+import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.unistart.entities.Article;
-import com.unistart.entities.Review;
 import com.unistart.entities.University;
 import com.unistart.repositories.ArticleRepository;
 import com.unistart.repositories.UniversityRepository;
@@ -28,10 +28,11 @@ public class ArticleService implements ArticleInterface{
 	private List<Article> listArticle;
 	private Article article;
 	@Override
-	public boolean saveArticle(String code, String title, String description, String contents, String image, Date createDate,
+	public boolean saveArticle(String code, String title, String description, String contents, String image,
 			int uniId) {
 		article = articleRepo.findByCode(code);
 		university = universityRepo.findById(uniId);
+		Calendar cal = Calendar.getInstance();
 		if (university != null && article == null) {
 			article = new Article();
 			article.setUniversity(university);
@@ -40,7 +41,7 @@ public class ArticleService implements ArticleInterface{
 			article.setDescription(description);
 			article.setContents(contents);
 			article.setImage(image);
-			article.setCreateDate(createDate);
+			article.setCreateDate(cal.getTime());
 			article.setIsActive(true);
 			articleRepo.save(article);
 			return true;

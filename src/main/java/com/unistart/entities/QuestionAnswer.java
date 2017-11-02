@@ -15,7 +15,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIgnoreProperties({"count", "isActive"})
 @Table(name = "Question_Answer", schema = "dbo", catalog = "University")
 public class QuestionAnswer implements java.io.Serializable {
 	private Integer id;
@@ -25,10 +25,11 @@ public class QuestionAnswer implements java.io.Serializable {
 	private Integer type;
 	private Integer count;
 	private Users users;
-	private Integer parent;
+	private Integer parentId;
 	private Boolean isActive;
+	private Date createdDateTime;
 	public QuestionAnswer(Integer id, String title, String content, Integer vote, Integer type, Users users,
-			Integer isParent, Boolean isActive) {
+			Integer parentId, Boolean isActive, Date createdDateTime) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -36,11 +37,15 @@ public class QuestionAnswer implements java.io.Serializable {
 		this.vote = vote;
 		this.type = type;
 		this.users = users;
-		this.parent = isParent;
+		this.parentId = parentId;
 		this.isActive = isActive;
+		this.createdDateTime = createdDateTime;
 	}
 	public QuestionAnswer() {
 		super();
+	}
+	public QuestionAnswer(int count) {
+		this.count = count;
 	}
 	
 	@Id
@@ -52,7 +57,7 @@ public class QuestionAnswer implements java.io.Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	@Column(name = "Title", nullable = false)
+	@Column(name = "Title", nullable = true)
 	public String getTitle() {
 		return title;
 	}
@@ -93,8 +98,8 @@ public class QuestionAnswer implements java.io.Serializable {
 	public void setType(Integer type) {
 		this.type = type;
 	}
-	
-	@ManyToOne(fetch = FetchType.LAZY)
+
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "UserId")
 	public Users getUsers() {
 		return users;
@@ -103,12 +108,12 @@ public class QuestionAnswer implements java.io.Serializable {
 		this.users = users;
 	}
 	
-	@Column(name = "Parent", nullable = false)
-	public Integer getIsParent() {
-		return parent;
+	@Column(name = "ParentId", nullable = false)
+	public Integer getParentId() {
+		return parentId;
 	}
-	public void setIsParent(Integer isParent) {
-		this.parent = isParent;
+	public void setParentId (Integer parentId) {
+		this.parentId = parentId;
 	}
 	@Column(name = "IsActive", nullable = false)
 	public Boolean getIsActive() {
@@ -116,6 +121,13 @@ public class QuestionAnswer implements java.io.Serializable {
 	}
 	public void setIsActive(Boolean isActive) {
 		this.isActive = isActive;
+	}
+	@Column(name = "CreatedDateTime", nullable = false)
+	public Date getCreatedDateTime() {
+		return createdDateTime;
+	}
+	public void setCreatedDateTime(Date createdDateTime) {
+		this.createdDateTime = createdDateTime;
 	}
 	
 	
