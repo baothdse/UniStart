@@ -1,5 +1,6 @@
 package com.unistart.controller;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -30,17 +31,16 @@ public class ArticleController {
 	private ErrorNotification error;
 	
 	@RequestMapping(value = UrlConstant.SAVE_ARTICLE, method = RequestMethod.POST)
-	public ResponseEntity<?> saveArticle(@RequestBody Article article) {
+	public ResponseEntity<?> saveArticle(@RequestBody Article article){
 		String code = article.getCode();
 		String title = article.getTitle();
 		String description = article.getDescription();
 		String contents = article.getContents();
 		String image = article.getImage();
-		Date createDate = Calendar.getInstance().getTime();
-		System.out.println(createDate);
+//		Date createDate = Calendar.getInstance().getTime();
 		//SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
 		int uniId = article.getUniversity().getId();
-		boolean isSuccess = articleService.saveArticle(code, title, description, contents, image, createDate, uniId);
+		boolean isSuccess = articleService.saveArticle(code, title, description, contents, image, uniId);
 		if (isSuccess) {
 			return new ResponseEntity<Boolean> (isSuccess, HttpStatus.OK);
 		} else {

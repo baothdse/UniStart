@@ -32,8 +32,8 @@ public interface ArticleRepository extends JpaRepository<Article, Integer> {
 			+ "from Article a where a.isActive = true order by a.createDate desc")
 	List<Article> getListArticle();
 
-	@Query("SELECT a FROM Article a WHERE"
-			+ " a.university.id = ?1 and a.isActive = true"
+	@Query("SELECT new com.unistart.entities.Article(a.id, a.title, a.createDate, a.description,a.image) FROM Article a WHERE"
+			+ " a.university.id = ?1 and a.isActive = true "
 			+ "ORDER BY createDate desc")
 	List<Article> getNewestArticle(int universityId);
 }
