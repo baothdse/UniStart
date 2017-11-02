@@ -42,17 +42,24 @@ public class QAController {
 	public ResponseEntity<?> viewQuestion (@RequestParam(value = ParamConstant.QA_ID) int qaId,
 								@RequestParam(value = ParamConstant.USER_ID) int userId) {
 		QuestionAnswer question = qaService.getQaById(qaId, userId);
+		question.getUsers().setPassword("");
 		return new ResponseEntity<QuestionAnswer> (question, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = UrlConstant.QUESTIONS, method = RequestMethod.GET)
 	public ResponseEntity<?> viewQuestions () {
-		List<QuestionAnswer> answers = qaService.getAllQuestion();
-		return new ResponseEntity<List<QuestionAnswer>> (answers, HttpStatus.OK);
+		List<QuestionAnswer> questions = qaService.getAllQuestion();
+		for (int i = 0; i < questions.size(); i++) {
+			questions.get(i).getUsers().setPassword("");
+		}
+		return new ResponseEntity<List<QuestionAnswer>> (questions, HttpStatus.OK);
 	}
 	@RequestMapping(value = UrlConstant.QUESTIONS_BY_USER, method = RequestMethod.GET)
 	public ResponseEntity<?> viewQuestionByUser (@RequestParam(value = ParamConstant.USER_ID) int userId) {
 		List<QuestionAnswer> answers = qaService.getAllQuestionByUserId(userId);
+		for (int i = 0; i < answers.size(); i++) {
+			answers.get(i).getUsers().setPassword("");
+		}
 		return new ResponseEntity<List<QuestionAnswer>> (answers, HttpStatus.OK);
 	}
 }
