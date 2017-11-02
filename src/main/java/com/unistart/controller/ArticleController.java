@@ -1,6 +1,7 @@
 package com.unistart.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -35,7 +36,7 @@ public class ArticleController {
 		String description = article.getDescription();
 		String contents = article.getContents();
 		String image = article.getImage();
-		Date createDate = new Date();
+		Date createDate = Calendar.getInstance().getTime();
 		System.out.println(createDate);
 		//SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
 		int uniId = article.getUniversity().getId();
@@ -78,6 +79,12 @@ public class ArticleController {
 		return new ResponseEntity<List<Article>>(listArticle, HttpStatus.OK);
 	}
 	
+
+	@RequestMapping(value = UrlConstant.GET_NEWEST_ARTICLE, method = RequestMethod.GET)
+	public ResponseEntity<?> getNewestArticle(@RequestParam(value = "universityId") int universityId){
+		listArticle = articleService.getNewestArticle(universityId);
+		return new ResponseEntity<List<Article>>(listArticle, HttpStatus.OK);
+	}
 
 	@RequestMapping(value = UrlConstant.GET_ARTICLE_BY_ID, method = RequestMethod.GET)
 	public ResponseEntity<?> getArticleById(@RequestParam(value = "articleId") int articleId){
