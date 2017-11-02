@@ -1,5 +1,6 @@
 package com.unistart.services;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -72,10 +73,34 @@ public class ArticleService implements ArticleInterface{
 		listArticle = articleRepo.getListArticle();
 		return listArticle;
 	}
+
+	
+	@Override
+	public List<Article> getNewestArticle(int universityId) {
+		listArticle = articleRepo.getNewestArticle(universityId);
+		List<Article> topArticle = new ArrayList<>();
+		if(listArticle != null){
+			for(int i=0; i<5; i++){
+				topArticle.add(listArticle.get(i));
+			}
+		}
+		return topArticle;
+/*		long currDate = System.currentTimeMillis();
+		List<Date> date = new ArrayList<Date>();
+		if (listArticle != null) {
+			for(int i=0 ; i < listArticle.size(); i++) {
+				date.add(listArticle.get(i).getCreateDate());
+				for(int a=0; a < date.size(); a++) {
+				}
+				long diff = Math.abs(date.getTime() - currDate);
+			}
+			
+		}*/
+	}
+
 	@Override
 	public Article getArticleById(int id) {
 		Article article = articleRepo.findById(id);
 		return article;
 	}
-
 }
