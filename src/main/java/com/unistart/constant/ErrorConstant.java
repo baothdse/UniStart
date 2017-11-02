@@ -27,5 +27,6 @@ public class ErrorConstant {
 	public static final String MES012 = "Major or user not existed";
 	
 	//Article
-	public static final String MES015 = "No Article found";
+	public static final String MES015 = "Code is duplicate";
+	public static final String MES016 = "Article is existed";
 }

@@ -36,11 +36,14 @@ public class Article implements java.io.Serializable {
 	}
 
 
-	public Article(Integer id, String code, String title) {
+	public Article(Integer id, String code, String title, Date createDate, String description, String image) {
 		super();
 		this.id = id;
 		this.code = code;
 		this.title = title;
+		this.createDate = createDate;
+		this.description = description;
+		this.image = image;
 	}
 
 

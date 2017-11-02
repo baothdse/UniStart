@@ -30,8 +30,9 @@ public class ArticleService implements ArticleInterface{
 	@Override
 	public boolean saveArticle(String code, String title, String description, String contents, String image, Date createDate,
 			int uniId) {
+		article = articleRepo.findByCode(code);
 		university = universityRepo.findById(uniId);
-		if (university != null) {
+		if (university != null && article == null) {
 			article = new Article();
 			article.setUniversity(university);
 			article.setCode(code);
@@ -49,10 +50,15 @@ public class ArticleService implements ArticleInterface{
 	@Override
 	public boolean updateArticle(int id, String code, String title, String description, String contents, String image,
 			int uniId) {
-		article = articleRepo.findById(id);
-		if(article != null){
-			articleRepo.updateArticle(id, code, title, description, contents, image, uniId);
-			return true;
+		article = articleRepo.findCodeById(id, code);
+		if(article == null){
+			article = articleRepo.findById(id);
+			if(article != null){
+				articleRepo.updateArticle(id, code, title, description, contents, image, uniId);
+				return true;
+			}else{
+				return false;
+			}
 		}
 		return false;
 	}
@@ -67,6 +73,7 @@ public class ArticleService implements ArticleInterface{
 		listArticle = articleRepo.getListArticle();
 		return listArticle;
 	}
+
 	
 	@Override
 	public List<Article> getNewestArticle(int universityId) {
@@ -89,5 +96,11 @@ public class ArticleService implements ArticleInterface{
 			}
 			
 		}*/
+	}
+
+	@Override
+	public Article getArticleById(int id) {
+		Article article = articleRepo.findById(id);
+		return article;
 	}
 }

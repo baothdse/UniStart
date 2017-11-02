@@ -43,7 +43,7 @@ public class ArticleController {
 		if (isSuccess) {
 			return new ResponseEntity<Boolean> (isSuccess, HttpStatus.OK);
 		} else {
-			error = new ErrorNotification(ErrorConstant.MES005);
+			error = new ErrorNotification(ErrorConstant.MES016);
 			return new ResponseEntity<ErrorNotification> (error, HttpStatus.CONFLICT);
 		}
 	}
@@ -78,9 +78,17 @@ public class ArticleController {
 		return new ResponseEntity<List<Article>>(listArticle, HttpStatus.OK);
 	}
 	
+
 	@RequestMapping(value = UrlConstant.GET_NEWEST_ARTICLE, method = RequestMethod.GET)
 	public ResponseEntity<?> getNewestArticle(@RequestParam(value = "universityId") int universityId){
 		listArticle = articleService.getNewestArticle(universityId);
 		return new ResponseEntity<List<Article>>(listArticle, HttpStatus.OK);
 	}
+
+	@RequestMapping(value = UrlConstant.GET_ARTICLE_BY_ID, method = RequestMethod.GET)
+	public ResponseEntity<?> getArticleById(@RequestParam(value = "articleId") int articleId){
+		Article article = articleService.getArticleById(articleId);
+		return new ResponseEntity<Article>(article, HttpStatus.OK);
+	}
+
 }
