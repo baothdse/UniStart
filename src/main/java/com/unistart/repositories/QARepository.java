@@ -24,10 +24,13 @@ public interface QARepository extends JpaRepository <QuestionAnswer, Integer>{
 	@Query("select qa from QuestionAnswer qa where qa.parentId = ?1 and qa.type = ?2 and qa.isActive = true")
 	List<QuestionAnswer> findByParentId(int parentId, int type);
 	
-	@Query("select qa from QuestionAnswer qa where qa.type = 1 and qa.isActive = true")
+	@Query("select qa from QuestionAnswer qa where qa.type = 1 and qa.isActive = true order by qa.createdDateTime desc")
 	List<QuestionAnswer> findAllQuestion();
 	
-	@Query("select qa from QuestionAnswer qa where qa.users.id = ?1 and qa.type = 1 and qa.isActive = true")
+	@Query("select qa from QuestionAnswer qa where qa.users.id = ?1 and qa.type = 1 and qa.isActive = true order by qa.createdDateTime desc")
 	List<QuestionAnswer> findAllQuestionByUserId(int userId);
 	
+	@Modifying
+	@Query("update QuestionAnswer qa set qa.isActive = false where qa.id = ?1")
+	void changeIsActive(int id);
 }

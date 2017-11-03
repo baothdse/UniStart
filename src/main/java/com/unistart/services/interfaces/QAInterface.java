@@ -11,4 +11,5 @@ public interface QAInterface {
 	List<QuestionAnswer> getAnswerOfQuestion(int questionId);
 	List<QuestionAnswer> getAllQuestion();
 	List<QuestionAnswer> getAllQuestionByUserId(int userId);
+	boolean deleteQuestionAnswer(int qaId);
 }

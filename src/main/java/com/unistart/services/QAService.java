@@ -86,4 +86,10 @@ public class QAService implements QAInterface {
 		return qaRepository.findAllQuestionByUserId(userId);
 	}
 
+	@Override
+	public boolean deleteQuestionAnswer(int qaId) {
+		qaRepository.changeIsActive(qaId);
+		return true;
+	}
+
 }

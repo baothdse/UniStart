@@ -15,7 +15,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@JsonIgnoreProperties({"count", "isActive"})
+@JsonIgnoreProperties({"isActive"})
 @Table(name = "Question_Answer", schema = "dbo", catalog = "University")
 public class QuestionAnswer implements java.io.Serializable {
 	private Integer id;
