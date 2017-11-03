@@ -90,4 +90,6 @@ public class UrlConstant {
 	public static final String ANSWER = "/answer";
 	public static final String QUESTIONS = "/questions";
 	public static final String QUESTIONS_BY_USER = "/questions-by-user";
+	public static final String ANSWER_BY_QUESTION = "/answer-by-question";
+	public static final String DELETE_QUESTION_ANSWER = "/delete-question-answer";
 }

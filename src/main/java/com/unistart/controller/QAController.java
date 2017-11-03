@@ -15,10 +15,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.unistart.constant.ParamConstant;
 import com.unistart.constant.UrlConstant;
 import com.unistart.entities.QuestionAnswer;
+import com.unistart.entities.University;
 import com.unistart.services.interfaces.QAInterface;
 
 @RestController
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @RequestMapping(value = UrlConstant.QA)
 public class QAController {
 	@Autowired
@@ -62,4 +62,21 @@ public class QAController {
 		}
 		return new ResponseEntity<List<QuestionAnswer>> (answers, HttpStatus.OK);
 	}
+	
+	@RequestMapping(value = UrlConstant.ANSWER_BY_QUESTION, method = RequestMethod.GET)
+	public ResponseEntity<?> getAnswerByQuestion (@RequestParam(value = "questionId") int questionId) {
+		List<QuestionAnswer> answers = qaService.getAnswerOfQuestion(questionId);
+		for (int i = 0; i < answers.size(); i++) {
+			answers.get(i).getUsers().setPassword("");
+		}
+		return new ResponseEntity<List<QuestionAnswer>> (answers, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = UrlConstant.DELETE_QUESTION_ANSWER, method = RequestMethod.POST)
+	public ResponseEntity<?> deleteQuestionAnswer (@RequestBody QuestionAnswer qa) {
+		int qaId = qa.getId();
+		boolean isDelete = qaService.deleteQuestionAnswer(qaId);
+		return new ResponseEntity<Boolean> (isDelete, HttpStatus.OK);
+	}
+	
 }
