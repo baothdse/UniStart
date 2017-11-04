@@ -79,24 +79,13 @@ public class ArticleService implements ArticleInterface{
 	@Override
 	public List<Article> getNewestArticle(int universityId) {
 		listArticle = articleRepo.getNewestArticle(universityId);
-		List<Article> topArticle = new ArrayList<>();
-		if(listArticle != null){
-			for(int i=0; i<5; i++){
-				topArticle.add(listArticle.get(i));
-			}
-		}
-		return topArticle;
-/*		long currDate = System.currentTimeMillis();
-		List<Date> date = new ArrayList<Date>();
-		if (listArticle != null) {
-			for(int i=0 ; i < listArticle.size(); i++) {
-				date.add(listArticle.get(i).getCreateDate());
-				for(int a=0; a < date.size(); a++) {
-				}
-				long diff = Math.abs(date.getTime() - currDate);
-			}
-			
-		}*/
+//		List<Article> topArticle = new ArrayList<>();
+//		if(listArticle != null){
+//			for(int i=0; i<5; i++){
+//				topArticle.add(listArticle.get(i));
+//			}
+//		}
+		return listArticle.subList(0, listArticle.size()>=5 ? 5 : listArticle.size());
 	}
 
 	@Override
