@@ -130,17 +130,14 @@ public class ArticleService implements ArticleInterface{
 		article = articleRepo.findById(artcleId);
 		if(article != null){
 			List<ArticleTag> listTag = articleTagRepo.findByArticleId(artcleId);
-			int[] majorUniId = new int[listTag.size()];
-			for(int j=0; j<listTag.size();j++){
-				majorUniId[j] = listTag.get(j).getMajorUni().getId();
-			}
 			ArticleTag aT = new ArticleTag();
-			ArrayList<Integer> check = new ArrayList(Arrays.asList(tags));
-			for(int a=0; a<majorUniId.length;a++){
-				System.out.println(check.contains(majorUniId[a]));
-			    if(check.contains(majorUniId[a])==false){
-			    	System.out.println("id: " + majorUniId[a]);
-			    	aT = articleTagRepo.findByArticleIdAndMajorUniId(artcleId, majorUniId[a]);
+			ArrayList<Integer> test = new ArrayList<Integer>();
+			for(int x=0;x<tags.length;x++){
+				test.add(tags[x]);
+			}
+			for(int a=0; a<listTag.size();a++){
+			    if(test.contains(listTag.get(a).getMajorUni().getId())==false){
+			    	aT = articleTagRepo.findByArticleIdAndMajorUniId(artcleId, listTag.get(a).getMajorUni().getId());
 			    	articleTagRepo.deleteTag(aT.getId());
 			    }
 			}
