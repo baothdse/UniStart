@@ -57,7 +57,7 @@ public class ArticleTag {
 		}
 
 		@ManyToOne(fetch = FetchType.LAZY)
-		@JoinColumn(name = "majorUniId")
+		@JoinColumn(name = "MajorUniId")
 		public MajorUniversity getMajorUni() {
 			return majorUni;
 		}
