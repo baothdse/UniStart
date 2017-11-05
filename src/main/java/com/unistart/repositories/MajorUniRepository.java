@@ -32,6 +32,9 @@ public interface MajorUniRepository extends JpaRepository<MajorUniversity, Integ
 	@Query("select new com.unistart.entities.MajorUniversity(m.id,m.major) from MajorUniversity m where m.university.id = ?1 and m.isActive = true")
 	List<MajorUniversity> findByUniIdShort(int uniId);
 	
+	@Query("select new com.unistart.entities.MajorUniversity(m.id,m.major,m.isActive) from MajorUniversity m where m.university.id = ?1 and m.isActive = true")
+	List<MajorUniversity> findByIdForTag(int uniId);
+	
 	@Query("select new com.unistart.entities.Major(m.major.id, m.major.majorName) "
 			+ "from MajorUniversity m where m.university.id = ?1 and m.isActive = true")
 	List<MajorUniversity> getByUniversityId(int uniId);
