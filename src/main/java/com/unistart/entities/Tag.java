@@ -1,5 +1,8 @@
 package com.unistart.entities;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -18,12 +21,11 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class Tag implements java.io.Serializable {
      private Integer id;
      private String tagName;
-     private QuestionAnswer questionAnswer;
-	public Tag(Integer id, String tagName, QuestionAnswer questionAnswer) {
+     private Boolean isActive;
+	public Tag(Integer id, String tagName) {
 		super();
 		this.id = id;
 		this.tagName = tagName;
-		this.questionAnswer = questionAnswer;
 	}
 	public Tag() {
 		super();
@@ -47,14 +49,13 @@ public class Tag implements java.io.Serializable {
 		this.tagName = tagName;
 	}
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "QuestionAnswerId")
-	public QuestionAnswer getQuestionAnswer() {
-		return questionAnswer;
+	@Column(name = "IsActive", nullable = false)
+	public Boolean getIsActive() {
+		return isActive;
 	}
-	public void setQuestionAnswer(QuestionAnswer questionAnswer) {
-		this.questionAnswer = questionAnswer;
+	public void setIsActive(Boolean isActive) {
+		this.isActive = isActive;
 	}
-     
-     
+	  
+	
 }
