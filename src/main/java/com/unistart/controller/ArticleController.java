@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.unistart.constant.ErrorConstant;
 import com.unistart.constant.UrlConstant;
 import com.unistart.entities.Article;
+import com.unistart.entities.Tag;
 import com.unistart.error.ErrorNotification;
 import com.unistart.services.interfaces.ArticleInterface;
 
@@ -41,7 +42,8 @@ public class ArticleController {
 		//SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
 		int uniId = article.getUniversity().getId();
 		boolean isSuccess = articleService.saveArticle(code, title, description, contents, image, uniId);
-		if (isSuccess) {
+		boolean isSaveTag = articleService.saveTag(code, article.getTags());
+		if (isSuccess && isSaveTag) {
 			return new ResponseEntity<Boolean> (isSuccess, HttpStatus.OK);
 		} else {
 			error = new ErrorNotification(ErrorConstant.MES016);
@@ -59,7 +61,8 @@ public class ArticleController {
 		String image = article.getImage();
 		int uniId = article.getUniversity().getId();
 		boolean isCreated = articleService.updateArticle(id, code, title, description, contents, image, uniId);
-		if (isCreated) {
+		boolean isUpdateTag = articleService.updateTag(id, article.getTags());
+		if (isCreated && isUpdateTag) {
 			return new ResponseEntity<Boolean> (isCreated, HttpStatus.OK);
 		}
 		error = new ErrorNotification(ErrorConstant.MES015);

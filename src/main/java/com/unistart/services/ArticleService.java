@@ -1,7 +1,9 @@
 package com.unistart.services;
 
+import java.sql.Array;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
@@ -10,8 +12,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.unistart.entities.Article;
+import com.unistart.entities.ArticleTag;
+import com.unistart.entities.MajorUniversity;
+import com.unistart.entities.Tag;
 import com.unistart.entities.University;
 import com.unistart.repositories.ArticleRepository;
+import com.unistart.repositories.ArticleTagRepository;
+import com.unistart.repositories.MajorUniRepository;
+import com.unistart.repositories.TagRepository;
 import com.unistart.repositories.UniversityRepository;
 import com.unistart.services.interfaces.ArticleInterface;
 
@@ -23,13 +31,16 @@ public class ArticleService implements ArticleInterface{
 	private UniversityRepository universityRepo;
 	@Autowired
 	private ArticleRepository articleRepo;
+	@Autowired
+	private ArticleTagRepository articleTagRepo;
+	@Autowired
+	private MajorUniRepository majorUniRepo;
 	
 	private University university;
 	private List<Article> listArticle;
 	private Article article;
 	@Override
-	public boolean saveArticle(String code, String title, String description, String contents, String image,
-			int uniId) {
+	public boolean saveArticle(String code, String title, String description, String contents, String image,int uniId) {
 		article = articleRepo.findByCode(code);
 		university = universityRepo.findById(uniId);
 		Calendar cal = Calendar.getInstance();
@@ -92,5 +103,49 @@ public class ArticleService implements ArticleInterface{
 	public Article getArticleById(int id) {
 		Article article = articleRepo.findById(id);
 		return article;
+	}
+	@Override
+	public boolean saveTag(String code, int[] tags) {
+		article = articleRepo.findByCode(code);
+		if(article != null){
+			for(int i =0; i<tags.length;i++){
+				ArticleTag aT = new ArticleTag();
+				aT.setArticle(article);
+				MajorUniversity majorUni = majorUniRepo.findById(tags[i]);
+				aT.setTag(majorUni);
+				articleTagRepo.save(aT);
+			}
+			return true;
+		}
+		return false;
+	}
+	@Override
+	public boolean updateTag(int artcleId, int[] tags) {
+		article = articleRepo.findById(artcleId);
+		if(article != null){
+			List<ArticleTag> listTag = articleTagRepo.findByArticleId(artcleId);
+			int[] majorUniId = new int[listTag.size()];
+			for(int j=0; j<listTag.size();j++){
+				majorUniId[j] = listTag.get(j).getTag().getId();
+			}
+			ArticleTag aT = new ArticleTag();
+			List check = Arrays.asList(tags);
+			for(int a=0; a<majorUniId.length;a++){
+			    if(check.contains(majorUniId[a])==false){
+			    	aT = articleTagRepo.findByArticleIdAndMajorUniId(artcleId, majorUniId[a]);
+			    	articleTagRepo.deleteTag(aT.getId());
+			    }
+			}
+			for(int i=0; i<tags.length;i++){
+				aT = articleTagRepo.findByArticleIdAndMajorUniId(artcleId, tags[i]);
+				if(aT == null){
+					aT.setArticle(article);
+					MajorUniversity majorUni = majorUniRepo.findById(tags[i]);
+					aT.setTag(majorUni);
+					articleTagRepo.save(aT);
+				}
+			}
+		}
+		return false;
 	}
 }

@@ -1,6 +1,7 @@
 package com.unistart.entities;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,7 +31,7 @@ public class Article implements java.io.Serializable {
 	private String image;
 	private University university;
 	private Boolean isActive;
-	
+	private int[] tags;
 	
 	public Article() {
 		super();
@@ -179,7 +180,16 @@ public class Article implements java.io.Serializable {
 	public void setIsActive(Boolean isActive) {
 		this.isActive = isActive;
 	}
-	
-	
+
+
+	public int[] getTags() {
+		return tags;
+	}
+
+
+	public void setTags(int[] tags) {
+		this.tags = tags;
+	}
+
 	
 }
