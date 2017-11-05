@@ -19,7 +19,9 @@ public class ArticleTag {
 		private Integer id;
 		private Article article;
 		private MajorUniversity majorUni;
-		
+		private String majorName;
+		private int majorUniId;
+		private int majorId;
 		
 		public ArticleTag() {
 			super();
@@ -32,6 +34,16 @@ public class ArticleTag {
 			this.article = article;
 			this.majorUni = majorUni;
 		}
+
+		public ArticleTag(Integer id, MajorUniversity majorUni) {
+			super();
+			this.id = id;
+			this.majorId = majorUni.getMajor().getId();
+			this.majorName = majorUni.getMajor().getMajorName();
+			this.majorUniId = majorUni.getId();
+
+		}
+
 
 		@Id
 		@GeneratedValue(strategy=GenerationType.IDENTITY)

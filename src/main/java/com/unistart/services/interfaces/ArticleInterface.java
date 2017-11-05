@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.unistart.entities.Article;
+import com.unistart.entities.ArticleTag;
 import com.unistart.entities.Tag;
 
 public interface ArticleInterface {
@@ -21,4 +22,6 @@ public interface ArticleInterface {
 	List<Article> getNewestArticle(int universityId);
     
 	Article getArticleById(int id);
+	
+	List<ArticleTag> getTagOfArticle(int articleId);
 }

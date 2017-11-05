@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -30,6 +31,8 @@ public class Article implements java.io.Serializable {
 	private String contents;
 	private String image;
 	private University university;
+	private String universityName;
+	private int universityId;
 	private Boolean isActive;
 	private int[] tags;
 	
@@ -64,7 +67,7 @@ public class Article implements java.io.Serializable {
 
 
 	public Article(Integer id, String code, String title, String description, String contents, String image, Date createDate,
-			University university, Boolean isActive) {
+			University university) {
 		super();
 		this.id = id;
 		this.code = code;
@@ -73,8 +76,8 @@ public class Article implements java.io.Serializable {
 		this.contents = contents;
 		this.image = image;
 		this.createDate = createDate;
-		this.university = university;
-		this.isActive = isActive;
+		this.universityId = university.getId();
+		this.universityName = university.getName();
 	}
 
 	public Article(Integer id, String title,  Date createDate, String description, String image) {
@@ -181,7 +184,7 @@ public class Article implements java.io.Serializable {
 		this.isActive = isActive;
 	}
 
-
+	@Transient
 	public int[] getTags() {
 		return tags;
 	}

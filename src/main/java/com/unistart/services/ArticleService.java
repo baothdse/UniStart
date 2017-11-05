@@ -96,12 +96,18 @@ public class ArticleService implements ArticleInterface{
 //				topArticle.add(listArticle.get(i));
 //			}
 //		}
-		return listArticle.subList(0, listArticle.size()>=5 ? 5 : listArticle.size());
+		return listArticle.subList(0, listArticle.size()>=4 ? 4 : listArticle.size());
 	}
 
 	@Override
 	public Article getArticleById(int id) {
-		Article article = articleRepo.findById(id);
+		Article article = articleRepo.findByArtcleId(id);
+		List<ArticleTag> listTag = articleTagRepo.findByArticleId(id);
+		int[] tag = new int[listTag.size()];
+		for(int i =0; i<listTag.size();i++){
+			tag[i] = listTag.get(i).getMajorUni().getId();
+		}
+		article.setTags(tag);
 		return article;
 	}
 	@Override
@@ -132,6 +138,7 @@ public class ArticleService implements ArticleInterface{
 			List check = Arrays.asList(tags);
 			for(int a=0; a<majorUniId.length;a++){
 			    if(check.contains(majorUniId[a])==false){
+			    	System.out.println("id: " + majorUniId[a]);
 			    	aT = articleTagRepo.findByArticleIdAndMajorUniId(artcleId, majorUniId[a]);
 			    	articleTagRepo.deleteTag(aT.getId());
 			    }
@@ -139,13 +146,20 @@ public class ArticleService implements ArticleInterface{
 			for(int i=0; i<tags.length;i++){
 				aT = articleTagRepo.findByArticleIdAndMajorUniId(artcleId, tags[i]);
 				if(aT == null){
+					aT = new ArticleTag();
 					aT.setArticle(article);
 					MajorUniversity majorUni = majorUniRepo.findById(tags[i]);
 					aT.setMajorUni(majorUni);
 					articleTagRepo.save(aT);
 				}
 			}
+			return true;
 		}
 		return false;
+	}
+	@Override
+	public List<ArticleTag> getTagOfArticle(int articleId) {
+		List<ArticleTag> listTag = articleTagRepo.findByArticleId(articleId);
+		return listTag;
 	}
 }
