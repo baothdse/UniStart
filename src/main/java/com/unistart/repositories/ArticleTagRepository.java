@@ -19,8 +19,11 @@ public interface ArticleTagRepository extends JpaRepository<ArticleTag, Integer>
     ArticleTag findByArticleIdAndMajorUniId(int articleId, int majorUniId);
 	
 	@Query("select new com.unistart.entities.ArticleTag(a.id,a.majorUni) from ArticleTag a where a.article.id=?1")
-    List<ArticleTag> findByArticleId(int articleId);
+    List<ArticleTag> getTagByArticleId(int articleId);
 
+	@Query("select a from ArticleTag a where a.article.id=?1")
+    List<ArticleTag> findByArticleId(int articleId);
+	
 	@Transactional
 	@Modifying
 	@Query("delete from ArticleTag a where a.id=?1 ")

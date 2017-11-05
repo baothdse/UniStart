@@ -135,8 +135,9 @@ public class ArticleService implements ArticleInterface{
 				majorUniId[j] = listTag.get(j).getMajorUni().getId();
 			}
 			ArticleTag aT = new ArticleTag();
-			List check = Arrays.asList(tags);
+			ArrayList<Integer> check = new ArrayList(Arrays.asList(tags));
 			for(int a=0; a<majorUniId.length;a++){
+				System.out.println(check.contains(majorUniId[a]));
 			    if(check.contains(majorUniId[a])==false){
 			    	System.out.println("id: " + majorUniId[a]);
 			    	aT = articleTagRepo.findByArticleIdAndMajorUniId(artcleId, majorUniId[a]);
@@ -159,7 +160,7 @@ public class ArticleService implements ArticleInterface{
 	}
 	@Override
 	public List<ArticleTag> getTagOfArticle(int articleId) {
-		List<ArticleTag> listTag = articleTagRepo.findByArticleId(articleId);
+		List<ArticleTag> listTag = articleTagRepo.getTagByArticleId(articleId);
 		return listTag;
 	}
 }
