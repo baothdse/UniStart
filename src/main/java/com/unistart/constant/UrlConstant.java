@@ -83,6 +83,9 @@ public class UrlConstant {
 	public static final String SHOW_ARTICLE = "/show-article";
 	public static final String GET_NEWEST_ARTICLE = "/get-newest-article";
 	public static final String GET_ARTICLE_BY_ID = "/get-article-by-id";
+	
+	//FAVORITE
+	public static final String FAVORITE = "/favorite";
 
 	
 	//QA
