@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.unistart.constant.ErrorConstant;
 import com.unistart.constant.UrlConstant;
 import com.unistart.entities.Article;
+import com.unistart.entities.ArticleTag;
 import com.unistart.entities.Tag;
 import com.unistart.error.ErrorNotification;
 import com.unistart.services.interfaces.ArticleInterface;
@@ -95,4 +96,9 @@ public class ArticleController {
 		return new ResponseEntity<Article>(article, HttpStatus.OK);
 	}
 
+	@RequestMapping(value = UrlConstant.GET_TAG_ARTICLE, method = RequestMethod.GET)
+	public ResponseEntity<?> getTagOfArticle(@RequestParam(value = "articleId") int articleId){
+		List<ArticleTag> listTag = articleService.getTagOfArticle(articleId);
+		return new ResponseEntity<List<ArticleTag>>(listTag, HttpStatus.OK);
+	}
 }
