@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class ArticleTag {
 		private Integer id;
 		private Article article;
-		private MajorUniversity major;
+		private MajorUniversity majorUni;
 		
 		
 		public ArticleTag() {
@@ -26,11 +26,11 @@ public class ArticleTag {
 		}
 
 
-		public ArticleTag(Integer id, Article article, Tag tag) {
+		public ArticleTag(Integer id, Article article, MajorUniversity majorUni) {
 			super();
 			this.id = id;
 			this.article = article;
-			this.major = major;
+			this.majorUni = majorUni;
 		}
 
 		@Id
@@ -57,15 +57,18 @@ public class ArticleTag {
 		}
 
 		@ManyToOne(fetch = FetchType.LAZY)
-		@JoinColumn(name = "majorId")
-		public MajorUniversity getTag() {
-			return major;
+		@JoinColumn(name = "majorUniId")
+		public MajorUniversity getMajorUni() {
+			return majorUni;
 		}
 
 
-		public void setTag(MajorUniversity major) {
-			this.major = major;
+		public void setMajorUni(MajorUniversity majorUni) {
+			this.majorUni = majorUni;
 		}
+
+		
+		
 		
 		
 }
