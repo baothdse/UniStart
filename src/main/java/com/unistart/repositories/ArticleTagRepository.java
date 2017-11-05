@@ -12,7 +12,7 @@ import com.unistart.entities.ArticleTag;
 @Repository
 public interface ArticleTagRepository extends JpaRepository<ArticleTag, Integer>{
 	
-	@Query("select a from ArticleTag a where a.article.id=?1 and a.major.id=?2")
+	@Query("select a from ArticleTag a where a.article.id=?1 and a.majorUni.id=?2")
     ArticleTag findByArticleIdAndMajorUniId(int articleId, int majorUniId);
 	
 	@Query("select a from ArticleTag a where a.article.id=?1")

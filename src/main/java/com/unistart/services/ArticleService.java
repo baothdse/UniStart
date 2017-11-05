@@ -112,7 +112,7 @@ public class ArticleService implements ArticleInterface{
 				ArticleTag aT = new ArticleTag();
 				aT.setArticle(article);
 				MajorUniversity majorUni = majorUniRepo.findById(tags[i]);
-				aT.setTag(majorUni);
+				aT.setMajorUni(majorUni);
 				articleTagRepo.save(aT);
 			}
 			return true;
@@ -126,7 +126,7 @@ public class ArticleService implements ArticleInterface{
 			List<ArticleTag> listTag = articleTagRepo.findByArticleId(artcleId);
 			int[] majorUniId = new int[listTag.size()];
 			for(int j=0; j<listTag.size();j++){
-				majorUniId[j] = listTag.get(j).getTag().getId();
+				majorUniId[j] = listTag.get(j).getMajorUni().getId();
 			}
 			ArticleTag aT = new ArticleTag();
 			List check = Arrays.asList(tags);
@@ -141,7 +141,7 @@ public class ArticleService implements ArticleInterface{
 				if(aT == null){
 					aT.setArticle(article);
 					MajorUniversity majorUni = majorUniRepo.findById(tags[i]);
-					aT.setTag(majorUni);
+					aT.setMajorUni(majorUni);
 					articleTagRepo.save(aT);
 				}
 			}
