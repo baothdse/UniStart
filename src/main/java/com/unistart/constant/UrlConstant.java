@@ -89,6 +89,7 @@ public class UrlConstant {
 	
 	//FAVORITE
 	public static final String FAVORITE = "/favorite";
+	public static final String SAVE_FAVORITE = "/save-favorite";
 
 	
 	//QA
