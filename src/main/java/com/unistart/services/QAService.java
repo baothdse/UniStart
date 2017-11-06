@@ -54,6 +54,7 @@ public class QAService implements QAInterface {
 			qa.setType(type);
 			qa.setUsers(userService.getUserById(userId));
 			qa.setCreatedDateTime(cal.getTime());
+			qa.setLastUpdatedTime(cal.getTime());
 			qaRepository.save(qa);
 			return true;
 		}
@@ -120,6 +121,7 @@ public class QAService implements QAInterface {
 		} else {
 			return false;
 		}
+	}
     
     @Override
 	public boolean deleteQuestionAnswer(int qaId) {

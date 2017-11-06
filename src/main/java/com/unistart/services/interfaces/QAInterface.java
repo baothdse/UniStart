@@ -18,6 +18,5 @@ public interface QAInterface {
 	int getTotalAnswerOfQuestion(int questionId);
 	
 	boolean updateQa(String title, String contents, int qaId, int userId);
-	List<QuestionAnswer> getAllQuestionByUserId(int userId);
 	boolean deleteQuestionAnswer(int qaId);
 }

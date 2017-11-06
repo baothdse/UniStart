@@ -132,7 +132,8 @@ public class QuestionAnswer implements java.io.Serializable {
 	public void setCreatedDateTime(Date createdDateTime) {
 		this.createdDateTime = createdDateTime;
 	}
-	@Column(name = "LastUpdatedTime", nullable = false)
+	
+	@Column(name = "LastUpdatedTime")
 	public Date getLastUpdatedTime() {
 		return lastUpdatedTime;
 	}
