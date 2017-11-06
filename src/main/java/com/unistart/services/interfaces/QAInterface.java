@@ -5,10 +5,10 @@ import java.util.List;
 import com.unistart.entities.QuestionAnswer;
 
 public interface QAInterface {
-	boolean saveQa(String title, String contents, int type, int parentId, int userId);
+	Integer saveQa(String title, String contents, int type, int parentId, int userId);
 	QuestionAnswer getQaById(int qaId, int userId);
 	
-	List<QuestionAnswer> getAnswerOfQuestion(int questionId);
+	List<QuestionAnswer> getAnswerOfQuestion(int questionId,int userId);
 	List<QuestionAnswer> getAllQuestion();
 	List<QuestionAnswer> getAllQuestionByUserId(int userId); 
 	

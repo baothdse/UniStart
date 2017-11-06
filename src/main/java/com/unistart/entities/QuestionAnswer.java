@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -29,6 +30,8 @@ public class QuestionAnswer implements java.io.Serializable {
 	private Boolean isActive;
 	private Date createdDateTime;
 	private Date lastUpdatedTime;
+	private boolean isVoteByUser;
+	private int totalAnswer;
 	
 	public QuestionAnswer(Integer id, String title, String content, Integer vote, Integer type, Users users,
 			Integer parentId, Boolean isActive, Date createdDateTime, Date lastUpdatedTime) {
@@ -140,4 +143,22 @@ public class QuestionAnswer implements java.io.Serializable {
 	public void setLastUpdatedTime(Date lastUpdatedTime) {
 		this.lastUpdatedTime = lastUpdatedTime;
 	}
+	
+	@Transient
+	public int getTotalAnswer() {
+		return totalAnswer;
+	}
+	public void setTotalAnswer(int totalAnswer) {
+		this.totalAnswer = totalAnswer;
+	}
+	@Transient
+	public boolean isVoteByUser() {
+		return isVoteByUser;
+	}
+	public void setVoteByUser(boolean isVoteByUser) {
+		this.isVoteByUser = isVoteByUser;
+	}
+	
+
+	
 }
