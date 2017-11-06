@@ -46,6 +46,15 @@ public class QAController {
 		return new ResponseEntity<QuestionAnswer> (question, HttpStatus.OK);
 	}
 	
+	@RequestMapping(value = UrlConstant.ANSWER, method = RequestMethod.GET)
+	public ResponseEntity<?> viewAnswerOfQuestion (@RequestParam(value = ParamConstant.QA_ID) int qaId) {
+		List<QuestionAnswer> answers = qaService.getAnswerOfQuestion(qaId);
+		for (int i = 0; i < answers.size(); i++) {
+			answers.get(i).getUsers().setPassword("");
+		}
+		return new ResponseEntity<List<QuestionAnswer>> (answers, HttpStatus.OK);
+	} 
+	
 	@RequestMapping(value = UrlConstant.QUESTIONS, method = RequestMethod.GET)
 	public ResponseEntity<?> viewQuestions () {
 		List<QuestionAnswer> questions = qaService.getAllQuestion();
@@ -56,10 +65,28 @@ public class QAController {
 	}
 	@RequestMapping(value = UrlConstant.QUESTIONS_BY_USER, method = RequestMethod.GET)
 	public ResponseEntity<?> viewQuestionByUser (@RequestParam(value = ParamConstant.USER_ID) int userId) {
-		List<QuestionAnswer> answers = qaService.getAllQuestionByUserId(userId);
-		for (int i = 0; i < answers.size(); i++) {
-			answers.get(i).getUsers().setPassword("");
+		List<QuestionAnswer> questions = qaService.getAllQuestionByUserId(userId);
+		for (int i = 0; i < questions.size(); i++) {
+			questions.get(i).getUsers().setPassword("");
 		}
-		return new ResponseEntity<List<QuestionAnswer>> (answers, HttpStatus.OK);
+		return new ResponseEntity<List<QuestionAnswer>> (questions, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = UrlConstant.COUNT_ANSWER, method = RequestMethod.GET)
+	public ResponseEntity<?> getTotalAnswer(@RequestParam(ParamConstant.QA_ID) int qaId) {
+		int count = qaService.getTotalAnswerOfQuestion(qaId);
+		return new ResponseEntity<Integer>(count, HttpStatus.OK);		
+	}
+	@RequestMapping(value = UrlConstant.UPDATE, method = RequestMethod.POST)
+	public ResponseEntity<?> updateQa(@RequestBody QuestionAnswer qa) {
+		String contents = qa.getContent();
+		String title = qa.getTitle();
+		int qaId = qa.getId();
+		int userId = qa.getUsers().getId();
+		boolean isSuccess = qaService.updateQa(title, contents, qaId, userId);
+		if(isSuccess) {
+			return new ResponseEntity<String>("Update successful", HttpStatus.OK);		
+		}
+		return new ResponseEntity<String>("Cannot update", HttpStatus.CONFLICT);
 	}
 }

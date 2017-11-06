@@ -1,6 +1,7 @@
 package com.unistart.services;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,7 @@ public class QAService implements QAInterface {
 				qa.setType(type);
 				qa.setUsers(userService.getUserById(userId));
 				qa.setCreatedDateTime(cal.getTime());
+				qa.setLastUpdatedTime(cal.getTime());
 				qaRepository.save(qa);
 				return true;
 			}
@@ -84,6 +86,40 @@ public class QAService implements QAInterface {
 	public List<QuestionAnswer> getAllQuestionByUserId(int userId) {
 		// TODO Auto-generated method stub
 		return qaRepository.findAllQuestionByUserId(userId);
+	}
+
+	@Override
+	public QuestionAnswer getQaByQaId(int qaId) {
+		// TODO Auto-generated method stub
+		return qaRepository.findById(qaId);
+	}
+
+	@Override
+	public void updateTotalVote(int qaId) {
+		// TODO Auto-generated method stub
+		QuestionAnswer qa = getQaByQaId(qaId);
+		int totalVote = qa.getVote() + 1;
+		qaRepository.setTotalVote(totalVote, qaId);
+	}
+
+	@Override
+	public int getTotalAnswerOfQuestion(int questionId) {
+		// TODO Auto-generated method stub
+		return qaRepository.getTotalAnswerOfQuestion(questionId);
+	}
+
+	@Override
+	public boolean updateQa(String title, String contents, int qaId, int userId) {
+		// TODO Auto-generated method stu
+		QuestionAnswer qa = qaRepository.findByIdAndUserId(qaId, userId);
+		if(qa != null) {
+			Calendar cal = Calendar.getInstance();
+			Date lastUpdatedTime = cal.getTime();
+			qaRepository.updateQa(title, contents, lastUpdatedTime, qaId, userId);
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 }

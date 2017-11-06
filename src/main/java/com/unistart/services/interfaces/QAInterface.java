@@ -10,5 +10,12 @@ public interface QAInterface {
 	
 	List<QuestionAnswer> getAnswerOfQuestion(int questionId);
 	List<QuestionAnswer> getAllQuestion();
-	List<QuestionAnswer> getAllQuestionByUserId(int userId);
+	List<QuestionAnswer> getAllQuestionByUserId(int userId); 
+	
+	QuestionAnswer getQaByQaId(int qaId);
+	void updateTotalVote(int qaId);
+	
+	int getTotalAnswerOfQuestion(int questionId);
+	
+	boolean updateQa(String title, String contents, int qaId, int userId);
 }
