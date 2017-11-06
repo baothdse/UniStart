@@ -38,6 +38,8 @@ public class MajorUniversity implements java.io.Serializable {
 	private String requirement;
 	private String prospects;
 	private Boolean isActive;
+	private String majorName;
+	private int majorId;
 	@JsonManagedReference
 	private Set<BlockMajorUniversity> blockMajorUniversities = new HashSet<BlockMajorUniversity>(0);
 
@@ -57,6 +59,13 @@ public class MajorUniversity implements java.io.Serializable {
 		this.major = major;
 	}
 
+	public MajorUniversity(Integer id, Major major, boolean isACtive) {
+		super();
+		this.id = id;
+		this.majorId = major.getId();
+		this.majorName = major.getMajorName();
+	}
+	
 	public MajorUniversity(Integer id, Major major, University university, String description, Double numberOfYear,
 			String requirement, String prospects, Boolean isActive, Set<BlockMajorUniversity> blockMajorUniversities) {
 		super();

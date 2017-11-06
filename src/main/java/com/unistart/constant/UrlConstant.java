@@ -41,6 +41,7 @@ public class UrlConstant {
 	public static final String SHOWMAJOR = "/show-major";
     public static final String SAVE_DETAIL_MAJOR = "/save-detail-major";
     public static final String GET_ALL_MAJOR_OF_UNIVERSITY = "/get-major-uni";
+    public static final String GET_FOR_TAG = "/get-major-for-tag";
 	//LOCATION
 	public static final String LOCATION = "/location";
 	public static final String SHOW_LOCATION = "/show-location";
@@ -83,6 +84,10 @@ public class UrlConstant {
 	public static final String SHOW_ARTICLE = "/show-article";
 	public static final String GET_NEWEST_ARTICLE = "/get-newest-article";
 	public static final String GET_ARTICLE_BY_ID = "/get-article-by-id";
+	public static final String GET_TAG_ARTICLE = "/get-tag-article";
+	
+	//FAVORITE
+	public static final String FAVORITE = "/favorite";
 
 	
 	//QA
@@ -95,4 +100,7 @@ public class UrlConstant {
 	//Vote
 	public static final String VOTE = "/vote";
 	public static final String COUNT_VOTE = "/count-vote";
+	public static final String ANSWER_BY_QUESTION = "/answer-by-question";
+	public static final String DELETE_QUESTION_ANSWER = "/delete-question-answer";
+
 }

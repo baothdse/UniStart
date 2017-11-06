@@ -180,6 +180,7 @@ public class Users implements java.io.Serializable {
 		this.reviewLikes = reviewLikes;
 	}
 
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "users")
 	public Set<Provider> getProviders() {
 		return this.providers;

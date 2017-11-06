@@ -60,4 +60,11 @@ public class MajorController {
 		List<MajorUniversity> major = majorService.getByUniversityId(uniId);
 		return new ResponseEntity<List<MajorUniversity>>(major, HttpStatus.OK);
 	}
+	
+	@RequestMapping(value = UrlConstant.GET_FOR_TAG, method = RequestMethod.GET)
+	public ResponseEntity<?> getForTag(@RequestParam(value = "universityId") int uniId ){
+		List<MajorUniversity> major = majorService.getForTag(uniId);
+		return new ResponseEntity<List<MajorUniversity>>(major, HttpStatus.OK);
+	}
+
 }

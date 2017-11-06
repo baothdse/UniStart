@@ -83,5 +83,9 @@ public class MajorService implements MajorServiceInterface {
 	public List<MajorUniversity> getListId() {
 		return majorUniRepo.getListId();
 	}
+	@Override
+	public List<MajorUniversity> getForTag(int uniId) {
+		return majorUniRepo.findByIdForTag(uniId);
+	}
 	
 }

@@ -120,6 +120,11 @@ public class QAService implements QAInterface {
 		} else {
 			return false;
 		}
+    
+    @Override
+	public boolean deleteQuestionAnswer(int qaId) {
+		qaRepository.changeIsActive(qaId);
+		return true;
 	}
 
 }
