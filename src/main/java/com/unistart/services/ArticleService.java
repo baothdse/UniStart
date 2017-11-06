@@ -5,7 +5,11 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,11 +17,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.unistart.entities.Article;
 import com.unistart.entities.ArticleTag;
+import com.unistart.entities.Favorite;
 import com.unistart.entities.MajorUniversity;
 import com.unistart.entities.Tag;
 import com.unistart.entities.University;
 import com.unistart.repositories.ArticleRepository;
 import com.unistart.repositories.ArticleTagRepository;
+import com.unistart.repositories.FavoriteRepository;
 import com.unistart.repositories.MajorUniRepository;
 import com.unistart.repositories.TagRepository;
 import com.unistart.repositories.UniversityRepository;
@@ -35,6 +41,8 @@ public class ArticleService implements ArticleInterface{
 	private ArticleTagRepository articleTagRepo;
 	@Autowired
 	private MajorUniRepository majorUniRepo;
+	@Autowired
+	private FavoriteRepository favoriteRepo;
 	
 	private University university;
 	private List<Article> listArticle;
@@ -160,4 +168,37 @@ public class ArticleService implements ArticleInterface{
 		List<ArticleTag> listTag = articleTagRepo.getTagByArticleId(articleId);
 		return listTag;
 	}
+	@Override
+	public List<Article> getYourArticle(int userId) {
+		List<Favorite> listFavorite = favoriteRepo.findByUserId(userId);
+		List<Article> yourArticle = new ArrayList<>();
+		List<Article> listYourArticle = new ArrayList<>();
+		for(int i =0;i<listFavorite.size();i++){
+			yourArticle = articleTagRepo.findByMajorUniId(listFavorite.get(i).getMajorUni().getId());
+			for(int j =0;j<yourArticle.size();j++){
+				listYourArticle.add(yourArticle.get(j));
+			}
+		}
+		return removeDuplicates(listYourArticle);
+	}
+
+	public List<Article> removeDuplicates(List<Article> list) {
+		 int s=0;
+		List<Article> unique = new ArrayList<Article>();
+		for (Article us1 : list) {
+			s=0;
+			for (Article us2 : unique) {
+				System.out.println("id2 " + us2.getId());
+				if (us1.getId() == us2.getId()) {
+				   s = 1;
+				   break;
+				}
+			}
+			if (s == 0) {
+				unique.add(us1);
+			}
+		}
+		return unique;
+	}
+
 }

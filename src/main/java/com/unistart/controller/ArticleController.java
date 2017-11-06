@@ -101,4 +101,11 @@ public class ArticleController {
 		List<ArticleTag> listTag = articleService.getTagOfArticle(articleId);
 		return new ResponseEntity<List<ArticleTag>>(listTag, HttpStatus.OK);
 	}
+	
+	@RequestMapping(value = UrlConstant.GET_YOUR_ARTICLE, method = RequestMethod.GET)
+	public ResponseEntity<?> getYourArticle(@RequestParam(value = "userId") int userId){
+		List<Article> listTag = articleService.getYourArticle(userId);
+		return new ResponseEntity<List<Article>>(listTag, HttpStatus.OK);
+	}
+
 }

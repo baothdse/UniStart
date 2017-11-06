@@ -24,4 +24,6 @@ public interface ArticleInterface {
 	Article getArticleById(int id);
 	
 	List<ArticleTag> getTagOfArticle(int articleId);
+	
+	List<Article> getYourArticle(int userId);
 }
