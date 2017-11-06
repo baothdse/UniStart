@@ -26,6 +26,10 @@ public class Vote {
 		this.user = user;
 	}
 	
+	public Vote() {
+
+	}
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "Id", unique = true, nullable = false)
