@@ -28,8 +28,10 @@ public class QuestionAnswer implements java.io.Serializable {
 	private Integer parentId;
 	private Boolean isActive;
 	private Date createdDateTime;
+	private Date lastUpdatedTime;
+	
 	public QuestionAnswer(Integer id, String title, String content, Integer vote, Integer type, Users users,
-			Integer parentId, Boolean isActive, Date createdDateTime) {
+			Integer parentId, Boolean isActive, Date createdDateTime, Date lastUpdatedTime) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -40,6 +42,7 @@ public class QuestionAnswer implements java.io.Serializable {
 		this.parentId = parentId;
 		this.isActive = isActive;
 		this.createdDateTime = createdDateTime;
+		this.lastUpdatedTime = lastUpdatedTime;
 	}
 	public QuestionAnswer() {
 		super();
@@ -129,6 +132,11 @@ public class QuestionAnswer implements java.io.Serializable {
 	public void setCreatedDateTime(Date createdDateTime) {
 		this.createdDateTime = createdDateTime;
 	}
-	
-	
+	@Column(name = "LastUpdatedTime", nullable = false)
+	public Date getLastUpdatedTime() {
+		return lastUpdatedTime;
+	}
+	public void setLastUpdatedTime(Date lastUpdatedTime) {
+		this.lastUpdatedTime = lastUpdatedTime;
+	}
 }
