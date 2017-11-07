@@ -31,9 +31,9 @@ public class QAController {
 		int type = qa.getType();
 		int parentId = qa.getParentId();
 		int userId = qa.getUsers().getId();
-		boolean isSuccess = qaService.saveQa(title, contents, type, parentId, userId);
-		if (isSuccess) {
-			return new ResponseEntity<String> ("Save success!", HttpStatus.OK);
+		int isSuccess = qaService.saveQa(title, contents, type, parentId, userId);
+		if (isSuccess != 0) {
+			return new ResponseEntity<Integer> (isSuccess, HttpStatus.OK);
 		}
 		return new ResponseEntity<String> ("Save error", HttpStatus.NOT_ACCEPTABLE);
 	}
@@ -45,15 +45,6 @@ public class QAController {
 		question.getUsers().setPassword("");
 		return new ResponseEntity<QuestionAnswer> (question, HttpStatus.OK);
 	}
-	
-	@RequestMapping(value = UrlConstant.ANSWER, method = RequestMethod.GET)
-	public ResponseEntity<?> viewAnswerOfQuestion (@RequestParam(value = ParamConstant.QA_ID) int qaId) {
-		List<QuestionAnswer> answers = qaService.getAnswerOfQuestion(qaId);
-		for (int i = 0; i < answers.size(); i++) {
-			answers.get(i).getUsers().setPassword("");
-		}
-		return new ResponseEntity<List<QuestionAnswer>> (answers, HttpStatus.OK);
-	} 
 	
 	@RequestMapping(value = UrlConstant.QUESTIONS, method = RequestMethod.GET)
 	public ResponseEntity<?> viewQuestions () {
@@ -91,14 +82,15 @@ public class QAController {
 	}
 	
 	@RequestMapping(value = UrlConstant.ANSWER_BY_QUESTION, method = RequestMethod.GET)
-	public ResponseEntity<?> getAnswerByQuestion (@RequestParam(value = "questionId") int questionId) {
-		List<QuestionAnswer> answers = qaService.getAnswerOfQuestion(questionId);
+	public ResponseEntity<?> viewAnswerOfQuestion (@RequestParam(value = ParamConstant.QA_ID) int qaId,
+			@RequestParam(value = ParamConstant.USER_ID) int userId) {
+		List<QuestionAnswer> answers = qaService.getAnswerOfQuestion(qaId,userId);
 		for (int i = 0; i < answers.size(); i++) {
 			answers.get(i).getUsers().setPassword("");
 		}
 		return new ResponseEntity<List<QuestionAnswer>> (answers, HttpStatus.OK);
-	}
-	
+	} 
+
 	@RequestMapping(value = UrlConstant.DELETE_QUESTION_ANSWER, method = RequestMethod.POST)
 	public ResponseEntity<?> deleteQuestionAnswer (@RequestBody QuestionAnswer qa) {
 		int qaId = qa.getId();

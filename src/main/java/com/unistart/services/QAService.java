@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.unistart.entities.QuestionAnswer;
+import com.unistart.entities.Vote;
 import com.unistart.repositories.QARepository;
+import com.unistart.repositories.VoteRepository;
 import com.unistart.services.interfaces.QAInterface;
 import com.unistart.services.interfaces.UserServiceInterface;
 
@@ -22,9 +24,12 @@ public class QAService implements QAInterface {
 
 	@Autowired
 	private QARepository qaRepository;
+	
+	@Autowired
+	private VoteRepository voteRepo;
 
 	@Override
-	public boolean saveQa(String title, String contents, int type, int parentId, int userId) {
+	public Integer saveQa(String title, String contents, int type, int parentId, int userId) {
 		// TODO Auto-generated method stub
 		QuestionAnswer qa = new QuestionAnswer();
 		Calendar cal = Calendar.getInstance();
@@ -39,10 +44,10 @@ public class QAService implements QAInterface {
 				qa.setUsers(userService.getUserById(userId));
 				qa.setCreatedDateTime(cal.getTime());
 				qa.setLastUpdatedTime(cal.getTime());
-				qaRepository.save(qa);
-				return true;
+				QuestionAnswer newQa = qaRepository.save(qa);
+				return newQa.getId();
 			}
-			return false;
+			return 0;
 		} else if (type == 2) {
 			int count = qaRepository.getCountByQaId(parentId).getCount() + 1;
 			qaRepository.updateCount(count, parentId);
@@ -55,10 +60,10 @@ public class QAService implements QAInterface {
 			qa.setUsers(userService.getUserById(userId));
 			qa.setCreatedDateTime(cal.getTime());
 			qa.setLastUpdatedTime(cal.getTime());
-			qaRepository.save(qa);
-			return true;
+			QuestionAnswer newQa = qaRepository.save(qa);
+			return newQa.getId();
 		}
-		return false;
+		return 0;
 	}
 
 	@Override
@@ -72,15 +77,28 @@ public class QAService implements QAInterface {
 	}
 
 	@Override
-	public List<QuestionAnswer> getAnswerOfQuestion(int questionId) {
+	public List<QuestionAnswer> getAnswerOfQuestion(int questionId,int userId) {
 		// TODO Auto-generated method stub
-		return qaRepository.findByParentId(questionId, 2);
+		List<QuestionAnswer> list = qaRepository.findByParentId(questionId, 2);
+		Vote vote = new Vote();
+		for(int i = 0;i<list.size();i++){
+			vote = voteRepo.findByUserAndAnswer(userId, list.get(i).getId());
+				if(vote != null){
+					list.get(i).setVoteByUser(true);
+				}
+		}
+		return list;
 	}
 
 	@Override
 	public List<QuestionAnswer> getAllQuestion() {
 		// TODO Auto-generated method stub
-		return qaRepository.findAllQuestion();
+		List<QuestionAnswer> list = qaRepository.findAllQuestion();
+		for(int i = 0; i<list.size();i++){
+			int count = getTotalAnswerOfQuestion(list.get(i).getId());
+			list.get(i).setTotalAnswer(count);
+		}
+		return list;
 	}
 
 	@Override
