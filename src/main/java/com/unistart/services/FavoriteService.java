@@ -1,5 +1,7 @@
 package com.unistart.services;
 
+
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -8,7 +10,6 @@ import com.unistart.entities.Favorite;
 import com.unistart.repositories.FavoriteRepository;
 import com.unistart.entities.MajorUniversity;
 import com.unistart.entities.Users;
-import com.unistart.repositories.FavoriteRepository;
 import com.unistart.repositories.MajorUniRepository;
 import com.unistart.repositories.UserRepository;
 import com.unistart.services.interfaces.FavoriteInterface;
@@ -24,8 +25,6 @@ public class FavoriteService implements FavoriteInterface{
 	private UserRepository userRepo;
 	@Autowired
 	private MajorUniRepository majorUniRepo;
-
-	
 	private Users user;
 	private MajorUniversity majorUni;
 	private Favorite favorite;
@@ -53,4 +52,9 @@ public class FavoriteService implements FavoriteInterface{
     }
     return false;
   }
+
+  	@Override
+	public List<Favorite> listAllFavorite(int userId) {
+		return favoriteRepo.findMajorUniByUserId(userId);
+	}
 }
