@@ -17,21 +17,21 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Table(name = "Favorite", schema = "dbo", catalog = "University")
 public class Favorite implements java.io.Serializable{
       private Integer id;
-      private Users user;
-      private MajorUniversity majorUni;
+      private Users users;
+      private MajorUniversity majorUniversity;
 	public Favorite() {
 		super();
 	}
 	public Favorite(Integer id, Users user, MajorUniversity majorUni) {
 		super();
 		this.id = id;
-		this.user = user;
-		this.majorUni = majorUni;
+		this.users = user;
+		this.majorUniversity = majorUni;
 	}
 	
 	public Favorite(MajorUniversity majorUni) {
 		super();
-		this.majorUni = majorUni;
+		this.majorUniversity = majorUni;
 	}
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -46,19 +46,19 @@ public class Favorite implements java.io.Serializable{
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "UserId")
 	public Users getUser() {
-		return user;
+		return users;
 	}
 	public void setUser(Users user) {
-		this.user = user;
+		this.users = user;
 	}
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "MajorUniversityId")
 	public MajorUniversity getMajorUni() {
-		return majorUni;
+		return majorUniversity;
 	}
 	public void setMajorUni(MajorUniversity majorUni) {
-		this.majorUni = majorUni;
+		this.majorUniversity = majorUni;
 	}
       
       
