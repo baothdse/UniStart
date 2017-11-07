@@ -17,6 +17,9 @@ import com.unistart.services.interfaces.FavoriteInterface;
 @RestController
 @RequestMapping(UrlConstant.FAVORITE)
 public class FavoriteController {
+
+	@Autowired
+	private FavoriteInterface favoriteService;
 	
 	@Autowired
 	private FavoriteInterface favoriteService;
@@ -36,4 +39,13 @@ public class FavoriteController {
 			return new ResponseEntity<ErrorNotification> (error, HttpStatus.CONFLICT);
 		}
 	}
+  
+  @RequestMapping(value = UrlConstant.CHECK_FAVORITE, method = RequestMethod.POST)
+	public ResponseEntity<?> checkFavorite(@RequestBody Favorite favorite) {
+		int userId = favorite.getUser().getId();
+		int majorUniId = favorite.getMajorUni().getId();
+
+		boolean isSuccess = favoriteService.checkFavorite(userId, majorUniId);
+		return new ResponseEntity<Boolean> (isSuccess, HttpStatus.OK);
+  }
 }

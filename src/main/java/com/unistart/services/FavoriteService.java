@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.unistart.entities.Favorite;
+import com.unistart.repositories.FavoriteRepository;
 import com.unistart.entities.MajorUniversity;
 import com.unistart.entities.Users;
 import com.unistart.repositories.FavoriteRepository;
@@ -18,11 +19,12 @@ import com.unistart.services.interfaces.FavoriteInterface;
 public class FavoriteService implements FavoriteInterface{
 
 	@Autowired
+	private FavoriteRepository favoriteRepo;
+	@Autowired
 	private UserRepository userRepo;
 	@Autowired
 	private MajorUniRepository majorUniRepo;
-	@Autowired
-	private FavoriteRepository favoriteRepo;
+
 	
 	private Users user;
 	private MajorUniversity majorUni;
@@ -42,5 +44,13 @@ public class FavoriteService implements FavoriteInterface{
 		}
 		return false;
 	}
-
+  
+  @Override
+	public boolean checkFavorite(int userId, int majorUniId) {
+		favorite = favoriteRepo.findByUserAndMajorUniId(userId, majorUniId);
+		if(favorite != null){
+      return true;
+    }
+    return false;
+  }
 }
