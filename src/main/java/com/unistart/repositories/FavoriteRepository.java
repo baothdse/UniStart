@@ -20,4 +20,11 @@ public interface FavoriteRepository extends JpaRepository<Favorite, Integer>{
 	@Modifying
 	@Query("delete from Favorite f where f.id = ?1 ")
 	void deleteFavorite(int id);
+
+	@Query("select f.majorUni.major, f.majorUni.university from Favorite f where f.user.id = ?1")
+	List<Favorite> findMajorUniByUserId(int userId);
+
+	@Query("select f from Favorite f where f.user.id = ?1 and f.majorUni.id = ?2")
+	public Favorite findByUserAndMajorUniId(int userId, int majorUniId);
+
 }

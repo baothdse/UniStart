@@ -29,6 +29,10 @@ public class Favorite implements java.io.Serializable{
 		this.majorUni = majorUni;
 	}
 	
+	public Favorite(MajorUniversity majorUni) {
+		super();
+		this.majorUni = majorUni;
+	}
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "Id", unique = true, nullable = false)
