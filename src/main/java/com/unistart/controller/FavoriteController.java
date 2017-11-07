@@ -45,9 +45,8 @@ public class FavoriteController {
 	public ResponseEntity<?> checkFavorite(@RequestBody Favorite favorite) {
 		int userId = favorite.getUser().getId();
 		int majorUniId = favorite.getMajorUni().getId();
-
-		boolean isSuccess = favoriteService.checkFavorite(userId, majorUniId);
-		return new ResponseEntity<Boolean> (isSuccess, HttpStatus.OK);
+		Favorite favo = favoriteService.checkFavorite(userId, majorUniId);
+		return new ResponseEntity<Favorite> (favo, HttpStatus.OK);
   }
 
   	@RequestMapping(value = UrlConstant.GET_USER_FAVORITE, method = RequestMethod.GET)

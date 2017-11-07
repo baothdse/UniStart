@@ -44,12 +44,12 @@ public class FavoriteService implements FavoriteInterface{
 	}
   
   @Override
-	public boolean checkFavorite(int userId, int majorUniId) {
+	public Favorite checkFavorite(int userId, int majorUniId) {
 		favorite = favoriteRepo.findByUserAndMajorUniId(userId, majorUniId);
 		if(favorite != null){
-      return true;
+      return favorite;
     }
-    return false;
+    return null;
   }
 
   	@Override
