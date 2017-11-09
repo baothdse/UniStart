@@ -32,9 +32,9 @@ public class FavoriteController {
 		int userId = favorite.getUser().getId();
 		int majorUniId = favorite.getMajorUni().getId();
 
-		boolean isSuccess = favoriteService.saveFavorite(userId, majorUniId);
-		if (isSuccess) {
-			return new ResponseEntity<Boolean> (isSuccess, HttpStatus.OK);
+		Favorite isSuccess = favoriteService.saveFavorite(userId, majorUniId);
+		if (isSuccess != null) {
+			return new ResponseEntity<Integer> (isSuccess.getId(), HttpStatus.OK);
 		} else {
 			error = new ErrorNotification(ErrorConstant.MES005);
 			return new ResponseEntity<ErrorNotification> (error, HttpStatus.CONFLICT);
@@ -45,9 +45,8 @@ public class FavoriteController {
 	public ResponseEntity<?> checkFavorite(@RequestBody Favorite favorite) {
 		int userId = favorite.getUser().getId();
 		int majorUniId = favorite.getMajorUni().getId();
-
-		boolean isSuccess = favoriteService.checkFavorite(userId, majorUniId);
-		return new ResponseEntity<Boolean> (isSuccess, HttpStatus.OK);
+		int favo = favoriteService.checkFavorite(userId, majorUniId);
+		return new ResponseEntity<Integer> (favo, HttpStatus.OK);
   }
 
   	@RequestMapping(value = UrlConstant.GET_USER_FAVORITE, method = RequestMethod.GET)

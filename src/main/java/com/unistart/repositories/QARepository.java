@@ -45,6 +45,8 @@ public interface QARepository extends JpaRepository <QuestionAnswer, Integer>{
 	
 	@Query("select qa from QuestionAnswer qa where qa.id = ?1 and qa.users.id = ?2 and qa.isActive = true")
 	QuestionAnswer findByIdAndUserId(int qaId, int userId);
+
+
 	@Modifying
 	@Query("update QuestionAnswer qa set qa.isActive = false where qa.id = ?1")
 	void changeIsActive(int id);

@@ -29,7 +29,7 @@ public class FavoriteService implements FavoriteInterface{
 	private Favorite favorite;
 	
 	@Override
-	public boolean saveFavorite(int userId, int majorUniId) {
+	public Favorite saveFavorite(int userId, int majorUniId) {
 		user = userRepo.findById(userId);
 		majorUni = majorUniRepo.findById(majorUniId);
 		
@@ -38,18 +38,18 @@ public class FavoriteService implements FavoriteInterface{
 			favorite.setUser(user);
 			favorite.setMajorUni(majorUni);
 			favoriteRepo.save(favorite);
-			return true;
+			return favoriteRepo.save(favorite);
 		}
-		return false;
+		return null;
 	}
   
   @Override
-	public boolean checkFavorite(int userId, int majorUniId) {
+	public int checkFavorite(int userId, int majorUniId) {
 		favorite = favoriteRepo.findByUserAndMajorUniId(userId, majorUniId);
-		if(favorite != null){
-      return true;
-    }
-    return false;
+		if (favorite != null) {
+			return favorite.getId();
+		}
+		return -1;
   }
 
   	@Override

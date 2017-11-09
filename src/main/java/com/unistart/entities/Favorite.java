@@ -19,6 +19,9 @@ public class Favorite implements java.io.Serializable{
       private Integer id;
       private Users users;
       private MajorUniversity majorUniversity;
+      private String majorName;
+      private String univeristyName;
+      private Integer majorUniId;
 	public Favorite() {
 		super();
 	}
@@ -32,6 +35,13 @@ public class Favorite implements java.io.Serializable{
 	public Favorite(MajorUniversity majorUni) {
 		super();
 		this.majorUniversity = majorUni;
+	}
+	
+	public Favorite(Integer id, MajorUniversity majorUni){
+		this.id = id;
+		this.majorUniId = majorUni.getId();
+		this.majorName = majorUni.getMajor().getMajorName();
+		this.univeristyName = majorUni.getUniversity().getName();
 	}
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
