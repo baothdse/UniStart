@@ -1,6 +1,8 @@
 package com.unistart.entities;
 // Generated Oct 1, 2017 10:03:30 PM by Hibernate Tools 4.3.1.Final
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -23,6 +25,7 @@ public class Mbtiresult implements java.io.Serializable {
 	private int id;
 	private Mbtitype mbtitype;
 	private Users users;
+	private Date testDate;
 
 	public Mbtiresult() {
 	}
@@ -68,5 +71,16 @@ public class Mbtiresult implements java.io.Serializable {
 	public void setUsers(Users users) {
 		this.users = users;
 	}
+
+	@Column(name = "TestDate")
+	public Date getTestDate() {
+		return testDate;
+	}
+
+	public void setTestDate(Date testDate) {
+		this.testDate = testDate;
+	}
+	
+	
 
 }

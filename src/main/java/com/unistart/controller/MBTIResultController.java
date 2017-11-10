@@ -40,18 +40,18 @@ public class MBTIResultController {
 		}
 	}
 	
-	@RequestMapping(value = UrlConstant.UPDATE_MBTI_RESULT, method = RequestMethod.POST)
-	public ResponseEntity<?> updateMbtiResult(@RequestBody MBTIResultType mbtiResultType) {
-		String mbtiName = mbtiResultType.getMbtiType().getMbtitypeName();
-		int userId = mbtiResultType.getUser().getId();
-		boolean isSuccess = mbtiResultService.updateMbtiResult(mbtiName, userId);
-		if (isSuccess) {
-			return new ResponseEntity<Boolean> (isSuccess, HttpStatus.OK);
-		} else {
-			error = new ErrorNotification(ErrorConstant.MES005);
-			return new ResponseEntity<ErrorNotification> (error, HttpStatus.CONFLICT);
-		}
-	}
+//	@RequestMapping(value = UrlConstant.UPDATE_MBTI_RESULT, method = RequestMethod.POST)
+//	public ResponseEntity<?> updateMbtiResult(@RequestBody MBTIResultType mbtiResultType) {
+//		String mbtiName = mbtiResultType.getMbtiType().getMbtitypeName();
+//		int userId = mbtiResultType.getUser().getId();
+//		boolean isSuccess = mbtiResultService.updateMbtiResult(mbtiName, userId);
+//		if (isSuccess) {
+//			return new ResponseEntity<Boolean> (isSuccess, HttpStatus.OK);
+//		} else {
+//			error = new ErrorNotification(ErrorConstant.MES005);
+//			return new ResponseEntity<ErrorNotification> (error, HttpStatus.CONFLICT);
+//		}
+//	}
 	
 	@RequestMapping(value = UrlConstant.GET_MBTI_RESULT, method = RequestMethod.GET)
 	public ResponseEntity<?> getMbtiResult(@RequestParam(value = "userId") int userId){

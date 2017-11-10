@@ -1,5 +1,8 @@
 package com.unistart.services;
 
+import java.util.Calendar;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,10 +37,12 @@ public class MBTIResultService implements MBTIResultServiceInterface {
 	public boolean saveMbtiResult(String mbtiTypeName, int userId) {
 		mbtiType = mbtiTypeRepo.findByMbtitypeName(mbtiTypeName);
 		user = userRepo.findById(userId);
+		Calendar cal = Calendar.getInstance();
 		if (mbtiType != null) {
 			mbtiResult = new Mbtiresult();
 			mbtiResult.setMbtitype(mbtiType);
 			mbtiResult.setUsers(user);
+			mbtiResult.setTestDate(cal.getTime());
 			mbtiResultRepo.save(mbtiResult);
 			return true;
 		}	
@@ -46,8 +51,12 @@ public class MBTIResultService implements MBTIResultServiceInterface {
 
 	@Override
 	public Mbtiresult getMBTIResult(int userId) {
-		mbtiResult = mbtiResultRepo.getMBTIResult(userId);
-		return mbtiResult;
+		List<Mbtiresult> result = mbtiResultRepo.getMBTIResult(userId);
+		if(result.size() >= 1){
+			int x = 0;
+			return result.get(x);
+		}
+		return null;
 	}
 
 	@Override
