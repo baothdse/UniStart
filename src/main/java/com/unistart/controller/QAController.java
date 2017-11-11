@@ -12,10 +12,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.unistart.constant.ErrorConstant;
 import com.unistart.constant.ParamConstant;
 import com.unistart.constant.UrlConstant;
+import com.unistart.entities.ArticleTag;
 import com.unistart.entities.QuestionAnswer;
+import com.unistart.entities.QuestionTag;
+import com.unistart.entities.Review;
 import com.unistart.entities.University;
+import com.unistart.error.ErrorNotification;
 import com.unistart.services.interfaces.QAInterface;
 
 @RestController
@@ -31,9 +36,13 @@ public class QAController {
 		int type = qa.getType();
 		int parentId = qa.getParentId();
 		int userId = qa.getUsers().getId();
-		int isSuccess = qaService.saveQa(title, contents, type, parentId, userId);
-		if (isSuccess != 0) {
-			return new ResponseEntity<Integer> (isSuccess, HttpStatus.OK);
+		int isqaId = qaService.saveQa(title, contents, type, parentId, userId);
+		boolean isSave =true;
+		if(type == 1){
+			isSave = qaService.saveTag(isqaId, qa.getTagUniversity());
+		}
+		if (isqaId != 0 && isSave) {
+			return new ResponseEntity<Integer> (isqaId, HttpStatus.OK);
 		}
 		return new ResponseEntity<String> ("Save error", HttpStatus.NOT_ACCEPTABLE);
 	}
@@ -75,6 +84,7 @@ public class QAController {
 		int qaId = qa.getId();
 		int userId = qa.getUsers().getId();
 		boolean isSuccess = qaService.updateQa(title, contents, qaId, userId);
+		//boolean isUpdate = qaService.updateTag(qaId, qa.getTagUniversity());
 		if(isSuccess) {
 			return new ResponseEntity<String>("Update successful", HttpStatus.OK);		
 		}
@@ -91,11 +101,55 @@ public class QAController {
 		return new ResponseEntity<List<QuestionAnswer>> (answers, HttpStatus.OK);
 	} 
 
-	@RequestMapping(value = UrlConstant.DELETE_QUESTION_ANSWER, method = RequestMethod.POST)
-	public ResponseEntity<?> deleteQuestionAnswer (@RequestBody QuestionAnswer qa) {
-		int qaId = qa.getId();
-		boolean isDelete = qaService.deleteQuestionAnswer(qaId);
-		return new ResponseEntity<Boolean> (isDelete, HttpStatus.OK);
+//	@RequestMapping(value = UrlConstant.CHANGE_QUESTION_STATUS, method = RequestMethod.POST)
+//	public ResponseEntity<?> deleteQuestionAnswer (@RequestBody QuestionAnswer qa) {
+//		int qaId = qa.getId();
+//		boolean status = qa.getStatus();
+//		boolean isActive = qa.getIsActive();
+//		boolean isDelete = qaService.changeStatusQuestionAnswer(qaId,status,isActive);
+//		return new ResponseEntity<Boolean> (isDelete, HttpStatus.OK);
+//	}
+	
+	@RequestMapping(value = UrlConstant.GET_TAG_QUESTION, method = RequestMethod.GET)
+	public ResponseEntity<?> getTagOfArticle(@RequestParam(value = "qaId") int qaId){
+		List<QuestionTag> listTag = qaService.getTagOfQuestion(qaId);
+		return new ResponseEntity<List<QuestionTag>>(listTag, HttpStatus.OK);
 	}
+	
+	@RequestMapping(value = UrlConstant.QUESTION_NEED_ACCEPT, method = RequestMethod.GET)
+	public ResponseEntity<?> listAllNeedAcceptReview(){
+		List<QuestionAnswer> listAllQuestion = qaService.listAllQuestionNeedAccept();
+		if(listAllQuestion != null){
+			return new ResponseEntity<List<QuestionAnswer>>(listAllQuestion, HttpStatus.OK);
+		}else {
+			ErrorNotification error = new ErrorNotification(ErrorConstant.MES017);
+			return new ResponseEntity<ErrorNotification> (error, HttpStatus.CONFLICT);
+		}
+		
+	}
+	
+	@RequestMapping(value = UrlConstant.NUMBER_QUESTION_NEED_ACCEPT, method = RequestMethod.GET)
+	public ResponseEntity<?> getNumberQuestionNeedAccept(){
+		int numberOfQuestion = qaService.numberOfQuestionNeedAccept();
+		return new ResponseEntity<Integer>(numberOfQuestion, HttpStatus.OK);	
+	}
+
+	@RequestMapping(value = UrlConstant.CHANGE_QUESTION_STATUS, method = RequestMethod.POST)
+	public ResponseEntity<?> changeQuestionStatus(@RequestBody QuestionAnswer qa){
+		int id = qa.getId();
+		boolean status = qa.getStatus();
+		boolean isActive = qa.getIsActive();
+		boolean isSuccess = qaService.changeStatusQuestionAnswer(id, status, isActive);
+		return new ResponseEntity<Boolean> (isSuccess, HttpStatus.OK);
+//		int qaId = qa.getId();
+//		boolean isDelete = qaService.deleteQuestionAnswer(qaId);
+//		return new ResponseEntity<Boolean> (isDelete, HttpStatus.OK);
+	}
+	
+//	@RequestMapping(value = UrlConstant.SET_REPORT, method = RequestMethod.POST)
+//	public ResponseEntity<?> getTagOfArticle(@RequestParam(value = "qaId") int qaId){
+//		List<QuestionTag> listTag = qaService.getTagOfQuestion(qaId);
+//		return new ResponseEntity<List<QuestionTag>>(listTag, HttpStatus.OK);
+//	}
 	
 }

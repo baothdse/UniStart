@@ -1,5 +1,6 @@
 package com.unistart.services;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -8,9 +9,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.unistart.entities.ArticleTag;
+import com.unistart.entities.MajorUniversity;
 import com.unistart.entities.QuestionAnswer;
+import com.unistart.entities.QuestionTag;
+import com.unistart.entities.Tag;
+import com.unistart.entities.University;
 import com.unistart.entities.Vote;
 import com.unistart.repositories.QARepository;
+import com.unistart.repositories.QATagRepository;
+import com.unistart.repositories.TagRepository;
+import com.unistart.repositories.UniversityRepository;
 import com.unistart.repositories.VoteRepository;
 import com.unistart.services.interfaces.QAInterface;
 import com.unistart.services.interfaces.UserServiceInterface;
@@ -27,7 +36,12 @@ public class QAService implements QAInterface {
 	
 	@Autowired
 	private VoteRepository voteRepo;
-
+	@Autowired
+	private UniversityRepository uniRepo;
+	@Autowired
+	private QATagRepository qaTagRepo;
+	@Autowired
+	private TagRepository tagRepo;
 	@Override
 	public Integer saveQa(String title, String contents, int type, int parentId, int userId) {
 		// TODO Auto-generated method stub
@@ -44,13 +58,17 @@ public class QAService implements QAInterface {
 				qa.setUsers(userService.getUserById(userId));
 				qa.setCreatedDateTime(cal.getTime());
 				qa.setLastUpdatedTime(cal.getTime());
+				qa.setStatus(false);
 				QuestionAnswer newQa = qaRepository.save(qa);
 				return newQa.getId();
 			}
 			return 0;
 		} else if (type == 2) {
-			int count = qaRepository.getCountByQaId(parentId).getCount() + 1;
-			qaRepository.updateCount(count, parentId);
+			QuestionAnswer ques = qaRepository.findById(parentId);
+			if(ques.getUsers().getId() != userId){
+				int count = qaRepository.getCountByQaId(parentId).getCount() + 1;
+				qaRepository.updateCount(count, parentId);
+			}
 			qa.setTitle("");
 			qa.setCount(0);
 			qa.setContent(contents);
@@ -60,6 +78,7 @@ public class QAService implements QAInterface {
 			qa.setUsers(userService.getUserById(userId));
 			qa.setCreatedDateTime(cal.getTime());
 			qa.setLastUpdatedTime(cal.getTime());
+			qa.setStatus(true);
 			QuestionAnswer newQa = qaRepository.save(qa);
 			return newQa.getId();
 		}
@@ -142,9 +161,86 @@ public class QAService implements QAInterface {
 	}
     
     @Override
-	public boolean deleteQuestionAnswer(int qaId) {
-		qaRepository.changeIsActive(qaId);
-		return true;
+	public boolean changeStatusQuestionAnswer(int qaId, boolean status, boolean isActive) {
+    	QuestionAnswer qa = qaRepository.findById(qaId);
+		if (qa != null){
+			qa.setStatus(status);
+			qa.setIsActive(isActive);
+			qaRepository.save(qa);
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean saveTag(int id, int[] tagUni) {
+		QuestionAnswer qa = qaRepository.findById(id);
+		if(qa != null){
+			for(int i =0; i<tagUni.length;i++){
+				QuestionTag qT = new QuestionTag();
+				qT.setQa(qa);
+				Tag tag = tagRepo.findById(tagUni[i]);
+				qT.setTag(tag);
+				qaTagRepo.save(qT);
+			}
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean updateTag(int questionId, int[] tagUni) {
+		QuestionAnswer qa = qaRepository.findById(questionId);
+		if(qa != null){
+			List<QuestionTag> questionTag = qaTagRepo.findByQuestionId(questionId);
+			QuestionTag qT = new QuestionTag();
+			ArrayList<Integer> test = new ArrayList<Integer>();
+			for(int x=0;x<tagUni.length;x++){
+				test.add(tagUni[x]);
+			}
+			for(int a=0; a<questionTag.size();a++){
+			    if(test.contains(questionTag.get(a).getTag().getId())==false){
+			    	qT = qaTagRepo.findByqaIdAnduniId(questionId, questionTag.get(a).getTag().getId());
+			    	qaTagRepo.deleteTag(qT.getId());
+			    }
+			}
+			for(int i=0; i<tagUni.length;i++){
+				qT = qaTagRepo.findByqaIdAnduniId(questionId, tagUni[i]);
+				if(qT == null){
+					qT = new QuestionTag();
+					qT.setQa(qa);
+					Tag tag = tagRepo.findById(tagUni[i]);
+					qT.setTag(tag);
+					qaTagRepo.save(qT);
+				}
+			}
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public List<QuestionTag> getTagOfQuestion(int qaId) {
+		List<QuestionTag> listTag = qaTagRepo.getTagByquestionId(qaId);
+		return listTag;
+	}
+
+	@Override
+	public void updateTotalReport(int qaId) {
+		// TODO Auto-generated method stub
+		QuestionAnswer qa = getQaByQaId(qaId);
+		int totalReport = qa.getNumberOfReport() + 1;
+		qaRepository.setTotalReport(totalReport, qaId);
+	}
+
+	@Override
+	public List<QuestionAnswer> listAllQuestionNeedAccept() {
+		return qaRepository.findAllQuestionNeedAccept();
+	}
+
+	@Override
+	public int numberOfQuestionNeedAccept() {
+		return qaRepository.numberOfQuestionNeedAccept();
 	}
 
 }

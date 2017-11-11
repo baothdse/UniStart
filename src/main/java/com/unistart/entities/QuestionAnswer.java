@@ -16,8 +16,8 @@ import javax.persistence.Transient;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@JsonIgnoreProperties({"isActive"})
-@Table(name = "Question_Answer", schema = "dbo", catalog = "University")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@Table(name = "QuestionAnswer", schema = "dbo", catalog = "University")
 public class QuestionAnswer implements java.io.Serializable {
 	private Integer id;
 	private String title;
@@ -28,10 +28,14 @@ public class QuestionAnswer implements java.io.Serializable {
 	private Users users;
 	private Integer parentId;
 	private Boolean isActive;
+	private Boolean status;
+	private Integer numberOfReport;
 	private Date createdDateTime;
 	private Date lastUpdatedTime;
 	private boolean isVoteByUser;
 	private int totalAnswer;
+	private int[] tagUniversity;
+	//private int[] otherTag;
 	
 	public QuestionAnswer(Integer id, String title, String content, Integer vote, Integer type, Users users,
 			Integer parentId, Boolean isActive, Date createdDateTime, Date lastUpdatedTime) {
@@ -54,6 +58,14 @@ public class QuestionAnswer implements java.io.Serializable {
 		this.count = count;
 	}
 	
+	public QuestionAnswer(Integer id, String title, String content, Boolean isActive, Boolean status) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.content = content;
+		this.isActive = isActive;
+		this.status = status;
+	}
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "Id", unique = true, nullable = false)
@@ -128,6 +140,32 @@ public class QuestionAnswer implements java.io.Serializable {
 	public void setIsActive(Boolean isActive) {
 		this.isActive = isActive;
 	}
+	
+	@Column(name = "Status")
+	public Boolean getStatus() {
+		return status;
+	}
+	public void setStatus(Boolean status) {
+		this.status = status;
+	}
+	@Column(name = "NumberOfReport")
+	public Integer getNumberOfReport() {
+		if(numberOfReport == null){
+			setNumberOfReport(0);
+		}
+		return numberOfReport;
+	}
+
+	public void setNumberOfReport(Integer numberOfReport) {
+		this.numberOfReport = numberOfReport;
+	}
+	//	@Column(name = "numberOfReport", nullable = false)
+//	public Boolean getStatus() {
+//		return status;
+//	}
+//	public void setStatus(Boolean status) {
+//		this.status = status;
+//	}
 	@Column(name = "CreatedDateTime", nullable = false)
 	public Date getCreatedDateTime() {
 		return createdDateTime;
@@ -158,6 +196,15 @@ public class QuestionAnswer implements java.io.Serializable {
 	public void setVoteByUser(boolean isVoteByUser) {
 		this.isVoteByUser = isVoteByUser;
 	}
+	
+	@Transient
+	public int[] getTagUniversity() {
+		return tagUniversity;
+	}
+	public void setTagUniversity(int[] tagUniversity) {
+		this.tagUniversity = tagUniversity;
+	}
+	
 	
 
 	
