@@ -101,11 +101,19 @@ public class UrlConstant {
 	public static final String QUESTIONS = "/questions";
 	public static final String QUESTIONS_BY_USER = "/questions-by-user";
 	public static final String COUNT_ANSWER = "/count-answer";
+	public static final String GET_TAG_QUESTION = "/get-tag-question";
+	public static final String SET_REPORT = "/set-report";
+	public static final String QUESTION_NEED_ACCEPT = "/question-need-accept";
+	public static final String NUMBER_QUESTION_NEED_ACCEPT = "/number-question-need-accept";
+	public static final String CHANGE_QUESTION_STATUS ="/change-question-status";
 	
 	//Vote
 	public static final String VOTE = "/vote";
 	public static final String COUNT_VOTE = "/count-vote";
 	public static final String ANSWER_BY_QUESTION = "/answer-by-question";
 	public static final String DELETE_QUESTION_ANSWER = "/delete-question-answer";
+	
+	//Report
+	public static final String REPORT = "/report";
 
 }

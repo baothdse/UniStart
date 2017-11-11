@@ -29,4 +29,7 @@ public class ErrorConstant {
 	//Article
 	public static final String MES015 = "Code is duplicate";
 	public static final String MES016 = "Article is existed";
+	
+	//Question 
+	public static final String MES017 = "No question need accept";
 }

@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.unistart.entities.QuestionAnswer;
+import com.unistart.entities.Report;
 
 @Repository
 public interface QARepository extends JpaRepository <QuestionAnswer, Integer>{
@@ -21,21 +22,26 @@ public interface QARepository extends JpaRepository <QuestionAnswer, Integer>{
 	void updateCount(int count, int id);
 	
 	QuestionAnswer findById(int id);
+
 	
-	@Query("select qa from QuestionAnswer qa where qa.parentId = ?1 and qa.type = ?2 and qa.isActive = true")
+	@Query("select qa from QuestionAnswer qa where qa.parentId = ?1 and qa.type = ?2 and qa.status = true and qa.isActive = true")
 	List<QuestionAnswer> findByParentId(int parentId, int type);
 	
-	@Query("select qa from QuestionAnswer qa where qa.type = 1 and qa.isActive = true order by qa.lastUpdatedTime desc")
+	@Query("select qa from QuestionAnswer qa where qa.type = 1 and qa.status = true and qa.isActive = true order by qa.lastUpdatedTime desc")
 	List<QuestionAnswer> findAllQuestion();
 	
-	@Query("select qa from QuestionAnswer qa where qa.users.id = ?1 and qa.type = 1 and qa.isActive = true order by qa.lastUpdatedTime desc")
+	@Query("select qa from QuestionAnswer qa where qa.users.id = ?1 and qa.type = 1 and qa.status = true and qa.isActive = true order by qa.lastUpdatedTime desc")
 	List<QuestionAnswer> findAllQuestionByUserId(int userId);
 	
 	@Modifying
 	@Query("update QuestionAnswer qa set qa.vote = ?1 where id = ?2")
 	void setTotalVote(int vote, int qaId);
 	
-	@Query("select count(*) from QuestionAnswer qa where qa.parentId = ?1 and qa.isActive = true")
+	@Modifying
+	@Query("update QuestionAnswer qa set qa.numberOfReport = ?1 where id = ?2")
+	void setTotalReport(int report, int qaId);
+	
+	@Query("select count(*) from QuestionAnswer qa where qa.parentId = ?1 and qa.status=true and qa.isActive = true")
 	int getTotalAnswerOfQuestion(int questionId);
 	
 	@Modifying
@@ -46,8 +52,14 @@ public interface QARepository extends JpaRepository <QuestionAnswer, Integer>{
 	@Query("select qa from QuestionAnswer qa where qa.id = ?1 and qa.users.id = ?2 and qa.isActive = true")
 	QuestionAnswer findByIdAndUserId(int qaId, int userId);
 
-
+	@Query("select count (qa) from QuestionAnswer qa where qa.isActive = true and qa.status= false")
+	int numberOfQuestionNeedAccept();
+	
 	@Modifying
-	@Query("update QuestionAnswer qa set qa.isActive = false where qa.id = ?1")
+	@Query("update QuestionAnswer qa set qa.isActive = ?3 where qa.id = ?1")
 	void changeIsActive(int id);
+	
+	@Query("SELECT new com.unistart.entities.QuestionAnswer(q.id,q.title, q.content, q.status, q.isActive)"
+			+ "from QuestionAnswer q where q.status = false and q.isActive = true and q.parentId = 0")
+	List<QuestionAnswer> findAllQuestionNeedAccept();
 }
