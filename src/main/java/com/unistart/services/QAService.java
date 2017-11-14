@@ -13,11 +13,13 @@ import com.unistart.entities.ArticleTag;
 import com.unistart.entities.MajorUniversity;
 import com.unistart.entities.QuestionAnswer;
 import com.unistart.entities.QuestionTag;
+import com.unistart.entities.Report;
 import com.unistart.entities.Tag;
 import com.unistart.entities.University;
 import com.unistart.entities.Vote;
 import com.unistart.repositories.QARepository;
 import com.unistart.repositories.QATagRepository;
+import com.unistart.repositories.ReportRespository;
 import com.unistart.repositories.TagRepository;
 import com.unistart.repositories.UniversityRepository;
 import com.unistart.repositories.VoteRepository;
@@ -42,6 +44,10 @@ public class QAService implements QAInterface {
 	private QATagRepository qaTagRepo;
 	@Autowired
 	private TagRepository tagRepo;
+	@Autowired
+	private ReportRespository reportRepo;
+	
+	
 	@Override
 	public Integer saveQa(String title, String contents, int type, int parentId, int userId) {
 		// TODO Auto-generated method stub
@@ -100,11 +106,16 @@ public class QAService implements QAInterface {
 		// TODO Auto-generated method stub
 		List<QuestionAnswer> list = qaRepository.findByParentId(questionId, 2);
 		Vote vote = new Vote();
+		Report report = new Report();
 		for(int i = 0;i<list.size();i++){
 			vote = voteRepo.findByUserAndAnswer(userId, list.get(i).getId());
 				if(vote != null){
 					list.get(i).setVoteByUser(true);
 				}
+			report = reportRepo.findByUserAndAnswer(userId, list.get(i).getId());
+			if(report != null){
+				list.get(i).setReportByUser(true);
+			}
 		}
 		return list;
 	}
@@ -241,6 +252,30 @@ public class QAService implements QAInterface {
 	@Override
 	public int numberOfQuestionNeedAccept() {
 		return qaRepository.numberOfQuestionNeedAccept();
+	}
+
+	@Override
+	public List<QuestionAnswer> getAllReport() {
+		List<QuestionAnswer> list = qaRepository.getAllReport();
+		return null;
+	}
+
+	@Override
+	public boolean changeReportStatus(int qaId, boolean status, boolean isActive) {
+		QuestionAnswer qa = qaRepository.findById(qaId);
+		if(qa != null){
+			if(status == true && isActive == true){
+				qa.setNumberOfReport(0);
+				qaRepository.save(qa);
+				return true;
+			}else if(status == false && isActive == false){
+				qa.setStatus(status);
+				qa.setIsActive(isActive);
+				qaRepository.save(qa);
+				return true;
+			}
+		}
+		return false;
 	}
 
 }

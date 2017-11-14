@@ -29,7 +29,6 @@ public class Users implements java.io.Serializable {
 
 	private Integer id;
 	private Role role;
-	private University university;
 	private String username;
 	private String password;
 	private String name;
@@ -66,12 +65,11 @@ public class Users implements java.io.Serializable {
 		this.email = email;
 	}
 
-	public Users(Integer id, Role role, University university, String username, String password, String name,
+	public Users(Integer id, Role role, String username, String password, String name,
 			String image, String email, boolean isActive, Set<ReviewLike> reviewLikes, Set<Provider> providers,
 			Set<Review> reviews, Set<Mbtiresult> mbtiresults) {
 		this.id = id;
 		this.role = role;
-		this.university = university;
 		this.username = username;
 		this.password = password;
 		this.name = name;
@@ -108,15 +106,15 @@ public class Users implements java.io.Serializable {
 	}
 
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "UniversityId")
-	public University getUniversity() {
-		return this.university;
-	}
-
-	public void setUniversity(University university) {
-		this.university = university;
-	}
+//	@ManyToOne(fetch = FetchType.LAZY)
+//	@JoinColumn(name = "UniversityId")
+//	public University getUniversity() {
+//		return this.university;
+//	}
+//
+//	public void setUniversity(University university) {
+//		this.university = university;
+//	}
 
 	@Column(name = "Username", nullable = false, length = 50)
 	public String getUsername() {
