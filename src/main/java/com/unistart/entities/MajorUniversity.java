@@ -25,7 +25,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
  */
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@Table(name = "Major_University", schema = "dbo", catalog = "University")
+@Table(name = "MajorUniversity", schema = "dbo", catalog = "University")
 public class MajorUniversity implements java.io.Serializable {
 
 

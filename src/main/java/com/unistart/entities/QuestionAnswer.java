@@ -33,6 +33,7 @@ public class QuestionAnswer implements java.io.Serializable {
 	private Date createdDateTime;
 	private Date lastUpdatedTime;
 	private boolean isVoteByUser;
+	private boolean isReportByUser;
 	private int totalAnswer;
 	private int[] tagUniversity;
 	//private int[] otherTag;
@@ -58,14 +59,18 @@ public class QuestionAnswer implements java.io.Serializable {
 		this.count = count;
 	}
 	
-	public QuestionAnswer(Integer id, String title, String content, Boolean isActive, Boolean status) {
+	public QuestionAnswer(Integer id, String title, String content) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.content = content;
-		this.isActive = isActive;
-		this.status = status;
 	}
+	public QuestionAnswer(Integer id, String content) {
+		super();
+		this.id = id;
+		this.content = content;
+	}
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "Id", unique = true, nullable = false)
@@ -203,6 +208,14 @@ public class QuestionAnswer implements java.io.Serializable {
 	}
 	public void setTagUniversity(int[] tagUniversity) {
 		this.tagUniversity = tagUniversity;
+	}
+	
+	@Transient
+	public boolean isReportByUser() {
+		return isReportByUser;
+	}
+	public void setReportByUser(boolean isReportByUser) {
+		this.isReportByUser = isReportByUser;
 	}
 	
 	

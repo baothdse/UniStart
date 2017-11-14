@@ -40,7 +40,7 @@ public class University implements java.io.Serializable {
 	private String image;
 	private Integer priority;
 	private Boolean isActive;
-	private Set<Users> userses = new HashSet<Users>(0);
+//	s
 	private Set<Review> reviews = new HashSet<Review>(0);
 	@JsonManagedReference
 	private Set<MajorUniversity> majorUniversities = new HashSet<MajorUniversity>(0);
@@ -218,15 +218,15 @@ public class University implements java.io.Serializable {
 		this.isActive = isActive;
 	}
 
-	@JsonIgnore
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "university")
-	public Set<Users> getUserses() {
-		return this.userses;
-	}
-
-	public void setUserses(Set<Users> userses) {
-		this.userses = userses;
-	}
+//	@JsonIgnore
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "university")
+//	public Set<Users> getUserses() {
+//		return this.userses;
+//	}
+//
+//	public void setUserses(Set<Users> userses) {
+//		this.userses = userses;
+//	}
 
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "university")

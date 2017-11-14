@@ -77,7 +77,7 @@ public class Block implements java.io.Serializable {
 		this.description = description;
 	}
 
-	@Column(name = "isActive")
+	@Column(name = "IsActive")
 	public Boolean getIsActive() {
 		return this.isActive;
 	}

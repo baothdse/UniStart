@@ -152,4 +152,18 @@ public class QAController {
 //		return new ResponseEntity<List<QuestionTag>>(listTag, HttpStatus.OK);
 //	}
 	
+	@RequestMapping(value = UrlConstant.GET_ALL_REPORT, method = RequestMethod.GET)
+	public ResponseEntity<?> getAllReport(){
+		List<QuestionAnswer> list = qaService.getAllReport();
+		return new ResponseEntity<List<QuestionAnswer>>(list, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = UrlConstant.CHANGE_REPORT_STATUS, method = RequestMethod.POST)
+	public ResponseEntity<?> changeReportStatus(@RequestBody QuestionAnswer qa){
+		int id = qa.getId();
+		boolean status = qa.getStatus();
+		boolean isActive = qa.getIsActive();
+		boolean isSuccess = qaService.changeStatusQuestionAnswer(id, status, isActive);
+		return new ResponseEntity<Boolean> (isSuccess, HttpStatus.OK);
+	}
 }

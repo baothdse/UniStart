@@ -59,7 +59,14 @@ public interface QARepository extends JpaRepository <QuestionAnswer, Integer>{
 	@Query("update QuestionAnswer qa set qa.isActive = ?3 where qa.id = ?1")
 	void changeIsActive(int id);
 	
-	@Query("SELECT new com.unistart.entities.QuestionAnswer(q.id,q.title, q.content, q.status, q.isActive)"
+	@Query("SELECT new com.unistart.entities.QuestionAnswer(q.id,q.title, q.content)"
 			+ "from QuestionAnswer q where q.status = false and q.isActive = true and q.parentId = 0")
 	List<QuestionAnswer> findAllQuestionNeedAccept();
+	
+	@Query("SELECT q from QuestionAnswer q where q.status = true and q.isActive = true and q.numberOfReport > 0")
+	List<QuestionAnswer> getAllReport();
+	
+	@Modifying
+	@Query("update QuestionAnswer qa set qa.numberOfReport = 0 where qa.id = ?1")
+	void changeNumberOfReport(int id);
 }

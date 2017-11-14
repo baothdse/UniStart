@@ -132,7 +132,7 @@ public class Article implements java.io.Serializable {
 		this.description = description;
 	}
 
-	@Column(name = "createDate", length = 100)
+	@Column(name = "CreateDate", length = 100)
 	public Date getCreateDate() {
 		return createDate;
 	}
