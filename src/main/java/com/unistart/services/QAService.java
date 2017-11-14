@@ -278,4 +278,9 @@ public class QAService implements QAInterface {
 		return false;
 	}
 
+	@Override
+	public List<Tag> getAllTag() {
+		return tagRepo.findAll();
+	}
+
 }

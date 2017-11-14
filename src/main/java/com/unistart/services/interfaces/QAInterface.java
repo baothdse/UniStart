@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.unistart.entities.QuestionAnswer;
 import com.unistart.entities.QuestionTag;
+import com.unistart.entities.Tag;
 
 public interface QAInterface {
 	Integer saveQa(String title, String contents, int type, int parentId, int userId);
@@ -24,4 +25,5 @@ public interface QAInterface {
 	int numberOfQuestionNeedAccept();
 	List<QuestionAnswer> getAllReport();
 	boolean changeReportStatus(int qaId, boolean status, boolean isActive);
+	List<Tag> getAllTag();
 }
