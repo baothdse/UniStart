@@ -108,6 +108,7 @@ public class UrlConstant {
 	public static final String CHANGE_QUESTION_STATUS ="/change-question-status";
 	public static final String GET_ALL_REPORT="/get-all-report";
 	public static final String CHANGE_REPORT_STATUS="/change-report-status";
+	public static final String GET_ALL_TAG = "/get-all-tag";
 	
 	//Vote
 	public static final String VOTE = "/vote";

@@ -19,6 +19,7 @@ import com.unistart.entities.ArticleTag;
 import com.unistart.entities.QuestionAnswer;
 import com.unistart.entities.QuestionTag;
 import com.unistart.entities.Review;
+import com.unistart.entities.Tag;
 import com.unistart.entities.University;
 import com.unistart.error.ErrorNotification;
 import com.unistart.services.interfaces.QAInterface;
@@ -165,5 +166,11 @@ public class QAController {
 		boolean isActive = qa.getIsActive();
 		boolean isSuccess = qaService.changeStatusQuestionAnswer(id, status, isActive);
 		return new ResponseEntity<Boolean> (isSuccess, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = UrlConstant.GET_ALL_TAG, method = RequestMethod.GET)
+	public ResponseEntity<?> getAllTag(){
+		List<Tag> list = qaService.getAllTag();
+		return new ResponseEntity<List<Tag>>(list, HttpStatus.OK);
 	}
 }
