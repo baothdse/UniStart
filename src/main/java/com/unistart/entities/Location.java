@@ -27,6 +27,7 @@ public class Location implements java.io.Serializable {
 	private String locationCode;
 	private Boolean isActive;
 	private Set<University> universities = new HashSet<University>(0);
+	private Set<HighSchool> highSchools = new HashSet<HighSchool>(0);
 
 	public Location() {
 	}
@@ -98,5 +99,16 @@ public class Location implements java.io.Serializable {
 		this.universities = universities;
 	}
 
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "location")
+	public Set<HighSchool> getHighSchools() {
+		return highSchools;
+	}
+
+	public void setHighSchools(Set<HighSchool> highSchools) {
+		this.highSchools = highSchools;
+	}
+
+	
 
 }
