@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -17,6 +18,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Table(name = "QuestionTag", schema = "dbo", catalog = "University")
 public class QuestionTag {
 	private Integer id;
+	@JsonBackReference
 	private QuestionAnswer qa;
 	private Tag tag;
 	//private Tag otherTag;
@@ -56,7 +58,7 @@ public class QuestionTag {
 		this.qa = qa;
 	}
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "TagId")
 	public Tag getTag() {
 		return tag;

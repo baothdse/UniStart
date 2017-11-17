@@ -20,7 +20,7 @@ public class ReportService implements ReportInterface{
 	private QAInterface qaService;
 	@Autowired
 	private UserServiceInterface userService;
-	
+	@Autowired
 	private ReportRespository reportRepo;
 	@Override
 	public Report getReportByAnswerAndUser(int qaId, int userId) {
@@ -31,8 +31,8 @@ public class ReportService implements ReportInterface{
 	@Override
 	public boolean saveReport(int qaId, int userId) {
 		// TODO Auto-generated method stub
+		Report report = new Report();
 		if (getReportByAnswerAndUser(qaId, userId) == null) {
-			Report report = new Report();
 			report.setQuestionAnswer(qaService.getQaByQaId(qaId));
 			report.setUser(userService.getUserById(userId));
 			qaService.updateTotalReport(qaId);

@@ -135,7 +135,7 @@ public class CorrelateService implements CorrelateServiceInterface{
 		List<ScoreHistory> list = new ArrayList<>();
 		for(int i = 0; i<listBlockMajorUni.size();i++){
 			List<ScoreHistory> listScore = new ArrayList<>(listBlockMajorUni.get(i).getScoreHistories());
-			for(int j=0; j<listScore.size();i++){
+			for(int j=0; j<listScore.size();j++){
 				if(listScore.get(j).getYear() == 2017){
 					list.add(listScore.get(j));
 				}

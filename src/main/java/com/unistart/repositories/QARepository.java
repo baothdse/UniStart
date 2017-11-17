@@ -27,8 +27,13 @@ public interface QARepository extends JpaRepository <QuestionAnswer, Integer>{
 	@Query("select qa from QuestionAnswer qa where qa.parentId = ?1 and qa.type = ?2 and qa.status = true and qa.isActive = true")
 	List<QuestionAnswer> findByParentId(int parentId, int type);
 	
-	@Query("select qa from QuestionAnswer qa where qa.type = 1 and qa.status = true and qa.isActive = true order by qa.lastUpdatedTime desc")
+	@Query("select qa from QuestionAnswer qa where qa.type = 1 and qa.status = true and qa.isActive = true "
+			+ "order by qa.lastUpdatedTime desc")
 	List<QuestionAnswer> findAllQuestion();
+	
+//	@Query("select new com.unistart.entities.QuestionAnswer(qa.id,qa.title,qa.users,qa.lastUpdatedTime,qa.tags) from QuestionAnswer qa where qa.type = 1 and qa.status = true and qa.isActive = true "
+//			+ "order by qa.lastUpdatedTime desc")
+//	List<QuestionAnswer> findAllQuestion();
 	
 	@Query("select qa from QuestionAnswer qa where qa.users.id = ?1 and qa.type = 1 and qa.status = true and qa.isActive = true order by qa.lastUpdatedTime desc")
 	List<QuestionAnswer> findAllQuestionByUserId(int userId);
@@ -63,9 +68,10 @@ public interface QARepository extends JpaRepository <QuestionAnswer, Integer>{
 			+ "from QuestionAnswer q where q.status = false and q.isActive = true and q.parentId = 0")
 	List<QuestionAnswer> findAllQuestionNeedAccept();
 	
-	@Query("SELECT q from QuestionAnswer q where q.status = true and q.isActive = true and q.numberOfReport > 0")
-	List<QuestionAnswer> getAllReport();
+//	@Query("SELECT q from QuestionAnswer q where q.status = true and q.isActive = true and q.numberOfReport > 0")
+//	List<QuestionAnswer> getAllReport();
 	
+	List<QuestionAnswer> findByStatusAndIsActiveAndNumberOfReportGreaterThan(boolean flag, boolean flag2, int number);
 	@Modifying
 	@Query("update QuestionAnswer qa set qa.numberOfReport = 0 where qa.id = ?1")
 	void changeNumberOfReport(int id);

@@ -134,7 +134,13 @@ public class QAService implements QAInterface {
 	@Override
 	public List<QuestionAnswer> getAllQuestionByUserId(int userId) {
 		// TODO Auto-generated method stub
-		return qaRepository.findAllQuestionByUserId(userId);
+		
+		List<QuestionAnswer> list = qaRepository.findAllQuestionByUserId(userId);
+		for(int i = 0; i<list.size();i++){
+			int count = getTotalAnswerOfQuestion(list.get(i).getId());
+			list.get(i).setTotalAnswer(count);
+		}
+		return list;
 	}
 
 	@Override
@@ -256,8 +262,8 @@ public class QAService implements QAInterface {
 
 	@Override
 	public List<QuestionAnswer> getAllReport() {
-		List<QuestionAnswer> list = qaRepository.getAllReport();
-		return null;
+		List<QuestionAnswer> list = qaRepository.findByStatusAndIsActiveAndNumberOfReportGreaterThan(true,true,0);
+		return list;
 	}
 
 	@Override
