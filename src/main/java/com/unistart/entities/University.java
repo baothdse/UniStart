@@ -40,7 +40,6 @@ public class University implements java.io.Serializable {
 	private String image;
 	private Integer priority;
 	private Boolean isActive;
-//	s
 	private Set<Review> reviews = new HashSet<Review>(0);
 	@JsonManagedReference
 	private Set<MajorUniversity> majorUniversities = new HashSet<MajorUniversity>(0);

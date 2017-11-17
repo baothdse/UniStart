@@ -35,6 +35,7 @@ public class Users implements java.io.Serializable {
 	private String image;
 	private String email;
 	private boolean isActive;
+	private HighSchool highSchool;
 	private Set<ReviewLike> reviewLikes = new HashSet<ReviewLike>(0);
 	private Set<Provider> providers = new HashSet<Provider>(0);
 	private Set<Review> reviews = new HashSet<Review>(0);
@@ -168,6 +169,16 @@ public class Users implements java.io.Serializable {
 
 	public void setIsActive(boolean isActive) {
 		this.isActive = isActive;
+	}
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "HighSchoolId")
+	public HighSchool getHighSchool() {
+		return highSchool;
+	}
+
+	public void setHighSchool(HighSchool highSchool) {
+		this.highSchool = highSchool;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "users")
