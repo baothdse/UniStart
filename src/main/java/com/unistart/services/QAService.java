@@ -289,4 +289,9 @@ public class QAService implements QAInterface {
 		return tagRepo.findAll();
 	}
 
+	@Override
+	public int numberOfReport() {
+		return qaRepository.numberOfReport();
+	}
+
 }

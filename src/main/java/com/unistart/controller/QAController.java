@@ -164,7 +164,7 @@ public class QAController {
 		int id = qa.getId();
 		boolean status = qa.getStatus();
 		boolean isActive = qa.getIsActive();
-		boolean isSuccess = qaService.changeStatusQuestionAnswer(id, status, isActive);
+		boolean isSuccess = qaService.changeReportStatus(id, status, isActive);
 		return new ResponseEntity<Boolean> (isSuccess, HttpStatus.OK);
 	}
 	
@@ -172,5 +172,11 @@ public class QAController {
 	public ResponseEntity<?> getAllTag(){
 		List<Tag> list = qaService.getAllTag();
 		return new ResponseEntity<List<Tag>>(list, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = UrlConstant.NUMBER_REPORT, method = RequestMethod.GET)
+	public ResponseEntity<?> numberOfReport(){
+		int number = qaService.numberOfReport();
+		return new ResponseEntity<Integer>(number, HttpStatus.OK);
 	}
 }

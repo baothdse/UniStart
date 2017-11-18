@@ -26,4 +26,5 @@ public interface QAInterface {
 	List<QuestionAnswer> getAllReport();
 	boolean changeReportStatus(int qaId, boolean status, boolean isActive);
 	List<Tag> getAllTag();
+	int numberOfReport();
 }

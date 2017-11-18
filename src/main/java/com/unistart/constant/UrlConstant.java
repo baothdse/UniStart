@@ -109,6 +109,7 @@ public class UrlConstant {
 	public static final String GET_ALL_REPORT="/get-all-report";
 	public static final String CHANGE_REPORT_STATUS="/change-report-status";
 	public static final String GET_ALL_TAG = "/get-all-tag";
+	public static final String NUMBER_REPORT ="/number-report";
 	
 	//Vote
 	public static final String VOTE = "/vote";
