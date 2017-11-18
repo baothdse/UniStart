@@ -4,7 +4,7 @@ import com.unistart.entities.Mbtiresult;
 
 public interface MBTIResultServiceInterface {
 
-	boolean saveMbtiResult(String mbtiName, int user);
+	Mbtiresult saveMbtiResult(String mbtiName, int user);
 	
 	boolean updateMbtiResult(String mbtiName, int userid);
 	

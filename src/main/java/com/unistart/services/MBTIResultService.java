@@ -34,7 +34,7 @@ public class MBTIResultService implements MBTIResultServiceInterface {
 	private Mbtiresult mbtiResult = new Mbtiresult();
 	
 	@Override
-	public boolean saveMbtiResult(String mbtiTypeName, int userId) {
+	public Mbtiresult saveMbtiResult(String mbtiTypeName, int userId) {
 		mbtiType = mbtiTypeRepo.findByMbtitypeName(mbtiTypeName);
 		user = userRepo.findById(userId);
 		Calendar cal = Calendar.getInstance();
@@ -43,10 +43,10 @@ public class MBTIResultService implements MBTIResultServiceInterface {
 			mbtiResult.setMbtitype(mbtiType);
 			mbtiResult.setUsers(user);
 			mbtiResult.setTestDate(cal.getTime());
-			mbtiResultRepo.save(mbtiResult);
-			return true;
+			mbtiResult = mbtiResultRepo.save(mbtiResult);
+			return mbtiResult;
 		}	
-		return false;
+		return null;
 	}
 
 	@Override

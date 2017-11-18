@@ -60,7 +60,7 @@ public interface QARepository extends JpaRepository <QuestionAnswer, Integer>{
 	@Query("select count (qa) from QuestionAnswer qa where qa.isActive = true and qa.status= false")
 	int numberOfQuestionNeedAccept();
 	
-	@Query("select count (qa) from QuestionAnswer qa where q.status = true and q.isActive = true and q.numberOfReport > 0")
+	@Query("select count (qa) from QuestionAnswer qa where qa.status = true and qa.isActive = true and qa.numberOfReport > 0")
 	int numberOfReport();
 	
 	@Modifying

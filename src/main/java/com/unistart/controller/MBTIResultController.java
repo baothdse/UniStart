@@ -31,9 +31,9 @@ public class MBTIResultController {
 	public ResponseEntity<?> saveMbtiResult(@RequestBody MBTIResultType mbtiResultType) {
 		String mbtiName = mbtiResultType.getMbtiType().getMbtitypeName();
 		int userId = mbtiResultType.getUser().getId();
-		boolean isSuccess = mbtiResultService.saveMbtiResult(mbtiName, userId);
-		if (isSuccess) {
-			return new ResponseEntity<Boolean> (isSuccess, HttpStatus.OK);
+		Mbtiresult isSuccess = mbtiResultService.saveMbtiResult(mbtiName, userId);
+		if (isSuccess != null) {
+			return new ResponseEntity<Mbtiresult> (isSuccess, HttpStatus.OK);
 		} else {
 			error = new ErrorNotification(ErrorConstant.MES005);
 			return new ResponseEntity<ErrorNotification> (error, HttpStatus.CONFLICT);
