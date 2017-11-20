@@ -7,7 +7,7 @@ import com.unistart.entities.QuestionTag;
 import com.unistart.entities.Tag;
 
 public interface QAInterface {
-	Integer saveQa(String title, String contents, int type, int parentId, int userId);
+	Integer saveQa(String title, String contents, int type, int parentId, int userId, int[] tags);
 	QuestionAnswer getQaById(int qaId, int userId);
 	List<QuestionAnswer> getAnswerOfQuestion(int questionId,int userId);
 	List<QuestionAnswer> getAllQuestion();

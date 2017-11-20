@@ -37,12 +37,8 @@ public class QAController {
 		int type = qa.getType();
 		int parentId = qa.getParentId();
 		int userId = qa.getUsers().getId();
-		int isqaId = qaService.saveQa(title, contents, type, parentId, userId);
-		boolean isSave =true;
-		if(type == 1){
-			isSave = qaService.saveTag(isqaId, qa.getTagUniversity());
-		}
-		if (isqaId != 0 && isSave) {
+		int isqaId = qaService.saveQa(title, contents, type, parentId, userId, qa.getTagUniversity());
+		if (isqaId != 0) {
 			return new ResponseEntity<Integer> (isqaId, HttpStatus.OK);
 		}
 		return new ResponseEntity<String> ("Save error", HttpStatus.NOT_ACCEPTABLE);

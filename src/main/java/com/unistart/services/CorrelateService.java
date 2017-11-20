@@ -257,15 +257,29 @@ public class CorrelateService implements CorrelateServiceInterface{
 	@Override
 	public List<Pearson> getTop5UniMBTI(List<MajorMbti> listMajorMBTI){
 		listCorrelate = getTop20Uni(listMajorMBTI);
+		Double n = caculateAvgSameMajor(listCorrelate);
+		System.out.println("n: " + n);
 		List<Pearson> listPearson = new ArrayList<>();
 		for(int i = 0; i<listCorrelate.size();i++){
+			System.out.println(listCorrelate.get(i).getUniversityId() + " " + listCorrelate.get(i).getNumberOfSameMajor());
 			Pearson pe = new Pearson();
 			UniversityPoint uniPoint = reviewService.getPointById(listCorrelate.get(i).getUniversityId());
 			University uni = uniRepo.findByUniId(listCorrelate.get(i).getUniversityId());
+			double r = 0.0;
 			if(uniPoint == null){
-				pe.setR(0.0);
+				if(listCorrelate.get(i).getNumberOfSameMajor()/n > 1){
+					r = 1 * 0.7;
+				}else{
+					r = listCorrelate.get(i).getNumberOfSameMajor()/n * 0.7;
+				}
+				pe.setR(r);
 			}else{
-				pe.setR(uniPoint.getRecommentPoint());
+				if(listCorrelate.get(i).getNumberOfSameMajor()/n > 1){
+					r = 1 * 0.7 + uniPoint.getRecommentPoint()/100 * 0.3;
+				}else{
+					r = listCorrelate.get(i).getNumberOfSameMajor()/n * 0.7 + uniPoint.getRecommentPoint()/100 * 0.3;
+				}
+				pe.setR(r);
 			}
 			pe.setUniversity(uni);
 			listPearson.add(pe);

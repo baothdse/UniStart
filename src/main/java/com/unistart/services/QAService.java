@@ -49,7 +49,7 @@ public class QAService implements QAInterface {
 	
 	
 	@Override
-	public Integer saveQa(String title, String contents, int type, int parentId, int userId) {
+	public Integer saveQa(String title, String contents, int type, int parentId, int userId, int[] tags) {
 		// TODO Auto-generated method stub
 		QuestionAnswer qa = new QuestionAnswer();
 		Calendar cal = Calendar.getInstance();
@@ -66,7 +66,10 @@ public class QAService implements QAInterface {
 				qa.setLastUpdatedTime(cal.getTime());
 				qa.setStatus(false);
 				QuestionAnswer newQa = qaRepository.save(qa);
-				return newQa.getId();
+				if(saveTag(newQa.getId(), tags)){
+					return newQa.getId();
+				}
+				return 0;
 			}
 			return 0;
 		} else if (type == 2) {
