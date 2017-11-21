@@ -25,7 +25,7 @@ public class ReportService implements ReportInterface{
 	@Override
 	public Report getReportByAnswerAndUser(int qaId, int userId) {
 		// TODO Auto-generated method stub
-		return null;
+		return reportRepo.findByUserAndAnswer(userId, qaId);
 	}
 
 	@Override

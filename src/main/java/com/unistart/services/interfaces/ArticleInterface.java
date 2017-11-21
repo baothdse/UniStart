@@ -17,7 +17,7 @@ public interface ArticleInterface {
 	List<Article> listAllArticle();
 
 	boolean updateArticle(int id, String code, String title, String description, String contents, String image,
-			int uniId);
+			int uniId, int[] tags);
 
 	List<Article> getNewestArticle(int universityId);
     

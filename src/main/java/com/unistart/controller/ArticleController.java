@@ -61,9 +61,9 @@ public class ArticleController {
 		String contents = article.getContents();
 		String image = article.getImage();
 		int uniId = article.getUniversity().getId();
-		boolean isCreated = articleService.updateArticle(id, code, title, description, contents, image, uniId);
-		boolean isUpdateTag = articleService.updateTag(id, article.getTags());
-		if (isCreated && isUpdateTag) {
+		boolean isCreated = articleService.updateArticle(id, code, title, description, contents, image, uniId,article.getTags());
+//		boolean isUpdateTag = articleService.updateTag(id, article.getTags());
+		if (isCreated) {
 			return new ResponseEntity<Boolean> (isCreated, HttpStatus.OK);
 		}
 		error = new ErrorNotification(ErrorConstant.MES015);

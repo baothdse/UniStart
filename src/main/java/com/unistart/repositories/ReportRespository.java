@@ -11,7 +11,7 @@ import com.unistart.entities.Vote;
 public interface ReportRespository extends JpaRepository<Report, Integer>{
 	@Query("select v from Report v where v.user.id = ?1 and v.questionAnswer.id = ?2")
 	Report findByUserAndAnswer(int userId, int qaId);
-	@Query("select count(*) from Vote v where v.questionAnswer.id = ?1")
-	int getTotalVoteOfAnswer(int qaId);
+	@Query("select count(*) from Report v where v.questionAnswer.id = ?1")
+	int getTotalReportOfAnswer(int qaId);
 	Report findById(int id);
 }

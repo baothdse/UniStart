@@ -267,14 +267,14 @@ public class CorrelateService implements CorrelateServiceInterface{
 			University uni = uniRepo.findByUniId(listCorrelate.get(i).getUniversityId());
 			double r = 0.0;
 			if(uniPoint == null){
-				if(listCorrelate.get(i).getNumberOfSameMajor()/n > 1){
+				if(listCorrelate.get(i).getNumberOfSameMajor()/10 > 1){
 					r = 1 * 0.7;
 				}else{
 					r = listCorrelate.get(i).getNumberOfSameMajor()/n * 0.7;
 				}
 				pe.setR(r);
 			}else{
-				if(listCorrelate.get(i).getNumberOfSameMajor()/n > 1){
+				if(listCorrelate.get(i).getNumberOfSameMajor()/10 > 1){
 					r = 1 * 0.7 + uniPoint.getRecommentPoint()/100 * 0.3;
 				}else{
 					r = listCorrelate.get(i).getNumberOfSameMajor()/n * 0.7 + uniPoint.getRecommentPoint()/100 * 0.3;

@@ -69,12 +69,13 @@ public class ArticleService implements ArticleInterface{
 	}
 	@Override
 	public boolean updateArticle(int id, String code, String title, String description, String contents, String image,
-			int uniId) {
+			int uniId, int[] tags) {
 		article = articleRepo.findCodeById(id, code);
 		if(article == null){
 			article = articleRepo.findById(id);
 			if(article != null){
 				articleRepo.updateArticle(id, code, title, description, contents, image, uniId);
+				updateTag(id,tags);
 				return true;
 			}else{
 				return false;
@@ -135,8 +136,6 @@ public class ArticleService implements ArticleInterface{
 	}
 	@Override
 	public boolean updateTag(int artcleId, int[] tags) {
-		article = articleRepo.findById(artcleId);
-		if(article != null){
 			List<ArticleTag> listTag = articleTagRepo.findByArticleId(artcleId);
 			ArticleTag aT = new ArticleTag();
 			ArrayList<Integer> test = new ArrayList<Integer>();
@@ -160,8 +159,6 @@ public class ArticleService implements ArticleInterface{
 				}
 			}
 			return true;
-		}
-		return false;
 	}
 	@Override
 	public List<ArticleTag> getTagOfArticle(int articleId) {
