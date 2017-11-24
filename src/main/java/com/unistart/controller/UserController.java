@@ -48,9 +48,9 @@ public class UserController {
 		String password = u.getPassword();
 		String image = u.getImage();
 		int userId = u.getId();
-		boolean isUpdate = userService.changeProfile(name, email, image, password, userId);
-		if (isUpdate) {
-			return new ResponseEntity<Boolean> (isUpdate, HttpStatus.OK);
+		Users isUpdate = userService.changeProfile(name, email, image, password, userId);
+		if (isUpdate != null) {
+			return new ResponseEntity<Users> (isUpdate, HttpStatus.OK);
 		} else {
 			error = new ErrorNotification(ErrorConstant.MES013);
 			return new ResponseEntity<ErrorNotification> (error, HttpStatus.UNAUTHORIZED);

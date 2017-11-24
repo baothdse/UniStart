@@ -97,14 +97,23 @@ public class UserService implements UserServiceInterface {
 	}
 
 	@Override
-	public boolean changeProfile(String name, String email, String image, String password, int userId) {
+	public Users changeProfile(String name, String email, String image, String password, int userId) {
 		user = userRepository.findById(userId);
 		if(user != null){
-			String encodedPassword = bcrypt.encode(password);
-			userRepository.updateProfile(name, email, encodedPassword, image, userId);
-			return true;
+			String encodedPassword = null;
+			if(password != null){
+				encodedPassword = bcrypt.encode(password);
+			}else{
+				encodedPassword = "12345678";
+			}
+			user.setEmail(email);
+			user.setImage(image);
+			user.setName(name);
+			user.setPassword(encodedPassword);
+			Users newUser = userRepository.save(user);
+			return newUser;
 		}
-		return false;
+		return null;
 	}
 
 	@Override
