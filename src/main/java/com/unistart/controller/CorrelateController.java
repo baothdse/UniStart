@@ -32,7 +32,7 @@ public class CorrelateController {
 	@RequestMapping(value = UrlConstant.TOP_CORRLATE_UNI, method = RequestMethod.GET)
 	public ResponseEntity<?> getTopUniByUniId(@RequestParam(value = "universityId") int universityId) {
 		List<Pearson> listCorr = correlateService.count(universityId);
-		return new ResponseEntity<List<Pearson>>(correlateService.getTop5Uni(listCorr), HttpStatus.OK);
+		return new ResponseEntity<List<Pearson>>(listCorr, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = UrlConstant.TOP_UNI_MBTI, method = RequestMethod.GET)

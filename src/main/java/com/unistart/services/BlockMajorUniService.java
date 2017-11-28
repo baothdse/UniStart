@@ -46,13 +46,15 @@ public class BlockMajorUniService implements BlockMajorUniInterface{
 		return false;	
 	}
 	@Override
-	public boolean saveScore(int blockMajorUniId, Double score, int year) {
+	public boolean saveScore(int blockMajorUniId, Double score, int year, String des, int barem) {
 		BlockMajorUniversity bmu = BlockMajorUniRepo.findById(blockMajorUniId);
 		if(bmu != null){
 			ScoreHistory scoreHistory = new ScoreHistory();
 			scoreHistory.setBlockMajorUniversity(bmu);
 			scoreHistory.setScore(score);
 			scoreHistory.setYear(year);
+			scoreHistory.setBarem(barem);
+			scoreHistory.setDescription(des);
 			scoreRepository.save(scoreHistory);
 			return true;
 		}
@@ -67,8 +69,8 @@ public class BlockMajorUniService implements BlockMajorUniInterface{
 		return scoreRepository.findByIdAndYear(blockMajorUniId, year);
 	}
 	@Override
-	public boolean updateScore(int blockMajorUniId, Double score, int year) {
-		scoreRepository.updatScore(blockMajorUniId, score, year);
+	public boolean updateScore(int blockMajorUniId, Double score, int year, String des, int barem) {
+		scoreRepository.updatScore(blockMajorUniId, score, year, des, barem);
 		return true;
 	}
 //	@Override

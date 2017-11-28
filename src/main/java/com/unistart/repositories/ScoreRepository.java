@@ -15,6 +15,7 @@ public interface ScoreRepository extends JpaRepository<ScoreHistory, Integer>{
     ScoreHistory findByIdAndYear(int blockUniId, int year);
 	
 	@Modifying
-	@Query("update ScoreHistory s set s.score = ?2 where s.blockMajorUniversity.id = ?1 and s.year = ?3")
-    void updatScore(int blockUniId, double score, int year);
+	@Query("update ScoreHistory s set s.score = ?2, s.barem= ?5, s.description=?4 "
+			+ "where s.blockMajorUniversity.id = ?1 and s.year = ?3")
+    void updatScore(int blockUniId, double score, int year, String des, int barem);
 }

@@ -18,6 +18,8 @@ public class MajorScore {
 	}
 	private Double score;
 	private int year;
+	private String description;
+	private int barem;
 	public int getBlockId() {
 		return blockId;
 	}
@@ -36,6 +38,18 @@ public class MajorScore {
 	}
 	public void setYear(int year) {
 		this.year = year;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public int getBarem() {
+		return barem;
+	}
+	public void setBarem(int barem) {
+		this.barem = barem;
 	}
 	
 }

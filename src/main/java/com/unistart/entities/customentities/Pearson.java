@@ -33,6 +33,7 @@ public class Pearson implements Comparator<Pearson>{
 	@Override
 	public int compare(Pearson a, Pearson b) {
 		return b.r.compareTo(a.r);
+		//return b.r - a.r;
 	}
 
 }

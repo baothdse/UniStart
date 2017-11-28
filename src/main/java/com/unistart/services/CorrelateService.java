@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.jws.soap.SOAPBinding;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -43,27 +45,29 @@ public class CorrelateService implements CorrelateServiceInterface{
 		List<MajorUniversity> listMajorUni = majorUniRepo.findByUniId(unversityId);
 		List<MajorUniversity> university = majorUniRepo.getListUni(unversityId);
 		for(int i=0;i<university.size();i++){
-			Correlate co = new Correlate();
-			List<MajorUniversity> listMajorX = new ArrayList<MajorUniversity>();
-			List<MajorUniversity> listMajorY = new ArrayList<MajorUniversity>();
-			int count = 0;
-			List<MajorUniversity> list = majorUniRepo.findByUniId(university.get(i).getUniversity().getId());
-			for(int j=0;j<listMajorUni.size();j++){
-				majorIdOfSelectedUni = listMajorUni.get(j).getMajor().getId();
-				for(int x=0;x<list.size();x++){
-					majorIdOfUni = list.get(x).getMajor().getId();
-					if(majorIdOfSelectedUni == majorIdOfUni){
-						count = count +1;
-						listMajorX.add(list.get(x));
-						listMajorY.add(listMajorUni.get(j));
+			if(uniRepo.findByUniId(university.get(i).getUniversity().getId()) != null){
+				Correlate co = new Correlate();
+				List<MajorUniversity> listMajorX = new ArrayList<MajorUniversity>();
+				List<MajorUniversity> listMajorY = new ArrayList<MajorUniversity>();
+				int count = 0;
+				List<MajorUniversity> list = majorUniRepo.findByUniId(university.get(i).getUniversity().getId());
+				for(int j=0;j<listMajorUni.size();j++){
+					majorIdOfSelectedUni = listMajorUni.get(j).getMajor().getId();
+					for(int x=0;x<list.size();x++){
+						majorIdOfUni = list.get(x).getMajor().getId();
+						if(majorIdOfSelectedUni == majorIdOfUni){
+							count = count +1;
+							listMajorX.add(list.get(x));
+							listMajorY.add(listMajorUni.get(j));
+						}
 					}
 				}
+				co.setNumberOfSameMajor(count);
+				co.setUniversityId(university.get(i).getUniversity().getId());
+				co.setListMajorX(listMajorX);
+				co.setListMajorY(listMajorY);
+				listCorrelate.add(co);
 			}
-			co.setNumberOfSameMajor(count);
-			co.setUniversityId(university.get(i).getUniversity().getId());
-			co.setListMajorX(listMajorX);
-			co.setListMajorY(listMajorY);
-			listCorrelate.add(co);
 		}
 		return listCorrelate;
 	}
@@ -78,7 +82,15 @@ public class CorrelateService implements CorrelateServiceInterface{
 	public List<Correlate> getTop10Uni(int universityId){
 		listCorrelate = countSameMajor(universityId);
 		Collections.sort(listCorrelate, new Correlate());
-	    return listCorrelate.subList(0, listCorrelate.size()>=10 ? 10 : listCorrelate.size());
+		List<Correlate> newList = new ArrayList<>();
+		for(int i =0; i<listCorrelate.size();i++){
+			if(listCorrelate.get(i).getNumberOfSameMajor() != 0){
+				newList.add(listCorrelate.get(i));
+			}else{
+				return newList;
+			}
+		}
+	    return newList;
 		//return listCorrelate.subList(0, 1);
 	}
 	
@@ -89,21 +101,23 @@ public class CorrelateService implements CorrelateServiceInterface{
 		int locationId = uni.getLocation().getId();
 		int trainSystem = uni.getTrainSystem().getId();
 		List<Pearson> list = new ArrayList<>();
-		Double n = caculateAvgSameMajor(listCorrelate);
+		int zero = 0;
+		Double n = 0.0;
+		if(listCorrelate.size() != 0){
+			n = (double) listCorrelate.get(zero).getNumberOfSameMajor();
+		}
 		for(int i = 0 ;i<listCorrelate.size();i++){
 			Pearson p = new Pearson();
 			int uniId = listCorrelate.get(i).getUniversityId();
-			System.out.println("uniid: " + uniId);
 			University uniCompare = new University();
 			uniCompare = uniRepo.findWithShortData(uniId);
-			System.out.println(uniCompare);
-			System.out.println(uniCompare.getId());
 			int loId = uniCompare.getLocation().getId();
 			int trainId = 0;
 			if(uniCompare.getTrainSystem() != null && uniCompare.getTrainSystem().getId() != null){
 				trainId = uniCompare.getTrainSystem().getId();
 			}
 			Double r = caculateNumerator(listCorrelate.get(i));
+			System.out.println("uniid: " + listCorrelate.get(i).getUniversityId());
 			Double ratio = listCorrelate.get(i).getNumberOfSameMajor()/n;
 			if(ratio > 1){
 				ratio = (double) 1;
@@ -115,20 +129,38 @@ public class CorrelateService implements CorrelateServiceInterface{
 			if(trainSystem == trainId){
 				b = 1;
 			}
-			Double subtent = (double) 0;
+			Double subtent = (double) 0.0;
 			if(r.isNaN()){
 				subtent = a*0.2 + b*0.2;
 			}else{
 				r = Math.abs(r);
 				subtent = (r*ratio)*0.6 + a*0.2 + b*0.2;
 			}
-			p.setR(subtent);
-			p.setUniversity(uniCompare);
-			list.add(p);
+			if(subtent != 0){
+				p.setR(subtent);
+				p.setUniversity(uniCompare);
+				list.add(p);
+			}
 		}
+		bubbleSort(list);
 		return list;
 	}
 	
+	public void bubbleSort(List<Pearson> list){
+		int n = list.size();  
+		Pearson temp = null;  
+         for(int i=0; i < n; i++){  
+                 for(int j=1; j < (n-i); j++){  
+                          if(list.get(j-1).getR() < list.get(j).getR()){  
+                                 //swap elements  
+                                 temp = list.get(j-1);  
+                                 list.set(j-1, list.get(j));
+                                 list.set(j, temp);
+                         }  
+                          
+                 }  
+         }  
+	}
 	public List<ScoreHistory> getListScore(int majorUniId){
 		MajorUniversity majorUni = majorUniRepo.findById(majorUniId);
 		List<BlockMajorUniversity> listBlockMajorUni = new ArrayList<>(majorUni.getBlockMajorUniversities());
@@ -151,12 +183,14 @@ public class CorrelateService implements CorrelateServiceInterface{
 			List<ScoreHistory> listScore = new ArrayList<>(listBlockMajorUni.get(i).getScoreHistories());
 			for(int j=0; j<listScore.size();j++){
 				if(listScore.get(j).getYear() == 2017){
-					totalScore = totalScore + listScore.get(j).getScore();
+					totalScore = totalScore + (listScore.get(j).getScore()*30)/listScore.get(j).getBarem();
 				}
 			}
 		}
 		Double avgScore = totalScore/listBlockMajorUni.size();
 		return avgScore;
+		
+		
 		
 		
 	}
@@ -181,16 +215,16 @@ public class CorrelateService implements CorrelateServiceInterface{
 			Double x = (double) 0;
 			Double y = (double) 0;
 			List<BlockMajorUniversity> listX = new ArrayList<>(listMajorX.get(i).getBlockMajorUniversities());
+			Double sumX = (double) 0;
 				for(int j = 0; j<listX.size();j++){
-					Double sumX = (double) 0;
 					List<ScoreHistory> listScore = new ArrayList<>(listX.get(j).getScoreHistories());
 						for(int a=0; a<listScore.size();a++){
 							if(listScore.get(a).getYear() == 2017){
 								sumX = sumX + listScore.get(a).getScore();
 							}
 						}
-						x = sumX/listScore.size() - avgX;
 				}
+				x = sumX/listX.size() - avgX;
 			xA = xA + x*x;
 			List<BlockMajorUniversity> listY = new ArrayList<>(listMajorY.get(i).getBlockMajorUniversities());
 			Double sumY = (double) 0;
@@ -199,6 +233,7 @@ public class CorrelateService implements CorrelateServiceInterface{
 						for(int a=0; a<listScore.size();a++){
 							if(listScore.get(a).getYear() == 2017){
 								sumY = sumY + listScore.get(a).getScore();
+								System.out.println("y: " + listScore.get(a).getScore());
 							}
 						}
 				}
@@ -211,11 +246,12 @@ public class CorrelateService implements CorrelateServiceInterface{
 	}
 	
 	public Double caculateAvgSameMajor(List<Correlate> listCorrelate){
-		int total = 0;
+		Double total = 0.0;
 		for(int i = 0; i<listCorrelate.size();i++){
 			total = total + listCorrelate.get(i).getNumberOfSameMajor();
 		}
-		Double avg = (double) (total/listCorrelate.size());
+		Double avg = 0.00;
+		avg = total/listCorrelate.size();
 		return avg;	
 	}
 	//End Correlate Uni
@@ -251,41 +287,44 @@ public class CorrelateService implements CorrelateServiceInterface{
 	public List<Correlate> getTop20Uni(List<MajorMbti> listMajorMBTI){
 		listCorrelate = countSameMBTI(listMajorMBTI);
 		Collections.sort(listCorrelate, new Correlate());
-	    return listCorrelate.subList(0, listCorrelate.size()>=20 ? 20 : listCorrelate.size());
+		List<Correlate> newList = new ArrayList<>();
+		for(int i =0; i<listCorrelate.size();i++){
+			if(listCorrelate.get(i).getNumberOfSameMajor() != 0){
+				newList.add(listCorrelate.get(i));
+			}else{
+				return newList;
+			}
+		}
+	    return newList;
+	    //return listCorrelate.subList(0, listCorrelate.size()>=20 ? 20 : listCorrelate.size());
 	}
 	
 	@Override
 	public List<Pearson> getTop5UniMBTI(List<MajorMbti> listMajorMBTI){
 		listCorrelate = getTop20Uni(listMajorMBTI);
-		Double n = caculateAvgSameMajor(listCorrelate);
-		System.out.println("n: " + n);
+		int zero = 0;
+		Double n = (double) listCorrelate.get(zero).getNumberOfSameMajor();
 		List<Pearson> listPearson = new ArrayList<>();
+		System.out.println(n);
 		for(int i = 0; i<listCorrelate.size();i++){
-			System.out.println(listCorrelate.get(i).getUniversityId() + " " + listCorrelate.get(i).getNumberOfSameMajor());
 			Pearson pe = new Pearson();
 			UniversityPoint uniPoint = reviewService.getPointById(listCorrelate.get(i).getUniversityId());
 			University uni = uniRepo.findByUniId(listCorrelate.get(i).getUniversityId());
 			double r = 0.0;
+			System.out.println(listCorrelate.get(i).getNumberOfSameMajor()/n);
 			if(uniPoint == null){
-				if(listCorrelate.get(i).getNumberOfSameMajor()/10 > 1){
-					r = 1 * 0.7;
-				}else{
 					r = listCorrelate.get(i).getNumberOfSameMajor()/n * 0.7;
-				}
 				pe.setR(r);
 			}else{
-				if(listCorrelate.get(i).getNumberOfSameMajor()/10 > 1){
-					r = 1 * 0.7 + uniPoint.getRecommentPoint()/100 * 0.3;
-				}else{
-					r = listCorrelate.get(i).getNumberOfSameMajor()/n * 0.7 + uniPoint.getRecommentPoint()/100 * 0.3;
-				}
+				r = listCorrelate.get(i).getNumberOfSameMajor()/n * 0.7 + uniPoint.getRecommentPoint()/100 * 0.3;
 				pe.setR(r);
 			}
 			pe.setUniversity(uni);
 			listPearson.add(pe);
 		}
 		Collections.sort(listPearson, new Pearson());
-		return listPearson.subList(0, listCorrelate.size()>=5 ? 5 : listCorrelate.size());
+		//return listPearson.subList(0, listCorrelate.size()>=5 ? 5 : listCorrelate.size());
+		return listPearson;
 	}
 	public List<University> getListUniSameMajor(int majorId){
 		List<University> listUni = uniRepo.findByMajor(majorId);

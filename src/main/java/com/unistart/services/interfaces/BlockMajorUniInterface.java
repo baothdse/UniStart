@@ -10,10 +10,10 @@ import com.unistart.entities.ScoreHistory;
 
 public interface BlockMajorUniInterface {
     boolean saveBlockOfMajor(int blockId, int majorId);
-    boolean saveScore(int blockMajorUniId, Double score, int year);
+    boolean saveScore(int blockMajorUniId, Double score, int year, String des, int barem);
     BlockMajorUniversity findByBlockAndMajor(int blockId, int majorId);
     ScoreHistory findByIdAndYear (int blockMajorUniId, int year);
-    boolean updateScore(int blockMajorUniId, Double score, int year);
+    boolean updateScore(int blockMajorUniId, Double score, int year, String des, int barem);
     //List<MajorUniversity> findByUniId(int uniId);
     boolean deleteBlockScore(int blockMajorUniId);
 }
