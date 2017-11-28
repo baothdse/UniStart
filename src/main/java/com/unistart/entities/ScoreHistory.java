@@ -25,6 +25,8 @@ public class ScoreHistory implements java.io.Serializable {
 	private BlockMajorUniversity blockMajorUniversity;
 	private Double score;
 	private Integer year;
+	private String description;
+	private Integer barem;
 
 	public ScoreHistory() {
 	}
@@ -78,5 +80,28 @@ public class ScoreHistory implements java.io.Serializable {
 	public void setYear(Integer year) {
 		this.year = year;
 	}
+
+	@Column(name = "Description")
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	@Column(name = "Barem")
+	public Integer getBarem() {
+		if(barem == null || barem == 0){
+			setBarem(30);
+		}
+		return barem;
+	}
+
+	public void setBarem(Integer barem) {
+		this.barem = barem;
+	}
+	
+	
 
 }

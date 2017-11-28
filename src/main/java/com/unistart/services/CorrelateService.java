@@ -129,20 +129,38 @@ public class CorrelateService implements CorrelateServiceInterface{
 			if(trainSystem == trainId){
 				b = 1;
 			}
-			Double subtent = (double) 0;
+			Double subtent = (double) 0.0;
 			if(r.isNaN()){
 				subtent = a*0.2 + b*0.2;
 			}else{
 				r = Math.abs(r);
 				subtent = (r*ratio)*0.6 + a*0.2 + b*0.2;
 			}
-			p.setR(subtent);
-			p.setUniversity(uniCompare);
-			list.add(p);
+			if(subtent != 0){
+				p.setR(subtent);
+				p.setUniversity(uniCompare);
+				list.add(p);
+			}
 		}
+		bubbleSort(list);
 		return list;
 	}
 	
+	public void bubbleSort(List<Pearson> list){
+		int n = list.size();  
+		Pearson temp = null;  
+         for(int i=0; i < n; i++){  
+                 for(int j=1; j < (n-i); j++){  
+                          if(list.get(j-1).getR() < list.get(j).getR()){  
+                                 //swap elements  
+                                 temp = list.get(j-1);  
+                                 list.set(j-1, list.get(j));
+                                 list.set(j, temp);
+                         }  
+                          
+                 }  
+         }  
+	}
 	public List<ScoreHistory> getListScore(int majorUniId){
 		MajorUniversity majorUni = majorUniRepo.findById(majorUniId);
 		List<BlockMajorUniversity> listBlockMajorUni = new ArrayList<>(majorUni.getBlockMajorUniversities());
@@ -165,12 +183,14 @@ public class CorrelateService implements CorrelateServiceInterface{
 			List<ScoreHistory> listScore = new ArrayList<>(listBlockMajorUni.get(i).getScoreHistories());
 			for(int j=0; j<listScore.size();j++){
 				if(listScore.get(j).getYear() == 2017){
-					totalScore = totalScore + listScore.get(j).getScore();
+					totalScore = totalScore + (listScore.get(j).getScore()*30)/listScore.get(j).getBarem();
 				}
 			}
 		}
 		Double avgScore = totalScore/listBlockMajorUni.size();
 		return avgScore;
+		
+		
 		
 		
 	}

@@ -54,7 +54,9 @@ public class ScoreController {
 					bmu = blockMajorUniService.findByBlockAndMajor(blockId, majorUniId);
 					Double score = (double) ms.getScore();
 					int year = ms.getYear();
-					boolean isAddScore = blockMajorUniService.saveScore(bmu.getId(), score, year);
+					String des = ms.getDescription();
+					int barem = ms.getBarem();
+					boolean isAddScore = blockMajorUniService.saveScore(bmu.getId(), score, year,des,barem);
 					if (isAddScore == false) {
 						error = new ErrorNotification(ErrorConstant.MES011);
 						return new ResponseEntity<ErrorNotification>(error, HttpStatus.CONFLICT);
@@ -69,17 +71,19 @@ public class ScoreController {
 				}
 				Double score = (double) ms.getScore();
 				int year = ms.getYear();
+				String des = ms.getDescription();
+				int barem = ms.getBarem();
 				scoreHistory = blockMajorUniService.findByIdAndYear(bmu.getId(), year);
 				if(scoreHistory == null){
 					//add Score
-					boolean isAddScore = blockMajorUniService.saveScore(bmu.getId(), score, year);
+					boolean isAddScore = blockMajorUniService.saveScore(bmu.getId(), score, year,des,barem);
 					if (isAddScore == false) {
 						error = new ErrorNotification(ErrorConstant.MES011);
 						return new ResponseEntity<ErrorNotification>(error, HttpStatus.CONFLICT);
 					}
 				}else{
 					//update socre
-					boolean isUpdateScore = blockMajorUniService.updateScore(bmu.getId(), score, year);
+					boolean isUpdateScore = blockMajorUniService.updateScore(bmu.getId(), score, year, des,barem);
 					if(isUpdateScore == false){
 						error = new ErrorNotification(ErrorConstant.MES011);
 						return new ResponseEntity<ErrorNotification>(error, HttpStatus.CONFLICT);
