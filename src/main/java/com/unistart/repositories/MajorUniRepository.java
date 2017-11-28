@@ -26,7 +26,7 @@ public interface MajorUniRepository extends JpaRepository<MajorUniversity, Integ
 	@Query("update MajorUniversity u set u.isActive = ?2 where u.id = ?1")
 	void changeIsActive(int id, boolean isActive);
 	
-	@Query("select m from MajorUniversity m where m.university.id = ?1")
+	@Query("select m from MajorUniversity m where m.university.id = ?1 and m.isActive = true")
 	List<MajorUniversity> findByUniId(int uniId);
 	
 	@Query("select new com.unistart.entities.MajorUniversity(m.id,m.major) from MajorUniversity m where m.university.id = ?1 and m.isActive = true")

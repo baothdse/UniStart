@@ -2,7 +2,9 @@ package com.unistart.services;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.jws.soap.SOAPBinding;
 
@@ -57,7 +59,24 @@ public class CorrelateService implements CorrelateServiceInterface{
 						majorIdOfUni = list.get(x).getMajor().getId();
 						if(majorIdOfSelectedUni == majorIdOfUni){
 							count = count +1;
+							List<BlockMajorUniversity> listBlockMajorUniX = new ArrayList<>(list.get(x).getBlockMajorUniversities());
+							for(int v= 0; v<listBlockMajorUniX.size(); v++){
+							   if(listBlockMajorUniX.get(v).getIsActive() == false){
+								   listBlockMajorUniX.remove(v);
+							   }
+							}
+							Set<BlockMajorUniversity> set = new HashSet<BlockMajorUniversity>(listBlockMajorUniX);
+							list.get(x).setBlockMajorUniversities(set);
 							listMajorX.add(list.get(x));
+							
+							List<BlockMajorUniversity> listBlockMajorUniY = new ArrayList<>(listMajorUni.get(j).getBlockMajorUniversities());
+							for(int v= 0; v<listBlockMajorUniY.size(); v++){
+							   if(listBlockMajorUniY.get(v).getIsActive() == false){
+								   listBlockMajorUniY.remove(v);
+							   }
+							}
+							Set<BlockMajorUniversity> setY = new HashSet<BlockMajorUniversity>(listBlockMajorUniY);
+							listMajorUni.get(j).setBlockMajorUniversities(setY);
 							listMajorY.add(listMajorUni.get(j));
 						}
 					}
@@ -118,6 +137,8 @@ public class CorrelateService implements CorrelateServiceInterface{
 			}
 			Double r = caculateNumerator(listCorrelate.get(i));
 			System.out.println("uniid: " + listCorrelate.get(i).getUniversityId());
+			System.out.println("n: " + n);
+			System.out.println("getNumberOfSameMajor: " + listCorrelate.get(i).getNumberOfSameMajor());
 			Double ratio = listCorrelate.get(i).getNumberOfSameMajor()/n;
 			if(ratio > 1){
 				ratio = (double) 1;
