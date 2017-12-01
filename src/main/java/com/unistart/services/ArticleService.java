@@ -105,7 +105,7 @@ public class ArticleService implements ArticleInterface{
 //				topArticle.add(listArticle.get(i));
 //			}
 //		}
-		return listArticle.subList(0, listArticle.size()>=4 ? 4 : listArticle.size());
+		return listArticle;
 	}
 
 	@Override

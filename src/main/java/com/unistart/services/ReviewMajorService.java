@@ -19,6 +19,7 @@ import com.unistart.entities.University;
 import com.unistart.entities.Users;
 import com.unistart.entities.customentities.MajorPoint;
 import com.unistart.entities.customentities.UniversityPoint;
+import com.unistart.repositories.MajorPointRepository;
 import com.unistart.repositories.MajorUniRepository;
 import com.unistart.repositories.ReviewMajorRepository;
 import com.unistart.repositories.UserRepository;
@@ -40,6 +41,9 @@ public class ReviewMajorService implements ReviewMajorUniInterface{
 	
 	@Autowired
 	private MajorServiceInterface majorUniService;
+	
+	@Autowired 
+	private MajorPointRepository majorPointRepo;
 	
 	private ReviewMajor review;
 	private List<MajorPoint> listMajorPoint;
@@ -97,28 +101,44 @@ public class ReviewMajorService implements ReviewMajorUniInterface{
 	}
 	
 	@Override
-	@PostConstruct
-	@Scheduled(cron = "0 0 2 * * *")
-	public void calculateTotalAverage() {
-		List<MajorUniversity> listId = majorUniService.getListId();
-		List<MajorPoint> listPoint = new ArrayList<MajorPoint>();
-		MajorPoint point = null;
-		for (int index = 0; index < listId.size(); index++) {	
-			System.out.println("ID major" + listId.get(index).getId());
-			starTeaching = calculateStarTeaching(listId.get(index).getId());
-			starCareer = calculateStarCareer(listId.get(index).getId());
-			calculateRecomment(listId.get(index).getId());
-			totalReview = reviewMajorRepo.countReview(listId.get(index).getId());
+//	@PostConstruct
+//	@Scheduled(cron = "0 0 2 * * *")
+	public void calculateTotalAverage(int majorUniId) {
+//		List<MajorUniversity> listId = majorUniService.getListId();
+		MajorPoint point;
+		//for (int index = 0; index < listId.size(); index++) {	
+//			starTeaching = calculateStarTeaching(listId.get(index).getId());
+//			starCareer = calculateStarCareer(listId.get(index).getId());
+//			calculateRecomment(listId.get(index).getId());
+//			totalReview = reviewMajorRepo.countReview(listId.get(index).getId());
+		starTeaching = calculateStarTeaching(majorUniId);
+		starCareer = calculateStarCareer(majorUniId);
+		calculateRecomment(majorUniId);
+		totalReview = reviewMajorRepo.countReview(majorUniId);
 			if(starTeaching != -1 && starCareer != -1){
-				if(getRecommentPoint() == null) {
-					point = new MajorPoint(listId.get(index).getId(), starTeaching,starCareer,totalReview);
-				} else {
-					point = new MajorPoint(listId.get(index).getId(), starTeaching, starCareer, totalReview, getRecommentPoint());
+				if(getRecommentPoint() != null) {
+					point = majorPointRepo.findByMajorUniId(majorUniId);
+					if(point != null){
+						 //point.setMajorUniversity(majorUniRepo.findById(majorUniId));
+						 point.setRecommentPoint(getRecommentPoint());
+						 point.setStarCareer(starCareer);
+						 point.setStarTeaching(starTeaching);
+						 point.setTotalReview(totalReview);
+						 majorPointRepo.save(point);
+					}else{
+						 MajorUniversity majoUni = majorUniRepo.findById(majorUniId);
+						 point = new MajorPoint();
+						 point.setMajorUniversity(majoUni);
+						 point.setRecommentPoint(getRecommentPoint());
+						 point.setStarCareer(starCareer);
+						 point.setStarTeaching(starTeaching);
+						 point.setTotalReview(totalReview);
+						 majorPointRepo.save(point);
+					}
+				    
 				}
-				listPoint.add(point);
-			}
+			//}
 		}
-		setListMajorPoint(listPoint);
 	}
 	
 	@Override
@@ -134,18 +154,19 @@ public class ReviewMajorService implements ReviewMajorUniInterface{
         	review.setIsRecomment(isRecomment);
         	review.setIsActive(true);
         	reviewMajorRepo.save(review);
+        	calculateTotalAverage(majorId);
         	return true;
         }
 		return false;
 	}
 	@Override
 	public MajorPoint getPointById(int majorUniId) {
-		MajorPoint majorPoint = null;
-		for (int index = 0; index < listMajorPoint.size(); index++) {
-			if(majorUniId == listMajorPoint.get(index).getMajorUniId()) {
-				majorPoint = listMajorPoint.get(index);
-			}
-		}
+		MajorPoint majorPoint = majorPointRepo.findByMajorUniId(majorUniId);
+//		for (int index = 0; index < listMajorPoint.size(); index++) {
+//			if(majorUniId == listMajorPoint.get(index).getMajorUniId()) {
+//				majorPoint = listMajorPoint.get(index);
+//			}
+//		}
 		return majorPoint;
 	}
 	@Override

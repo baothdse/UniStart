@@ -5,6 +5,6 @@ import com.unistart.entities.customentities.MajorPoint;
 public interface ReviewMajorUniInterface {
 	boolean saveReviewMajorUni(int majorId, int userId,int starTeaching,int starCareer, boolean isRecomment);
 	MajorPoint getPointById(int majorUniId);
-	public void calculateTotalAverage();
+	public void calculateTotalAverage(int majorUniId);
 	boolean checkReviewUniMajor(int majorUniId, int userId);
 }
