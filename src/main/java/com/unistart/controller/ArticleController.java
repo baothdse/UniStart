@@ -87,6 +87,12 @@ public class ArticleController {
 	@RequestMapping(value = UrlConstant.GET_NEWEST_ARTICLE, method = RequestMethod.GET)
 	public ResponseEntity<?> getNewestArticle(@RequestParam(value = "universityId") int universityId){
 		listArticle = articleService.getNewestArticle(universityId);
+		return new ResponseEntity<List<Article>>(listArticle.subList(0, listArticle.size()>=4 ? 4 : listArticle.size()), HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = UrlConstant.GET_ALL_ARTICLE, method = RequestMethod.GET)
+	public ResponseEntity<?> getAllArticle(@RequestParam(value = "universityId") int universityId){
+		listArticle = articleService.getNewestArticle(universityId);
 		return new ResponseEntity<List<Article>>(listArticle, HttpStatus.OK);
 	}
 

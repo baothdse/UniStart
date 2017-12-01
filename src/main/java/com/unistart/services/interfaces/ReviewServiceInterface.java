@@ -7,7 +7,7 @@ import com.unistart.entities.customentities.UniversityPoint;
 
 public interface ReviewServiceInterface {
 	List<UniversityPoint> getListUniversityPoint();
-	void calculateTotalAverage();
+	void calculateTotalAverage(int universityId);
 	
 	UniversityPoint getPointById(int universityId);
   

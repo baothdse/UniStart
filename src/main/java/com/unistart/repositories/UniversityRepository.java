@@ -12,7 +12,7 @@ import com.unistart.entities.University;
 
 @Repository
 public interface UniversityRepository extends JpaRepository<University, Integer> {
-	University findById(Integer id);
+	University findById(int id);
 	University findByCode(String code);
 
 	@Modifying
