@@ -97,7 +97,11 @@ public class QAService implements QAInterface {
 			QuestionAnswer newQa = qaRepository.save(qa);
 			try {
 				messagingTemplate.convertAndSend("/notify/" + ques.getUsers().getId(), new ObjectMapper().writeValueAsString(newQa));
-				//messagingTemplate.convertAndSend("/get-answer", new ObjectMapper().writeValueAsString(newQa));
+			} catch (MessagingException | JsonProcessingException e) {
+			}
+			try{
+				System.out.println(parentId);
+				messagingTemplate.convertAndSend("/get-answer/" + parentId, new ObjectMapper().writeValueAsString(newQa));
 			} catch (MessagingException | JsonProcessingException e) {
 			}
 			return newQa.getId();

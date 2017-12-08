@@ -29,6 +29,9 @@ public class VoteService implements VoteInterface {
 	@Override
 	public boolean saveVote(int qaId, int userId) {
 		// TODO Auto-generated method stub
+		if(qaService.getQaByQaId(qaId).getIsActive() == false){
+			return false;
+		}
 		if(getVoteByAnswerAndUser(qaId, userId) == null) {
 			Vote vote = new Vote();
 			vote.setQuestionAnswer(qaService.getQaByQaId(qaId));
