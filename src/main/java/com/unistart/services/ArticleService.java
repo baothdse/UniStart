@@ -173,7 +173,9 @@ public class ArticleService implements ArticleInterface{
 		for(int i =0;i<listFavorite.size();i++){
 			yourArticle = articleTagRepo.findByMajorUniId(listFavorite.get(i).getMajorUni().getId());
 			for(int j =0;j<yourArticle.size();j++){
-				listYourArticle.add(yourArticle.get(j));
+				if(yourArticle.get(j).getIsActive()== true){
+					listYourArticle.add(yourArticle.get(j));
+				}
 			}
 		}
 		return removeDuplicates(listYourArticle);

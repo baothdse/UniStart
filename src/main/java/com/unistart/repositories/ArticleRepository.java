@@ -28,7 +28,7 @@ public interface ArticleRepository extends JpaRepository<Article, Integer> {
 	@Query("update Article a set a.isActive = false where a.id = ?1")
 	void changeIsActive(int id);
 
-	@Query("select new com.unistart.entities.Article(a.id, a.code, a.title, a.createDate, a.description,a.image) "
+	@Query("select new com.unistart.entities.Article(a.id, a.code, a.title, a.createDate, a.description,a.image,a.isActive) "
 			+ "from Article a where a.isActive = true order by a.createDate desc")
 	List<Article> getListArticle();
 

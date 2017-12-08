@@ -171,7 +171,7 @@ public class ReviewService implements ReviewServiceInterface {
 		if (getRecommentPoint() != null) {
 			point = uniPointRepo.findByUniversityId(universityId);
 			if(point != null){
-				//point.setUniversity(universityRepo.findById(universityId));
+				point.setUniversity(universityRepo.findById(universityId));
 				point.setRecommentPoint(getRecommentPoint());
 				point.setStarCare(starCare);
 				point.setStarCareer(starCareer);
@@ -181,7 +181,7 @@ public class ReviewService implements ReviewServiceInterface {
 				point.setTotalReview(totalReview);
 				uniPointRepo.save(point);
 			}else{
-				university = universityRepo.findById(35);
+				university = universityRepo.findById(universityId);
 				point = new UniversityPoint();
 				point.setRecommentPoint(getRecommentPoint());
 				point.setStarCare(starCare);

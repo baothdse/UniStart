@@ -33,9 +33,10 @@ public class UniversityPoint implements Serializable, Comparator<UniversityPoint
 	public UniversityPoint(){
 		
 	}
-	public UniversityPoint(int universityId, double starCare, double starTeaching, double starSocieties, double starFacilities,
+	public UniversityPoint(int id,int universityId, double starCare, double starTeaching, double starSocieties, double starFacilities,
 			double starCareer, double recommentPoint,int totalReview) {
 		super();
+		this.id = id;
 		this.universityId = universityId;
 		this.starCare = starCare;
 		this.starTeaching = starTeaching;

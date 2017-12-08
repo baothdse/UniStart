@@ -25,7 +25,7 @@ public interface ArticleTagRepository extends JpaRepository<ArticleTag, Integer>
 	@Query("select a from ArticleTag a where a.article.id=?1")
     List<ArticleTag> findByArticleId(int articleId);
 	
-	@Query("select new com.unistart.entities.Article(a.article.id, a.article.code, a.article.title, a.article.createDate, a.article.description, a.article.image) from ArticleTag a where a.majorUni.id=?1")
+	@Query("select new com.unistart.entities.Article(a.article.id, a.article.code, a.article.title, a.article.createDate, a.article.description, a.article.image, a.article.isActive) from ArticleTag a where a.majorUni.id=?1")
     List<Article> findByMajorUniId(int majorUniId);
 	@Transactional
 	@Modifying

@@ -37,8 +37,9 @@ public class MajorPoint {
 		this.recommentPoint = recommentPoint;
 		this.totalReview = totalReview;
 	}
-	public MajorPoint(int majorId, double starTeaching, double starCareer, int totalReview,double recommentPoint) {
+	public MajorPoint(int id, int majorId, double starTeaching, double starCareer, int totalReview,double recommentPoint) {
 		super();
+		this.id = id;
 		this.majorId = majorId;
 		this.starTeaching = starTeaching;
 		this.starCareer = starCareer;

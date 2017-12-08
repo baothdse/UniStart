@@ -105,7 +105,7 @@ public class ReviewMajorService implements ReviewMajorUniInterface{
 //	@Scheduled(cron = "0 0 2 * * *")
 	public void calculateTotalAverage(int majorUniId) {
 //		List<MajorUniversity> listId = majorUniService.getListId();
-		MajorPoint point;
+		MajorPoint point = null;
 		//for (int index = 0; index < listId.size(); index++) {	
 //			starTeaching = calculateStarTeaching(listId.get(index).getId());
 //			starCareer = calculateStarCareer(listId.get(index).getId());
@@ -119,13 +119,16 @@ public class ReviewMajorService implements ReviewMajorUniInterface{
 				if(getRecommentPoint() != null) {
 					point = majorPointRepo.findByMajorUniId(majorUniId);
 					if(point != null){
-						 //point.setMajorUniversity(majorUniRepo.findById(majorUniId));
+						System.out.println("fsdkfjhsdkfjsdhfkjsdhfksdjfhsdkjhfksd true" + point.getId());
+						 point.setMajorUniversity(majorUniRepo.findById(majorUniId));
 						 point.setRecommentPoint(getRecommentPoint());
 						 point.setStarCareer(starCareer);
 						 point.setStarTeaching(starTeaching);
 						 point.setTotalReview(totalReview);
 						 majorPointRepo.save(point);
-					}else{
+					}
+					else{
+						System.out.println("fsdkfjhsdkfjsdhfkjsdhfksdjfhsdkjhfksd false");
 						 MajorUniversity majoUni = majorUniRepo.findById(majorUniId);
 						 point = new MajorPoint();
 						 point.setMajorUniversity(majoUni);
@@ -161,7 +164,8 @@ public class ReviewMajorService implements ReviewMajorUniInterface{
 	}
 	@Override
 	public MajorPoint getPointById(int majorUniId) {
-		MajorPoint majorPoint = majorPointRepo.findByMajorUniId(majorUniId);
+		MajorPoint majorPoint= majorPointRepo.findByMajorUniId(majorUniId);
+		//MajorPoint majorPoint = majorPointRepo.findByMajorUniId(majorUniId);
 //		for (int index = 0; index < listMajorPoint.size(); index++) {
 //			if(majorUniId == listMajorPoint.get(index).getMajorUniId()) {
 //				majorPoint = listMajorPoint.get(index);
