@@ -6,6 +6,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.MessagingException;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,6 +27,8 @@ import com.unistart.repositories.UniversityRepository;
 import com.unistart.repositories.VoteRepository;
 import com.unistart.services.interfaces.QAInterface;
 import com.unistart.services.interfaces.UserServiceInterface;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
 @Transactional
@@ -46,6 +50,8 @@ public class QAService implements QAInterface {
 	private TagRepository tagRepo;
 	@Autowired
 	private ReportRespository reportRepo;
+	@Autowired
+	private SimpMessagingTemplate messagingTemplate;
 	
 	
 	@Override
@@ -89,6 +95,11 @@ public class QAService implements QAInterface {
 			qa.setLastUpdatedTime(cal.getTime());
 			qa.setStatus(true);
 			QuestionAnswer newQa = qaRepository.save(qa);
+			try {
+				messagingTemplate.convertAndSend("/notify/" + ques.getUsers().getId(), new ObjectMapper().writeValueAsString(newQa));
+				//messagingTemplate.convertAndSend("/get-answer", new ObjectMapper().writeValueAsString(newQa));
+			} catch (MessagingException | JsonProcessingException e) {
+			}
 			return newQa.getId();
 		}
 		return 0;
