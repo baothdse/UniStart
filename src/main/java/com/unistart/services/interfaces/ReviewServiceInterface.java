@@ -15,6 +15,7 @@ public interface ReviewServiceInterface {
 			int starFacilities, int starCare, int starSocieties, int starCareer, boolean isRecomment, boolean status);
 
 	List<Review> listReviewOfUniversity(int universityId);
+	List<Review> listReview();
 	boolean changeReviewStatus(int id, boolean status, boolean isActive);
 
 	List<Review> listAllNeedAcceptReview();

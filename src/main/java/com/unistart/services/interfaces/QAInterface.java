@@ -11,6 +11,7 @@ public interface QAInterface {
 	QuestionAnswer getQaById(int qaId, int userId);
 	List<QuestionAnswer> getAnswerOfQuestion(int questionId,int userId);
 	List<QuestionAnswer> getAllQuestion();
+	List<QuestionAnswer> getAllQuestionNotApprove();
 	List<QuestionAnswer> getAllQuestionByUserId(int userId); 
 	QuestionAnswer getQaByQaId(int qaId);
 	void updateTotalVote(int qaId);

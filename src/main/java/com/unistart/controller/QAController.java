@@ -60,6 +60,16 @@ public class QAController {
 		}
 		return new ResponseEntity<List<QuestionAnswer>> (questions, HttpStatus.OK);
 	}
+	
+	@RequestMapping(value = UrlConstant.QUESTIONS_NOT_APPROVE, method = RequestMethod.GET)
+	public ResponseEntity<?> getQuestionsNotApprove () {
+		List<QuestionAnswer> questions = qaService.getAllQuestionNotApprove();
+		for (int i = 0; i < questions.size(); i++) {
+			questions.get(i).getUsers().setPassword("");
+		}
+		return new ResponseEntity<List<QuestionAnswer>> (questions, HttpStatus.OK);
+	}
+	
 	@RequestMapping(value = UrlConstant.QUESTIONS_BY_USER, method = RequestMethod.GET)
 	public ResponseEntity<?> viewQuestionByUser (@RequestParam(value = ParamConstant.USER_ID) int userId) {
 		List<QuestionAnswer> questions = qaService.getAllQuestionByUserId(userId);

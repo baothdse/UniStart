@@ -194,6 +194,11 @@ public class ReviewService implements ReviewServiceInterface {
 				uniPointRepo.save(point);
 			}
 		}
+	}else{
+		point = uniPointRepo.findByUniversityId(universityId);
+		if(point != null){
+			uniPointRepo.delete(point);
+		}
 	}
 }
 		
@@ -249,10 +254,17 @@ public class ReviewService implements ReviewServiceInterface {
 	public boolean changeReviewStatus(int id, boolean status, boolean isActive) {	
 		review = reviewRepo.findById(id);
 		if (review != null){
+			boolean isApproved = false;
+			if(review.getStatus() == true && review.getIsActive() == true){
+				isApproved = true;
+			}
 			review.setStatus(status);
 			review.setIsActive(isActive);
 			reviewRepo.save(review);
 			if(status==true && isActive==true){
+				calculateTotalAverage(review.getUniversity().getId());
+			}
+			if(status==false && isActive==false && isApproved == true){
 				calculateTotalAverage(review.getUniversity().getId());
 			}
 			return true;
@@ -278,5 +290,11 @@ public class ReviewService implements ReviewServiceInterface {
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public List<Review> listReview() {
+		listAllReview = reviewRepo.listReivewAccepted();
+		return listAllReview;
 	}
 }
