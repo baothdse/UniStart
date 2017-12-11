@@ -31,6 +31,9 @@ public class ReportService implements ReportInterface{
 	@Override
 	public boolean saveReport(int qaId, int userId) {
 		// TODO Auto-generated method stub
+		if(qaService.getQaByQaId(qaId).getIsActive() == false){
+			return false;
+		}
 		Report report = new Report();
 		if (getReportByAnswerAndUser(qaId, userId) == null) {
 			report.setQuestionAnswer(qaService.getQaByQaId(qaId));
