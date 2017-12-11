@@ -31,6 +31,10 @@ public interface QARepository extends JpaRepository <QuestionAnswer, Integer>{
 			+ "order by qa.lastUpdatedTime desc")
 	List<QuestionAnswer> findAllQuestion();
 	
+	@Query("select qa from QuestionAnswer qa where qa.type = 1 and qa.status = false and qa.isActive = false "
+			+ "order by qa.lastUpdatedTime desc")
+	List<QuestionAnswer> findAllQuestionNotApprove();
+	
 //	@Query("select new com.unistart.entities.QuestionAnswer(qa.id,qa.title,qa.users,qa.lastUpdatedTime,qa.tags) from QuestionAnswer qa where qa.type = 1 and qa.status = true and qa.isActive = true "
 //			+ "order by qa.lastUpdatedTime desc")
 //	List<QuestionAnswer> findAllQuestion();

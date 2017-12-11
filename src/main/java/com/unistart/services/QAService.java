@@ -148,7 +148,12 @@ public class QAService implements QAInterface {
 		}
 		return list;
 	}
-
+	@Override
+	public List<QuestionAnswer> getAllQuestionNotApprove() {
+		// TODO Auto-generated method stub
+		List<QuestionAnswer> list = qaRepository.findAllQuestionNotApprove();
+		return list;
+	}
 	@Override
 	public List<QuestionAnswer> getAllQuestionByUserId(int userId) {
 		// TODO Auto-generated method stub

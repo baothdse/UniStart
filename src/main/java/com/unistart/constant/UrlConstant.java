@@ -51,6 +51,7 @@ public class UrlConstant {
 	public static final String STAR_POINT = "/star-point";
 	public static final String STAR_REIVEW_MAJOR = "/star-review-major";
 	public static final String SHOW_REVIEW = "/show-review";
+	public static final String GET_ALL_REVIEW = "/get-all-review";
 	public static final String CHANGE_REVIEW_STATUS = "/change-review-status";
 	public static final String NEED_ACCEPT_REVIEW = "/need-accept-review";
 	public static final String NUMBER_NEED_ACCEPT_REVIEW = "/number-need-accept-review";
@@ -99,7 +100,8 @@ public class UrlConstant {
 	//QA
 	public static final String QA = "/qa";
 	public static final String ANSWER = "/answer";
-	public static final String QUESTIONS = "/questions";
+	public static final String QUESTIONS = "/questions"; 
+	public static final String QUESTIONS_NOT_APPROVE = "/questions-not-approve";
 	public static final String QUESTIONS_BY_USER = "/questions-by-user";
 	public static final String COUNT_ANSWER = "/count-answer";
 	public static final String GET_TAG_QUESTION = "/get-tag-question";

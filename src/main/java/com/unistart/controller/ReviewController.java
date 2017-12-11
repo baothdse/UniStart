@@ -79,6 +79,18 @@ public class ReviewController {
 			return new ResponseEntity<ErrorNotification> (error, HttpStatus.CONFLICT);
 		}
 	}
+	
+	@RequestMapping(value = UrlConstant.GET_ALL_REVIEW, method = RequestMethod.GET)
+	public ResponseEntity<?> getAllReview(){
+		listAllReview = reviewService.listReview();
+		if (listAllReview != null){
+			return new ResponseEntity<List<Review>>(listAllReview, HttpStatus.OK);
+		}else {
+			error = new ErrorNotification(ErrorConstant.MES007);
+			return new ResponseEntity<ErrorNotification> (error, HttpStatus.CONFLICT);
+		}
+	}
+	
 	@RequestMapping(value = UrlConstant.CHANGE_REVIEW_STATUS, method = RequestMethod.POST)
 	public ResponseEntity<?> changeReviewStatus(@RequestBody Review Review) {
 		int id = Review.getId();

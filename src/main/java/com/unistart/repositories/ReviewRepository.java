@@ -48,6 +48,10 @@ public interface ReviewRepository extends JpaRepository<Review, Integer> {
 	@Query("select count (r) from Review r where r.isActive = true and r.status= false")
 	int numberOfReviewNeedAccept();
 	
+	@Query("SELECT new com.unistart.entities.Review(r.id,r.university, r.title, r.description, r.status, r.isActive)"
+			+ "from Review r where r.status = 1 and r.isActive = 1")
+	public List<Review> listReivewAccepted();
+	
 	@Query("select r from Review r where r.university.id=?1 and r.users.id=?2")
 	Review checkReviewed(int universityId, int userId);
 }
